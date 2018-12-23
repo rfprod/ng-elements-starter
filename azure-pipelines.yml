@@ -22,7 +22,7 @@ steps:
     npm run build
     firebase deploy --token $FIREBASE_DEPLOY_TOKEN
   env:
-    FIREBASE_DEPLOY_TOKEN: $(firebaseDeployToken)
+    FIREBASE_DEPLOY_TOKEN: $(FIREBASE_DEPLOY_TOKEN)
 
 - task: ArchiveFiles@2
   displayName: 'Archive files'
