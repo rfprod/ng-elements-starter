@@ -1,0 +1,5 @@
+<div fxLayout="row wrap">
+  <private-orders-config fxFlex="100" *ngIf="displayConfig" [theme]="theme" (serverChange)="selectServer($event)" (themeChange)="selectTheme($event)"></private-orders-config>
+
+  <private-orders-index fxFlex="100" [theme]="theme" [mock]="mock" (ordersChange)="ordersChangeHandler($event)"></private-orders-index>
+</div>

@@ -1,0 +1,120 @@
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "e2e/**",
+      "src/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://ng2elements.firebaseapp.com"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,PUT,POST,DELETE,OPTIONS,HEAD"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          }
+        ]
+      },
+      {
+        "source": "/ng-elements-(all|chat|passport|balance|catalogue|orders|private-orders)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/(login|signup|balance|catalogue|orders)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/login",
+        "function": "login"
+      },
+      {
+        "source": "/signup",
+        "function": "signup"
+      },
+      {
+        "source": "/balance",
+        "function": "balance"
+      },
+      {
+        "source": "/catalogue",
+        "function": "catalogue"
+      },
+      {
+        "source": "/orders",
+        "function": "orders"
+      },
+      {
+        "source": "/ng-elements-chat",
+        "destination": "ng-elements-chat/index.html"
+      },
+      {
+        "source": "/ng-elements-passport",
+        "destination": "ng-elements-passport/index.html"
+      },
+      {
+        "source": "/ng-elements-balance",
+        "destination": "ng-elements-balance/index.html"
+      },
+      {
+        "source": "/ng-elements-catalogue",
+        "destination": "ng-elements-catalogue/index.html"
+      },
+      {
+        "source": "/ng-elements-orders",
+        "destination": "ng-elements-orders/index.html"
+      },
+      {
+        "source": "/ng-elements-private-orders",
+        "destination": "ng-elements-private-orders/index.html"
+      },
+      {
+        "source": "**/!(login|signup|ng-elements-chat|ng-elements-table|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders|ng-elements-private-orders)",
+        "destination": "ng-elements-app/index.html"
+      }
+    ]
+  }
+}

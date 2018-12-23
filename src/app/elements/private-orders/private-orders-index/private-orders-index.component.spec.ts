@@ -1,0 +1,85 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'node_modules/hammerjs/hammer.js';
+import { CustomMaterialModule } from '../../../modules/material/custom-material.module';
+
+import { PassportModule } from '../../passport/passport.module';
+import { OrdersModule } from '../../orders/orders.module';
+
+import { PrivateOrdersConfigComponent } from '../private-orders-config/private-orders-config.component';
+import { PrivateOrdersIndexComponent } from './private-orders-index.component';
+import { PrivateOrdersWidgetComponent } from '../private-orders-widget/private-orders-widget.component';
+
+import { UserService } from '../../../services/user/user.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { OrdersService } from '../../../services/orders/orders.service';
+import { CustomHttpHandlersService } from '../../../services/http-handlers/custom-http-handlers.service';
+
+describe('PrivateOrdersIndexComponent', () => {
+
+  let httpController: HttpTestingController;
+  let component: PrivateOrdersIndexComponent;
+  let fixture: ComponentFixture<PrivateOrdersIndexComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        BrowserDynamicTestingModule, NoopAnimationsModule,
+        CustomMaterialModule, FlexLayoutModule,
+        FormsModule, ReactiveFormsModule,
+        HttpClientTestingModule,
+        PassportModule, OrdersModule
+      ],
+      providers: [
+        { provide: 'Window', useValue: window },
+        UserService,
+        {
+          provide: CustomHttpHandlersService,
+          useFactory: (userService, win) => new CustomHttpHandlersService(userService, win),
+          deps: [UserService, 'Window']
+        },
+        {
+          provide: OrdersService,
+          useFactory: (http, handlers, win) => new OrdersService(http, handlers, win),
+          deps: [HttpClient, CustomHttpHandlersService, 'Window']
+        },
+        {
+          provide: AuthService,
+          useFactory: (http, handlers, win) => new AuthService(http, handlers, win),
+          deps: [HttpClient, CustomHttpHandlersService, 'Window']
+        }
+      ],
+      declarations: [
+        PrivateOrdersConfigComponent,
+        PrivateOrdersIndexComponent,
+        PrivateOrdersWidgetComponent
+      ]
+    })
+    .compileComponents().then(() => {
+      httpController = TestBed.get(HttpTestingController);
+      fixture = TestBed.createComponent(PrivateOrdersIndexComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      httpController.match((req: HttpRequest<any>): boolean => true).forEach((req: TestRequest) => req.flush({}));
+    });
+  }));
+
+  afterEach(() => {
+    httpController.match((req: HttpRequest<any>): boolean => true).forEach((req: TestRequest) => req.flush({}));
+		httpController.verify();
+		TestBed.resetTestingModule();
+	});
+
+  it('should be defined', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,13 @@
+<div fxLayout="row wrap">
+
+  <div fxFlex="35" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="row">
+    <passport-widget fxFlex fxFlexFill [theme]="theme" [mock]="mock" [restrictMode]="'signup'" [displayConfig]="false" [ngStyle]="{ 'padding': '15px 0 15px 0' }"></passport-widget>
+  </div>
+
+  <div fxFlex="1" fxFlex.lt-md="0"></div>
+
+  <div fxFlex="64" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" fxLayout="row">
+    <orders-table-widget fxFlex fxFlexFill [theme]="theme" [mock]="mock" [displayConfig]="false" (ordersChange)="ordersChangeHandler($event)" [ngStyle]="{ 'padding': '15px 0 15px 0' }"></orders-table-widget>
+  </div>
+
+</div>

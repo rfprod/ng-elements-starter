@@ -1,0 +1,7 @@
+<div fxLayout="row wrap">
+  <orders-table-config *ngIf="displayConfig" fxFlex="100" [theme]="theme" [mock]="mock" (serverChange)="selectServer($event)"></orders-table-config>
+
+  <div fxFlex="100" fxLayout="row">
+    <orders-table-index fxFlex fxLayoutFill [theme]="theme" [mock]="mock" (ordersChange)="ordersChangeHandler($event)"></orders-table-index>
+  </div>
+</div>

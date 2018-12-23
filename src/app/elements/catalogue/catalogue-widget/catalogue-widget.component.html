@@ -1,0 +1,7 @@
+<div fxLayout="row wrap">
+  <catalogue-config fxFlex="100" [theme]="theme" (serverChange)="selectServer($event)"></catalogue-config>
+
+  <div fxFlex="100" fxLayout="row">
+    <catalogue-index fxFlex fxLayoutFill [theme]="theme" [mock]="mock" (catalogueChange)="catalogueChangeHandler($event)"></catalogue-index>
+  </div>
+</div>
