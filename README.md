@@ -1,15 +1,14 @@
 # Angular Elements NodeJS Widget Server Starter
 
-TODO change build status badge
-[![Azure DevOps Build Status](https://dev.azure.com/tn-azure-testing/tn-ng-elements/_apis/build/status/tn-ng-elements)](https://dev.azure.com/tn-azure-testing/tn-ng-elements/_build/latest?definitionId=3)
+[![Azure DevOps Build Status](https://rfprod.visualstudio.com/Ng2Elements/_apis/build/status/Ng2Elements-CI?branchName=master)](https://rfprod.visualstudio.com/Ng2Elements/_build/latest?definitionId=8?branchName=master)
 
 ## Deployment urls
 
-* https://ng-elements-e7724.firebaseapp.com/ng-elements-app/
-* https://ng-elements-e7724.firebaseapp.com/ng-elements-chat/
-* https://ng-elements-e7724.firebaseapp.com/ng-elements-passport/
-* https://ng-elements-e7724.firebaseapp.com/ng-elements-orders/
-* https://ng-elements-e7724.firebaseapp.com/ng-elements-private-orders/
+* https://ng2elements.firebaseapp.com/ng-elements-app/
+* https://ng2elements.firebaseapp.com/ng-elements-chat/
+* https://ng2elements.firebaseapp.com/ng-elements-passport/
+* https://ng2elements.firebaseapp.com/ng-elements-orders/
+* https://ng2elements.firebaseapp.com/ng-elements-private-orders/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
