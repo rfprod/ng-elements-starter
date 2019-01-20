@@ -9,7 +9,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import '../../../../node_modules/hammerjs/hammer.js';
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
 
-import { ChatModule } from '../../elements/chat/chat.module';
 import { PassportModule } from '../../elements/passport/passport.module';
 import { BalanceModule } from '../../elements/balance/balance.module';
 import { CatalogueModule } from '../../elements/catalogue/catalogue.module';
@@ -28,7 +27,7 @@ describe('AppIndexComponent', () => {
         BrowserDynamicTestingModule, NoopAnimationsModule,
         CustomMaterialModule, FlexLayoutModule,
         FormsModule, ReactiveFormsModule,
-        ChatModule, PassportModule, BalanceModule, CatalogueModule,
+        PassportModule, BalanceModule, CatalogueModule,
         OrdersModule
       ],
       providers: [

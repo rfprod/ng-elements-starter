@@ -4,11 +4,13 @@
 
 ## Deployment urls
 
-* https://ng2elements.firebaseapp.com/ng-elements-app/
-* https://ng2elements.firebaseapp.com/ng-elements-chat/
-* https://ng2elements.firebaseapp.com/ng-elements-passport/
-* https://ng2elements.firebaseapp.com/ng-elements-orders/
-* https://ng2elements.firebaseapp.com/ng-elements-private-orders/
+* https://ng2elements.firebaseapp.com/ - elements based application
+* https://ng2elements.firebaseapp.com/ng-elements-app/ - elements based application
+* https://ng2elements.firebaseapp.com/ng-elements-balance/ - balance elements
+* https://ng2elements.firebaseapp.com/ng-elements-catalogue/ - catalogue elements
+* https://ng2elements.firebaseapp.com/ng-elements-orders/ - orders element
+* https://ng2elements.firebaseapp.com/ng-elements-passport/ - passport elements
+* https://ng2elements.firebaseapp.com/ngd/ - Angular Modules Dependency Injection Graphs
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 

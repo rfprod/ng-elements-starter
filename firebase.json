@@ -32,7 +32,24 @@
         ]
       },
       {
-        "source": "/ng-elements-(app|chat|passport|balance|catalogue|orders|private-orders)",
+        "source": "/ng-elements-(app|chat|passport|balance|catalogue|orders)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/ngd",
         "headers": [
           {
             "key": "Cache-Control",
@@ -88,8 +105,8 @@
         "function": "orders"
       },
       {
-        "source": "/ng-elements-chat",
-        "destination": "ng-elements-chat/index.html"
+        "source": "/ng-elements-app",
+        "destination": "ng-elements-app/index.html"
       },
       {
         "source": "/ng-elements-passport",
@@ -108,11 +125,7 @@
         "destination": "ng-elements-orders/index.html"
       },
       {
-        "source": "/ng-elements-private-orders",
-        "destination": "ng-elements-private-orders/index.html"
-      },
-      {
-        "source": "**/!(login|signup|balance|catalogue|orders|ng-elements-chat|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders|ng-elements-private-orders)",
+        "source": "**/!(login|signup|balance|catalogue|orders|ngd|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders)",
         "destination": "ng-elements-app/index.html"
       }
     ]

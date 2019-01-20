@@ -64,43 +64,86 @@ app.use(compression({
 	level: -1
 }));
 
-/**
- * Elements' dists.
- */
-const elements = ['app', 'chat', 'passport', 'balance', 'catalogue', 'orders', 'private-orders'];
-for (const [index, value] of elements.entries()) {
-  const webappPath = `/ng-elements-${value}`;
-  const distPath = `/dist/ng-elements-${value}`;
-  console.log(`serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`);
-  app.use(webappPath, express.static(cwd + distPath));
+const devServer = process.argv[2] === 'dev';
+
+if (!devServer) {
+  console.log('server started in production mode, without \'dev\' argument , serving dists');
+  /**
+   * Serve ngd graphs.
+   */
+  app.use('/', express.static(cwd + '/dist'));
+  console.log('serving ngd dist\n - webapp path: /ngd\n - dist path: /ngd\n');
+
+  /**
+   * Elements' dists.
+   */
+  const elements = [
+    'app',
+    'passport',
+    'balance',
+    'catalogue',
+    'orders'
+  ];
+  for (const [index, value] of elements.entries()) {
+    const webappPath = (value === 'app') ? '/' : `/ng-elements-${value}`;
+    const distPath = `/dist/ng-elements-${value}`;
+    console.log(`serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`);
+    app.use(webappPath, express.static(cwd + distPath));
+  }
+
+  /**
+   * Paths regex object that should be passed by the server as is, without path substitution.
+   */
+  const regX = {
+    filesAndFolders: /(assets|txt|ico|html|css|js)/,
+    logs: /(ngd)/,
+    api: /(auth|register|balance|catalogue|graphql)/
+  };
+
+  /**
+   * Serving paths.
+   */
+  const pathRegX = {
+    passport: /ng-elements-passport/,
+    balance: /ng-elements-balance/,
+    catalogue: /ng-elements-catalogue/,
+    orders: /ng-elements-orders/
+  };
+
+  /**
+   * Serving conditions.
+   */
+  const serve = {
+    next: (req) => regX.filesAndFolders.test(req.path) || regX.api.test(req.path) || regX.logs.test(req.path),
+    passport: (req) => pathRegX.passport.test(req.path),
+    balance: (req) => pathRegX.balance.test(req.path),
+    catalogue: (req) => pathRegX.catalogue.test(req.path),
+    orders: (req) => pathRegX.orders.test(req.path)
+  };
+
+  /**
+   * Serve app index file for paths excluding provided in regX object (see above).
+   */
+  app.use((req, res, next) => {
+    if (serve.next(req)) {
+      return next();
+    } else if (serve.passport(req)) {
+      res.sendFile(cwd + '/dist/ng-elements-passport/index.html');
+    } else if (serve.balance(req)) {
+      res.sendFile(cwd + '/dist/ng-elements-balance/index.html');
+    } else if (serve.catalogue(req)) {
+      res.sendFile(cwd + '/dist/ng-elements-catalogue/index.html');
+    } else if (serve.orders(req)) {
+      res.sendFile(cwd + '/dist/ng-elements-orders/index.html');
+    } else {
+      res.sendFile(cwd + '/dist/ng-elements-app/index.html');
+    }
+  });
+
+} else {
+  console.log('server started with \'dev\' argument, not serving dists');
 }
 
-/**
- * Serve app index file for paths excluding provided in regX.
- */
-app.use((req, res, next) => {
-  const regX = /(assets|txt|ico|html|css|js)/;
-  const apiRegX = /(login|signup|balance|catalogue|orders)/;
-  if (regX.test(req.path) || apiRegX.test(req.path)) {
-    return next();
-  } else if (/ng-elements-chat/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-chat/index.html');
-  } else if (/ng-elements-passport/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-passport/index.html');
-  } else if (/ng-elements-balance/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-balance/index.html');
-  } else if (/ng-elements-catalogue/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-catalogue/index.html');
-  } else if (/ng-elements-orders/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-orders/index.html');
-  } else if (/ng-elements-private-orders/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-private-orders/index.html');
-  } else if (/ng-elements-app/.test(req.path)) {
-    res.sendFile(cwd + '/dist/ng-elements-app/index.html');
-  } else {
-    res.redirect('/ng-elements-app/');
-  }
-});
 
 /**
  * Request parameters middleware.

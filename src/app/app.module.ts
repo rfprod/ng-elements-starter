@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
 
-import { ChatElementModule } from './elements/chat/chat-element.module';
 import { PassportElementModule } from './elements/passport/passport-element.module';
 import { BalanceElementModule } from './elements/balance/balance-element.module';
 import { CatalogueElementModule } from './elements/catalogue/catalogue-element.module';
@@ -46,12 +45,11 @@ import {
     FormsModule, ReactiveFormsModule,
     FlexLayoutModule, CustomMaterialModuleWithProviders,
     AppRoutingModule,
-    ChatElementModule,
     PassportElementModule, BalanceElementModule, CatalogueElementModule,
     OrdersElementModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/ng-elements-all/' },
+    { provide: APP_BASE_HREF, useValue: '/' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: 'Window', useValue: window },
     MarkdownService,

@@ -13,7 +13,6 @@ import { CustomMaterialModule } from './modules/material/custom-material.module'
 
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
-import { ChatModule } from './elements/chat/chat.module';
 import { PassportModule } from './elements/passport/passport.module';
 import { BalanceModule } from './elements/balance/balance.module';
 import { CatalogueModule } from './elements/catalogue/catalogue.module';
@@ -34,7 +33,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserDynamicTestingModule, NoopAnimationsModule, CustomMaterialModule, FlexLayoutModule,
-        ChatModule, PassportModule, BalanceModule, CatalogueModule,
+        PassportModule, BalanceModule, CatalogueModule,
         OrdersModule,
         RouterTestingModule, HttpClientTestingModule
       ],
