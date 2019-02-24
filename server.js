@@ -144,7 +144,6 @@ if (!devServer) {
   console.log('server started with \'dev\' argument, not serving dists');
 }
 
-
 /**
  * Request parameters middleware.
  */
@@ -191,7 +190,6 @@ function terminator(sig) {
  */
 (() => {
   process.on('exit', () => { terminator('exit'); });
-  // Removed 'SIGPIPE' from the list - bugz 852598.
   ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
     'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
   ].forEach((element) => {

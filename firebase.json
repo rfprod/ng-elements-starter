@@ -106,27 +106,35 @@
       },
       {
         "source": "/ng-elements-app",
-        "destination": "ng-elements-app/index.html"
+        "destination": "/ng-elements-app/index.html"
       },
       {
         "source": "/ng-elements-passport",
-        "destination": "ng-elements-passport/index.html"
+        "destination": "/ng-elements-passport/index.html"
       },
       {
         "source": "/ng-elements-balance",
-        "destination": "ng-elements-balance/index.html"
+        "destination": "/ng-elements-balance/index.html"
       },
       {
         "source": "/ng-elements-catalogue",
-        "destination": "ng-elements-catalogue/index.html"
+        "destination": "/ng-elements-catalogue/index.html"
       },
       {
         "source": "/ng-elements-orders",
-        "destination": "ng-elements-orders/index.html"
+        "destination": "/ng-elements-orders/index.html"
       },
       {
-        "source": "**/!(login|signup|balance|catalogue|orders|ngd|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders)",
-        "destination": "ng-elements-app/index.html"
+        "source": "/ngd",
+        "destination": "/ngd/index.html"
+      },
+      {
+        "source": "/coverage",
+        "destination": "/coverage/index.html"
+      },
+      {
+        "source": "**/!(*.*|login|signup|balance|catalogue|orders|ngd|coverage|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders)",
+        "destination": "/ng-elements-app/index.html"
       }
     ]
   }

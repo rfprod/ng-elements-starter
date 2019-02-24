@@ -19,7 +19,7 @@ import { IUser } from '../../../interfaces/index';
       <!-- TODO: should it work without authentication?
       <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
       -->
-      <mat-accordion fxFlex="100">
+      <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
         <mat-expansion-panel *ngFor="let order of orders()">
           <mat-expansion-panel-header>
             <mat-panel-title>

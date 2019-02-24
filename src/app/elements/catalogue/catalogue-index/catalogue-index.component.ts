@@ -19,7 +19,7 @@ import { IUser } from '../../../interfaces/index';
       <!-- TODO: should it work without authentication?
       <mat-grid-list fxFlex="100" *ngIf="isLoggedIn()">
       -->
-      <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1">
+      <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1" *ngIf="isLoggedIn()">
         <mat-grid-tile *ngFor="let item of catalogue()">
           {{item}}
         </mat-grid-tile>

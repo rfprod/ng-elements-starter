@@ -19,7 +19,7 @@ import { IUser, IBalance } from '../../../interfaces/index';
       <!-- TODO: should it work without authentication?
       <span fxFlex="100" *ngIf="isLoggedIn()">
       -->
-      <span fxFlex="100">
+      <span fxFlex="100" *ngIf="isLoggedIn()">
         <p>organization: {{balance().organization}}</p>
         <p>sum1: {{balance().sum1}}</p>
         <p>sum2: {{balance().sum2}}</p>

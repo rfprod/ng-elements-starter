@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/",
             "outputPath": "dist/ng-elements-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -103,7 +104,8 @@
             "scripts": [
               "node_modules/marked/marked.min.js",
               "node_modules/hammerjs/hammer.js"
-            ]
+            ],
+            "codeCoverage": true
           }
         },
         "lint": {
@@ -134,6 +136,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/ng-elements-passport/",
             "outputPath": "dist/ng-elements-passport",
             "index": "src/app/elements/passport/index.html",
             "main": "src/app/elements/passport/main.ts",
@@ -184,6 +187,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "baseHref": "/",
+            "proxyConfig": "proxy.conf.json",
             "browserTarget": "ng-elements-passport:build"
           },
           "configurations": {
@@ -249,6 +254,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/ng-elements-balance/",
             "outputPath": "dist/ng-elements-balance",
             "index": "src/app/elements/balance/index.html",
             "main": "src/app/elements/balance/main.ts",
@@ -299,6 +305,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "baseHref": "/",
+            "proxyConfig": "proxy.conf.json",
             "browserTarget": "ng-elements-balance:build"
           },
           "configurations": {
@@ -364,6 +372,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/ng-elements-catalogue/",
             "outputPath": "dist/ng-elements-catalogue",
             "index": "src/app/elements/catalogue/index.html",
             "main": "src/app/elements/catalogue/main.ts",
@@ -414,6 +423,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "baseHref": "/",
+            "proxyConfig": "proxy.conf.json",
             "browserTarget": "ng-elements-catalogue:build"
           },
           "configurations": {
@@ -479,6 +490,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/ng-elements-orders/",
             "outputPath": "dist/ng-elements-orders",
             "index": "src/app/elements/orders/index.html",
             "main": "src/app/elements/orders/main.ts",
@@ -529,6 +541,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "baseHref": "/",
+            "proxyConfig": "proxy.conf.json",
             "browserTarget": "ng-elements-orders:build"
           },
           "configurations": {
