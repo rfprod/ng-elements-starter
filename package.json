@@ -10,7 +10,7 @@
     "build-balance-prod": "ng build --project ng-elements-balance --prod",
     "build-catalogue-prod": "ng build --project ng-elements-catalogue --prod",
     "build-dependencies-graph": "bash shell/build.sh ngd",
-    "build-dependencies-graph-app": "ngd -p ./tsconfig.json -f ./src/app/app.module0.ts -d ./dist/ngd/app/",
+    "build-dependencies-graph-app": "ngd -p ./tsconfig.json -f ./src/app/app.module.ts -d ./dist/ngd/app/",
     "build-dependencies-graph-app-routing": "ngd -p ./tsconfig.json -f ./src/app/app-routing.module.ts -d ./dist/ngd/app-routing/",
     "build-dependencies-graph-balance": "ngd -p ./tsconfig.json -f ./src/app/elements/balance/balance.module.ts -d ./dist/ngd/balance/",
     "build-dependencies-graph-catalogue": "ngd -p ./tsconfig.json -f ./src/app/elements/catalogue/catalogue.module.ts -d ./dist/ngd/catalogue/",
