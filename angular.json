@@ -36,7 +36,8 @@
             "scripts": [
               "node_modules/marked/marked.min.js",
               "node_modules/hammerjs/hammer.js"
-            ]
+            ],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
