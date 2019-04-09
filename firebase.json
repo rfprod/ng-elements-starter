@@ -49,7 +49,7 @@
         ]
       },
       {
-        "source": "/ngd",
+        "source": "/(coverage|documentation)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -125,15 +125,15 @@
         "destination": "/ng-elements-orders/index.html"
       },
       {
-        "source": "/ngd",
-        "destination": "/ngd/index.html"
-      },
-      {
         "source": "/coverage",
         "destination": "/coverage/index.html"
       },
       {
-        "source": "**/!(*.*|login|signup|balance|catalogue|orders|ngd|coverage|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders)",
+        "source": "/documentation",
+        "destination": "/documentation/index.html"
+      },
+      {
+        "source": "**/!(*.*|login|signup|balance|catalogue|orders|coverage|documentation|ng-elements-passport|ng-elements-balance|ng-elements-catalogue|ng-elements-orders)",
         "destination": "/ng-elements-app/index.html"
       }
     ]

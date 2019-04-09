@@ -96,7 +96,8 @@ if (!devServer) {
    */
   const regX = {
     filesAndFolders: /(assets|txt|ico|html|css|js)/,
-    logs: /(ngd)/,
+    coverage: /(coverage)/,
+    documentation: /(documentation)/,
     api: /(auth|register|balance|catalogue|graphql)/
   };
 
@@ -114,7 +115,7 @@ if (!devServer) {
    * Serving conditions.
    */
   const serve = {
-    next: (req) => regX.filesAndFolders.test(req.path) || regX.api.test(req.path) || regX.logs.test(req.path),
+    next: (req) => regX.filesAndFolders.test(req.path) || regX.api.test(req.path) || regX.coverage.test(req.path) || regX.documentation.test(req.path),
     passport: (req) => pathRegX.passport.test(req.path),
     balance: (req) => pathRegX.balance.test(req.path),
     catalogue: (req) => pathRegX.catalogue.test(req.path),

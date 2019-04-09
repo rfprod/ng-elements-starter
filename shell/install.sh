@@ -22,7 +22,7 @@ if [ $# -ne 1 ]; then
   npm install
 elif [ $1 = 'global' ]; then
   printf "\n ${LIGHT_BLUE}<< INSTALLING GLOBAL DEPENDENCIES >>${DEFAULT}\n\n"
-  sudo npm install -g @angular/cli@latest typescript@latest firebase-tools@latest @compodoc/ngd-cli@latest @datorama/akita
+  sudo npm install -g @angular/cli@latest typescript@latest firebase-tools@latest @compodoc/compodoc@latest @datorama/akita
 else
   printf "\n ${LIGHT_RED}<< ERROR: wrong argument: ${1} >>${DEFAULT}\n\n"
 fi
