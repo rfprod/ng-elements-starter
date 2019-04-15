@@ -22,7 +22,7 @@ import {
 } from '../../services/index';
 
 /**
- * @title Balance module
+ * Balance module
  */
 @NgModule({
   imports: [

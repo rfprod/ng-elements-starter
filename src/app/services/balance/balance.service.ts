@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @title Balance service
+ * @description Polls server for balance data over http
  */
 @Injectable()
 export class BalanceService {

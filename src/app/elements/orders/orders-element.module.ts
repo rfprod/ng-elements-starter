@@ -9,7 +9,7 @@ import { OrdersModule } from './orders.module';
 import { OrdersWidgetComponent } from './';
 
 /**
- * @title Orders element module
+ * Orders element module
  */
 @NgModule({
   imports: [

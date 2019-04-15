@@ -9,7 +9,7 @@ import { PassportModule } from './passport.module';
 import { PassportWidgetComponent } from './';
 
 /**
- * @title Passport element module
+ * Passport element module
  */
 @NgModule({
   imports: [

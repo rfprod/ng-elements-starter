@@ -22,7 +22,7 @@ import {
 } from '../../services/index';
 
 /**
- * @title Orders module
+ * Orders module
  */
 @NgModule({
   imports: [

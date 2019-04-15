@@ -33,7 +33,7 @@ import {
 } from './services/index';
 
 /**
- * @title Main application module, includes all widgets
+ * Main application module, includes all widgets
  */
 @NgModule({
   declarations: [

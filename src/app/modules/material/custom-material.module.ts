@@ -30,8 +30,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 /**
- * Custom material module without providers.
- * Exports material modules only.
+ * @title Custom material module without providers.
+ * @description Exports material modules only.
  */
 @NgModule({
   imports: [
@@ -86,8 +86,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 export class CustomMaterialModule {}
 
 /**
- * Custom material module with providers.
- * Exports material modules, and provides services.
+ * @title Custom material module with providers.
+ * @description Exports material modules, and provides services.
  */
 export const CustomMaterialModuleWithProviders: ModuleWithProviders = {
   ngModule: CustomMaterialModule,

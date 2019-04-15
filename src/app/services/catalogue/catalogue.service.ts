@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @title Catalogue service
+ * @description Polls server for catalogue data over http
  */
 @Injectable()
 export class CatalogueService {

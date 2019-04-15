@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @title Auth service
+ * @description Sends authentication requests with user credentials to server over http
  */
 @Injectable()
 export class AuthService {

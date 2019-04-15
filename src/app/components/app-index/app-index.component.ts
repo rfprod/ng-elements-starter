@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 
 /**
  * @title Application index component
+ * @description Includes element modules
  */
 @Component({
   selector: 'app-index',

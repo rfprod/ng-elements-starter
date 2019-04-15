@@ -9,7 +9,7 @@ import { CatalogueModule } from './catalogue.module';
 import { CatalogueWidgetComponent } from './';
 
 /**
- * @title Catalogue element module
+ * Catalogue element module
  */
 @NgModule({
   imports: [

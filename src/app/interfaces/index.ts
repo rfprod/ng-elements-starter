@@ -1,3 +1,7 @@
+/**
+ * Interfaces barrel.
+ */
+
 export * from './login-form.interface';
 export * from './signup-form.interface';
 export * from './user.interface';

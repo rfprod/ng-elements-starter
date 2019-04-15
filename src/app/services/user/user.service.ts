@@ -4,6 +4,7 @@ import { IUser } from '../../interfaces/index';
 
 /**
  * @title User service
+ * @description Is a wrapper around browser local storage
  */
 @Injectable()
 export class UserService {

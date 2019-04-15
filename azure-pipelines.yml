@@ -35,7 +35,7 @@ jobs:
       npm install -g typescript
       npm install -g @angular/cli
       npm install -g firebase-tools
-      npm install -g @compodoc/ngd-cli
+      npm install -g @compodoc/compodoc
       npm run build-firebase
       npm run test-single-run-and-report-to-dist
       firebase deploy --token $FIREBASE_DEPLOY_TOKEN

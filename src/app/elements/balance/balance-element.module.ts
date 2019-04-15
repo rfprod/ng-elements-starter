@@ -9,7 +9,7 @@ import { BalanceModule } from './balance.module';
 import { BalanceWidgetComponent } from './';
 
 /**
- * @title Balance element module
+ * Balance element module
  */
 @NgModule({
   imports: [

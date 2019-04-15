@@ -24,7 +24,7 @@ import {
 } from '../../services/index';
 
 /**
- * @title Passport module
+ * Passport module
  */
 @NgModule({
   imports: [
