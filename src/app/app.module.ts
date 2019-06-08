@@ -1,16 +1,26 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
+} from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {
+  APP_BASE_HREF,
+  LocationStrategy,
+  PathLocationStrategy
+} from '@angular/common';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import '../../node_modules/hammerjs/hammer.js';
+import 'node_modules/hammerjs/hammer.js';
 import { CustomMaterialModuleWithProviders } from './modules/material/custom-material.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +42,12 @@ import {
   OrdersService
 } from './services/index';
 
+import { NgxsModule } from '@ngxs/store';
+import { Ng2elementsState } from 'src/app/state/ng2elements.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { AppIconsService } from './services/icons/icons.service';
+
 /**
  * Main application module, includes all widgets
  */
@@ -43,10 +59,18 @@ import {
     BrowserModule, BrowserAnimationsModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
-    FlexLayoutModule, CustomMaterialModuleWithProviders,
-    AppRoutingModule,
-    PassportElementModule, BalanceElementModule, CatalogueElementModule,
-    OrdersElementModule
+    FlexLayoutModule,
+    CustomMaterialModuleWithProviders,
+    BalanceElementModule,
+    CatalogueElementModule,
+    OrdersElementModule,
+    PassportElementModule,
+    NgxsModule.forRoot([
+      Ng2elementsState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
@@ -58,7 +82,8 @@ import {
     AuthService,
     BalanceService,
     CatalogueService,
-    OrdersService
+    OrdersService,
+    AppIconsService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -67,4 +92,4 @@ import {
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}

@@ -30,12 +30,13 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
               "node_modules/marked/marked.min.js",
-              "node_modules/hammerjs/hammer.js"
+              "node_modules/hammerjs/hammer.js",
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js"
             ],
             "es5BrowserSupport": true
           },
@@ -99,12 +100,13 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
               "node_modules/marked/marked.min.js",
-              "node_modules/hammerjs/hammer.js"
+              "node_modules/hammerjs/hammer.js",
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js"
             ],
             "codeCoverage": true
           }
@@ -150,7 +152,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -218,7 +220,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -268,7 +270,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -336,7 +338,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -386,7 +388,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -454,7 +456,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -504,7 +506,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -572,7 +574,7 @@
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
             "scripts": [

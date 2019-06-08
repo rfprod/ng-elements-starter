@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostBinding
+} from '@angular/core';
+
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 /**
  * @title Application index component
@@ -15,16 +22,35 @@ import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 export class AppIndexComponent implements OnInit, OnDestroy {
 
   /**
-   * @param el Element reference
+   * AppIndexComponent constructor.
+   * @param overlayContainer Overlay container
    */
   constructor(
-    private el: ElementRef
+    public overlayContainer: OverlayContainer
   ) {}
 
   /**
    * Component theme color.
    */
   public theme: 'primary'|'accent'|'warn' = 'primary';
+
+  /**
+	 * Defines if UI should use alternative dark material theme.
+	 */
+	@HostBinding('class.unicorn-dark-theme') public darkTheme: boolean = false;
+
+  /**
+   * Toggles application material theme.
+   */
+  public toggleMaterialTheme(): void {
+    console.log('TODO: toggle material theme');
+    if (this.darkTheme) {
+      this.overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
+    } else {
+      this.overlayContainer.getContainerElement().classList.remove('unicorn-dark-theme');
+    }
+    this.darkTheme = !this.darkTheme;
+  }
 
   /**
    * Lifecycle hook called on component initialization.

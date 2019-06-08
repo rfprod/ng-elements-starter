@@ -1,3 +1,13 @@
+<mat-toolbar>
+  <span fxFlex="1 1 auto"></span>
+  <button mat-raised-button color="primary" (click)="toggleMaterialTheme()" matTooltip="Toggle material theme">
+    <mat-icon class="material-icons-fas" fontSet="fas" [fontIcon]="darkTheme ? 'fa-moon' : 'fa-sun'"></mat-icon>
+    <span *ngIf="darkTheme">Dark theme</span>
+    <span *ngIf="!darkTheme">Light theme</span>
+  </button>
+  <span fxFlex="1 1 auto"></span>
+</mat-toolbar>
+
 <div fxLayout="row wrap">
 
   <div fxFlex="35" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxLayout="row wrap" [ngStyle]="{'padding': '15px 0 15px 0'}">

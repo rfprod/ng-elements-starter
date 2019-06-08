@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppIconsService } from './services/icons/icons.service';
 
 /**
  * Application root component
@@ -8,10 +9,20 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   host: {
-		class: 'mat-body-1'
-	}
+    class: 'mat-body-1'
+  }
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  /**
+   * AppComponent constructor.
+   * @param appIconsService Application icons service
+   */
+  constructor(
+    private appIconsService: AppIconsService
+  ) {
+
+  }
 
   /**
    * Component title.
@@ -22,5 +33,12 @@ export class AppComponent {
    * Component theme color.
    */
   public theme: 'primary'|'accent'|'warn' = 'primary';
+
+  /**
+   * Lifecycle hook called on component initialization.
+   */
+  public ngOnInit(): void {
+    this.appIconsService.initialize();
+  }
 
 }
