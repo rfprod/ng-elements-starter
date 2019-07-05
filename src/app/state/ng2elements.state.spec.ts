@@ -13,10 +13,10 @@ describe('Ng2elements actions', () => {
     store = TestBed.get(Store);
   }));
 
-  it('should create an action and add an item', () => {
-    store.dispatch(new Ng2elementsAction('item-1'));
-    store.select(state => state.ng2elements.items).subscribe((items: string[]) => {
-      expect(items).toEqual(jasmine.objectContaining([ 'item-1' ]));
+  it('should create an action and set theme', () => {
+    store.dispatch(new Ng2elementsAction({ theme: 'item-1' }));
+    store.select(state => state.ng2elements.theme).subscribe((theme: string) => {
+      expect(theme).toEqual('item-1');
     });
   });
 
