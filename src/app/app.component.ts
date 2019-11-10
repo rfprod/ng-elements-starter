@@ -15,7 +15,7 @@ import { AppIconsService } from './services/icons/icons.service';
 export class AppComponent implements OnInit {
 
   /**
-   * AppComponent constructor.
+   * Constructor.
    * @param appIconsService Application icons service
    */
   constructor(
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   /**
    * Component title.
    */
-  public title: string = 'ng-elements';
+  public title = 'ng-elements';
 
   /**
    * Component theme color.

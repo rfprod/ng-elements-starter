@@ -8,7 +8,7 @@ export class Ng2elementsAction {
   static readonly type = '[Ng2elements] Add item';
 
   /**
-   * Ng2elementsAction constructor.
+   * Constructor.
    */
   constructor(
     public payload: {

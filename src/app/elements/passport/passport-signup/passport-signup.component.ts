@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { ISignupForm } from '../../../interfaces/index';
 
 /**
- * @title Passport signup
+ * Passport signup
  */
 @Component({
   selector: 'passport-signup',
@@ -74,6 +74,7 @@ import { ISignupForm } from '../../../interfaces/index';
 export class PassportSignupComponent implements OnInit {
 
   /**
+   * Constructor.
    * @param fb Form builder
    * @param userService User service
    * @param authService Auth service
@@ -94,25 +95,17 @@ export class PassportSignupComponent implements OnInit {
   /**
    * Component title.
    */
-  @Input() public title: string = 'Passport Signup';
+  @Input() public title = 'Passport Signup';
 
   /**
    * Indicates if mocked server should be used for http requests.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
 
   /**
    * Switch mode event emitter.
    */
   @Output() public switchMode: EventEmitter<string> = new EventEmitter();
-
-  /**
-   * Emits mode change event.
-   * @param mode mode that should be activated by widget component.
-   */
-  public modeChange(mode: 'index'|'login'): void {
-    this.switchMode.emit(mode);
-  }
 
   /**
    * Indicates if a particular passport mode is restricted:
@@ -129,6 +122,24 @@ export class PassportSignupComponent implements OnInit {
   public signupForm: ISignupForm;
 
   /**
+   * Indicates if password should be showm.
+   */
+  public showPassword = false;
+
+  /**
+   * UI error reporter.
+   */
+  public errorReport = '';
+
+  /**
+   * Emits mode change event.
+   * @param mode mode that should be activated by widget component.
+   */
+  public modeChange(mode: 'index'|'login'): void {
+    this.switchMode.emit(mode);
+  }
+
+  /**
    * Resets signup form.
    */
   public resetForm(): void {
@@ -141,21 +152,11 @@ export class PassportSignupComponent implements OnInit {
   }
 
   /**
-   * Indicates if password should be showm.
-   */
-  public showPassword: boolean = false;
-
-  /**
    * Toggles password visibility.
    */
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-
-  /**
-   * UI error reporter.
-   */
-  public errorReport: string = '';
 
   /**
    * Sends signup request with provided credentials.
@@ -167,12 +168,10 @@ export class PassportSignupComponent implements OnInit {
     if (this.signupForm.valid) {
       this.authService.signup(this.mock, formData.email, formData.password, formData.organization, formData.name).subscribe(
         (data: any) => {
-          console.log('signup success, data', data);
           this.userService.SaveUser(data);
           this.modeChange('index');
         },
         (error: any) => {
-          console.log('signup error, error', error);
           this.errorReport = error;
           setTimeout(() => {
             this.errorReport = '';

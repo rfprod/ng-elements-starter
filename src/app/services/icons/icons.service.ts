@@ -14,15 +14,15 @@ import { SvgIconInterface } from 'src/app/interfaces/svg-icon.interface';
 export class AppIconsService {
 
   /**
+   * Constructor.
    * @param matIconRegistry Material icon registry - icons registry for registering icons for usage within mat-icon selector
    * @param domSanitizer DOM sanitizer
    */
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) {
-    console.log('CustomIconsService, model', this.model);
-  }
+  ) {}
+
   /**
    * Custom icons model.
    * Information stored here is used to add SVG icons to material icons registry.
@@ -42,7 +42,6 @@ export class AppIconsService {
   private addIcons(): void {
     const icons: any[] = this.getIcons();
     for (const icon of icons) {
-      console.log('adding icon', icon);
       this.matIconRegistry.addSvgIcon(icon.name, this.domSanitizer.bypassSecurityTrustResourceUrl(icon.path));
     }
   }
@@ -57,7 +56,6 @@ export class AppIconsService {
    * Icons reference: https://fontawesome.com/icons/
    */
   private registerFontawesome(): void {
-    console.log('registering fontawesome');
     this.matIconRegistry.registerFontClassAlias('all');
   }
 
@@ -67,7 +65,6 @@ export class AppIconsService {
   public initialize(): void {
     this.registerFontawesome();
     this.addIcons();
-    console.log('CustomIconsService initialized, this.matIconRegistry', this.matIconRegistry);
   }
 
   public getMatIconRegistry(): MatIconRegistry {

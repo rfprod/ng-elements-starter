@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * @title Dummy component.
+ * Dummy component.
  * @description For usage in unit tests where applicable.
  */
 @Component({

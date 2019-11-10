@@ -11,16 +11,15 @@
     $display-3:		mat-typography-level(56px, 56px, 400),
     $display-2:		mat-typography-level(45px, 48px, 400),
     $display-1:		mat-typography-level(34px, 40px, 400),
-    $headline:		mat-typography-level(24px, 32px, 400), // h1
-    $title:			mat-typography-level(20px, 32px, 500), // h2
-    $subheading-2:	mat-typography-level(16px, 28px, 400), // h3
-    $subheading-1:	mat-typography-level(15px, 24px, 400), // h4
-    $body-2:		mat-typography-level(14px, 24px, 500), // bolder body text
-    $body-1:		mat-typography-level(14px, 20px, 400), // base body text
-    $caption:		mat-typography-level(12px, 20px, 400), // smaller hint text
+    $headline:		mat-typography-level(24px, 32px, 400),
+    $title:			mat-typography-level(20px, 32px, 500),
+    $subheading-2:	mat-typography-level(16px, 28px, 400),
+    $subheading-1:	mat-typography-level(15px, 24px, 400),
+    $body-2:		mat-typography-level(14px, 24px, 500),
+    $body-1:		mat-typography-level(14px, 20px, 400),
+    $caption:		mat-typography-level(12px, 20px, 400),
     $button:		mat-typography-level(14px, 14px, 500),
-    // Line-height must be unit-less fraction of the font-size.
-    $input:			mat-typography-level(inherit, 1.125, 400) // form input text
+    $input:			mat-typography-level(inherit, 1.125, 400)
   );
 
   /*
@@ -74,7 +73,7 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: url(/MaterialIcons-Regular.eot);
     src: local('Material Icons'),
       local('MaterialIcons-Regular'),
       url(/MaterialIcons-Regular.woff2) format('woff2'),
@@ -85,7 +84,7 @@
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px; /* Preferred icon size */
+    font-size: 24px;
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -142,10 +141,8 @@
       cursor: default;
     }
   }
-  .material-icons-fas { // font-awesome solid
-    // font-weight: normal; // this will break fas icons
-    // font-style: normal; // this will break fas icons
-    font-size: 19px; /* Preferred icon size */
+  .material-icons-fas {
+    font-size: 19px;
     display: inline-block;
     line-height: 1;
     text-align: center;
@@ -176,7 +173,7 @@
   .material-icons-svg {
     font-weight: normal;
     font-style: normal;
-    font-size: 24px; /* Preferred icon size */
+    font-size: 24px;
     display: inline-block;
     line-height: 1;
     text-transform: none;

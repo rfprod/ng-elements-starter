@@ -1,14 +1,21 @@
 <div>
 
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <span fxFlex="0 1 auto">
-      <img [ngStyle]="{ 'max-width': '100px', height: 'auto!important'}" alt="Angular Logo" src="assets/angular-elements-logo.png">
-    </span>
-    <h1 fxFlex="0 1 auto">Welcome to {{ title }}!</h1>
-  </div>
+    <div
+        fxLayout="row"
+        fxLayoutAlign="center center"
+    >
+        <span fxFlex="0 1 auto">
+            <img
+                [ngStyle]="{ 'max-width': '100px', height: 'auto!important'}"
+                alt="Angular Logo"
+                src="assets/angular-elements-logo.png"
+            >
+        </span>
+        <h1 fxFlex="0 1 auto">Welcome to {{ title }}!</h1>
+    </div>
 
-  <div style="padding: 15px 0 15px 0">
-    <router-outlet></router-outlet>
-  </div>
+    <div style="padding: 15px 0 15px 0">
+        <router-outlet></router-outlet>
+    </div>
 
 </div>

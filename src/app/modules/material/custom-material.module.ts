@@ -1,7 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import {
   // form controls
-  MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatInputModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
+  MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatInputModule,
+  MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
   // navigation
   MatMenuModule, MatSidenavModule, MatToolbarModule,
   // layout
@@ -36,7 +37,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 @NgModule({
   imports: [
     // form controls
-    MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule, MatInputModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
+    MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule,
+    MatInputModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
     // navigation
     MatMenuModule, MatSidenavModule, MatToolbarModule,
     // layout
@@ -60,7 +62,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
   ],
   exports: [
     // form controls
-    MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule, MatInputModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
+    MatAutocompleteModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatMomentDateModule, MatInputModule,
+    MatSelectModule, MatSliderModule, MatSlideToggleModule, MatRadioModule,
     // navigation
     MatMenuModule, MatSidenavModule, MatToolbarModule,
     // layout
@@ -86,13 +89,20 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 export class CustomMaterialModule {}
 
 /**
- * @title Custom material module with providers.
+ * Custom material module with providers.
  * @description Exports material modules, and provides services.
  */
 export const CustomMaterialModuleWithProviders: ModuleWithProviders = {
   ngModule: CustomMaterialModule,
   providers: [
     MatIconRegistry,
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: { showDelay: 1000, hideDelay: 1000, touchendHideDelay: 1000 } as MatTooltipDefaultOptions }
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: {
+        showDelay: 1000,
+        hideDelay: 1000,
+        touchendHideDelay: 1000
+      } as MatTooltipDefaultOptions
+    }
   ]
 };

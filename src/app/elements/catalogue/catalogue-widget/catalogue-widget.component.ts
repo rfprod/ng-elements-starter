@@ -1,28 +1,27 @@
-import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { UserService } from '../../../services/user/user.service';
 
 import { IUser } from '../../../interfaces/index';
 
 /**
- * @title Catalogue widget component
+ * Catalogue widget component
  */
 @Component({
   selector: 'catalogue-widget',
   templateUrl: './catalogue-widget.component.html',
   styleUrls: ['./catalogue-widget.component.css'],
   host: {
-		class: 'mat-body-1'
-	}
+    class: 'mat-body-1'
+  }
 })
-export class CatalogueWidgetComponent implements OnInit, OnDestroy {
+export class CatalogueWidgetComponent implements OnInit {
 
   /**
-   * @param el Element reference
+   * Constructor.
    * @param userService Users service
    */
   constructor(
-    private el: ElementRef,
     private userService: UserService
   ) {}
 
@@ -39,7 +38,7 @@ export class CatalogueWidgetComponent implements OnInit, OnDestroy {
   /**
    * Indicates if mocked server should be used.
    */
-  public mock: boolean = true;
+  public mock = true;
 
   /**
    * Selects real or mocked server., used in config callback.
@@ -57,12 +56,7 @@ export class CatalogueWidgetComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    console.log('Catalogue widget initialized');
     this.userService.SaveUser(this.user);
-  }
-
-  public ngOnDestroy(): void {
-    console.log('Catalogue widget destroyed');
   }
 
 }

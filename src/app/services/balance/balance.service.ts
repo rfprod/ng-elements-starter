@@ -6,13 +6,14 @@ import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers
 import { Observable } from 'rxjs';
 
 /**
- * @title Balance service
+ * Balance service
  * @description Polls server for balance data over http
  */
 @Injectable()
 export class BalanceService {
 
   /**
+   * Constructor.
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference

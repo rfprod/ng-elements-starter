@@ -6,7 +6,7 @@ import { OrdersService } from '../../../services/orders/orders.service';
 import { IUser } from '../../../interfaces/index';
 
 /**
- * @title Orders index
+ * Orders index
  */
 @Component({
   selector: 'orders-index',
@@ -16,9 +16,6 @@ import { IUser } from '../../../interfaces/index';
         user is not logged in
       </span>
       <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
-      <!-- TODO: should it work without authentication?
-      <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
-      -->
       <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
         <mat-expansion-panel *ngFor="let order of orders()">
           <mat-expansion-panel-header>
@@ -47,6 +44,7 @@ import { IUser } from '../../../interfaces/index';
 export class OrdersIndexComponent implements OnInit, OnChanges {
 
   /**
+   * Constructor.
    * @param userService User service
    * @param ordersService Orders service
    */
@@ -63,7 +61,22 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   /**
    * Indicates if mocked server should be used for http requests.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
+
+  /**
+   * Orders data.
+   */
+  private data: string[] = [];
+
+  /**
+   * UI error reporter.
+   */
+  public errorReport = '';
+
+  /**
+   * Orders change event emitter.
+   */
+  @Output() public ordersChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
    * Indicates if user is logged in.
@@ -73,21 +86,11 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Orders data.
-   */
-  private data: string[] = [];
-
-  /**
    * Returns current orders.
    */
   public orders(): any[] {
     return this.data;
   }
-
-  /**
-   * UI error reporter.
-   */
-  public errorReport: string = '';
 
   /**
    * Gets user orders.
@@ -96,12 +99,10 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
     const serviceModel: IUser = this.userService.getUser();
     this.ordersService.orders(this.mock, serviceModel.token || '$TOKEN').subscribe(
       (data: string[]) => {
-        console.log('orders request, data', data);
         this.data = data;
         this.changeOrders();
       },
       (error: any) => {
-        console.log('orders request, error', error);
         this.errorReport = error;
         setTimeout(() => {
           this.errorReport = '';
@@ -109,11 +110,6 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
       }
     );
   }
-
-  /**
-   * Orders change event emitter.
-   */
-  @Output() public ordersChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
    * Emits orders data change event.
@@ -130,7 +126,6 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log('orders changes', changes);
     if (changes.mock) {
       this.getOrders();
     }

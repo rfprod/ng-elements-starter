@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { UserService } from '../../../services/user/user.service';
 
 import { IUser, IBalance } from '../../../interfaces/index';
 
 /**
- * @title Balance widget component
+ * Balance widget component
  */
 @Component({
   selector: 'balance-widget',
@@ -15,14 +15,13 @@ import { IUser, IBalance } from '../../../interfaces/index';
     class: 'mat-body-1'
   }
 })
-export class BalanceWidgetComponent implements OnInit, OnDestroy {
+export class BalanceWidgetComponent implements OnInit {
 
   /**
-   * @param el Element reference
+   * Constructor.
    * @param userService Users service
    */
   constructor(
-    private el: ElementRef,
     private userService: UserService
   ) {}
 
@@ -39,7 +38,7 @@ export class BalanceWidgetComponent implements OnInit, OnDestroy {
   /**
    * Indicates if mocked server should be used.
    */
-  public mock: boolean = true;
+  public mock = true;
 
   /**
    * Selects real or mocked server., used in config callback.
@@ -57,12 +56,7 @@ export class BalanceWidgetComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    console.log('Balance widget initialized');
     this.userService.SaveUser(this.user);
-  }
-
-  public ngOnDestroy(): void {
-    console.log('Balance widget destroyed');
   }
 
 }

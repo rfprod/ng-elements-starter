@@ -5,7 +5,7 @@ import { fadeIn, fadeInOut } from '../animations';
 import { UserService } from '../../../services/user/user.service';
 
 /**
- * @title Passport index
+ * Passport index
  */
 @Component({
   selector: 'passport-index',
@@ -37,6 +37,7 @@ import { UserService } from '../../../services/user/user.service';
 export class PassportIndexComponent {
 
   /**
+   * Constructor.
    * @param userService User service
    */
   constructor(
@@ -51,12 +52,21 @@ export class PassportIndexComponent {
   /**
    * UI title.
    */
-  @Input() public title: string = 'Passport Index';
+  @Input() public title = 'Passport Index';
 
   /**
    * Indicates if mocked server should be used for http requests.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
+
+  /**
+   * Indicates if a particular passport mode is restricted:
+   * - login
+   * - signup
+   * - null
+   * null indicates that there is no mode restriction.
+   */
+  @Input() public restrictMode: 'login'|'signup'|null = null;
 
   /**
    * Switches mode.
@@ -70,15 +80,6 @@ export class PassportIndexComponent {
   public modeChange(mode: 'login'|'signup'): void {
     this.switchMode.emit(mode);
   }
-
-  /**
-   * Indicates if a particular passport mode is restricted:
-   * - login
-   * - signup
-   * - null
-   * null indicates that there is no mode restriction.
-   */
-  @Input() public restrictMode: 'login'|'signup'|null = null;
 
   /**
    * Indicates if user is logged in.

@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { ILoginForm } from '../../../interfaces/index';
 
 /**
- * @title Passport login
+ * Passport login
  */
 @Component({
   selector: 'passport-login',
@@ -59,6 +59,7 @@ import { ILoginForm } from '../../../interfaces/index';
 export class PassportLoginComponent implements OnInit {
 
   /**
+   * Constructor.
    * @param fb Form builder
    * @param userService User service
    * @param authService Auth service
@@ -79,25 +80,17 @@ export class PassportLoginComponent implements OnInit {
   /**
    * Component title.
    */
-  @Input() public title: string = 'Passport Login';
+  @Input() public title = 'Passport Login';
 
   /**
    * Indicates if mocked server should be used for http requests.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
 
   /**
    * Switch mode event emitter.
    */
   @Output() public switchMode: EventEmitter<string> = new EventEmitter();
-
-  /**
-   * Emits mode change event.
-   * @param mode mode that should be activated by widget component.
-   */
-  public modeChange(mode: 'index'|'signup'): void {
-    this.switchMode.emit(mode);
-  }
 
   /**
    * Indicates if a particular passport mode is restricted:
@@ -114,6 +107,24 @@ export class PassportLoginComponent implements OnInit {
   public loginForm: ILoginForm;
 
   /**
+   * Indicates if password should be showm.
+   */
+  public showPassword = false;
+
+  /**
+   * UI error reporter.
+   */
+  public errorReport = '';
+
+  /**
+   * Emits mode change event.
+   * @param mode mode that should be activated by widget component.
+   */
+  public modeChange(mode: 'index'|'signup'): void {
+    this.switchMode.emit(mode);
+  }
+
+  /**
    * Resets signup form.
    */
   public resetForm(): void {
@@ -124,21 +135,11 @@ export class PassportLoginComponent implements OnInit {
   }
 
   /**
-   * Indicates if password should be showm.
-   */
-  public showPassword: boolean = false;
-
-  /**
    * Toggles password visibility.
    */
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-
-  /**
-   * UI error reporter.
-   */
-  public errorReport: string = '';
 
   /**
    * Sends signup request with provided credentials.
@@ -150,12 +151,10 @@ export class PassportLoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.mock, formData.email, formData.password).subscribe(
         (data: any) => {
-          console.log('login success, data', data);
           this.userService.SaveUser(data);
           this.modeChange('index');
         },
         (error: any) => {
-          console.log('login error, error', error);
           this.errorReport = error;
           setTimeout(() => {
             this.errorReport = '';

@@ -8,7 +8,7 @@ import {
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 /**
- * @title Application index component
+ * Application index component
  * @description Includes element modules
  */
 @Component({
@@ -22,7 +22,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 export class AppIndexComponent implements OnInit, OnDestroy {
 
   /**
-   * AppIndexComponent constructor.
+   * Constructor.
    * @param overlayContainer Overlay container
    */
   constructor(
@@ -35,15 +35,14 @@ export class AppIndexComponent implements OnInit, OnDestroy {
   public theme: 'primary'|'accent'|'warn' = 'primary';
 
   /**
-	 * Defines if UI should use alternative dark material theme.
-	 */
-	@HostBinding('class.unicorn-dark-theme') public darkTheme: boolean = false;
+   * Defines if UI should use alternative dark material theme.
+   */
+  @HostBinding('class.unicorn-dark-theme') public darkTheme = false;
 
   /**
    * Toggles application material theme.
    */
   public toggleMaterialTheme(): void {
-    console.log('TODO: toggle material theme');
     if (this.darkTheme) {
       this.overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
     } else {
@@ -55,15 +54,11 @@ export class AppIndexComponent implements OnInit, OnDestroy {
   /**
    * Lifecycle hook called on component initialization.
    */
-  public ngOnInit(): void {
-    console.log('AppIndex component initialized');
-  }
+  public ngOnInit(): void {}
 
   /**
    * Lifecycle hook called on component destruction.
    */
-  public ngOnDestroy(): void {
-    console.log('AppIndex component destroyed');
-  }
+  public ngOnDestroy(): void {}
 
 }

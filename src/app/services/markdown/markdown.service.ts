@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 declare let marked;
 
 /**
- * @title Markdown service.
+ * Markdown service.
  * @description Processes string in markdown format, outputs html.
  */
 @Injectable()
@@ -15,6 +15,6 @@ export class MarkdownService {
    */
   public process(input: string): string {
     return marked(input);
-  };
+  }
 
 }

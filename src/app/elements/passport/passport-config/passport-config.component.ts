@@ -4,7 +4,7 @@ import { MatButtonToggleChange, MatSlideToggleChange } from '@angular/material';
 import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
 
 /**
- * @title Passport config
+ * Passport config
  */
 @Component({
   selector: 'passport-config',
@@ -52,17 +52,27 @@ export class PassportConfigComponent {
   /**
    * Component title.
    */
-  @Input() public title: string = 'Passport';
+  @Input() public title = 'Passport';
 
   /**
-   * Component hotkeys.
+   * Insicates if mocked server should be used.
    */
-  public hotkeys: string = 'Hotkeys (SHIFT +): I - index, L - login, S - signup';
+  @Input() public mock = true;
+
+  /**
+   * Server change event emitter.
+   */
+  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Theme change event emitter.
    */
   @Output() public themeChange: EventEmitter<IColorThemeChangeEvent> = new EventEmitter();
+
+  /**
+   * Component hotkeys.
+   */
+  public hotkeys = 'Hotkeys (SHIFT +): I - index, L - login, S - signup';
 
   /**
    * Available themes.
@@ -85,16 +95,6 @@ export class PassportConfigComponent {
   public matButtonToggleChange(event: MatButtonToggleChange): void {
     this.setTheme(event.value);
   }
-
-  /**
-   * Insicates if mocked server should be used.
-   */
-  @Input() public mock: boolean = true;
-
-  /**
-   * Server change event emitter.
-   */
-  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Selects mocked/real server

@@ -6,7 +6,7 @@ import { BalanceService } from '../../../services/balance/balance.service';
 import { IUser, IBalance } from '../../../interfaces/index';
 
 /**
- * @title Balance index
+ * Balance index
  */
 @Component({
   selector: 'balance-index',
@@ -16,9 +16,6 @@ import { IUser, IBalance } from '../../../interfaces/index';
         user is not logged in
       </span>
       <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
-      <!-- TODO: should it work without authentication?
-      <span fxFlex="100" *ngIf="isLoggedIn()">
-      -->
       <span fxFlex="100" *ngIf="isLoggedIn()">
         <p>organization: {{balance().organization}}</p>
         <p>sum1: {{balance().sum1}}</p>
@@ -35,6 +32,22 @@ import { IUser, IBalance } from '../../../interfaces/index';
 export class BalanceIndexComponent implements OnInit, OnChanges {
 
   /**
+   * Balance change event emitter.
+   */
+  @Output() public balanceChange: EventEmitter<IBalance> = new EventEmitter();
+
+  /**
+   * Balance data.
+   */
+  private data: IBalance = new IBalance();
+
+  /**
+   * UI error reporter.
+   */
+  public errorReport = '';
+
+  /**
+   * Constructor.
    * @param userService User service
    * @param balanceService Balance service
    */
@@ -51,7 +64,7 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   /**
    * Indicates if mocked server should be used for http requests.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
 
   /**
    * Indicates if user is logged in.
@@ -61,21 +74,11 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Balance data.
-   */
-  private data: IBalance = new IBalance();
-
-  /**
    * Returns current balance.
    */
   public balance(): IBalance {
     return this.data;
   }
-
-  /**
-   * UI error reporter.
-   */
-  public errorReport: string = '';
 
   /**
    * Gets user balance.
@@ -84,12 +87,10 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
     const serviceModel: IUser = this.userService.getUser();
     this.balanceService.balance(this.mock, serviceModel.token || '$TOKEN').subscribe(
       (data: IBalance) => {
-        console.log('balance request, data', data);
         this.data = data;
         this.changeBalance();
       },
       (error: any) => {
-        console.log('balance request, error', error);
         this.errorReport = error;
         setTimeout(() => {
           this.errorReport = '';
@@ -97,11 +98,6 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
       }
     );
   }
-
-  /**
-   * Balance change event emitter.
-   */
-  @Output() public balanceChange: EventEmitter<IBalance> = new EventEmitter();
 
   /**
    * Emits balance data change event.
@@ -118,7 +114,6 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log('balance changes', changes);
     if (changes.mock) {
       this.getBalance();
     }

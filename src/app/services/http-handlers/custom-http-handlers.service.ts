@@ -7,22 +7,26 @@ import { Observable, concat, throwError } from 'rxjs';
 import { timeout, take, map, catchError } from 'rxjs/operators';
 
 /**
- * @title Custom http handers
+ * Custom http handers
  * @description Handles http requests.
  */
 @Injectable()
 export class CustomHttpHandlersService {
 
   /**
+   * Default timeout interval for http-requests.
+   */
+  public defaultHttpTimeout = 10000;
+
+  /**
+   * Constructor.
    * @param userService User service - browser local storage wrapper which stores user creadentials
    * @param window window reference
    */
   constructor(
     private userService: UserService,
     @Inject('Window') private window: Window
-  ) {
-    console.log('CustomHttpHandlersService init');
-  }
+  ) {}
 
   /**
    * Resolves if app is running on localhost.
@@ -37,11 +41,6 @@ export class CustomHttpHandlersService {
   public apiBaseUrl(): string {
     return this.window.location.protocol + '//real-server-domain.tld';
   }
-
-  /**
-   * Default timeout interval for http-requests.
-   */
-  public defaultHttpTimeout: number = 10000;
 
   /**
    * Extracts response in format { val1: {}, val2: '' }.
@@ -73,7 +72,6 @@ export class CustomHttpHandlersService {
    * 403 - forbidden, no access rights
    */
   public checkErrorStatusAndRedirect(status: any): void {
-    console.log('checkErrorStatusAndRedirect, status', status);
     if (status === 401) {
       /*
       * Reset token first or user will be redirected by router to profile.
@@ -90,7 +88,6 @@ export class CustomHttpHandlersService {
    * @param error error object
    */
   public handleError(error: any): Observable<any> {
-    console.log('ERROR', error);
     let msg: string;
     let errors: any;
     if (typeof error._body === 'string' && error._body !== 'null') {
@@ -114,12 +111,11 @@ export class CustomHttpHandlersService {
         *	Parse errors as object.
         *	{ code: 'c', message: 'm', detail: { inn: ['Invalid inn'] } }
         */
-        let errDetail: string = '';
+        let errDetail = '';
         if (errors.detail && typeof errors.detail === 'object') {
           /*
           *	Unwrap nested structure for errors.detail first, it must be flat.
           */
-          console.log('errors.detail is object');
           for (const key in errors.detail) {
             if (errors.detail[key]) {
               if (!Array.isArray(errors.detail[key]) && typeof errors.detail[key] === 'object') {

@@ -1,4 +1,4 @@
-$material-colors: ( /// RED
+$material-colors: (
 red-50: #FFEBEE,
 red-100: #FFCDD2,
 red-200: #EF9A9A,
@@ -13,7 +13,7 @@ red-a100: #FF8A80,
 red-a200: #FF5252,
 red-a400: #FF1744,
 red-a700: #D50000,
-/// PINK
+
 pink-50: #FCE4EC,
 pink-100: #F8BBD0,
 pink-200: #F48FB1,
@@ -28,7 +28,7 @@ pink-a100: #FF80AB,
 pink-a200: #FF4081,
 pink-a400: #F50057,
 pink-a700: #C51162,
-/// PURPLE
+
 purple-50: #F3E5F5,
 purple-100: #E1BEE7,
 purple-200: #CE93D8,
@@ -43,7 +43,7 @@ purple-a100: #EA80FC,
 purple-a200: #E040FB,
 purple-a400: #D500F9,
 purple-a700: #AA00FF,
-/// DEEP PURPLE
+
 deep-purple-50: #EDE7F6,
 deep-purple-100: #D1C4E9,
 deep-purple-200: #B39DDB,
@@ -58,7 +58,7 @@ deep-purple-a100: #B388FF,
 deep-purple-a200: #7C4DFF,
 deep-purple-a400: #651FFF,
 deep-purple-a700: #6200EA,
-/// INDIGO
+
 indigo-50: #E8EAF6,
 indigo-100: #C5CAE9,
 indigo-200: #9FA8DA,
@@ -73,7 +73,7 @@ indigo-a100: #8C9EFF,
 indigo-a200: #536DFE,
 indigo-a400: #3D5AFE,
 indigo-a700: #304FFE,
-/// BLUE
+
 blue-50: #E3F2FD,
 blue-100: #BBDEFB,
 blue-200: #90CAF9,
@@ -88,7 +88,7 @@ blue-a100: #82B1FF,
 blue-a200: #448AFF,
 blue-a400: #2979FF,
 blue-a700: #2962FF,
-/// LIGHT-BLUE
+
 light-blue-50: #E1F5FE,
 light-blue-100: #B3E5FC,
 light-blue-200: #81D4FA,
@@ -103,7 +103,7 @@ light-blue-a100: #80D8FF,
 light-blue-a200: #40C4FF,
 light-blue-a400: #00B0FF,
 light-blue-a700: #0091EA,
-/// CYAN
+
 cyan-50: #E0F7FA,
 cyan-100: #B2EBF2,
 cyan-200: #80DEEA,
@@ -118,7 +118,7 @@ cyan-a100: #84FFFF,
 cyan-a200: #18FFFF,
 cyan-a400: #00E5FF,
 cyan-a700: #00B8D4,
-/// TEAL
+
 teal-50: #E0F2F1,
 teal-100: #B2DFDB,
 teal-200: #80CBC4,
@@ -133,7 +133,7 @@ teal-a100: #A7FFEB,
 teal-a200: #64FFDA,
 teal-a400: #1DE9B6,
 teal-a700: #00BFA5,
-/// GREEN
+
 green-50: #E8F5E9,
 green-100: #C8E6C9,
 green-200: #A5D6A7,
@@ -148,7 +148,7 @@ green-a100: #B9F6CA,
 green-a200: #69F0AE,
 green-a400: #00E676,
 green-a700: #00C853,
-/// LIGHT GREEN
+
 light-green-50: #F1F8E9,
 light-green-100: #DCEDC8,
 light-green-200: #C5E1A5,
@@ -163,7 +163,7 @@ light-green-a100: #CCFF90,
 light-green-a200: #B2FF59,
 light-green-a400: #76FF03,
 light-green-a700: #64DD17,
-/// LIME
+
 lime-50: #F9FBE7,
 lime-100: #F0F4C3,
 lime-200: #E6EE9C,
@@ -178,7 +178,7 @@ lime-a100: #F4FF81,
 lime-a200: #EEFF41,
 lime-a400: #C6FF00,
 lime-a700: #AEEA00,
-/// YELLOW
+
 yellow-50: #FFFDE7,
 yellow-100: #FFF9C4,
 yellow-200: #FFF59D,
@@ -193,7 +193,7 @@ yellow-a100: #FFFF8D,
 yellow-a200: #FFFF00,
 yellow-a400: #FFEA00,
 yellow-a700: #FFD600,
-/// AMBER
+
 amber-50: #FFF8E1,
 amber-100: #FFECB3,
 amber-200: #FFE082,
@@ -208,7 +208,7 @@ amber-a100: #FFE57F,
 amber-a200: #FFD740,
 amber-a400: #FFC400,
 amber-a700: #FFAB00,
-/// ORANGE
+
 orange-50: #FFF3E0,
 orange-100: #FFE0B2,
 orange-200: #FFCC80,
@@ -223,7 +223,7 @@ orange-a100: #FFD180,
 orange-a200: #FFAB40,
 orange-a400: #FF9100,
 orange-a700: #FF6D00,
-/// DEEP ORANGE
+
 deep-orange-50: #FBE9E7,
 deep-orange-100: #FFCCBC,
 deep-orange-200: #FFAB91,
@@ -237,7 +237,8 @@ deep-orange-900: #BF360C,
 deep-orange-a100: #FF9E80,
 deep-orange-a200: #FF6E40,
 deep-orange-a400: #FF3D00,
-deep-orange-a700: #DD2C00, /// BROWN
+deep-orange-a700: #DD2C00,
+
 brown-50: #EFEBE9,
 brown-100: #D7CCC8,
 brown-200: #BCAAA4,
@@ -248,7 +249,7 @@ brown-600: #6D4C41,
 brown-700: #5D4037,
 brown-800: #4E342E,
 brown-900: #3E2723,
-/// GRAY
+
 gray-50: #FAFAFA,
 gray-100: #F5F5F5,
 gray-200: #EEEEEE,
@@ -259,7 +260,7 @@ gray-600: #757575,
 gray-700: #616161,
 gray-800: #424242,
 gray-900: #212121,
-/// BLUE-GRAY
+
 blue-gray-50: #ECEFF1,
 blue-gray-100: #CFD8DC,
 blue-gray-200: #B0BEC5,
@@ -270,7 +271,7 @@ blue-gray-600: #546E7A,
 blue-gray-700: #455A64,
 blue-gray-800: #37474F,
 blue-gray-900: #263238,
-/// BLACK
+
 black: #000000,
-/// WHITE
+
 white: #ffffff);

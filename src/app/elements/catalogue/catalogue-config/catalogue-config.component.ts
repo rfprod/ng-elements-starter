@@ -4,7 +4,7 @@ import { MatButtonToggleChange, MatSlideToggleChange } from '@angular/material';
 import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
 
 /**
- * @title Catalogue config
+ * Catalogue config
  */
 @Component({
   selector: 'catalogue-config',
@@ -49,12 +49,22 @@ export class CatalogueConfigComponent {
   /**
    * Component title.
    */
-  @Input() public title: string = 'Catalogue';
+  @Input() public title = 'Catalogue';
 
   /**
    * Theme change event emitter.
    */
   @Output() public themeChange: EventEmitter<IColorThemeChangeEvent> = new EventEmitter();
+
+  /**
+   * Server change event emitter.
+   */
+  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
+
+  /**
+   * Insicates if mocked server should be used.
+   */
+  public mock = true;
 
   /**
    * Available themes.
@@ -77,16 +87,6 @@ export class CatalogueConfigComponent {
   public matButtonToggleChange(event: MatButtonToggleChange): void {
     this.setTheme(event.value);
   }
-
-  /**
-   * Insicates if mocked server should be used.
-   */
-  public mock: boolean = true;
-
-  /**
-   * Server change event emitter.
-   */
-  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Selects mocked/real server

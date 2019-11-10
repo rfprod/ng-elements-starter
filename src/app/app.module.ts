@@ -49,7 +49,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppIconsService } from './services/icons/icons.service';
 
 /**
- * Main application module, includes all widgets
+ * Application module, includes all widgets
  */
 @NgModule({
   declarations: [

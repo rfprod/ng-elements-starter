@@ -4,7 +4,7 @@ import { MatButtonToggleChange, MatSlideToggleChange } from '@angular/material';
 import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
 
 /**
- * @title Balance config
+ * Balance config
  */
 @Component({
   selector: 'balance-config',
@@ -49,12 +49,22 @@ export class BalanceConfigComponent {
   /**
    * Component title.
    */
-  @Input() public title: string = 'Balance';
+  @Input() public title = 'Balance';
 
   /**
    * Theme change event emitter.
    */
   @Output() public themeChange: EventEmitter<IColorThemeChangeEvent> = new EventEmitter();
+
+  /**
+   * Server change event emitter.
+   */
+  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
+
+  /**
+   * Insicates if mocked server should be used.
+   */
+  public mock = true;
 
   /**
    * Available themes.
@@ -77,16 +87,6 @@ export class BalanceConfigComponent {
   public matButtonToggleChange(event: MatButtonToggleChange): void {
     this.setTheme(event.value);
   }
-
-  /**
-   * Insicates if mocked server should be used.
-   */
-  public mock: boolean = true;
-
-  /**
-   * Server change event emitter.
-   */
-  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Selects mocked/real server

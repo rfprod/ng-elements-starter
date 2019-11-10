@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { fadeIn, fadeInOut } from '../animations';
 
@@ -7,7 +7,7 @@ import { UserService } from '../../../services/user/user.service';
 import { IServerChangeEvent } from '../../../interfaces/index';
 
 /**
- * @title Passport widget component
+ * Passport widget component
  */
 @Component({
   selector: 'passport-widget',
@@ -18,41 +18,7 @@ import { IServerChangeEvent } from '../../../interfaces/index';
     class: 'mat-body-1'
   }
 })
-export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
-
-  /**
-   * @param el Element reference
-   * @param userService Users service
-   */
-  constructor(
-    private el: ElementRef,
-    private userService: UserService
-  ) {}
-
-  /**
-   * Indicates if user is anonymous, i.e. token is not present in UserService.
-   */
-  public anonUser(): boolean {
-    return (this.userService.getUser().token) ? false : true;
-  }
-
-  /**
-   * Component theme.
-   */
-  @Input() public theme: 'primary' | 'accent' | 'warn' = 'primary';
-
-  /**
-   * UI mode state.
-   */
-  private mode: {
-    index: boolean,
-    login: boolean,
-    signup: boolean
-  } = {
-    index: true,
-    login: false,
-    signup: false
-  };
+export class PassportWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Currently activated mode.
@@ -71,7 +37,45 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Indicated if passport config should be displayed.
    */
-  @Input() public displayConfig: boolean = true;
+  @Input() public displayConfig = true;
+
+  /**
+   * Component theme.
+   */
+  @Input() public theme: 'primary' | 'accent' | 'warn' = 'primary';
+
+  /**
+   * Indicates if mocked server should be used.
+   */
+  @Input() public mock = true;
+
+  /**
+   * UI mode state.
+   */
+  private mode: {
+    index: boolean,
+    login: boolean,
+    signup: boolean
+  } = {
+    index: true,
+    login: false,
+    signup: false
+  };
+
+  /**
+   * Constructor.
+   * @param userService Users service
+   */
+  constructor(
+    private userService: UserService
+  ) {}
+
+  /**
+   * Indicates if user is anonymous, i.e. token is not present in UserService.
+   */
+  public anonUser(): boolean {
+    return (this.userService.getUser().token) ? false : true;
+  }
 
   /**
    * Resolves if mode is restricted or not.
@@ -86,7 +90,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
    * @param modeKey mode that should be checked for activateion state
    */
   public isCurrentMode(modeKey: 'index'|'login'|'signup'): boolean {
-    return modeKey == this.activatedMode;
+    return modeKey === this.activatedMode;
   }
 
   /**
@@ -119,11 +123,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Indicates if mocked server should be used.
-   */
-  @Input() public mock: boolean = true;
-
-  /**
    * Selects real or mocked server., used in config callback.
    * @param event server change event
    */
@@ -137,7 +136,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
    */
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    console.log('handleKeyboardEvent, event', event);
     if (event.shiftKey && event.key === 'I') {
       event.preventDefault();
       this.activateMode('index');
@@ -156,7 +154,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
    * Lifecycle hook called on component initialization.
    */
   public ngOnInit(): void {
-    console.log('Passport widget initialized');
     this.activateMode(this.getStartModeKey());
   }
 
@@ -165,18 +162,10 @@ export class PassportWidgetComponent implements OnInit, OnChanges, OnDestroy {
    * @param changes input changes
    */
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log('Passport widget input change', changes);
     if ('mock' in changes) {
       const mock = changes.mock.currentValue;
       this.selectServer({ mock });
     }
-  }
-
-  /**
-   * Lifecycle hook called on component destruction.
-   */
-  public ngOnDestroy(): void {
-    console.log('Passport widget destroyed');
   }
 
 }

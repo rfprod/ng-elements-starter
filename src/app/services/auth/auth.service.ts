@@ -6,13 +6,14 @@ import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers
 import { Observable } from 'rxjs';
 
 /**
- * @title Auth service
+ * Auth service
  * @description Sends authentication requests with user credentials to server over http
  */
 @Injectable()
 export class AuthService {
 
   /**
+   * Constructor.
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference

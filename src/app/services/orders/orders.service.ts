@@ -6,13 +6,14 @@ import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers
 import { Observable } from 'rxjs';
 
 /**
- * @title Orders service
+ * Orders service
  * @description Polls server for orders data over http
  */
 @Injectable()
 export class OrdersService {
 
   /**
+   * Constructor.
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference

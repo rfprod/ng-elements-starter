@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { UserService } from '../../../services/user/user.service';
 
 import { IUser } from '../../../interfaces/index';
 
 /**
- * @title Orders widget component
+ * Orders widget component
  */
 @Component({
   selector: 'orders-widget',
@@ -15,14 +15,14 @@ import { IUser } from '../../../interfaces/index';
     class: 'mat-body-1'
   }
 })
-export class OrdersWidgetComponent implements OnInit, OnChanges, OnDestroy {
+export class OrdersWidgetComponent implements OnInit, OnChanges {
 
   /**
+   * Constructor.
    * @param el Element reference
    * @param userService Users service
    */
   constructor(
-    private el: ElementRef,
     private userService: UserService
   ) {}
 
@@ -34,7 +34,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Indicated if passport config should be displayed.
    */
-  @Input() public displayConfig: boolean = true;
+  @Input() public displayConfig = true;
 
   /**
    * User object.
@@ -44,7 +44,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Indicates if mocked server should be used.
    */
-  @Input() public mock: boolean = true;
+  @Input() public mock = true;
 
   /**
    * Selects real or mocked server., used in config callback.
@@ -65,7 +65,6 @@ export class OrdersWidgetComponent implements OnInit, OnChanges, OnDestroy {
    * Lifecycle hook called on component initialization.
    */
   public ngOnInit(): void {
-    console.log('Orders widget initialized');
     this.userService.SaveUser(this.user);
   }
 
@@ -74,17 +73,9 @@ export class OrdersWidgetComponent implements OnInit, OnChanges, OnDestroy {
    * @param changes input changes
    */
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log('Orders widget input change', changes);
     if ('mock' in changes) {
       this.selectServer({ mock: changes.mock.currentValue });
     }
-  }
-
-  /**
-   * Lifecycle hook called on component destruction.
-   */
-  public ngOnDestroy(): void {
-    console.log('Orders widget destroyed');
   }
 
 }

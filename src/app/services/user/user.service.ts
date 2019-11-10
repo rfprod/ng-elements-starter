@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../../interfaces/index';
 
 /**
- * @title User service
+ * User service
  * @description Is a wrapper around browser local storage
  */
 @Injectable()
 export class UserService {
 
+  /**
+   * Constructor.
+   */
   constructor() {
     this.initializeModel();
     if (!localStorage.getItem('userService') && typeof localStorage.getItem('userService') === 'undefined') {
@@ -16,7 +19,6 @@ export class UserService {
     } else {
       this.RestoreUser();
     }
-    console.log(' >> USER SERVICE CONSTRUCTOR, model', this.model);
   }
 
   /**
@@ -43,7 +45,6 @@ export class UserService {
    * @param newValues new values object
    */
   public SaveUser(newValues: any): void {
-    console.log('SaveUser', newValues);
     if (newValues.hasOwnProperty('name')) {
       this.model.name = newValues.name;
     }
@@ -74,7 +75,6 @@ export class UserService {
   public ResetUser(): void {
     this.model = new IUser();
     localStorage.setItem('userService', JSON.stringify(this.model));
-    console.log('Reset User, localStorage.userService:', localStorage.getItem('userService'));
   }
 
 }
