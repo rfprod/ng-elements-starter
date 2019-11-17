@@ -47,6 +47,8 @@ import { Ng2elementsState } from 'src/app/state/ng2elements.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppIconsService } from './services/icons/icons.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 /**
  * Application module, includes all widgets
@@ -70,7 +72,8 @@ import { AppIconsService } from './services/icons/icons.service';
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
