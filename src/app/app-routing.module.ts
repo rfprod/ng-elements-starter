@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AppIndexComponent } from './components/app-index/app-index.component';
 
 /**
@@ -8,14 +7,14 @@ import { AppIndexComponent } from './components/app-index/app-index.component';
  */
 const routes: Routes = [
   { path: '', component: AppIndexComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];
 
 /**
  * Application routing module.
  */
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

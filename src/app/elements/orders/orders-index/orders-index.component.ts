@@ -1,15 +1,21 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-
-import { UserService } from '../../../services/user/user.service';
-import { OrdersService } from '../../../services/orders/orders.service';
-
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { IUser } from '../../../interfaces/index';
+import { OrdersService } from '../../../services/orders/orders.service';
+import { UserService } from '../../../services/user/user.service';
 
 /**
  * Orders index
  */
 @Component({
-  selector: 'orders-index',
+  selector: 'app-orders-index',
   template: `
     <div fxLayout="row wrap">
       <span fxFlex="100" *ngIf="!isLoggedIn()">
@@ -20,53 +26,37 @@ import { IUser } from '../../../interfaces/index';
         <mat-expansion-panel *ngFor="let order of orders()">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{order.id}}
+              {{ order.id }}
             </mat-panel-title>
             <mat-panel-description>
-              <span fxFlex>{{order.status}}</span>
-              <span fxFlex>{{order.date}}</span>
-              <span fxFlex>{{order.goods.length}}</span>
-              <span fxFlex>{{order.sum}}</span>
+              <span fxFlex>{{ order.status }}</span>
+              <span fxFlex>{{ order.date }}</span>
+              <span fxFlex>{{ order.goods.length }}</span>
+              <span fxFlex>{{ order.sum }}</span>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
           <span>
-            <p *ngFor="let item of order.goods">{{item}}</p>
+            <p *ngFor="let item of order.goods">{{ item }}</p>
           </span>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
   `,
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class OrdersIndexComponent implements OnInit, OnChanges {
-
-  /**
-   * Constructor.
-   * @param userService User service
-   * @param ordersService Orders service
-   */
-  constructor(
-    private userService: UserService,
-    private ordersService: OrdersService
-  ) {}
-
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary'|'accent'|'warn';
+  @Input() public theme: 'primary' | 'accent' | 'warn';
 
   /**
    * Indicates if mocked server should be used for http requests.
    */
   @Input() public mock = true;
-
-  /**
-   * Orders data.
-   */
-  private data: string[] = [];
 
   /**
    * UI error reporter.
@@ -79,10 +69,25 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   @Output() public ordersChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
+   * Orders data.
+   */
+  private data: string[] = [];
+
+  /**
+   * Constructor.
+   * @param userService User service
+   * @param ordersService Orders service
+   */
+  constructor(
+    private readonly userService: UserService,
+    private readonly ordersService: OrdersService,
+  ) {}
+
+  /**
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return (this.userService.getUser().token) ? true : false;
+    return this.userService.getUser().token ? true : false;
   }
 
   /**
@@ -107,7 +112,7 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
         setTimeout(() => {
           this.errorReport = '';
         }, 2500);
-      }
+      },
     );
   }
 
@@ -130,5 +135,4 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
       this.getOrders();
     }
   }
-
 }

@@ -1,22 +1,19 @@
 <div fxLayout="row wrap">
-    <orders-config
-        *ngIf="displayConfig"
-        fxFlex="100"
-        [theme]="theme"
-        [mock]="mock"
-        (serverChange)="selectServer($event)"
-    ></orders-config>
+  <app-orders-config
+    *ngIf="displayConfig"
+    fxFlex="100"
+    [theme]="theme"
+    [mock]="mock"
+    (serverChange)="selectServer($event)"
+  ></app-orders-config>
 
-    <div
-        fxFlex="100"
-        fxLayout="row"
-    >
-        <orders-index
-            fxFlex
-            fxLayoutFill
-            [theme]="theme"
-            [mock]="mock"
-            (ordersChange)="ordersChangeHandler($event)"
-        ></orders-index>
-    </div>
+  <div fxFlex="100" fxLayout="row">
+    <app-orders-index
+      fxFlex
+      fxLayoutFill
+      [theme]="theme"
+      [mock]="mock"
+      (ordersChange)="ordersChangeHandler($event)"
+    ></app-orders-index>
+  </div>
 </div>

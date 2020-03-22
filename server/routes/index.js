@@ -7,8 +7,7 @@ const handlers = require('../../functions/handlers/index');
  * @module server/routes/index
  * @param {object} app Express application
  */
-module.exports = (app) => {
-
+module.exports = app => {
   /**
    * Login endpoint mock.
    */
@@ -33,5 +32,4 @@ module.exports = (app) => {
    * Orders endpoint mock.
    */
   app.get('/orders', handlers.orders);
-
 };

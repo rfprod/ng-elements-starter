@@ -1,25 +1,12 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HttpClientModule } from '@angular/common/http';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { CustomMaterialModuleWithProviders } from '../../modules/material/custom-material.module';
-
-import {
-  OrdersWidgetComponent,
-  OrdersConfigComponent,
-  OrdersIndexComponent
-} from './index';
-
-import {
-  CustomHttpHandlersService,
-  UserService,
-  OrdersService
-} from '../../services/index';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WINDOW, getWindow } from 'src/app/utils';
+import { CustomMaterialModule } from '../../modules/material/custom-material.module';
+import { CustomHttpHandlersService, OrdersService, UserService } from '../../services/index';
+import { OrdersConfigComponent, OrdersIndexComponent, OrdersWidgetComponent } from './index';
 
 /**
  * Orders module
@@ -27,28 +14,21 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule, CustomMaterialModuleWithProviders,
-    FormsModule, ReactiveFormsModule,
-    HttpClientModule
+    FlexLayoutModule,
+    CustomMaterialModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  declarations: [
-    OrdersWidgetComponent,
-    OrdersConfigComponent, OrdersIndexComponent
-  ],
+  declarations: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
   providers: [
-    { provide: 'Window', useValue: window },
-    CustomHttpHandlersService, UserService, OrdersService
+    { provide: WINDOW, useFactory: getWindow },
+    CustomHttpHandlersService,
+    UserService,
+    OrdersService,
   ],
-  exports: [
-    OrdersWidgetComponent,
-    OrdersConfigComponent, OrdersIndexComponent
-  ],
-  entryComponents: [
-    OrdersWidgetComponent,
-    OrdersConfigComponent, OrdersIndexComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  exports: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
+  entryComponents: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class OrdersModule {}

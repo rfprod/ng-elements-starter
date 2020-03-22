@@ -1,0 +1,11 @@
+node_modules/**
+public/webfonts/**
+*.svg
+*.ico
+*.css
+*.scss
+*.html
+*.min.js
+*.js.map
+*.php
+*.json

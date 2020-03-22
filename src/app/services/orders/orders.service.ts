@@ -1,9 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
-
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { WINDOW } from 'src/app/utils';
+import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 
 /**
  * Orders service
@@ -11,6 +10,15 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class OrdersService {
+  /**
+   * Endpoints object for making requests to the API.
+   */
+  private readonly endpoints: any = {
+    orders: {
+      mock: `${this.window.location.origin}/orders`,
+      real: `${this.handlers.apiBaseUrl()}/orders`,
+    },
+  };
 
   /**
    * Constructor.
@@ -19,20 +27,10 @@ export class OrdersService {
    * @param window Window - window reference
    */
   constructor(
-    private http: HttpClient,
-    private handlers: CustomHttpHandlersService,
-    @Inject('Window') private window: Window
+    private readonly http: HttpClient,
+    private readonly handlers: CustomHttpHandlersService,
+    @Inject(WINDOW) private readonly window: Window,
   ) {}
-
-  /**
-   * Endpoints object for making requests to the API.
-   */
-  private endpoints: any = {
-    orders: {
-      mock: this.window.location.origin + '/orders' as string,
-      real: this.handlers.apiBaseUrl() + '/orders' as string
-    }
-  };
 
   /**
    * Returns user balance.
@@ -41,8 +39,7 @@ export class OrdersService {
    */
   public orders(mock: boolean, token: string): Observable<any> {
     const endpoint: string = mock ? this.endpoints.orders.mock : this.endpoints.orders.real;
-    const observable: Observable<any> = this.http.get(endpoint + `?token=${token}`);
+    const observable: Observable<any> = this.http.get(`${endpoint}?token=${token}`);
     return this.handlers.pipeRequestWithArrayResponse(observable);
   }
-
 }

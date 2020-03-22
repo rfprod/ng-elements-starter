@@ -1,13 +1,13 @@
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 /**
  * Signup form interface.
  */
 export interface ISignupForm extends FormGroup {
-	controls: {
+  controls: {
     name: AbstractControl;
-		email: AbstractControl;
+    email: AbstractControl;
     organization: AbstractControl;
-		password: AbstractControl;
-	};
+    password: AbstractControl;
+  };
 }

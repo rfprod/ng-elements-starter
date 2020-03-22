@@ -1,9 +1,39 @@
 <div fxLayout="row wrap">
-  <passport-config *ngIf="displayConfig" fxFlex="100" [theme]="theme" [mock]="mock" (serverChange)="selectServer($event)"></passport-config>
+  <app-passport-config
+    *ngIf="displayConfig"
+    fxFlex="100"
+    [theme]="theme"
+    [mock]="mock"
+    (serverChange)="selectServer($event)"
+  ></app-passport-config>
 
   <div fxFlex="100" fxLayout="row">
-    <passport-index fxFlex fxLayoutFill *ngIf="isCurrentMode('index')" [restrictMode]="restrictMode" [theme]="theme" [mock]="mock" (switchMode)="activateMode($event)"></passport-index>
-    <passport-login fxFlex fxLayoutFill *ngIf="isCurrentMode('login')" [restrictMode]="restrictMode" [theme]="theme" [mock]="mock" (switchMode)="activateMode($event)"></passport-login>
-    <passport-signup fxFlex fxLayoutFill *ngIf="isCurrentMode('signup')" [restrictMode]="restrictMode" [theme]="theme" [mock]="mock" (switchMode)="activateMode($event)"></passport-signup>
+    <app-passport-index
+      fxFlex
+      fxLayoutFill
+      *ngIf="isCurrentMode('index')"
+      [restrictMode]="restrictMode"
+      [theme]="theme"
+      [mock]="mock"
+      (switchMode)="activateMode($event)"
+    ></app-passport-index>
+    <app-passport-login
+      fxFlex
+      fxLayoutFill
+      *ngIf="isCurrentMode('login')"
+      [restrictMode]="restrictMode"
+      [theme]="theme"
+      [mock]="mock"
+      (switchMode)="activateMode($event)"
+    ></app-passport-login>
+    <app-passport-signup
+      fxFlex
+      fxLayoutFill
+      *ngIf="isCurrentMode('signup')"
+      [restrictMode]="restrictMode"
+      [theme]="theme"
+      [mock]="mock"
+      (switchMode)="activateMode($event)"
+    ></app-passport-signup>
   </div>
 </div>

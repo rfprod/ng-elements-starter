@@ -1,37 +1,25 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Injector, NgModule } from '@angular/core';
-
-import { createCustomElement } from '@angular/elements';
-
-import { BalanceModule } from './balance.module';
 import { BalanceWidgetComponent } from './';
+import { BalanceModule } from './balance.module';
 
 /**
  * Balance element module
  */
 @NgModule({
-  imports: [
-    BrowserModule, BrowserAnimationsModule,
-    BalanceModule
-  ],
-  exports: [ BalanceModule ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  imports: [BrowserModule, BrowserAnimationsModule, BalanceModule],
+  exports: [BalanceModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BalanceElementModule {
+  constructor(private readonly injector: Injector) {}
 
-  constructor(
-    private injector: Injector
-  ) {}
-
-  ngDoBootstrap() {
-    const balanceWidget = <any>createCustomElement(BalanceWidgetComponent, {
+  public ngDoBootstrap() {
+    const balanceWidget = createCustomElement(BalanceWidgetComponent, {
       injector: this.injector,
-    });
-    customElements.define('balance-widget', balanceWidget);
+    }) as any;
+    customElements.define('app-balance-widget', balanceWidget);
   }
-
 }

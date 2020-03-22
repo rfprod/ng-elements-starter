@@ -1,31 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventEmitter } from '@angular/core';
-
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { FlexLayoutModule } from '@angular/flex-layout';
-import 'node_modules/hammerjs/hammer.js';
 import { CustomMaterialModule } from '../../../modules/material/custom-material.module';
-
 import { BalanceConfigComponent } from './balance-config.component';
 
 describe('BalanceConfigComponent', () => {
-
   let component: BalanceConfigComponent;
   let fixture: ComponentFixture<BalanceConfigComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserDynamicTestingModule, NoopAnimationsModule, CustomMaterialModule, FlexLayoutModule
+        BrowserDynamicTestingModule,
+        NoopAnimationsModule,
+        CustomMaterialModule,
+        FlexLayoutModule,
       ],
-      declarations: [
-        BalanceConfigComponent
-      ]
-    })
-    .compileComponents();
+      declarations: [BalanceConfigComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

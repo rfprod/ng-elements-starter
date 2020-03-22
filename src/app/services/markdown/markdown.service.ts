@@ -8,7 +8,6 @@ declare let marked;
  */
 @Injectable()
 export class MarkdownService {
-
   /**
    * Processes markdown input.
    * @param input marked input
@@ -16,5 +15,4 @@ export class MarkdownService {
   public process(input: string): string {
     return marked(input);
   }
-
 }

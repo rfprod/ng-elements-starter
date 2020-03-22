@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { IUser } from '../../interfaces/index';
 
 /**
@@ -8,29 +7,23 @@ import { IUser } from '../../interfaces/index';
  */
 @Injectable()
 export class UserService {
-
+  /**
+   * User service model.
+   */
+  private model: IUser = new IUser();
   /**
    * Constructor.
    */
   constructor() {
     this.initializeModel();
-    if (!localStorage.getItem('userService') && typeof localStorage.getItem('userService') === 'undefined') {
+    if (
+      !localStorage.getItem('userService') &&
+      typeof localStorage.getItem('userService') === 'undefined'
+    ) {
       localStorage.setItem('userService', JSON.stringify(this.model));
     } else {
       this.RestoreUser();
     }
-  }
-
-  /**
-   * User service model.
-   */
-  private model: IUser = new IUser();
-
-  /**
-   * Initializes model.
-   */
-  private initializeModel(): void {
-    this.model = new IUser();
   }
 
   /**
@@ -64,7 +57,10 @@ export class UserService {
    * Restores user service model.
    */
   public RestoreUser(): void {
-    if (localStorage.getItem('userService') && typeof localStorage.getItem('userService') !== 'undefined') {
+    if (
+      localStorage.getItem('userService') &&
+      typeof localStorage.getItem('userService') !== 'undefined'
+    ) {
       this.model = JSON.parse(localStorage.getItem('userService'));
     }
   }
@@ -77,4 +73,10 @@ export class UserService {
     localStorage.setItem('userService', JSON.stringify(this.model));
   }
 
+  /**
+   * Initializes model.
+   */
+  private initializeModel(): void {
+    this.model = new IUser();
+  }
 }

@@ -1,30 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { UserService } from '../../../services/user/user.service';
-
 import { IUser } from '../../../interfaces/index';
+import { UserService } from '../../../services/user/user.service';
 
 /**
  * Catalogue widget component
  */
 @Component({
-  selector: 'catalogue-widget',
+  selector: 'app-catalogue-widget',
   templateUrl: './catalogue-widget.component.html',
-  styleUrls: ['./catalogue-widget.component.css'],
+  styleUrls: ['./catalogue-widget.component.scss'],
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class CatalogueWidgetComponent implements OnInit {
-
-  /**
-   * Constructor.
-   * @param userService Users service
-   */
-  constructor(
-    private userService: UserService
-  ) {}
-
   /**
    * Component theme.
    */
@@ -41,6 +30,12 @@ export class CatalogueWidgetComponent implements OnInit {
   public mock = true;
 
   /**
+   * Constructor.
+   * @param userService Users service
+   */
+  constructor(private readonly userService: UserService) {}
+
+  /**
    * Selects real or mocked server., used in config callback.
    * @param event server change event
    */
@@ -52,11 +47,10 @@ export class CatalogueWidgetComponent implements OnInit {
    * Catalogue data change event handler.
    */
   public catalogueChangeHandler(event: string[]): void {
-    console.log('Catalogue widget: catalogueChangeHandler, event', event);
+    console.warn('Catalogue widget: catalogueChangeHandler, event', event);
   }
 
   public ngOnInit(): void {
     this.userService.SaveUser(this.user);
   }
-
 }

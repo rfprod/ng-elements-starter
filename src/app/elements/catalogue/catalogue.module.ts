@@ -1,25 +1,16 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HttpClientModule } from '@angular/common/http';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { CustomMaterialModuleWithProviders } from '../../modules/material/custom-material.module';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WINDOW, getWindow } from 'src/app/utils';
+import { CustomMaterialModule } from '../../modules/material/custom-material.module';
+import { CatalogueService, CustomHttpHandlersService, UserService } from '../../services/index';
 import {
-  CatalogueWidgetComponent,
   CatalogueConfigComponent,
-  CatalogueIndexComponent
+  CatalogueIndexComponent,
+  CatalogueWidgetComponent,
 } from './index';
-
-import {
-  CustomHttpHandlersService,
-  UserService,
-  CatalogueService
-} from '../../services/index';
 
 /**
  * Catalogue module
@@ -27,28 +18,21 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule, CustomMaterialModuleWithProviders,
-    FormsModule, ReactiveFormsModule,
-    HttpClientModule
+    FlexLayoutModule,
+    CustomMaterialModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  declarations: [
-    CatalogueWidgetComponent,
-    CatalogueConfigComponent, CatalogueIndexComponent
-  ],
+  declarations: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
   providers: [
-    { provide: 'Window', useValue: window },
-    CustomHttpHandlersService, UserService, CatalogueService
+    { provide: WINDOW, useFactory: getWindow },
+    CustomHttpHandlersService,
+    UserService,
+    CatalogueService,
   ],
-  exports: [
-    CatalogueWidgetComponent,
-    CatalogueConfigComponent, CatalogueIndexComponent
-  ],
-  entryComponents: [
-    CatalogueWidgetComponent,
-    CatalogueConfigComponent, CatalogueIndexComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  exports: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
+  entryComponents: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CatalogueModule {}

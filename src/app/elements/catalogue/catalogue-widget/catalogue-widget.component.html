@@ -1,20 +1,17 @@
 <div fxLayout="row wrap">
-    <catalogue-config
-        fxFlex="100"
-        [theme]="theme"
-        (serverChange)="selectServer($event)"
-    ></catalogue-config>
+  <app-catalogue-config
+    fxFlex="100"
+    [theme]="theme"
+    (serverChange)="selectServer($event)"
+  ></app-catalogue-config>
 
-    <div
-        fxFlex="100"
-        fxLayout="row"
-    >
-        <catalogue-index
-            fxFlex
-            fxLayoutFill
-            [theme]="theme"
-            [mock]="mock"
-            (catalogueChange)="catalogueChangeHandler($event)"
-        ></catalogue-index>
-    </div>
+  <div fxFlex="100" fxLayout="row">
+    <app-catalogue-index
+      fxFlex
+      fxLayoutFill
+      [theme]="theme"
+      [mock]="mock"
+      (catalogueChange)="catalogueChangeHandler($event)"
+    ></app-catalogue-index>
+  </div>
 </div>

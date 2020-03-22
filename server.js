@@ -59,15 +59,17 @@ const routes = require(`${cwd}/server/routes/index.js`);
 /**
  * Use compression for all responses.
  */
-app.use(compression({
-	threshold: 0,
-	level: -1
-}));
+app.use(
+  compression({
+    threshold: 0,
+    level: -1,
+  }),
+);
 
 const devServer = process.argv[2] === 'dev';
 
 if (!devServer) {
-  console.log('server started in production mode, without \'dev\' argument , serving dists');
+  console.log('server started in production mode, without "dev" argument , serving dists');
   /**
    * Serve ngd graphs.
    */
@@ -77,17 +79,13 @@ if (!devServer) {
   /**
    * Elements' dists.
    */
-  const elements = [
-    'app',
-    'passport',
-    'balance',
-    'catalogue',
-    'orders'
-  ];
+  const elements = ['app', 'passport', 'balance', 'catalogue', 'orders'];
   for (const [index, value] of elements.entries()) {
-    const webappPath = (value === 'app') ? '/' : `/ng-elements-${value}`;
+    const webappPath = value === 'app' ? '/' : `/ng-elements-${value}`;
     const distPath = `/dist/ng-elements-${value}`;
-    console.log(`serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`);
+    console.log(
+      `serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`,
+    );
     app.use(webappPath, express.static(cwd + distPath));
   }
 
@@ -98,7 +96,7 @@ if (!devServer) {
     filesAndFolders: /(assets|txt|ico|html|css|js)/,
     coverage: /(coverage)/,
     documentation: /(documentation)/,
-    api: /(auth|register|balance|catalogue|graphql)/
+    api: /(auth|register|balance|catalogue|graphql)/,
   };
 
   /**
@@ -108,18 +106,22 @@ if (!devServer) {
     passport: /ng-elements-passport/,
     balance: /ng-elements-balance/,
     catalogue: /ng-elements-catalogue/,
-    orders: /ng-elements-orders/
+    orders: /ng-elements-orders/,
   };
 
   /**
    * Serving conditions.
    */
   const serve = {
-    next: (req) => regX.filesAndFolders.test(req.path) || regX.api.test(req.path) || regX.coverage.test(req.path) || regX.documentation.test(req.path),
-    passport: (req) => pathRegX.passport.test(req.path),
-    balance: (req) => pathRegX.balance.test(req.path),
-    catalogue: (req) => pathRegX.catalogue.test(req.path),
-    orders: (req) => pathRegX.orders.test(req.path)
+    next: req =>
+      regX.filesAndFolders.test(req.path) ||
+      regX.api.test(req.path) ||
+      regX.coverage.test(req.path) ||
+      regX.documentation.test(req.path),
+    passport: req => pathRegX.passport.test(req.path),
+    balance: req => pathRegX.balance.test(req.path),
+    catalogue: req => pathRegX.catalogue.test(req.path),
+    orders: req => pathRegX.orders.test(req.path),
   };
 
   /**
@@ -140,9 +142,8 @@ if (!devServer) {
       res.sendFile(cwd + '/dist/ng-elements-app/index.html');
     }
   });
-
 } else {
-  console.log('server started with \'dev\' argument, not serving dists');
+  console.log('server started with "dev" argument, not serving dists');
 }
 
 /**
@@ -190,10 +191,23 @@ function terminator(sig) {
  * Termination handlers.
  */
 (() => {
-  process.on('exit', () => { terminator('exit'); });
-  ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-    'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
-  ].forEach((element) => {
+  process.on('exit', () => {
+    terminator('exit');
+  });
+  [
+    'SIGHUP',
+    'SIGINT',
+    'SIGQUIT',
+    'SIGILL',
+    'SIGTRAP',
+    'SIGABRT',
+    'SIGBUS',
+    'SIGFPE',
+    'SIGUSR1',
+    'SIGSEGV',
+    'SIGUSR2',
+    'SIGTERM',
+  ].forEach(element => {
     process.on(element, () => {
       terminator(element);
     });

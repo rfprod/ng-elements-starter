@@ -4,15 +4,15 @@ const admin = require('firebase-admin');
 const handlers = require('./handlers/index');
 
 /*
-*	Create and Deploy Cloud Functions
-*	https://firebase.google.com/docs/functions/write-firebase-functions
-*
-*	basic usage example
-*
-* exports.helloWorld = functions.https.onRequest((request, response) => {
-*		response.send('Hello from Firebase!');
-*	});
-*/
+ * Create and Deploy Cloud Functions
+ * https://firebase.google.com/docs/functions/write-firebase-functions
+ *
+ * basic usage example
+ *
+ * exports.helloWorld = functions.https.onRequest((request, response) => {
+ *  response.send('Hello from Firebase!');
+ * });
+ */
 
 /**
  * Initialize admin SDK to access Firebase Realtime Database.
@@ -24,7 +24,7 @@ admin.initializeApp(functions.config().firebase);
  */
 exports.login = functions.https.onRequest((req, res) => {
   if (req.method !== 'POST') {
-    res.status(403).json({error: 'Forbidden method'});
+    res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.login(req, res);
 });
@@ -34,7 +34,7 @@ exports.login = functions.https.onRequest((req, res) => {
  */
 exports.signup = functions.https.onRequest((req, res) => {
   if (req.method !== 'POST') {
-    res.status(403).json({error: 'Forbidden method'});
+    res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.signup(req, res);
 });
@@ -44,7 +44,7 @@ exports.signup = functions.https.onRequest((req, res) => {
  */
 exports.balance = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
-    res.status(403).json({error: 'Forbidden method'});
+    res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.balance(req, res);
 });
@@ -54,7 +54,7 @@ exports.balance = functions.https.onRequest((req, res) => {
  */
 exports.catalogue = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
-    res.status(403).json({error: 'Forbidden method'});
+    res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.catalogue(req, res);
 });
@@ -64,7 +64,7 @@ exports.catalogue = functions.https.onRequest((req, res) => {
  */
 exports.orders = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
-    res.status(403).json({error: 'Forbidden method'});
+    res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.orders(req, res);
 });

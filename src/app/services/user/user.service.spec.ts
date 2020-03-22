@@ -1,27 +1,29 @@
 import { TestBed, async } from '@angular/core/testing';
-
+import { LocalStorageMock } from '../../mocks/utils/local-storage.mock';
 import { UserService } from './user.service';
 
-import { LocalStorageMock } from '../../mocks/utils/local-storage.mock';
-
 describe('UserService', () => {
-
   let service: UserService;
   let localStorage: LocalStorageMock;
 
   beforeEach(async(() => {
-    Object.defineProperty(window, 'localStorage', { value: new LocalStorageMock(), writable: true});
+    Object.defineProperty(window, 'localStorage', {
+      value: new LocalStorageMock(),
+      writable: true,
+    });
     localStorage = window.localStorage;
     spyOn(localStorage, 'setItem').and.callThrough();
 
     TestBed.configureTestingModule({
-      declarations: [ ],
-      imports: [ ],
-      providers: [ UserService ],
-      schemas: [ ],
-    }).compileComponents().then(() => {
-      service = TestBed.get(UserService) as UserService;
-    });
+      declarations: [],
+      imports: [],
+      providers: [UserService],
+      schemas: [],
+    })
+      .compileComponents()
+      .then(() => {
+        service = TestBed.get(UserService) as UserService;
+      });
   }));
 
   it('should be defined', () => {
@@ -60,12 +62,14 @@ describe('UserService', () => {
 
   it('getUser method should return a private model', () => {
     expect(service.getUser()).toEqual(jasmine.any(Object));
-    expect(service.getUser()).toEqual(jasmine.objectContaining({
-      name: '',
-      email: '',
-      organization: '',
-      token: ''
-    }));
+    expect(service.getUser()).toEqual(
+      jasmine.objectContaining({
+        name: '',
+        email: '',
+        organization: '',
+        token: '',
+      }),
+    );
   });
 
   it('SaveUser should update UserService private model', () => {
@@ -84,39 +88,46 @@ describe('UserService', () => {
     expect(service.getUser().token).toEqual('');
     service.SaveUser({ token: 'sample' });
     expect(service.getUser().token).toEqual('sample');
-
   });
 
   it('ResetUser should reset private model and local storage', () => {
     service.ResetUser();
-    expect(service.getUser()).toEqual(jasmine.objectContaining({
-      name: '',
-      email: '',
-      organization: '',
-      token: ''
-    }));
+    expect(service.getUser()).toEqual(
+      jasmine.objectContaining({
+        name: '',
+        email: '',
+        organization: '',
+        token: '',
+      }),
+    );
   });
 
   it('RestoreUser should restore user model from local storage if it exists', () => {
-    expect(service.getUser()).toEqual(jasmine.objectContaining({
-      name: '',
-      email: '',
-      organization: '',
-      token: ''
-    }));
-    localStorage.setItem('userService', JSON.stringify({
-      name: 'name',
-      email: 'email',
-      organization: 'org',
-      token: 'token'
-    }));
+    expect(service.getUser()).toEqual(
+      jasmine.objectContaining({
+        name: '',
+        email: '',
+        organization: '',
+        token: '',
+      }),
+    );
+    localStorage.setItem(
+      'userService',
+      JSON.stringify({
+        name: 'name',
+        email: 'email',
+        organization: 'org',
+        token: 'token',
+      }),
+    );
     service.RestoreUser();
-    expect(service.getUser()).toEqual(jasmine.objectContaining({
-      name: 'name',
-      email: 'email',
-      organization: 'org',
-      token: 'token'
-    }));
+    expect(service.getUser()).toEqual(
+      jasmine.objectContaining({
+        name: 'name',
+        email: 'email',
+        organization: 'org',
+        token: 'token',
+      }),
+    );
   });
-
 });

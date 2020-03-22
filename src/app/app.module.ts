@@ -1,84 +1,64 @@
-import {
-  NgModule,
-  CUSTOM_ELEMENTS_SCHEMA
-} from '@angular/core';
-
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
-import {
-  APP_BASE_HREF,
-  LocationStrategy,
-  PathLocationStrategy
-} from '@angular/common';
-
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
-
-import { FlexLayoutModule } from '@angular/flex-layout';
-import 'node_modules/hammerjs/hammer.js';
-import { CustomMaterialModuleWithProviders } from './modules/material/custom-material.module';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { NgElementsStarterState } from 'src/app/state/ng2elements.state';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
-
-import { PassportElementModule } from './elements/passport/passport-element.module';
 import { BalanceElementModule } from './elements/balance/balance-element.module';
 import { CatalogueElementModule } from './elements/catalogue/catalogue-element.module';
 import { OrdersElementModule } from './elements/orders/orders-element.module';
-
+import { PassportElementModule } from './elements/passport/passport-element.module';
+import { CustomMaterialModule } from './modules/material/custom-material.module';
+import { AppIconsService } from './services/icons/icons.service';
 import {
-  MarkdownService,
-  CustomHttpHandlersService,
-  UserService,
   AuthService,
   BalanceService,
   CatalogueService,
-  OrdersService
+  CustomHttpHandlersService,
+  MarkdownService,
+  OrdersService,
+  UserService,
 } from './services/index';
-
-import { NgxsModule } from '@ngxs/store';
-import { Ng2elementsState } from 'src/app/state/ng2elements.state';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { AppIconsService } from './services/icons/icons.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { WINDOW } from './utils';
+import { getWindow } from './utils/providers';
 
 /**
  * Application module, includes all widgets
  */
 @NgModule({
-  declarations: [
-    AppComponent, AppIndexComponent
-  ],
+  declarations: [AppComponent, AppIndexComponent],
   imports: [
-    BrowserModule, BrowserAnimationsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
-    CustomMaterialModuleWithProviders,
+    CustomMaterialModule.forRoot(),
     BalanceElementModule,
     CatalogueElementModule,
     OrdersElementModule,
     PassportElementModule,
-    NgxsModule.forRoot([
-      Ng2elementsState
-    ]),
+    NgxsModule.forRoot([NgElementsStarterState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    { provide: 'Window', useValue: window },
+    { provide: WINDOW, useFactory: getWindow },
     MarkdownService,
     CustomHttpHandlersService,
     UserService,
@@ -86,13 +66,9 @@ import { environment } from '../environments/environment';
     BalanceService,
     CatalogueService,
     OrdersService,
-    AppIconsService
+    AppIconsService,
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

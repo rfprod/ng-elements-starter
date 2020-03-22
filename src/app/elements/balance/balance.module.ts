@@ -1,25 +1,12 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HttpClientModule } from '@angular/common/http';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { CustomMaterialModuleWithProviders } from '../../modules/material/custom-material.module';
-
-import {
-  BalanceWidgetComponent,
-  BalanceConfigComponent,
-  BalanceIndexComponent
-} from './index';
-
-import {
-  CustomHttpHandlersService,
-  UserService,
-  BalanceService
-} from '../../services/index';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WINDOW, getWindow } from 'src/app/utils';
+import { CustomMaterialModule } from '../../modules/material/custom-material.module';
+import { BalanceService, CustomHttpHandlersService, UserService } from '../../services/index';
+import { BalanceConfigComponent, BalanceIndexComponent, BalanceWidgetComponent } from './index';
 
 /**
  * Balance module
@@ -27,28 +14,21 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule, CustomMaterialModuleWithProviders,
-    FormsModule, ReactiveFormsModule,
-    HttpClientModule
+    FlexLayoutModule,
+    CustomMaterialModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  declarations: [
-    BalanceWidgetComponent,
-    BalanceConfigComponent, BalanceIndexComponent
-  ],
+  declarations: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
   providers: [
-    { provide: 'Window', useValue: window },
-    CustomHttpHandlersService, UserService, BalanceService
+    { provide: WINDOW, useFactory: getWindow },
+    CustomHttpHandlersService,
+    UserService,
+    BalanceService,
   ],
-  exports: [
-    BalanceWidgetComponent,
-    BalanceConfigComponent, BalanceIndexComponent
-  ],
-  entryComponents: [
-    BalanceWidgetComponent,
-    BalanceConfigComponent, BalanceIndexComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  exports: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
+  entryComponents: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BalanceModule {}
