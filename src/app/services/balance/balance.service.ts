@@ -1,9 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
-
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { WINDOW } from 'src/app/utils';
+import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 
 /**
  * Balance service
@@ -11,6 +10,15 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class BalanceService {
+  /**
+   * Endpoints object for making requests to the API.
+   */
+  private readonly endpoints: any = {
+    balance: {
+      mock: `${this.window.location.origin}/balance`,
+      real: `${this.handlers.apiBaseUrl()}/balance`,
+    },
+  };
 
   /**
    * Constructor.
@@ -19,20 +27,10 @@ export class BalanceService {
    * @param window Window - window reference
    */
   constructor(
-    private http: HttpClient,
-    private handlers: CustomHttpHandlersService,
-    @Inject('Window') private window: Window
+    private readonly http: HttpClient,
+    private readonly handlers: CustomHttpHandlersService,
+    @Inject(WINDOW) private readonly window: Window,
   ) {}
-
-  /**
-   * Endpoints object for making requests to the API.
-   */
-  private endpoints: any = {
-    balance: {
-      mock: this.window.location.origin + '/balance' as string,
-      real: this.handlers.apiBaseUrl() + '/balance' as string
-    }
-  };
 
   /**
    * Returns user balance.
@@ -41,8 +39,7 @@ export class BalanceService {
    */
   public balance(mock: boolean, token: string): Observable<any> {
     const endpoint: string = mock ? this.endpoints.balance.mock : this.endpoints.balance.real;
-    const observable: Observable<any> = this.http.get(endpoint + `?token=${token}`);
+    const observable: Observable<any> = this.http.get(`${endpoint}?token=${token}`);
     return this.handlers.pipeRequestWithObjectResponse(observable);
   }
-
 }

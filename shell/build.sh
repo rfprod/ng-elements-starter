@@ -7,16 +7,14 @@
 ##
 
 ##
-# Colors:
-# DEFAULT, BLACK, DARK_GRAY, RED, LIGHT_RED, GREEN, LIGHT_GREEN, BROWN, YELLOW,
-# BLUE, LIGHT_BLUE, PURPLE, LIGHT_PURPLE, CYAN, LIGHT_CYAN, LIGHT_GRAY, WHITE.
+# Colors definitions.
 ##
 source shell/colors.sh
 
 ##
 # Builds all dists.
 ##
-build () {
+build() {
   printf "\n ${LIGHT_BLUE}<< BUILDING ALL APPLICATIONS DEFINED IN angular.json >>${DEFAULT}\n\n"
   npx npm-run-all -s build-app-prod build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
 }
@@ -24,7 +22,7 @@ build () {
 ##
 # Builds all dists for firebase setup.
 ##
-buildFirebase () {
+buildFirebase() {
   printf "\n ${LIGHT_BLUE}<< BUILDING ALL APPLICATIONS DEFINED IN angular.json FOR FIREBASE SETUP >>${DEFAULT}\n\n"
   npx npm-run-all -s build-app-prod-firebase build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
 }
@@ -32,7 +30,7 @@ buildFirebase () {
 ##
 # Generates client documentation with compodoc.
 ##
-generateClientDocumentation () {
+generateClientDocumentation() {
   npm run compodoc-generate-and-report-to-dist
 }
 
@@ -41,7 +39,7 @@ generateClientDocumentation () {
 ##
 
 if [ $# -ne 1 ]; then
-	build
+  build
 elif [ $1 = 'firebase' ]; then
   buildFirebase
 else

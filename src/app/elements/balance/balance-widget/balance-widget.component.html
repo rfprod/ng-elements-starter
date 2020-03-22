@@ -1,20 +1,17 @@
 <div fxLayout="row wrap">
-    <balance-config
-        fxFlex="100"
-        [theme]="theme"
-        (serverChange)="selectServer($event)"
-    ></balance-config>
+  <app-balance-config
+    fxFlex="100"
+    [theme]="theme"
+    (serverChange)="selectServer($event)"
+  ></app-balance-config>
 
-    <div
-        fxFlex="100"
-        fxLayout="row"
-    >
-        <balance-index
-            fxFlex
-            fxLayoutFill
-            [theme]="theme"
-            [mock]="mock"
-            (balanceChange)="balanceChangeHandler($event)"
-        ></balance-index>
-    </div>
+  <div fxFlex="100" fxLayout="row">
+    <app-balance-index
+      fxFlex
+      fxLayoutFill
+      [theme]="theme"
+      [mock]="mock"
+      (balanceChange)="balanceChangeHandler($event)"
+    ></app-balance-index>
+  </div>
 </div>

@@ -1,10 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-
-import { UserService } from '../user/user.service';
-
+import { Inject, Injectable } from '@angular/core';
 import { Observable, concat, throwError } from 'rxjs';
-import { timeout, take, map, catchError } from 'rxjs/operators';
+import { catchError, map, take, timeout } from 'rxjs/operators';
+import { WINDOW } from 'src/app/utils';
+import { UserService } from '../user/user.service';
 
 /**
  * Custom http handers
@@ -12,7 +11,6 @@ import { timeout, take, map, catchError } from 'rxjs/operators';
  */
 @Injectable()
 export class CustomHttpHandlersService {
-
   /**
    * Default timeout interval for http-requests.
    */
@@ -24,8 +22,8 @@ export class CustomHttpHandlersService {
    * @param window window reference
    */
   constructor(
-    private userService: UserService,
-    @Inject('Window') private window: Window
+    private readonly userService: UserService,
+    @Inject(WINDOW) private readonly window: Window,
   ) {}
 
   /**
@@ -39,7 +37,7 @@ export class CustomHttpHandlersService {
    * Resolves real server API base url, adds correct protocol.
    */
   public apiBaseUrl(): string {
-    return this.window.location.protocol + '//real-server-domain.tld';
+    return `${this.window.location.protocol}/real-server-domain.tld`;
   }
 
   /**
@@ -47,7 +45,7 @@ export class CustomHttpHandlersService {
    * @param res http response, either extracted (body in json) or http response that should be parsed
    */
   public extractObject(res: any): object {
-    return (!res) ? {} : (typeof res.json === 'function') ? res.json() || {} : res || {};
+    return !res ? {} : typeof res.json === 'function' ? res.json() || {} : res || {};
   }
 
   /**
@@ -55,7 +53,7 @@ export class CustomHttpHandlersService {
    * @param res http response, either extracted (body in json) or http response that should be parsed
    */
   public extractArray(res: any): any[] {
-    return (!res) ? [] : (typeof res.json === 'function') ? res.json().data || [] : res.data || [];
+    return !res ? [] : typeof res.json === 'function' ? res.json().data || [] : res.data || [];
   }
 
   /**
@@ -74,8 +72,8 @@ export class CustomHttpHandlersService {
   public checkErrorStatusAndRedirect(status: any): void {
     if (status === 401) {
       /*
-      * Reset token first or user will be redirected by router to profile.
-      */
+       * Reset token first or user will be redirected by router to profile.
+       */
       this.userService.SaveUser({ token: '' });
     }
   }
@@ -91,31 +89,35 @@ export class CustomHttpHandlersService {
     let msg: string;
     let errors: any;
     if (typeof error._body === 'string' && error._body !== 'null') {
-      // unwrap body
+      // Unwrap body
       error._body = JSON.parse(error._body);
-      errors = (error._body.errors) ? error._body.errors : (error._body.code && error._body.message) ? error._body : null;
+      errors = error._body.errors
+        ? error._body.errors
+        : error._body.code && error._body.message
+        ? error._body
+        : null;
     }
-    errors = (!errors && error.errors) ? error.errors : (error.code && error.message) ? error : errors;
+    errors = !errors && error.errors ? error.errors : error.code && error.message ? error : errors;
     if (errors) {
       if (Array.isArray(errors)) {
         /*
-        *	Parse errors as array.
-        *	{ errors: [ { code: 'c', detail: 'd' } ] }
-        */
+         *	Parse errors as array.
+         *	{ errors: [ { code: 'c', detail: 'd' } ] }
+         */
         if (errors.length) {
-          const e = errors[0]; // grab only first error
-          msg = (e.code && e.detail) ? `${e.code} - ${e.detail}` : null;
+          const e = errors[0]; // Grab only first error
+          msg = e.code && e.detail ? `${e.code} - ${e.detail}` : null;
         }
       } else {
         /*
-        *	Parse errors as object.
-        *	{ code: 'c', message: 'm', detail: { inn: ['Invalid inn'] } }
-        */
+         *	Parse errors as object.
+         *	{ code: 'c', message: 'm', detail: { inn: ['Invalid inn'] } }
+         */
         let errDetail = '';
         if (errors.detail && typeof errors.detail === 'object') {
           /*
-          *	Unwrap nested structure for errors.detail first, it must be flat.
-          */
+           *	Unwrap nested structure for errors.detail first, it must be flat.
+           */
           for (const key in errors.detail) {
             if (errors.detail[key]) {
               if (!Array.isArray(errors.detail[key]) && typeof errors.detail[key] === 'object') {
@@ -129,23 +131,29 @@ export class CustomHttpHandlersService {
             }
           }
           /*
-          *	Now parse it.
-          */
+           *	Now parse it.
+           */
           for (const key in errors.detail) {
             if (errors.detail[key]) {
-              errDetail += key + ' - ' + errors.detail[key].join(', ') + ' ';
+              errDetail += `${key} - ${errors.detail[key].join(', ')} `;
             }
           }
           errDetail = errDetail.trim();
         }
-        msg = (errDetail) ? `${errors.code} - ${errors.message}: ${errDetail}` : `${errors.code} - ${errors.message}`;
+        msg = errDetail
+          ? `${errors.code} - ${errors.message}: ${errDetail}`
+          : `${errors.code} - ${errors.message}`;
       }
     }
     /*
-    *	Parse error response - fallback.
-    *	{ status: '400', statusText: 'Bad request' }
-    */
-    const errMsg: string = (msg) ? msg : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+     *	Parse error response - fallback.
+     *	{ status: '400', statusText: 'Bad request' }
+     */
+    const errMsg: string = msg
+      ? msg
+      : error.status
+      ? `${error.status} - ${error.statusText}`
+      : 'Server error';
     return concat(throwError(errMsg));
   }
 
@@ -157,8 +165,8 @@ export class CustomHttpHandlersService {
     return observable.pipe(
       timeout(this.defaultHttpTimeout),
       take(1),
-      map(this.extractObject),
-      catchError(this.handleError)
+      map(data => this.extractObject(data)),
+      catchError(error => this.handleError(error)),
     );
   }
 
@@ -170,9 +178,8 @@ export class CustomHttpHandlersService {
     return observable.pipe(
       timeout(this.defaultHttpTimeout),
       take(1),
-      map(this.extractArray),
-      catchError(this.handleError)
+      map(data => this.extractArray(data)),
+      catchError(error => this.handleError(error)),
     );
   }
-
 }

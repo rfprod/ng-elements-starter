@@ -1,15 +1,21 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-
-import { UserService } from '../../../services/user/user.service';
-import { CatalogueService } from '../../../services/catalogue/catalogue.service';
-
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { IUser } from '../../../interfaces/index';
+import { CatalogueService } from '../../../services/catalogue/catalogue.service';
+import { UserService } from '../../../services/user/user.service';
 
 /**
  * Catalogue index
  */
 @Component({
-  selector: 'catalogue-index',
+  selector: 'app-catalogue-index',
   template: `
     <div fxLayout="row wrap">
       <span fxFlex="100" *ngIf="!isLoggedIn()">
@@ -18,31 +24,20 @@ import { IUser } from '../../../interfaces/index';
       <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
       <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1" *ngIf="isLoggedIn()">
         <mat-grid-tile *ngFor="let item of catalogue()">
-          {{item}}
+          {{ item }}
         </mat-grid-tile>
       </mat-grid-list>
     </div>
   `,
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class CatalogueIndexComponent implements OnInit, OnChanges {
-
-  /**
-   * Constructor.
-   * @param userService User service
-   * @param catalogueService Catalogue service
-   */
-  constructor(
-    private userService: UserService,
-    private catalogueService: CatalogueService
-  ) {}
-
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary'|'accent'|'warn';
+  @Input() public theme: 'primary' | 'accent' | 'warn';
 
   /**
    * Indicates if mocked server should be used for http requests.
@@ -55,20 +50,30 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
   @Output() public catalogueChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
-   * Catalogue data.
-   */
-  private data: string[] = [];
-
-  /**
    * UI error reporter.
    */
   public errorReport = '';
 
   /**
+   * Catalogue data.
+   */
+  private data: string[] = [];
+
+  /**
+   * Constructor.
+   * @param userService User service
+   * @param catalogueService Catalogue service
+   */
+  constructor(
+    private readonly userService: UserService,
+    private readonly catalogueService: CatalogueService,
+  ) {}
+
+  /**
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return (this.userService.getUser().token) ? true : false;
+    return this.userService.getUser().token ? true : false;
   }
 
   /**
@@ -93,7 +98,7 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
         setTimeout(() => {
           this.errorReport = '';
         }, 2500);
-      }
+      },
     );
   }
 
@@ -116,5 +121,4 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
       this.getCatalogue();
     }
   }
-
 }

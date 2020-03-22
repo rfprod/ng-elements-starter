@@ -1,9 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
-
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { WINDOW } from 'src/app/utils';
+import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 
 /**
  * Auth service
@@ -11,7 +10,19 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class AuthService {
-
+  /**
+   * Endpoints object for making requests to the API.
+   */
+  private readonly endpoints: any = {
+    login: {
+      mock: `${this.window.location.origin}/login`,
+      real: `${this.handlers.apiBaseUrl()}/auth`,
+    },
+    signup: {
+      mock: `${this.window.location.origin}/signup`,
+      real: `${this.handlers.apiBaseUrl()}/register`,
+    },
+  };
   /**
    * Constructor.
    * @param http Http client
@@ -19,24 +30,10 @@ export class AuthService {
    * @param window Window - window reference
    */
   constructor(
-    private http: HttpClient,
-    private handlers: CustomHttpHandlersService,
-    @Inject('Window') private window: Window
+    private readonly http: HttpClient,
+    private readonly handlers: CustomHttpHandlersService,
+    @Inject(WINDOW) private readonly window: Window,
   ) {}
-
-  /**
-   * Endpoints object for making requests to the API.
-   */
-  private endpoints: any = {
-    login: {
-      mock: this.window.location.origin + '/login' as string,
-      real: this.handlers.apiBaseUrl() + '/auth' as string
-    },
-    signup: {
-      mock: this.window.location.origin + '/signup' as string,
-      real: this.handlers.apiBaseUrl() + '/register' as string
-    }
-  };
 
   /**
    * Loggs user in using email + password.
@@ -46,8 +43,9 @@ export class AuthService {
    */
   public login(mock: boolean, email: string, password: string): Observable<any> {
     const endpoint: string = mock ? this.endpoints.login.mock : this.endpoints.login.real;
-    const formData: { email: string, password: string } = {
-      email, password
+    const formData: { email: string; password: string } = {
+      email,
+      password,
     };
     const observable: Observable<any> = this.http.post(endpoint, formData);
     return this.handlers.pipeRequestWithObjectResponse(observable);
@@ -61,13 +59,21 @@ export class AuthService {
    * @param password user password
    * @param organization user organization
    */
-  public signup(mock: boolean, email: string, password: string, organization: string, name: string): Observable<any> {
+  public signup(
+    mock: boolean,
+    email: string,
+    password: string,
+    organization: string,
+    name: string,
+  ): Observable<any> {
     const endpoint: string = mock ? this.endpoints.signup.mock : this.endpoints.signup.real;
-    const formData: { name: string, email: string, password: string, organization: string } = {
-      name, email, password, organization
+    const formData: { name: string; email: string; password: string; organization: string } = {
+      name,
+      email,
+      password,
+      organization,
     };
     const observable: Observable<any> = this.http.post(endpoint, formData);
     return this.handlers.pipeRequestWithObjectResponse(observable);
   }
-
 }

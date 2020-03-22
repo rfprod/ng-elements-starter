@@ -1,28 +1,20 @@
-import { State, Action, StateContext } from '@ngxs/store';
-import { Ng2elementsAction } from './ng2elements.actions';
+import { Action, State, StateContext } from '@ngxs/store';
+import { NgElementsStarterAction } from './ng2elements.actions';
+import { NgElementsStarterStateModel } from './ng2elements.state.model';
 
 /**
- * Ng2elements state model.
+ * NgElementsStarter state.
  */
-export class Ng2elementsStateModel {
-  public theme: string;
-}
-
-/**
- * Ng2elements state.
- */
-@State<Ng2elementsStateModel>({
-  name: 'ng2elements',
+@State<NgElementsStarterStateModel>({
+  name: 'ngElementsStarter',
   defaults: {
-    theme: null
-  }
+    theme: null,
+  },
 })
-export class Ng2elementsState {
-
-  @Action(Ng2elementsAction)
-  add(ctx: StateContext<Ng2elementsStateModel>, action: Ng2elementsAction) {
+export class NgElementsStarterState {
+  @Action(NgElementsStarterAction)
+  public add(ctx: StateContext<NgElementsStarterStateModel>, action: NgElementsStarterAction) {
     const state = ctx.getState();
     ctx.setState({ theme: action.payload.theme || state.theme });
   }
-
 }

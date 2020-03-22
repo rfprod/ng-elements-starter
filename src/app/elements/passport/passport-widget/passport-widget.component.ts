@@ -1,29 +1,25 @@
-import { Component, HostListener, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-
-import { fadeIn, fadeInOut } from '../animations';
-
-import { UserService } from '../../../services/user/user.service';
-
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IServerChangeEvent } from '../../../interfaces/index';
+import { UserService } from '../../../services/user/user.service';
+import { fadeIn, fadeInOut } from '../animations';
 
 /**
  * Passport widget component
  */
 @Component({
-  selector: 'passport-widget',
+  selector: 'app-passport-widget',
   templateUrl: './passport-widget.component.html',
-  styleUrls: ['./passport-widget.component.css'],
+  styleUrls: ['./passport-widget.component.scss'],
   animations: [fadeInOut, fadeIn],
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class PassportWidgetComponent implements OnInit, OnChanges {
-
   /**
    * Currently activated mode.
    */
-  @Input() public activatedMode: 'index'|'login'|'signup' = 'index';
+  @Input() public activatedMode: 'index' | 'login' | 'signup' = 'index';
 
   /**
    * Indicates if a particular passport mode is restricted:
@@ -32,7 +28,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * - null
    * null indicates that there is no mode restriction.
    */
-  @Input() public restrictMode: 'login'|'signup'|null = null;
+  @Input() public restrictMode: 'login' | 'signup' | null = null;
 
   /**
    * Indicated if passport config should be displayed.
@@ -52,36 +48,34 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
   /**
    * UI mode state.
    */
-  private mode: {
-    index: boolean,
-    login: boolean,
-    signup: boolean
+  private readonly mode: {
+    index: boolean;
+    login: boolean;
+    signup: boolean;
   } = {
     index: true,
     login: false,
-    signup: false
+    signup: false,
   };
 
   /**
    * Constructor.
    * @param userService Users service
    */
-  constructor(
-    private userService: UserService
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   /**
    * Indicates if user is anonymous, i.e. token is not present in UserService.
    */
   public anonUser(): boolean {
-    return (this.userService.getUser().token) ? false : true;
+    return this.userService.getUser().token ? false : true;
   }
 
   /**
    * Resolves if mode is restricted or not.
    * @param modeKey mode key that should be chedked for restriction
    */
-  public isRestricted(modeKey: 'index'|'login'|'signup'): boolean {
+  public isRestricted(modeKey: 'index' | 'login' | 'signup'): boolean {
     return this.restrictMode && this.restrictMode === modeKey;
   }
 
@@ -89,21 +83,8 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * Resolves if mode is current.
    * @param modeKey mode that should be checked for activateion state
    */
-  public isCurrentMode(modeKey: 'index'|'login'|'signup'): boolean {
+  public isCurrentMode(modeKey: 'index' | 'login' | 'signup'): boolean {
     return modeKey === this.activatedMode;
-  }
-
-  /**
-   * Returns component start mode key.
-   */
-  private getStartModeKey(): 'index'|'login'|'signup' {
-    let key: 'index'|'login'|'signup' = 'index';
-    if (this.isRestricted('signup')) {
-      key = (this.userService.getUser().token) ? 'index' : 'login';
-    } else if (this.isRestricted('login')) {
-      key = 'signup';
-    }
-    return key;
   }
 
   /**
@@ -111,8 +92,9 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * Deactivates current UI mode first.
    * @param modeKey mode key that should be activated
    */
-  public activateMode(modeKey: 'index'|'login'|'signup'): void {
-    if (this.userService.getUser().token) { // override modeKey, load index view for authenticated users
+  public activateMode(modeKey: 'index' | 'login' | 'signup'): void {
+    if (this.userService.getUser().token) {
+      // Override modeKey, load index view for authenticated users
       modeKey = 'index';
     }
     if (!this.isRestricted(modeKey)) {
@@ -135,7 +117,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * @param event keyboard event
    */
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
+  public handleKeyboardEvent(event: KeyboardEvent) {
     if (event.shiftKey && event.key === 'I') {
       event.preventDefault();
       this.activateMode('index');
@@ -168,4 +150,16 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Returns component start mode key.
+   */
+  private getStartModeKey(): 'index' | 'login' | 'signup' {
+    let key: 'index' | 'login' | 'signup' = 'index';
+    if (this.isRestricted('signup')) {
+      key = this.userService.getUser().token ? 'index' : 'login';
+    } else if (this.isRestricted('login')) {
+      key = 'signup';
+    }
+    return key;
+  }
 }

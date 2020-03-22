@@ -1,15 +1,21 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-
-import { UserService } from '../../../services/user/user.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { IBalance, IUser } from '../../../interfaces/index';
 import { BalanceService } from '../../../services/balance/balance.service';
-
-import { IUser, IBalance } from '../../../interfaces/index';
+import { UserService } from '../../../services/user/user.service';
 
 /**
  * Balance index
  */
 @Component({
-  selector: 'balance-index',
+  selector: 'app-balance-index',
   template: `
     <div fxLayout="row wrap">
       <span fxFlex="100" *ngIf="!isLoggedIn()">
@@ -17,29 +23,23 @@ import { IUser, IBalance } from '../../../interfaces/index';
       </span>
       <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
       <span fxFlex="100" *ngIf="isLoggedIn()">
-        <p>organization: {{balance().organization}}</p>
-        <p>sum1: {{balance().sum1}}</p>
-        <p>sum2: {{balance().sum2}}</p>
-        <p>sum3: {{balance().sum3}}</p>
-        <p>sum4: {{balance().sum4}}</p>
+        <p>organization: {{ balance().organization }}</p>
+        <p>sum1: {{ balance().sum1 }}</p>
+        <p>sum2: {{ balance().sum2 }}</p>
+        <p>sum3: {{ balance().sum3 }}</p>
+        <p>sum4: {{ balance().sum4 }}</p>
       </span>
     </div>
   `,
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class BalanceIndexComponent implements OnInit, OnChanges {
-
   /**
    * Balance change event emitter.
    */
   @Output() public balanceChange: EventEmitter<IBalance> = new EventEmitter();
-
-  /**
-   * Balance data.
-   */
-  private data: IBalance = new IBalance();
 
   /**
    * UI error reporter.
@@ -47,19 +47,9 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   public errorReport = '';
 
   /**
-   * Constructor.
-   * @param userService User service
-   * @param balanceService Balance service
-   */
-  constructor(
-    private userService: UserService,
-    private balanceService: BalanceService
-  ) {}
-
-  /**
    * Component theme.
    */
-  @Input() public theme: 'primary'|'accent'|'warn';
+  @Input() public theme: 'primary' | 'accent' | 'warn';
 
   /**
    * Indicates if mocked server should be used for http requests.
@@ -67,10 +57,25 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
+   * Balance data.
+   */
+  private data: IBalance = new IBalance();
+
+  /**
+   * Constructor.
+   * @param userService User service
+   * @param balanceService Balance service
+   */
+  constructor(
+    private readonly userService: UserService,
+    private readonly balanceService: BalanceService,
+  ) {}
+
+  /**
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return (this.userService.getUser().token) ? true : false;
+    return this.userService.getUser().token ? true : false;
   }
 
   /**
@@ -95,7 +100,7 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
         setTimeout(() => {
           this.errorReport = '';
         }, 2500);
-      }
+      },
     );
   }
 
@@ -118,5 +123,4 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
       this.getBalance();
     }
   }
-
 }

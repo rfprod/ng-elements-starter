@@ -1,76 +1,58 @@
 <mat-toolbar>
-    <span fxFlex="1 1 auto"></span>
-    <button
-        mat-raised-button
-        color="primary"
-        (click)="toggleMaterialTheme()"
-        matTooltip="Toggle material theme"
-    >
-        <mat-icon
-            class="material-icons-fas"
-            fontSet="fas"
-            [fontIcon]="darkTheme ? 'fa-moon' : 'fa-sun'"
-        ></mat-icon>
-        <span *ngIf="darkTheme">Dark theme</span>
-        <span *ngIf="!darkTheme">Light theme</span>
-    </button>
-    <span fxFlex="1 1 auto"></span>
+  <span fxFlex="1 1 auto"></span>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="toggleMaterialTheme()"
+    matTooltip="Toggle material theme"
+  >
+    <mat-icon
+      class="material-icons-fas"
+      fontSet="fas"
+      [fontIcon]="darkTheme ? 'fa-moon' : 'fa-sun'"
+    ></mat-icon>
+    <span *ngIf="darkTheme">Dark theme</span>
+    <span *ngIf="!darkTheme">Light theme</span>
+  </button>
+  <span fxFlex="1 1 auto"></span>
 </mat-toolbar>
 
 <div fxLayout="row wrap">
-
-    <div
-        fxFlex="35"
-        fxFlex.xs="100"
-        fxFlex.sm="100"
-        fxFlex.md="100"
-        fxLayout="row wrap"
-        [ngStyle]="{'padding': '15px 0 15px 0'}"
-    >
-
-        <div fxFlex="100">
-            <passport-widget [theme]="theme"></passport-widget>
-        </div>
-
-        <mat-divider fxFlex="100"></mat-divider>
-
-        <div
-            fxFlex="100"
-            [ngStyle]="{'padding': '15px 0 15px 0'}"
-        >
-            <balance-widget [theme]="theme"></balance-widget>
-        </div>
-
-        <mat-divider fxFlex="100"></mat-divider>
-
-        <div
-            fxFlex="100"
-            [ngStyle]="{'padding': '15px 0 15px 0'}"
-        >
-            <catalogue-widget [theme]="theme"></catalogue-widget>
-        </div>
-
+  <div
+    fxFlex="35"
+    fxFlex.xs="100"
+    fxFlex.sm="100"
+    fxFlex.md="100"
+    fxLayout="row wrap"
+    [ngStyle]="{ padding: '15px 0 15px 0' }"
+  >
+    <div fxFlex="100">
+      <app-passport-widget [theme]="theme"></app-passport-widget>
     </div>
 
-    <div
-        fxFlex="1"
-        fxFlex.lt-md="0"
-    ></div>
+    <mat-divider fxFlex="100"></mat-divider>
 
-    <div
-        fxFlex="64"
-        fxFlex.xs="100"
-        fxFlex.sm="100"
-        fxFlex.md="100"
-        fxLayout="row wrap"
-        [ngStyle]="{'padding': '15px 0 15px 0'}"
-    >
-
-        <orders-widget
-            fxFlex="100"
-            [theme]="theme"
-        ></orders-widget>
-
+    <div fxFlex="100" [ngStyle]="{ padding: '15px 0 15px 0' }">
+      <app-balance-widget [theme]="theme"></app-balance-widget>
     </div>
 
+    <mat-divider fxFlex="100"></mat-divider>
+
+    <div fxFlex="100" [ngStyle]="{ padding: '15px 0 15px 0' }">
+      <app-catalogue-widget [theme]="theme"></app-catalogue-widget>
+    </div>
+  </div>
+
+  <div fxFlex="1" fxFlex.lt-md="0"></div>
+
+  <div
+    fxFlex="64"
+    fxFlex.xs="100"
+    fxFlex.sm="100"
+    fxFlex.md="100"
+    fxLayout="row wrap"
+    [ngStyle]="{ padding: '15px 0 15px 0' }"
+  >
+    <app-orders-widget fxFlex="100" [theme]="theme"></app-orders-widget>
+  </div>
 </div>

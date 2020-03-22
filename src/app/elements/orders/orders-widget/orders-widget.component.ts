@@ -1,31 +1,19 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-
-import { UserService } from '../../../services/user/user.service';
-
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IUser } from '../../../interfaces/index';
+import { UserService } from '../../../services/user/user.service';
 
 /**
  * Orders widget component
  */
 @Component({
-  selector: 'orders-widget',
+  selector: 'app-orders-widget',
   templateUrl: './orders-widget.component.html',
-  styleUrls: ['./orders-widget.component.css'],
+  styleUrls: ['./orders-widget.component.scss'],
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class OrdersWidgetComponent implements OnInit, OnChanges {
-
-  /**
-   * Constructor.
-   * @param el Element reference
-   * @param userService Users service
-   */
-  constructor(
-    private userService: UserService
-  ) {}
-
   /**
    * Component theme.
    */
@@ -47,6 +35,13 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
+   * Constructor.
+   * @param el Element reference
+   * @param userService Users service
+   */
+  constructor(private readonly userService: UserService) {}
+
+  /**
    * Selects real or mocked server., used in config callback.
    * @param event server change event
    */
@@ -58,7 +53,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
    * Orders data change event handler.
    */
   public ordersChangeHandler(event: string[]): void {
-    console.log('Orders widget: ordersChangeHandler, event', event);
+    console.warn('Orders widget: ordersChangeHandler, event', event);
   }
 
   /**
@@ -77,5 +72,4 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
       this.selectServer({ mock: changes.mock.currentValue });
     }
   }
-
 }

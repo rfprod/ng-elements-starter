@@ -1,33 +1,41 @@
 import { Injectable } from '@angular/core';
-
 import { MatIconRegistry } from '@angular/material';
-
 import { DomSanitizer } from '@angular/platform-browser';
-import { SvgIconInterface } from 'src/app/interfaces/svg-icon.interface';
+import { ISvgIconInterface } from 'src/app/interfaces/svg-icon.interface';
 
 /**
  * Application icons service.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppIconsService {
-
+  /**
+   * Custom icons model.
+   * Information stored here is used to add SVG icons to material icons registry.
+   */
+  private readonly model: ISvgIconInterface[] = [];
   /**
    * Constructor.
    * @param matIconRegistry Material icon registry - icons registry for registering icons for usage within mat-icon selector
    * @param domSanitizer DOM sanitizer
    */
   constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private readonly matIconRegistry: MatIconRegistry,
+    private readonly domSanitizer: DomSanitizer,
   ) {}
 
   /**
-   * Custom icons model.
-   * Information stored here is used to add SVG icons to material icons registry.
+   * Initialize mat icon registry.
    */
-  private model: SvgIconInterface[] = [];
+  public initialize(): void {
+    this.registerFontawesome();
+    this.addIcons();
+  }
+
+  public getMatIconRegistry(): MatIconRegistry {
+    return this.matIconRegistry;
+  }
 
   /**
    * Returns custom icons array.
@@ -42,7 +50,10 @@ export class AppIconsService {
   private addIcons(): void {
     const icons: any[] = this.getIcons();
     for (const icon of icons) {
-      this.matIconRegistry.addSvgIcon(icon.name, this.domSanitizer.bypassSecurityTrustResourceUrl(icon.path));
+      this.matIconRegistry.addSvgIcon(
+        icon.name,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(icon.path),
+      );
     }
   }
 
@@ -58,17 +69,4 @@ export class AppIconsService {
   private registerFontawesome(): void {
     this.matIconRegistry.registerFontClassAlias('all');
   }
-
-  /**
-   * Initialize mat icon registry.
-   */
-  public initialize(): void {
-    this.registerFontawesome();
-    this.addIcons();
-  }
-
-  public getMatIconRegistry(): MatIconRegistry {
-    return this.matIconRegistry;
-  }
-
 }

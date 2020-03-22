@@ -1,96 +1,120 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-
-import { fadeIn, fadeInOut } from '../animations';
-
-import { UserService } from '../../../services/user/user.service';
-import { AuthService } from '../../../services/auth/auth.service';
-
 import { ISignupForm } from '../../../interfaces/index';
+import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user/user.service';
+import { fadeIn, fadeInOut } from '../animations';
 
 /**
  * Passport signup
  */
 @Component({
-  selector: 'passport-signup',
+  selector: 'app-passport-signup',
   template: `
     <div fxLayout="row wrap">
       <span fxFlex="100">
-        {{title}}
+        {{ title }}
       </span>
       <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
         <button mat-button (click)="modeChange('index')">Index</button>
-        <button mat-button (click)="modeChange('login')" *ngIf="restrictMode !== 'login'">Login</button>
+        <button mat-button (click)="modeChange('login')" *ngIf="restrictMode !== 'login'">
+          Login
+        </button>
       </span>
 
-      <form fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start" [formGroup]="signupForm" (ngSubmit)="submitForm()" novalidate class="mat-body-2">
-
+      <form
+        fxFlex="100"
+        fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        [formGroup]="signupForm"
+        (ngSubmit)="submitForm()"
+        novalidate
+        class="mat-body-2"
+      >
         <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
 
         <mat-form-field fxFlex="100">
-          <input matInput type="text" name="name" [formControl]="signupForm.controls.name" placeholder="username" required />
+          <input
+            matInput
+            type="text"
+            name="name"
+            [formControl]="signupForm.controls.name"
+            placeholder="username"
+            required
+          />
           <mat-icon matSuffix class="material-icons">user</mat-icon>
           <mat-error *ngIf="signupForm.controls.name.invalid" class="mat-body-1">
             1+ characters
           </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="100">
-          <input matInput type="email" name="email" [formControl]="signupForm.controls.email" placeholder="email" required />
+          <input
+            matInput
+            type="email"
+            name="email"
+            [formControl]="signupForm.controls.email"
+            placeholder="email"
+            required
+          />
           <mat-icon matSuffix class="material-icons">mail</mat-icon>
           <mat-error *ngIf="signupForm.controls.email.invalid" class="mat-body-1">
             invalid email
           </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="100">
-          <input matInput type="text" name="organization" [formControl]="signupForm.controls.organization" placeholder="organization" required />
+          <input
+            matInput
+            type="text"
+            name="organization"
+            [formControl]="signupForm.controls.organization"
+            placeholder="organization"
+            required
+          />
           <mat-icon matSuffix class="material-icons">business</mat-icon>
           <mat-error *ngIf="signupForm.controls.organization.invalid" class="mat-body-1">
             1+ characters
           </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="100">
-          <input matInput type="{{showPassword ? 'text' : 'password'}}" name="password" [formControl]="signupForm.controls.password" placeholder="password" required />
-          <mat-icon matSuffix class="material-icons" (click)="togglePasswordVisibility()">lock</mat-icon>
+          <input
+            matInput
+            type="{{ showPassword ? 'text' : 'password' }}"
+            name="password"
+            [formControl]="signupForm.controls.password"
+            placeholder="password"
+            required
+          />
+          <mat-icon matSuffix class="material-icons" (click)="togglePasswordVisibility()"
+            >lock</mat-icon
+          >
           <mat-error *ngIf="signupForm.controls.password.invalid" class="mat-body-1">
             1+ characters
           </mat-error>
         </mat-form-field>
 
         <mat-toolbar [color]="theme">
-          <button mat-button type="submit" [disabled]="signupForm.pristine || signupForm.invalid" aria-label="submit">
+          <button
+            mat-button
+            type="submit"
+            [disabled]="signupForm.pristine || signupForm.invalid"
+            aria-label="submit"
+          >
             Signup
           </button>
         </mat-toolbar>
       </form>
-
     </div>
   `,
   animations: [fadeIn, fadeInOut],
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class PassportSignupComponent implements OnInit {
-
-  /**
-   * Constructor.
-   * @param fb Form builder
-   * @param userService User service
-   * @param authService Auth service
-   */
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private authService: AuthService
-  ) {
-    this.resetForm();
-  }
-
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary'|'accent'|'warn';
+  @Input() public theme: 'primary' | 'accent' | 'warn';
 
   /**
    * Component title.
@@ -114,7 +138,7 @@ export class PassportSignupComponent implements OnInit {
    * - null
    * null indicates that there is no mode restriction.
    */
-  @Input() public restrictMode: 'login'|'signup'|null = null;
+  @Input() public restrictMode: 'login' | 'signup' | null = null;
 
   /**
    * Signup form.
@@ -130,12 +154,25 @@ export class PassportSignupComponent implements OnInit {
    * UI error reporter.
    */
   public errorReport = '';
+  /**
+   * Constructor.
+   * @param fb Form builder
+   * @param userService User service
+   * @param authService Auth service
+   */
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {
+    this.resetForm();
+  }
 
   /**
    * Emits mode change event.
    * @param mode mode that should be activated by widget component.
    */
-  public modeChange(mode: 'index'|'login'): void {
+  public modeChange(mode: 'index' | 'login'): void {
     this.switchMode.emit(mode);
   }
 
@@ -163,21 +200,26 @@ export class PassportSignupComponent implements OnInit {
    */
   public submitForm(): void {
     const formData: {
-      name: string, email: string, organization: string, password: string
+      name: string;
+      email: string;
+      organization: string;
+      password: string;
     } = this.signupForm.value;
     if (this.signupForm.valid) {
-      this.authService.signup(this.mock, formData.email, formData.password, formData.organization, formData.name).subscribe(
-        (data: any) => {
-          this.userService.SaveUser(data);
-          this.modeChange('index');
-        },
-        (error: any) => {
-          this.errorReport = error;
-          setTimeout(() => {
-            this.errorReport = '';
-          }, 2500);
-        }
-      );
+      this.authService
+        .signup(this.mock, formData.email, formData.password, formData.organization, formData.name)
+        .subscribe(
+          (data: any) => {
+            this.userService.SaveUser(data);
+            this.modeChange('index');
+          },
+          (error: any) => {
+            this.errorReport = error;
+            setTimeout(() => {
+              this.errorReport = '';
+            }, 2500);
+          },
+        );
       this.resetForm();
     }
   }
@@ -190,5 +232,4 @@ export class PassportSignupComponent implements OnInit {
       this.modeChange('index');
     }
   }
-
 }

@@ -31,7 +31,6 @@ function getRandomCounterValue(from = 10, to = 99, fixedFactor = 0) {
  * For usage in express server and in cloud functions.
  */
 module.exports = {
-
   /**
    * Handles user login.
    */
@@ -46,7 +45,7 @@ module.exports = {
         email,
         name,
         organization,
-        token: tokenObject.token
+        token: tokenObject.token,
       });
     } else {
       let missingParams = email ? '' : 'email';
@@ -64,14 +63,14 @@ module.exports = {
     const organization = req.body.organization || '';
     const password = req.body.password || '';
     if (name === 'exists') {
-      res.status(409).json({ error: `User exists` });
+      res.status(409).json({ error: 'User exists' });
     } else if (email && name && organization && password) {
       const tokenObject = getTokenWithPayload(email, name, organization);
       res.status(200).json({
         email,
         name,
         organization,
-        token: tokenObject.token
+        token: tokenObject.token,
       });
     } else {
       let missingParams = email ? '' : 'email';
@@ -92,10 +91,10 @@ module.exports = {
         sum1: getRandomCounterValue(),
         sum2: getRandomCounterValue(),
         sum3: getRandomCounterValue(),
-        sum4: getRandomCounterValue()
+        sum4: getRandomCounterValue(),
       });
     } else {
-      res.status(400).json({ error: `Missing mandatory request parameters: token` });
+      res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }
   },
 
@@ -106,10 +105,12 @@ module.exports = {
     const token = req.query.token || '';
     if (token) {
       res.status(200).json({
-        data: Array.apply(null, Array(5)).map(String.prototype.valueOf, 'catalogue item ').map((item, index) => item + index)
+        data: Array.apply(null, Array(5))
+          .map(String.prototype.valueOf, 'catalogue item ')
+          .map((item, index) => item + index),
       });
     } else {
-      res.status(400).json({ error: `Missing mandatory request parameters: token` });
+      res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }
   },
 
@@ -120,23 +121,28 @@ module.exports = {
     const token = req.query.token || '';
     if (token) {
       res.status(200).json({
-        data: Array.apply(null, Array(5)).map(Object.prototype.valueOf, {
-          id: 'ORDER-ID-',
-          status: 'status-',
-          date: new Date().toISOString(),
-          goods: Array.apply(null, Array(2)).map(String.prototype.valueOf, 'goods item ').map((item, index) => item + index ),
-          sum: 0
-        }).map((item, index) => {
-          item.id += index;
-          item.status += index;
-          item.goods = Array.apply(null, Array(1 + index)).map(String.prototype.valueOf, 'goods item ').map((item1, index1) => item1 + index1 );
-          item.sum = getRandomCounterValue();
-          return item;
-        })
+        data: Array.apply(null, Array(5))
+          .map(Object.prototype.valueOf, {
+            id: 'ORDER-ID-',
+            status: 'status-',
+            date: new Date().toISOString(),
+            goods: Array.apply(null, Array(2))
+              .map(String.prototype.valueOf, 'goods item ')
+              .map((item, index) => item + index),
+            sum: 0,
+          })
+          .map((item, index) => {
+            item.id += index;
+            item.status += index;
+            item.goods = Array.apply(null, Array(1 + index))
+              .map(String.prototype.valueOf, 'goods item ')
+              .map((item1, index1) => item1 + index1);
+            item.sum = getRandomCounterValue();
+            return item;
+          }),
       });
     } else {
-      res.status(400).json({ error: `Missing mandatory request parameters: token` });
+      res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }
-  }
-
+  },
 };

@@ -1,34 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { IBalance, IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
-
-import { IUser, IBalance } from '../../../interfaces/index';
 
 /**
  * Balance widget component
  */
 @Component({
-  selector: 'balance-widget',
+  selector: 'app-balance-widget',
   templateUrl: './balance-widget.component.html',
-  styleUrls: ['./balance-widget.component.css'],
+  styleUrls: ['./balance-widget.component.scss'],
   host: {
-    class: 'mat-body-1'
-  }
+    class: 'mat-body-1',
+  },
 })
 export class BalanceWidgetComponent implements OnInit {
-
-  /**
-   * Constructor.
-   * @param userService Users service
-   */
-  constructor(
-    private userService: UserService
-  ) {}
-
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary'|'accent'|'warn' = 'primary';
+  @Input() public theme: 'primary' | 'accent' | 'warn' = 'primary';
 
   /**
    * User object.
@@ -39,6 +28,12 @@ export class BalanceWidgetComponent implements OnInit {
    * Indicates if mocked server should be used.
    */
   public mock = true;
+
+  /**
+   * Constructor.
+   * @param userService Users service
+   */
+  constructor(private readonly userService: UserService) {}
 
   /**
    * Selects real or mocked server., used in config callback.
@@ -52,11 +47,10 @@ export class BalanceWidgetComponent implements OnInit {
    * Balance data change event handler.
    */
   public balanceChangeHandler(event: IBalance): void {
-    console.log('Balance widget: balanceChangeHandler, event', event);
+    console.warn('Balance widget: balanceChangeHandler, event', event);
   }
 
   public ngOnInit(): void {
     this.userService.SaveUser(this.user);
   }
-
 }

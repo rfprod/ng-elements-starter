@@ -1,7 +1,7 @@
 /**
  * SVG Icon interface.
  */
-export interface SvgIconInterface {
+export interface ISvgIconInterface {
   name: string;
   path: string;
 }

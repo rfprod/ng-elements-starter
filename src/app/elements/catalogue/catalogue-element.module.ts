@@ -1,37 +1,25 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Injector, NgModule } from '@angular/core';
-
-import { createCustomElement } from '@angular/elements';
-
-import { CatalogueModule } from './catalogue.module';
 import { CatalogueWidgetComponent } from './';
+import { CatalogueModule } from './catalogue.module';
 
 /**
  * Catalogue element module
  */
 @NgModule({
-  imports: [
-    BrowserModule, BrowserAnimationsModule,
-    CatalogueModule
-  ],
-  exports: [ CatalogueModule ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  imports: [BrowserModule, BrowserAnimationsModule, CatalogueModule],
+  exports: [CatalogueModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CatalogueElementModule {
+  constructor(private readonly injector: Injector) {}
 
-  constructor(
-    private injector: Injector
-  ) {}
-
-  ngDoBootstrap() {
-    const catalogueWidget = <any>createCustomElement(CatalogueWidgetComponent, {
+  public ngDoBootstrap() {
+    const catalogueWidget = createCustomElement(CatalogueWidgetComponent, {
       injector: this.injector,
-    });
-    customElements.define('catalogue-widget', catalogueWidget);
+    }) as any;
+    customElements.define('app-catalogue-widget', catalogueWidget);
   }
-
 }

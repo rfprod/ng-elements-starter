@@ -1,37 +1,34 @@
-import { TestBed, async } from '@angular/core/testing';
-import { Response, ResponseOptions, Headers } from '@angular/http';
-
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { TestBed, async } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-
+import { WINDOW, getWindow } from 'src/app/utils';
+import { DummyComponent } from '../../mocks/components/dummy.component';
 import { UserService } from '../user/user.service';
-
 import { CustomHttpHandlersService } from './custom-http-handlers.service';
 
-import { DummyComponent } from '../../mocks/components/dummy.component';
-
 describe('CustomHttpHandlersService', () => {
-
   let service: CustomHttpHandlersService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DummyComponent ],
-      imports: [ HttpClientTestingModule ],
+      declarations: [DummyComponent],
+      imports: [HttpClientTestingModule],
       providers: [
-        { provide: 'Window', useValue: window },
+        { provide: WINDOW, useFactory: getWindow },
         UserService,
         {
           provide: CustomHttpHandlersService,
           useFactory: (userService, win) => new CustomHttpHandlersService(userService, win),
-          deps: [UserService, 'Window']
-        }
+          deps: [UserService, WINDOW],
+        },
       ],
-      schemas: []
-    }).compileComponents().then(() => {
-      service = TestBed.get(CustomHttpHandlersService) as CustomHttpHandlersService;
-    });
+      schemas: [],
+    })
+      .compileComponents()
+      .then(() => {
+        service = TestBed.get(CustomHttpHandlersService) as CustomHttpHandlersService;
+      });
   }));
 
   it('should be defined', () => {
@@ -51,7 +48,8 @@ describe('CustomHttpHandlersService', () => {
   });
 
   it('extractObject should return an Object', () => {
-    expect(service.extractObject(new Response(new ResponseOptions({ body: {}, status: 200 })))).toEqual(jasmine.any(Object));
+    const response = new HttpResponse<any>({ body: {}, status: 200 });
+    expect(service.extractObject(response)).toEqual(jasmine.any(Object));
   });
 
   it('extractObject should return an empty Object if not data is present', () => {
@@ -59,7 +57,15 @@ describe('CustomHttpHandlersService', () => {
   });
 
   it('extractArray should return an Array', () => {
-    expect(service.extractArray(new Response(new ResponseOptions({ body: { data: [ {x: 'x'}, {y: 'y'} ] }, status: 200, headers: new Headers({}) })))).toEqual(jasmine.any(Array));
+    expect(
+      service.extractArray(
+        new HttpResponse<any>({
+          body: { data: [{ x: 'x' }, { y: 'y' }] },
+          status: 200,
+          headers: new HttpHeaders({}),
+        }),
+      ),
+    ).toEqual(jasmine.any(Array));
   });
 
   it('extractArray should return an empty Array if no data is present', () => {
@@ -67,73 +73,120 @@ describe('CustomHttpHandlersService', () => {
   });
 
   it('handleError should return an Observable', () => {
-    expect(service.handleError({ errors: [{ detail: 'error' }]})).toEqual(jasmine.any(Observable));
+    expect(service.handleError({ errors: [{ detail: 'error' }] })).toEqual(jasmine.any(Observable));
   });
 
   it('handleError should return an Observable', () => {
-    expect(service.handleError({ errors: [{ detail: 'error' }]})).toEqual(jasmine.any(Observable));
+    expect(service.handleError({ errors: [{ detail: 'error' }] })).toEqual(jasmine.any(Observable));
   });
 
-  it('handleError should handle errors properly', async () => {
-    // this is returned by real backend by the moment
-    await service.handleError({ _body: JSON.stringify({ code: 'errorType', message: 'errorMessage', detail: { root_erratic_item: {erratic_item: ['error msg 1', 'error msg 2']}} })}).subscribe(
+  it('handleError should handle errors properly', async(() => {
+    // This is returned by real backend by the moment
+    service
+      .handleError({
+        _body: JSON.stringify({
+          code: 'errorType',
+          message: 'errorMessage',
+          detail: { root_erratic_item: { erratic_item: ['error msg 1', 'error msg 2'] } },
+        }),
+      })
+      .subscribe(
+        () => true,
+        (error: string) =>
+          expect(error).toEqual(
+            'errorType - errorMessage: erratic_item - error msg 1, error msg 2',
+          ),
+      );
+    service
+      .handleError({
+        _body: JSON.stringify({
+          code: 'errorType',
+          message: 'errorMessage',
+          detail: {
+            root_erratic_item: { erratic_item: ['error msg 1', 'error msg 2'] },
+            erratic_item2: null,
+          },
+        }),
+      })
+      .subscribe(
+        () => true,
+        (error: string) =>
+          expect(error).toEqual(
+            'errorType - errorMessage: erratic_item - error msg 1, error msg 2',
+          ),
+      );
+    service
+      .handleError({ status: '400', statusText: 'error status text', _body: JSON.stringify(null) })
+      .subscribe(
+        () => true,
+        (error: string) => expect(error).toEqual('400 - error status text'),
+      );
+    service.handleError({ _body: JSON.stringify(null) }).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('errorType - errorMessage: erratic_item - error msg 1, error msg 2')
-    );
-    await service.handleError({ _body: JSON.stringify({ code: 'errorType', message: 'errorMessage', detail: { root_erratic_item: {erratic_item: ['error msg 1', 'error msg 2']}, erratic_item2: null} })}).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('errorType - errorMessage: erratic_item - error msg 1, error msg 2')
-    );
-    await service.handleError({ status: '400', statusText: 'error status text', _body: JSON.stringify(null)}).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('400 - error status text')
-    );
-    await service.handleError({ _body: JSON.stringify(null)}).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('Server error')
+      (error: string) => expect(error).toEqual('Server error'),
     );
 
-    // optional error response handling
-    await service.handleError({ _body: JSON.stringify({ errors: [{ code: 'err_code', detail: 'error body' }]})}).subscribe(
+    // Optional error response handling
+    service
+      .handleError({
+        _body: JSON.stringify({ errors: [{ code: 'err_code', detail: 'error body' }] }),
+      })
+      .subscribe(
+        () => true,
+        (error: string) => expect(error).toEqual('err_code - error body'),
+      );
+    service.handleError({ errors: [{ code: 'err_code', detail: 'error body' }] }).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('err_code - error body')
+      (error: string) => expect(error).toEqual('err_code - error body'),
     );
-    await service.handleError({ errors: [{ code: 'err_code', detail: 'error body' }]}).subscribe(
+    service.handleError({ errors: [], status: '400', statusText: 'error status text' }).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('err_code - error body')
+      (error: string) => expect(error).toEqual('400 - error status text'),
     );
-    await service.handleError({ errors: [], status: '400', statusText: 'error status text' }).subscribe(
+    service
+      .handleError({ _body: JSON.stringify({ code: 'errorType', message: 'general message' }) })
+      .subscribe(
+        () => true,
+        (error: string) => expect(error).toEqual('errorType - general message'),
+      );
+    service.handleError({ code: 'errorType', message: 'general message' }).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('400 - error status text')
+      (error: string) => expect(error).toEqual('errorType - general message'),
     );
-    await service.handleError({ _body: JSON.stringify({ code: 'errorType', message: 'general message' }) }).subscribe(
+    service
+      .handleError({
+        code: 'errorType',
+        message: 'general message',
+        detail: { inn: ['invalidValue'] },
+      })
+      .subscribe(
+        () => true,
+        (error: string) => expect(error).toEqual('errorType - general message: inn - invalidValue'),
+      );
+    service
+      .handleError({
+        code: 'errorType',
+        message: 'general message',
+        detail: { inn: ['invalidValue1', 'invalidValue2'] },
+      })
+      .subscribe(
+        () => true,
+        (error: string) =>
+          expect(error).toEqual('errorType - general message: inn - invalidValue1, invalidValue2'),
+      );
+    service
+      .handleError({ _body: JSON.stringify({}), status: '400', statusText: 'error status text' })
+      .subscribe(
+        () => true,
+        (error: string) => expect(error).toEqual('400 - error status text'),
+      );
+    service.handleError({ status: '400', statusText: 'error status text' }).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('errorType - general message')
+      (error: string) => expect(error).toEqual('400 - error status text'),
     );
-    await service.handleError({ code: 'errorType', message: 'general message' }).subscribe(
+    service.handleError({}).subscribe(
       () => true,
-      (error: string) => expect(error).toEqual('errorType - general message')
+      (error: string) => expect(error).toEqual('Server error'),
     );
-    await service.handleError({ code: 'errorType', message: 'general message', detail: {inn: ['invalidValue']} }).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('errorType - general message: inn - invalidValue')
-    );
-    await service.handleError({ code: 'errorType', message: 'general message', detail: {inn: ['invalidValue1', 'invalidValue2']} }).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('errorType - general message: inn - invalidValue1, invalidValue2')
-    );
-    await service.handleError({ _body: JSON.stringify({}), status: '400', statusText: 'error status text' }).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('400 - error status text')
-    );
-    await service.handleError({ status: '400', statusText: 'error status text' }).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('400 - error status text')
-    );
-    await service.handleError({}).subscribe(
-      () => true,
-      (error: string) => expect(error).toEqual('Server error')
-    );
-  });
-
+  }));
 });

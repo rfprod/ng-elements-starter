@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
  * @description For usage in unit tests where applicable.
  */
 @Component({
-  selector: 'dummy-component',
-  template: `<span>summy component</span>`
+  selector: 'app-dummy-component',
+  template: '<span>summy component</span>',
 })
 export class DummyComponent {}
