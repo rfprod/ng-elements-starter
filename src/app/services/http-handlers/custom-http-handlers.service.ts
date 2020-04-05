@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, concat, throwError } from 'rxjs';
 import { catchError, map, take, timeout } from 'rxjs/operators';
-import { WINDOW } from 'src/app/utils';
+import { ESERVER_RESPONSE_CODE, WINDOW } from 'src/app/utils';
 import { UserService } from '../user/user.service';
 
 /**
@@ -70,7 +70,7 @@ export class CustomHttpHandlersService {
    * 403 - forbidden, no access rights
    */
   public checkErrorStatusAndRedirect(status: any): void {
-    if (status === 401) {
+    if (status === ESERVER_RESPONSE_CODE.UNAUTHORIZED) {
       /*
        * Reset token first or user will be redirected by router to profile.
        */

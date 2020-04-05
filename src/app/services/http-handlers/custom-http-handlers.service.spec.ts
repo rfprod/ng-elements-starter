@@ -27,7 +27,7 @@ describe('CustomHttpHandlersService', () => {
     })
       .compileComponents()
       .then(() => {
-        service = TestBed.get(CustomHttpHandlersService) as CustomHttpHandlersService;
+        service = TestBed.inject(CustomHttpHandlersService);
       });
   }));
 

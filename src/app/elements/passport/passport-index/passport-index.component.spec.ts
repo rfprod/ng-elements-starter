@@ -47,7 +47,7 @@ describe('PassportIndexComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
+        httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(PassportIndexComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -61,7 +61,6 @@ describe('PassportIndexComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create', () => {

@@ -34,8 +34,8 @@ describe('CatalogueService', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
-        service = TestBed.get(CatalogueService) as CatalogueService;
+        httpController = TestBed.inject(HttpTestingController);
+        service = TestBed.inject(CatalogueService);
       });
   }));
 
@@ -46,7 +46,6 @@ describe('CatalogueService', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should exist', () => {

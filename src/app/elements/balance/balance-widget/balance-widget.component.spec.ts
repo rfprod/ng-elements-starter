@@ -52,7 +52,7 @@ describe('BalanceWidgetComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController);
+        httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(BalanceWidgetComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -71,7 +71,6 @@ describe('BalanceWidgetComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create', () => {

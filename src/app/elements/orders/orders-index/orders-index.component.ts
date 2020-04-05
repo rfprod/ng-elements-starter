@@ -7,6 +7,8 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { timer } from 'rxjs';
+import { ETIMEOUT } from 'src/app/utils';
 import { IUser } from '../../../interfaces/index';
 import { OrdersService } from '../../../services/orders/orders.service';
 import { UserService } from '../../../services/user/user.service';
@@ -109,9 +111,9 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
       },
       (error: any) => {
         this.errorReport = error;
-        setTimeout(() => {
+        timer(ETIMEOUT.MEDUIM).subscribe(_ => {
           this.errorReport = '';
-        }, 2500);
+        });
       },
     );
   }

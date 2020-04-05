@@ -74,7 +74,7 @@ describe('AppComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
+        httpController = TestBed.inject(HttpTestingController);
       });
   }));
 
@@ -85,7 +85,6 @@ describe('AppComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create the app', () => {
