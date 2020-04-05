@@ -9,6 +9,8 @@ trigger:
     exclude:
       - README.md
 
+pr: none
+
 jobs:
   ##
   # Main Building pipeline.

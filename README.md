@@ -1,6 +1,12 @@
 # Angular Elements NodeJS Widget Server Starter
 
-[![Azure DevOps Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/NgElementsStarter-CI?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8?branchName=master)
+## PR Validation
+
+[![Azure DevOps PR Validation Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/PR%20Validation?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=15&branchName=master)
+
+## Prod
+
+[![Azure DevOps Prod Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/Prod?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8&branchName=master)
 
 ## Deployment urls
 
