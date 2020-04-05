@@ -1,6 +1,6 @@
 # Angular Elements NodeJS Widget Server Starter
 
-[![Azure DevOps Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/NgElementsStarter-CI?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8?branchName=master)
+[![Azure DevOps Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/Prod?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8&branchName=master)
 
 ## Deployment urls
 
