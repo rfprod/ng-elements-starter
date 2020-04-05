@@ -7,9 +7,11 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { timer } from 'rxjs';
 import { IBalance, IUser } from '../../../interfaces/index';
 import { BalanceService } from '../../../services/balance/balance.service';
 import { UserService } from '../../../services/user/user.service';
+import { ETIMEOUT } from '../../../utils/constants';
 
 /**
  * Balance index
@@ -97,9 +99,9 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
       },
       (error: any) => {
         this.errorReport = error;
-        setTimeout(() => {
+        timer(ETIMEOUT.MEDUIM).subscribe(_ => {
           this.errorReport = '';
-        }, 2500);
+        });
       },
     );
   }

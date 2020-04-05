@@ -34,8 +34,8 @@ describe('BalanceService', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
-        service = TestBed.get(BalanceService) as BalanceService;
+        httpController = TestBed.inject(HttpTestingController);
+        service = TestBed.inject(BalanceService);
       });
   }));
 
@@ -46,7 +46,6 @@ describe('BalanceService', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should exist', () => {

@@ -22,7 +22,7 @@ describe('UserService', () => {
     })
       .compileComponents()
       .then(() => {
-        service = TestBed.get(UserService) as UserService;
+        service = TestBed.inject(UserService);
       });
   }));
 

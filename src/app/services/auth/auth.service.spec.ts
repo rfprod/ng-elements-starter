@@ -34,8 +34,8 @@ describe('AuthService', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
-        service = TestBed.get(AuthService) as AuthService;
+        httpController = TestBed.inject(HttpTestingController);
+        service = TestBed.inject(AuthService);
       });
   }));
 
@@ -46,7 +46,6 @@ describe('AuthService', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should exist', () => {

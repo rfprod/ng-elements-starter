@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { timer } from 'rxjs';
+import { ETIMEOUT } from 'src/app/utils';
 import { ILoginForm } from '../../../interfaces/index';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
@@ -181,9 +183,9 @@ export class PassportLoginComponent implements OnInit {
         },
         (error: any) => {
           this.errorReport = error;
-          setTimeout(() => {
+          timer(ETIMEOUT.MEDUIM).subscribe(_ => {
             this.errorReport = '';
-          }, 2500);
+          });
         },
       );
       this.resetForm();

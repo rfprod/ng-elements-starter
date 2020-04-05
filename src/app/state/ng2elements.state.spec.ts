@@ -9,8 +9,11 @@ describe('Ng2elements actions', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([NgElementsStarterState])],
-    }).compileComponents();
-    store = TestBed.get(Store);
+    })
+      .compileComponents()
+      .then(() => {
+        store = TestBed.inject(Store);
+      });
   }));
 
   it('should create an action and set theme', () => {

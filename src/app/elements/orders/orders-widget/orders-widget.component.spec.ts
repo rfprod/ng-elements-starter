@@ -52,7 +52,7 @@ describe('OrdersWidgetComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController);
+        httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(OrdersWidgetComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -71,7 +71,6 @@ describe('OrdersWidgetComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create', () => {

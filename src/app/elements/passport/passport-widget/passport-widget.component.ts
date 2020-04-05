@@ -93,14 +93,15 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * @param modeKey mode key that should be activated
    */
   public activateMode(modeKey: 'index' | 'login' | 'signup'): void {
+    let key = modeKey;
     if (this.userService.getUser().token) {
       // Override modeKey, load index view for authenticated users
-      modeKey = 'index';
+      key = 'index';
     }
-    if (!this.isRestricted(modeKey)) {
+    if (!this.isRestricted(key)) {
       this.mode[this.activatedMode] = !this.mode[this.activatedMode];
-      this.mode[modeKey] = !this.mode[modeKey];
-      this.activatedMode = modeKey;
+      this.mode[key] = !this.mode[key];
+      this.activatedMode = key;
     }
   }
 

@@ -1,0 +1,12 @@
+export enum ETIMEOUT {
+  SHORTEST = 250,
+  SHORTER = 500,
+  SHORT = 1000,
+  MEDUIM = 2500,
+  LONG = 5000,
+}
+
+export enum ESERVER_RESPONSE_CODE {
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+}

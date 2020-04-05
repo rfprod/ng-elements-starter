@@ -50,7 +50,7 @@ describe('PassportSignupComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
+        httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(PassportSignupComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -64,7 +64,6 @@ describe('PassportSignupComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create', () => {

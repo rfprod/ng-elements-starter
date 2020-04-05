@@ -40,10 +40,6 @@ describe('AppIndexComponent', () => {
       });
   }));
 
-  afterEach(() => {
-    TestBed.resetTestingModule();
-  });
-
   it('should be defined', () => {
     expect(component).toBeTruthy();
   });

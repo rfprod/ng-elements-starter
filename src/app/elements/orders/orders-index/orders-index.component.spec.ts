@@ -50,7 +50,7 @@ describe('OrdersIndexComponent', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
+        httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(OrdersIndexComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -69,7 +69,6 @@ describe('OrdersIndexComponent', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should create', () => {

@@ -34,8 +34,8 @@ describe('OrdersService', () => {
     })
       .compileComponents()
       .then(() => {
-        httpController = TestBed.get(HttpTestingController) as HttpTestingController;
-        service = TestBed.get(OrdersService) as OrdersService;
+        httpController = TestBed.inject(HttpTestingController);
+        service = TestBed.inject(OrdersService);
       });
   }));
 
@@ -46,7 +46,6 @@ describe('OrdersService', () => {
         req.flush({});
       });
     httpController.verify();
-    TestBed.resetTestingModule();
   });
 
   it('should exist', () => {
