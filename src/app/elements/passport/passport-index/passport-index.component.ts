@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IUser } from 'src/app/interfaces';
 
 import { UserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
@@ -92,22 +93,17 @@ export class PassportIndexComponent {
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return this.userService.getUser().token ? true : false;
+    return this.userService.isLoggedIn();
   }
 
   /**
    * Returns current user object without token.
    */
   public user(): { name: string; email: string; organization: string } {
-    const serviceModel: any = this.userService.getUser();
-    let name: string;
-    let email: string;
-    let organization: string;
-    ({ name, email, organization } = {
-      name: serviceModel.name,
-      email: serviceModel.email,
-      organization: serviceModel.organization,
-    });
+    const serviceModel: IUser = this.userService.getUser();
+    const name: string = serviceModel.name;
+    const email: string = serviceModel.email;
+    const organization: string = serviceModel.organization;
     return { name, email, organization };
   }
 
@@ -115,6 +111,6 @@ export class PassportIndexComponent {
    * Logs user out.
    */
   public logout(): void {
-    this.userService.ResetUser();
+    this.userService.resetUser();
   }
 }

@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { BalanceService, CustomHttpHandlersService, UserService } from '../../services/index';
+import { BalanceService, HttpHandlersService, UserService } from '../../services/index';
 import { BalanceConfigComponent, BalanceIndexComponent, BalanceWidgetComponent } from './index';
 
 /**
@@ -28,7 +28,7 @@ import { BalanceConfigComponent, BalanceIndexComponent, BalanceWidgetComponent }
   declarations: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
   providers: [
     { provide: WINDOW, useFactory: getWindow },
-    CustomHttpHandlersService,
+    HttpHandlersService,
     UserService,
     BalanceService,
   ],

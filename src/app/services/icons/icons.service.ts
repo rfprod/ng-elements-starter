@@ -40,7 +40,7 @@ export class AppIconsService {
   /**
    * Returns custom icons array.
    */
-  private getIcons(): any[] {
+  private getIcons(): ISvgIconInterface[] {
     return this.model;
   }
 
@@ -48,7 +48,7 @@ export class AppIconsService {
    * Registers custom svg icons to matIconRegistry.
    */
   private addIcons(): void {
-    const icons: any[] = this.getIcons();
+    const icons: ISvgIconInterface[] = this.getIcons();
     for (const icon of icons) {
       this.matIconRegistry.addSvgIcon(
         icon.name,

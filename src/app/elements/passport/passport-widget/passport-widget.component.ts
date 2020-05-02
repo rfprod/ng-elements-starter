@@ -69,7 +69,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * Indicates if user is anonymous, i.e. token is not present in UserService.
    */
   public anonUser(): boolean {
-    return this.userService.getUser().token ? false : true;
+    return Boolean(this.userService.getUser().token);
   }
 
   /**
@@ -77,7 +77,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * @param modeKey mode key that should be chedked for restriction
    */
   public isRestricted(modeKey: 'index' | 'login' | 'signup'): boolean {
-    return this.restrictMode && this.restrictMode === modeKey;
+    return Boolean(this.restrictMode) && this.restrictMode === modeKey;
   }
 
   /**
@@ -95,7 +95,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    */
   public activateMode(modeKey: 'index' | 'login' | 'signup'): void {
     let key = modeKey;
-    if (this.userService.getUser().token) {
+    if (Boolean(this.userService.getUser().token)) {
       // Override modeKey, load index view for authenticated users
       key = 'index';
     }
@@ -158,7 +158,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
   private getStartModeKey(): 'index' | 'login' | 'signup' {
     let key: 'index' | 'login' | 'signup' = 'index';
     if (this.isRestricted('signup')) {
-      key = this.userService.getUser().token ? 'index' : 'login';
+      key = Boolean(this.userService.getUser().token) ? 'index' : 'login';
     } else if (this.isRestricted('login')) {
       key = 'signup';
     }

@@ -7,12 +7,10 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { timer } from 'rxjs';
 
 import { IBalance, IUser } from '../../../interfaces/index';
 import { BalanceService } from '../../../services/balance/balance.service';
 import { UserService } from '../../../services/user/user.service';
-import { ETIMEOUT } from '../../../utils/constants';
 
 /**
  * Balance index
@@ -24,7 +22,6 @@ import { ETIMEOUT } from '../../../utils/constants';
       <span fxFlex="100" *ngIf="!isLoggedIn()">
         user is not logged in
       </span>
-      <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
       <span fxFlex="100" *ngIf="isLoggedIn()">
         <p>organization: {{ balance().organization }}</p>
         <p>sum1: {{ balance().sum1 }}</p>
@@ -43,11 +40,6 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
    * Balance change event emitter.
    */
   @Output() public balanceChange: EventEmitter<IBalance> = new EventEmitter();
-
-  /**
-   * UI error reporter.
-   */
-  public errorReport = '';
 
   /**
    * Component theme.
@@ -78,7 +70,7 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return this.userService.getUser().token ? true : false;
+    return this.userService.isLoggedIn();
   }
 
   /**
@@ -93,18 +85,15 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
    */
   public getBalance(): void {
     const serviceModel: IUser = this.userService.getUser();
-    this.balanceService.balance(this.mock, serviceModel.token || '$TOKEN').subscribe(
-      (data: IBalance) => {
-        this.data = data;
-        this.changeBalance();
-      },
-      (error: any) => {
-        this.errorReport = error;
-        timer(ETIMEOUT.MEDUIM).subscribe(_ => {
-          this.errorReport = '';
-        });
-      },
-    );
+    this.balanceService
+      .balance(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+      .subscribe(
+        (data: IBalance) => {
+          this.data = data;
+          this.changeBalance();
+        },
+        _ => null,
+      );
   }
 
   /**

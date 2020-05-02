@@ -7,8 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { timer } from 'rxjs';
-import { ETIMEOUT } from 'src/app/utils';
+import { TCatalogue } from 'src/app/interfaces/catalogue.interface';
 
 import { IUser } from '../../../interfaces/index';
 import { CatalogueService } from '../../../services/catalogue/catalogue.service';
@@ -24,7 +23,6 @@ import { UserService } from '../../../services/user/user.service';
       <span fxFlex="100" *ngIf="!isLoggedIn()">
         user is not logged in
       </span>
-      <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
       <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1" *ngIf="isLoggedIn()">
         <mat-grid-tile *ngFor="let item of catalogue()">
           {{ item }}
@@ -53,14 +51,9 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
   @Output() public catalogueChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
-   * UI error reporter.
-   */
-  public errorReport = '';
-
-  /**
    * Catalogue data.
    */
-  private data: string[] = [];
+  private data: TCatalogue = [];
 
   /**
    * Constructor.
@@ -76,13 +69,13 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return this.userService.getUser().token ? true : false;
+    return this.userService.isLoggedIn();
   }
 
   /**
    * Returns current catalogue.
    */
-  public catalogue(): any[] {
+  public catalogue(): TCatalogue {
     return this.data;
   }
 
@@ -91,18 +84,15 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
    */
   public getCatalogue(): void {
     const serviceModel: IUser = this.userService.getUser();
-    this.catalogueService.catalogue(this.mock, serviceModel.token || '$TOKEN').subscribe(
-      (data: string[]) => {
-        this.data = data;
-        this.changeCatalogue();
-      },
-      (error: any) => {
-        this.errorReport = error;
-        timer(ETIMEOUT.MEDUIM).subscribe(_ => {
-          this.errorReport = '';
-        });
-      },
-    );
+    this.catalogueService
+      .catalogue(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+      .subscribe(
+        (data: TCatalogue) => {
+          this.data = data;
+          this.changeCatalogue();
+        },
+        _ => null,
+      );
   }
 
   /**

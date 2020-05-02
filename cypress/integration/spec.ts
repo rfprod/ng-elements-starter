@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path='../../node_modules/cypress/types/index.d.ts'/>
+declare const cy: { visit: (arg0: string) => void; contains: (arg0: string) => void };
 
 it('loads examples', () => {
   const baseUrl = 'http://localhost:4200';

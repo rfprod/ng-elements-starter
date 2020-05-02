@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TCatalogue } from 'src/app/interfaces/catalogue.interface';
 import { WINDOW } from 'src/app/utils';
 
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
+import { HttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Catalogue service
@@ -30,7 +30,7 @@ export class CatalogueService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: CustomHttpHandlersService,
+    private readonly handlers: HttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -39,9 +39,9 @@ export class CatalogueService {
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */
-  public catalogue(mock: boolean, token: string): Observable<any> {
+  public catalogue(mock: boolean, token: string): Observable<TCatalogue> {
     const endpoint: string = mock ? this.endpoints.catalogue.mock : this.endpoints.catalogue.real;
-    const observable: Observable<any> = this.http.get(`${endpoint}?token=${token}`);
-    return this.handlers.pipeRequestWithArrayResponse(observable);
+    const observable = this.http.get<TCatalogue>(`${endpoint}?token=${token}`);
+    return this.handlers.pipeHttpRequest<TCatalogue>(observable);
   }
 }

@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IOrder } from 'src/app/interfaces';
 import { WINDOW } from 'src/app/utils';
 
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
+import { HttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Orders service
@@ -30,7 +30,7 @@ export class OrdersService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: CustomHttpHandlersService,
+    private readonly handlers: HttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -39,9 +39,9 @@ export class OrdersService {
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */
-  public orders(mock: boolean, token: string): Observable<any> {
+  public orders(mock: boolean, token: string): Observable<IOrder[]> {
     const endpoint: string = mock ? this.endpoints.orders.mock : this.endpoints.orders.real;
-    const observable: Observable<any> = this.http.get(`${endpoint}?token=${token}`);
-    return this.handlers.pipeRequestWithArrayResponse(observable);
+    const observable = this.http.get<IOrder[]>(`${endpoint}?token=${token}`);
+    return this.handlers.pipeHttpRequest<IOrder[]>(observable);
   }
 }

@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 
-import { IUser } from '../../interfaces/index';
+import { IUser, IUserDto } from '../../interfaces/index';
 
 /**
  * User service
@@ -27,14 +23,14 @@ export class UserService {
     ) {
       localStorage.setItem('userService', JSON.stringify(this.model));
     } else {
-      this.RestoreUser();
+      this.restoreUser();
     }
   }
 
   /**
    * Retrieves user service model.
    */
-  public getUser(): any {
+  public getUser(): IUser {
     return this.model;
   }
 
@@ -42,7 +38,7 @@ export class UserService {
    * Updates user service model with new values.
    * @param newValues new values object
    */
-  public SaveUser(newValues: any): void {
+  public saveUser(newValues: IUserDto): void {
     if (newValues.hasOwnProperty('name')) {
       this.model.name = newValues.name;
     }
@@ -61,9 +57,9 @@ export class UserService {
   /**
    * Restores user service model.
    */
-  public RestoreUser(): void {
+  public restoreUser(): void {
     if (
-      localStorage.getItem('userService') &&
+      Boolean(localStorage.getItem('userService')) &&
       typeof localStorage.getItem('userService') !== 'undefined'
     ) {
       this.model = JSON.parse(localStorage.getItem('userService'));
@@ -73,7 +69,7 @@ export class UserService {
   /**
    * Resets/initializes user service model.
    */
-  public ResetUser(): void {
+  public resetUser(): void {
     this.model = new IUser();
     localStorage.setItem('userService', JSON.stringify(this.model));
   }
@@ -83,5 +79,12 @@ export class UserService {
    */
   private initializeModel(): void {
     this.model = new IUser();
+  }
+
+  /**
+   * Indicats if user is logged in.
+   */
+  public isLoggedIn(): boolean {
+    return Boolean(this.getUser().token);
   }
 }

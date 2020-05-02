@@ -53,6 +53,6 @@ export class CatalogueWidgetComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.userService.SaveUser(this.user);
+    this.userService.saveUser(this.user);
   }
 }

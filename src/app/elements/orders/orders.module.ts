@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { CustomHttpHandlersService, OrdersService, UserService } from '../../services/index';
+import { HttpHandlersService, OrdersService, UserService } from '../../services/index';
 import { OrdersConfigComponent, OrdersIndexComponent, OrdersWidgetComponent } from './index';
 
 /**
@@ -28,7 +28,7 @@ import { OrdersConfigComponent, OrdersIndexComponent, OrdersWidgetComponent } fr
   declarations: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
   providers: [
     { provide: WINDOW, useFactory: getWindow },
-    CustomHttpHandlersService,
+    HttpHandlersService,
     UserService,
     OrdersService,
   ],

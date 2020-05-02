@@ -53,6 +53,6 @@ export class BalanceWidgetComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.userService.SaveUser(this.user);
+    this.userService.saveUser(this.user);
   }
 }

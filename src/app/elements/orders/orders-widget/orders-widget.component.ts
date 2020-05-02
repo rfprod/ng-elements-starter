@@ -62,7 +62,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
    * Lifecycle hook called on component initialization.
    */
   public ngOnInit(): void {
-    this.userService.SaveUser(this.user);
+    this.userService.saveUser(this.user);
   }
 
   /**

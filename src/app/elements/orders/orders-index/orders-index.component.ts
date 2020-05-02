@@ -7,10 +7,8 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { timer } from 'rxjs';
-import { ETIMEOUT } from 'src/app/utils';
 
-import { IUser } from '../../../interfaces/index';
+import { IOrder, IUser } from '../../../interfaces/index';
 import { OrdersService } from '../../../services/orders/orders.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -24,7 +22,6 @@ import { UserService } from '../../../services/user/user.service';
       <span fxFlex="100" *ngIf="!isLoggedIn()">
         user is not logged in
       </span>
-      <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
       <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
         <mat-expansion-panel *ngFor="let order of orders()">
           <mat-expansion-panel-header>
@@ -62,19 +59,14 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
-   * UI error reporter.
-   */
-  public errorReport = '';
-
-  /**
    * Orders change event emitter.
    */
-  @Output() public ordersChange: EventEmitter<string[]> = new EventEmitter();
+  @Output() public ordersChange: EventEmitter<IOrder[]> = new EventEmitter();
 
   /**
    * Orders data.
    */
-  private data: string[] = [];
+  private data: IOrder[] = [];
 
   /**
    * Constructor.
@@ -90,13 +82,13 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
    * Indicates if user is logged in.
    */
   public isLoggedIn(): boolean {
-    return this.userService.getUser().token ? true : false;
+    return this.userService.isLoggedIn();
   }
 
   /**
    * Returns current orders.
    */
-  public orders(): any[] {
+  public orders(): IOrder[] {
     return this.data;
   }
 
@@ -105,18 +97,15 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
    */
   public getOrders(): void {
     const serviceModel: IUser = this.userService.getUser();
-    this.ordersService.orders(this.mock, serviceModel.token || '$TOKEN').subscribe(
-      (data: string[]) => {
-        this.data = data;
-        this.changeOrders();
-      },
-      (error: any) => {
-        this.errorReport = error;
-        timer(ETIMEOUT.MEDUIM).subscribe(_ => {
-          this.errorReport = '';
-        });
-      },
-    );
+    this.ordersService
+      .orders(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+      .subscribe(
+        (data: IOrder[]) => {
+          this.data = data;
+          this.changeOrders();
+        },
+        _ => null,
+      );
   }
 
   /**

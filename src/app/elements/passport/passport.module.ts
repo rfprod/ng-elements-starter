@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { AuthService, CustomHttpHandlersService, UserService } from '../../services/index';
+import { AuthService, HttpHandlersService, UserService } from '../../services/index';
 import {
   PassportConfigComponent,
   PassportIndexComponent,
@@ -40,7 +40,7 @@ import {
   ],
   providers: [
     { provide: WINDOW, useFactory: getWindow },
-    CustomHttpHandlersService,
+    HttpHandlersService,
     UserService,
     AuthService,
   ],
