@@ -7,6 +7,7 @@ import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +19,7 @@ import {
   AuthService,
   BalanceService,
   CatalogueService,
-  CustomHttpHandlersService,
+  HttpHandlersService,
   MarkdownService,
   OrdersService,
   UserService,
@@ -50,38 +51,44 @@ export const mocksCoreModuleProviders: Provider[] = [
     },
   },
   {
+    provide: MatSnackBar,
+    useValue: {
+      open: (): void => null,
+    },
+  },
+  {
     provide: UserService,
     useFactory: () => new UserService(),
   },
   {
-    provide: CustomHttpHandlersService,
-    useFactory: (userService: UserService, win: Window) =>
-      new CustomHttpHandlersService(userService, win),
-    deps: [UserService, WINDOW],
+    provide: HttpHandlersService,
+    useFactory: (userService: UserService, snackBar: MatSnackBar, win: Window) =>
+      new HttpHandlersService(userService, snackBar, win),
+    deps: [UserService, MatSnackBar, WINDOW],
   },
   {
     provide: BalanceService,
-    useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
+    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
       new BalanceService(http, handlers, win),
-    deps: [HttpClient, CustomHttpHandlersService, WINDOW],
+    deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {
     provide: CatalogueService,
-    useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
+    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
       new CatalogueService(http, handlers, win),
-    deps: [HttpClient, CustomHttpHandlersService, WINDOW],
+    deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {
     provide: OrdersService,
-    useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
+    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
       new OrdersService(http, handlers, win),
-    deps: [HttpClient, CustomHttpHandlersService, WINDOW],
+    deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {
     provide: AuthService,
-    useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
+    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
       new AuthService(http, handlers, win),
-    deps: [HttpClient, CustomHttpHandlersService, WINDOW],
+    deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {
     provide: MarkdownService,

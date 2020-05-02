@@ -24,20 +24,14 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
               "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/@webcomponents/custom-elements/custom-elements.min.js"
-            ],
+            "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js"],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -96,9 +90,7 @@
             "setupFile": "src/test-setup.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "collectCoverage": true,
-            "scripts": [
-              "node_modules/@webcomponents/custom-elements/custom-elements.min.js"
-            ],
+            "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
@@ -111,20 +103,15 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "src/.eslintrc",
-            "exclude": [
-              "**/node_modules/**",
-              "!src/**"
-            ],
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ]
+            "exclude": ["**/node_modules/**", "!src/**"],
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"]
           }
         },
         "cypress-run": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "ng-elements-app:serve"
+            "devServerTarget": "ng-elements-app:serve",
+            "tsConfig": "cypress/tsconfig.e2e.json"
           },
           "configurations": {
             "production": {
@@ -136,6 +123,7 @@
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
             "devServerTarget": "ng-elements-app:serve",
+            "tsConfig": "cypress/tsconfig.e2e.json",
             "watch": true,
             "headless": false
           },
@@ -149,6 +137,7 @@
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
             "devServerTarget": "ng-elements-app:serve",
+            "tsConfig": "cypress/tsconfig.e2e.json",
             "watch": true,
             "headless": false
           },
@@ -180,10 +169,7 @@
             "main": "src/app/elements/passport/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.passport.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
@@ -260,10 +246,7 @@
             "main": "src/app/elements/balance/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.balance.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
@@ -340,10 +323,7 @@
             "main": "src/app/elements/catalogue/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.catalogue.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
@@ -420,10 +400,7 @@
             "main": "src/app/elements/orders/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.orders.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",

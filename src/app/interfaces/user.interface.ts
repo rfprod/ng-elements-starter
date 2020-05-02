@@ -7,3 +7,13 @@ export class IUser {
   public organization = '';
   public token = '';
 }
+
+/**
+ * User interface.
+ */
+export interface IUserDto {
+  name?: string;
+  email?: string;
+  organization?: string;
+  token?: string;
+}

@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { timer } from 'rxjs';
-import { ETIMEOUT } from 'src/app/utils';
 
 import { ILoginForm } from '../../../interfaces/index';
+import { IUser } from '../../../interfaces/user.interface';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
@@ -34,8 +33,6 @@ import { fadeIn, fadeInOut } from '../animations';
         novalidate
         class="mat-body-2"
       >
-        <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
-
         <mat-form-field fxFlex="100">
           <input
             matInput
@@ -126,10 +123,6 @@ export class PassportLoginComponent implements OnInit {
   public showPassword = false;
 
   /**
-   * UI error reporter.
-   */
-  public errorReport = '';
-  /**
    * Constructor.
    * @param fb Form builder
    * @param userService User service
@@ -178,16 +171,11 @@ export class PassportLoginComponent implements OnInit {
     } = this.loginForm.value;
     if (this.loginForm.valid) {
       this.authService.login(this.mock, formData.email, formData.password).subscribe(
-        (data: any) => {
-          this.userService.SaveUser(data);
+        (data: IUser) => {
+          this.userService.saveUser(data);
           this.modeChange('index');
         },
-        (error: any) => {
-          this.errorReport = error;
-          timer(ETIMEOUT.MEDUIM).subscribe(_ => {
-            this.errorReport = '';
-          });
-        },
+        _ => null,
       );
       this.resetForm();
     }
@@ -197,7 +185,7 @@ export class PassportLoginComponent implements OnInit {
    * Lifecysle hook called on component initialization.
    */
   public ngOnInit(): void {
-    if (this.userService.getUser().token) {
+    if (Boolean(this.userService.getUser().token)) {
       this.modeChange('index');
     }
   }

@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { CatalogueService, CustomHttpHandlersService, UserService } from '../../services/index';
+import { CatalogueService, HttpHandlersService, UserService } from '../../services/index';
 import {
   CatalogueConfigComponent,
   CatalogueIndexComponent,
@@ -32,7 +32,7 @@ import {
   declarations: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
   providers: [
     { provide: WINDOW, useFactory: getWindow },
-    CustomHttpHandlersService,
+    HttpHandlersService,
     UserService,
     CatalogueService,
   ],

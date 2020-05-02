@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { timer } from 'rxjs';
-import { ETIMEOUT } from 'src/app/utils';
 
-import { ISignupForm } from '../../../interfaces/index';
+import { ISignupForm, IUserDto } from '../../../interfaces/index';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
@@ -34,8 +32,6 @@ import { fadeIn, fadeInOut } from '../animations';
         novalidate
         class="mat-body-2"
       >
-        <div fxFlex="100" *ngIf="errorReport" [innerHtml]="errorReport"></div>
-
         <mat-form-field fxFlex="100">
           <input
             matInput
@@ -154,10 +150,6 @@ export class PassportSignupComponent implements OnInit {
   public showPassword = false;
 
   /**
-   * UI error reporter.
-   */
-  public errorReport = '';
-  /**
    * Constructor.
    * @param fb Form builder
    * @param userService User service
@@ -212,16 +204,11 @@ export class PassportSignupComponent implements OnInit {
       this.authService
         .signup(this.mock, formData.email, formData.password, formData.organization, formData.name)
         .subscribe(
-          (data: any) => {
-            this.userService.SaveUser(data);
+          (data: IUserDto) => {
+            this.userService.saveUser(data);
             this.modeChange('index');
           },
-          (error: any) => {
-            this.errorReport = error;
-            timer(ETIMEOUT.MEDUIM).subscribe(_ => {
-              this.errorReport = '';
-            });
-          },
+          _ => null,
         );
       this.resetForm();
     }
@@ -231,7 +218,7 @@ export class PassportSignupComponent implements OnInit {
    * Lifecysle hook called on component initialization.
    */
   public ngOnInit(): void {
-    if (this.userService.getUser().token) {
+    if (Boolean(this.userService.getUser().token)) {
       this.modeChange('index');
     }
   }

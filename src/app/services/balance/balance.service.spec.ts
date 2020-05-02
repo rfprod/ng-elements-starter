@@ -1,40 +1,19 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-  TestRequest,
-} from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
-import { getWindow, WINDOW } from 'src/app/utils';
+import { HttpRequest } from '@angular/common/http';
+import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
-import { UserService } from '../user/user.service';
 import { BalanceService } from './balance.service';
 
 describe('BalanceService', () => {
   let service: BalanceService;
   let httpController: HttpTestingController;
 
+  const testBedMetadata: TestModuleMetadata = newTestBedMetadata({});
+  const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
+
   beforeEach(async(() => {
-    void TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        { provide: WINDOW, useFactory: getWindow },
-        UserService,
-        {
-          provide: CustomHttpHandlersService,
-          useFactory: (userService: UserService, win: Window) =>
-            new CustomHttpHandlersService(userService, win),
-          deps: [UserService, WINDOW],
-        },
-        {
-          provide: BalanceService,
-          useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
-            new BalanceService(http, handlers, win),
-          deps: [HttpClient, CustomHttpHandlersService, WINDOW],
-        },
-      ],
-    })
+    void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);

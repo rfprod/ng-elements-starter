@@ -5,8 +5,3 @@ export enum ETIMEOUT {
   MEDUIM = 2500,
   LONG = 5000,
 }
-
-export enum ESERVER_RESPONSE_CODE {
-  UNAUTHORIZED = 401,
-  FORBIDDEN = 403,
-}

@@ -104,11 +104,10 @@ module.exports = {
   catalogue: (req, res) => {
     const token = req.query.token || '';
     if (token) {
-      res.status(200).json({
-        data: Array.apply(null, Array(5))
-          .map(String.prototype.valueOf, 'catalogue item ')
-          .map((item, index) => item + index),
-      });
+      const catalogue = Array.apply(null, Array(5))
+        .map(String.prototype.valueOf, 'catalogue item ')
+        .map((item, index) => item + index);
+      res.status(200).json(catalogue);
     } else {
       res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }
@@ -120,27 +119,26 @@ module.exports = {
   orders: (req, res) => {
     const token = req.query.token || '';
     if (token) {
-      res.status(200).json({
-        data: Array.apply(null, Array(5))
-          .map(Object.prototype.valueOf, {
-            id: 'ORDER-ID-',
-            status: 'status-',
-            date: new Date().toISOString(),
-            goods: Array.apply(null, Array(2))
-              .map(String.prototype.valueOf, 'goods item ')
-              .map((item, index) => item + index),
-            sum: 0,
-          })
-          .map((item, index) => {
-            item.id += index;
-            item.status += index;
-            item.goods = Array.apply(null, Array(1 + index))
-              .map(String.prototype.valueOf, 'goods item ')
-              .map((item1, index1) => item1 + index1);
-            item.sum = getRandomCounterValue();
-            return item;
-          }),
-      });
+      const orders = Array.apply(null, Array(5))
+        .map(Object.prototype.valueOf, {
+          id: 'ORDER-ID-',
+          status: 'status-',
+          date: new Date().toISOString(),
+          goods: Array.apply(null, Array(2))
+            .map(String.prototype.valueOf, 'goods item ')
+            .map((item, index) => item + index),
+          sum: 0,
+        })
+        .map((item, index) => {
+          item.id += index;
+          item.status += index;
+          item.goods = Array.apply(null, Array(1 + index))
+            .map(String.prototype.valueOf, 'goods item ')
+            .map((item1, index1) => item1 + index1);
+          item.sum = getRandomCounterValue();
+          return item;
+        });
+      res.status(200).json(orders);
     } else {
       res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }

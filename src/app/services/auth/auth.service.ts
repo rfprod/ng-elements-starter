@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WINDOW } from 'src/app/utils';
 
-import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
+import { IUser } from '../../interfaces/user.interface';
+import { HttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Auth service
@@ -33,7 +33,7 @@ export class AuthService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: CustomHttpHandlersService,
+    private readonly handlers: HttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -43,14 +43,14 @@ export class AuthService {
    * @param email user email
    * @param pass user password
    */
-  public login(mock: boolean, email: string, password: string): Observable<any> {
+  public login(mock: boolean, email: string, password: string): Observable<IUser> {
     const endpoint: string = mock ? this.endpoints.login.mock : this.endpoints.login.real;
     const formData: { email: string; password: string } = {
       email,
       password,
     };
-    const observable: Observable<any> = this.http.post(endpoint, formData);
-    return this.handlers.pipeRequestWithObjectResponse(observable);
+    const observable = this.http.post<IUser>(endpoint, formData);
+    return this.handlers.pipeHttpRequest<IUser>(observable);
   }
 
   /**
@@ -67,7 +67,7 @@ export class AuthService {
     password: string,
     organization: string,
     name: string,
-  ): Observable<any> {
+  ): Observable<IUser> {
     const endpoint: string = mock ? this.endpoints.signup.mock : this.endpoints.signup.real;
     const formData: { name: string; email: string; password: string; organization: string } = {
       name,
@@ -75,7 +75,7 @@ export class AuthService {
       password,
       organization,
     };
-    const observable: Observable<any> = this.http.post(endpoint, formData);
-    return this.handlers.pipeRequestWithObjectResponse(observable);
+    const observable = this.http.post<IUser>(endpoint, formData);
+    return this.handlers.pipeHttpRequest<IUser>(observable);
   }
 }
