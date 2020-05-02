@@ -11,16 +11,29 @@ source shell/colors.sh
 ##
 
 if [ $# -ne 1 ]; then
-  printf "\n ${LIGHT_BLUE}<< INSTALLING FIREBASE FUNCTIONS DEPENDENCIES >>${DEFAULT}\n\n"
+  TITLE="<< INSTALLING FIREBASE FUNCTIONS DEPENDENCIES >>"
+  printf "
+    ${LIGHT_BLUE}%s
+    ${DEFAULT}\n\n" "$TITLE"
   cd ./functions || exit
   npm install
 
-  printf "\n ${LIGHT_BLUE}<< INSTALLING PROJECT DEPENDENCIES >>${DEFAULT}\n\n"
+  TITLE="<< INSTALLING PROJECT DEPENDENCIES >>"
+  printf "
+    ${LIGHT_BLUE}%s
+    ${DEFAULT}\n\n" "$TITLE"
   cd ..
-  npm install
+  yarn install
 elif [ $1 = 'global' ]; then
-  printf "\n ${LIGHT_BLUE}<< INSTALLING GLOBAL DEPENDENCIES >>${DEFAULT}\n\n"
-  sudo npm install -g @angular/cli@latest typescript@latest firebase-tools@latest @compodoc/compodoc@latest @datorama/akita
+  TITLE="<< INSTALLING GLOBAL DEPENDENCIES >>"
+  printf "
+    ${LIGHT_BLUE}%s
+    ${DEFAULT}\n\n" "$TITLE"
+  sudo npm install -g @angular/cli@latest typescript@latest firebase-tools@latest @compodoc/compodoc@latest @ngxs/cli@latest commitizen@latest cz-conventional-changelog@latest yarn
 else
-  printf "\n ${LIGHT_RED}<< ERROR: wrong argument: ${1} >>${DEFAULT}\n\n"
+  TITLE="<< ERROR >>"
+  printf "
+    ${RED}%s
+    ${LIGHT_RED}- wrong argument: ${1}
+    ${DEFAULT}\n\n" "$TITLE"
 fi

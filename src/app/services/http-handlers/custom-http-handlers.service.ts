@@ -1,8 +1,16 @@
+/* eslint-disable @typescript-eslint/no-dynamic-delete */
+/* eslint-disable max-depth */
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, concat, throwError } from 'rxjs';
+import { concat, Observable, throwError } from 'rxjs';
 import { catchError, map, take, timeout } from 'rxjs/operators';
 import { ESERVER_RESPONSE_CODE, WINDOW } from 'src/app/utils';
+
 import { UserService } from '../user/user.service';
 
 /**
@@ -14,7 +22,7 @@ export class CustomHttpHandlersService {
   /**
    * Default timeout interval for http-requests.
    */
-  public defaultHttpTimeout = 10000;
+  public readonly defaultHttpTimeout = 10000;
 
   /**
    * Constructor.

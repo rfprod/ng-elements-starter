@@ -1,32 +1,27 @@
 import { EventEmitter } from '@angular/core';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomMaterialModule } from '../../../modules/material/custom-material.module';
+import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
+
 import { PassportConfigComponent } from './passport-config.component';
 
 describe('PassportConfigComponent', () => {
   let component: PassportConfigComponent;
   let fixture: ComponentFixture<PassportConfigComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserDynamicTestingModule,
-        NoopAnimationsModule,
-        CustomMaterialModule,
-        FlexLayoutModule,
-      ],
-      declarations: [PassportConfigComponent],
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PassportConfigComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
+    declarations: [PassportConfigComponent],
   });
+  const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
+
+  beforeEach(async(() => {
+    void TestBed.configureTestingModule(testBedConfig)
+      .compileComponents()
+      .then(_ => {
+        fixture = TestBed.createComponent(PassportConfigComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+  }));
 
   it('should be defined', () => {
     expect(component).toBeTruthy();

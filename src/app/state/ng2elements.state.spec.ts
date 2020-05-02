@@ -1,5 +1,7 @@
-import { TestBed, async } from '@angular/core/testing';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { async, TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
+
 import { NgElementsStarterAction } from './ng2elements.actions';
 import { NgElementsStarterState } from './ng2elements.state';
 
@@ -7,7 +9,7 @@ describe('Ng2elements actions', () => {
   let store: Store;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([NgElementsStarterState])],
     })
       .compileComponents()

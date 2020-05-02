@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { WINDOW, getWindow } from 'src/app/utils';
+import { getWindow, WINDOW } from 'src/app/utils';
+
 import { DummyComponent } from '../../mocks/components/dummy.component';
 import { UserService } from '../user/user.service';
 import { CustomHttpHandlersService } from './custom-http-handlers.service';
@@ -11,7 +14,7 @@ describe('CustomHttpHandlersService', () => {
   let service: CustomHttpHandlersService;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [DummyComponent],
       imports: [HttpClientTestingModule],
       providers: [
@@ -19,7 +22,8 @@ describe('CustomHttpHandlersService', () => {
         UserService,
         {
           provide: CustomHttpHandlersService,
-          useFactory: (userService, win) => new CustomHttpHandlersService(userService, win),
+          useFactory: (userService: UserService, win: Window) =>
+            new CustomHttpHandlersService(userService, win),
           deps: [UserService, WINDOW],
         },
       ],
@@ -48,7 +52,7 @@ describe('CustomHttpHandlersService', () => {
   });
 
   it('extractObject should return an Object', () => {
-    const response = new HttpResponse<any>({ body: {}, status: 200 });
+    const response = new HttpResponse<unknown>({ body: {}, status: 200 });
     expect(service.extractObject(response)).toEqual(jasmine.any(Object));
   });
 
@@ -59,7 +63,7 @@ describe('CustomHttpHandlersService', () => {
   it('extractArray should return an Array', () => {
     expect(
       service.extractArray(
-        new HttpResponse<any>({
+        new HttpResponse<unknown>({
           body: { data: [{ x: 'x' }, { y: 'y' }] },
           status: 200,
           headers: new HttpHeaders({}),

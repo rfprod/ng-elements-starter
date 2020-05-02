@@ -1,4 +1,6 @@
+import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
+
 import { NgElementsStarterAction } from './ng2elements.actions';
 import { NgElementsStarterStateModel } from './ng2elements.state.model';
 
@@ -11,10 +13,11 @@ import { NgElementsStarterStateModel } from './ng2elements.state.model';
     theme: null,
   },
 })
+@Injectable()
 export class NgElementsStarterState {
   @Action(NgElementsStarterAction)
   public add(ctx: StateContext<NgElementsStarterStateModel>, action: NgElementsStarterAction) {
     const state = ctx.getState();
-    ctx.setState({ theme: action.payload.theme || state.theme });
+    ctx.setState({ theme: Boolean(action.payload.theme) ? action.payload.theme : state.theme });
   }
 }

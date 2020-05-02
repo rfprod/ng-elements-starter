@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { timer } from 'rxjs';
 import { ETIMEOUT } from 'src/app/utils';
+
 import { IUser } from '../../../interfaces/index';
 import { CatalogueService } from '../../../services/catalogue/catalogue.service';
 import { UserService } from '../../../services/user/user.service';

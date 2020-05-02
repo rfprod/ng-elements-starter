@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { IBalance, IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
 
@@ -46,8 +47,9 @@ export class BalanceWidgetComponent implements OnInit {
   /**
    * Balance data change event handler.
    */
-  public balanceChangeHandler(event: IBalance): void {
-    console.warn('Balance widget: balanceChangeHandler, event', event);
+  public balanceChangeHandler(event: IBalance): IBalance {
+    // TODO
+    return event;
   }
 
   public ngOnInit(): void {

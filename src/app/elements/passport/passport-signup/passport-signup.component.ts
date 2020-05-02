@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { timer } from 'rxjs';
 import { ETIMEOUT } from 'src/app/utils';
+
 import { ISignupForm } from '../../../interfaces/index';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';

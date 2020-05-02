@@ -1,18 +1,8 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-  TestRequest,
-} from '@angular/common/http/testing';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { WINDOW, getWindow } from 'src/app/utils';
-import { CustomMaterialModule } from '../../../modules/material/custom-material.module';
-import { AuthService } from '../../../services/auth/auth.service';
-import { CustomHttpHandlersService } from '../../../services/http-handlers/custom-http-handlers.service';
-import { UserService } from '../../../services/user/user.service';
+import { HttpTestingController } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
+import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
+
 import { PassportIndexComponent } from './passport-index.component';
 
 describe('PassportIndexComponent', () => {
@@ -20,47 +10,25 @@ describe('PassportIndexComponent', () => {
   let fixture: ComponentFixture<PassportIndexComponent>;
   let component: PassportIndexComponent;
 
+  const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
+    declarations: [PassportIndexComponent],
+  });
+  const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
+
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserDynamicTestingModule,
-        NoopAnimationsModule,
-        CustomMaterialModule,
-        FlexLayoutModule,
-        HttpClientTestingModule,
-      ],
-      providers: [
-        { provide: WINDOW, useFactory: getWindow },
-        UserService,
-        {
-          provide: CustomHttpHandlersService,
-          useFactory: (userService, win) => new CustomHttpHandlersService(userService, win),
-          deps: [UserService, WINDOW],
-        },
-        {
-          provide: AuthService,
-          useFactory: (http, handlers, win) => new AuthService(http, handlers, win),
-          deps: [HttpClient, CustomHttpHandlersService, WINDOW],
-        },
-      ],
-      declarations: [PassportIndexComponent],
-    })
+    void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
         fixture = TestBed.createComponent(PassportIndexComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        flushHttpRequests(httpController);
       });
   }));
 
   afterEach(() => {
-    httpController
-      .match((req: HttpRequest<any>): boolean => true)
-      .forEach((req: TestRequest) => {
-        req.flush({});
-      });
-    httpController.verify();
+    flushHttpRequests(httpController, true);
   });
 
   it('should create', () => {

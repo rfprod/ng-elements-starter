@@ -4,8 +4,9 @@ import {
   HttpTestingController,
   TestRequest,
 } from '@angular/common/http/testing';
-import { TestBed, async } from '@angular/core/testing';
-import { WINDOW, getWindow } from 'src/app/utils';
+import { async, TestBed } from '@angular/core/testing';
+import { getWindow, WINDOW } from 'src/app/utils';
+
 import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 import { UserService } from '../user/user.service';
 import { OrdersService } from './orders.service';
@@ -15,19 +16,21 @@ describe('OrdersService', () => {
   let httpController: HttpTestingController;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
         { provide: WINDOW, useFactory: getWindow },
         UserService,
         {
           provide: CustomHttpHandlersService,
-          useFactory: (userService, win) => new CustomHttpHandlersService(userService, win),
+          useFactory: (userService: UserService, win: Window) =>
+            new CustomHttpHandlersService(userService, win),
           deps: [UserService, WINDOW],
         },
         {
           provide: OrdersService,
-          useFactory: (http, handlers, win) => new OrdersService(http, handlers, win),
+          useFactory: (http: HttpClient, handlers: CustomHttpHandlersService, win: Window) =>
+            new OrdersService(http, handlers, win),
           deps: [HttpClient, CustomHttpHandlersService, WINDOW],
         },
       ],
@@ -41,7 +44,7 @@ describe('OrdersService', () => {
 
   afterEach(() => {
     httpController
-      .match((req: HttpRequest<any>): boolean => true)
+      .match((req: HttpRequest<unknown>): boolean => true)
       .forEach((req: TestRequest) => {
         req.flush({});
       });
