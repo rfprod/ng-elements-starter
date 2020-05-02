@@ -19,6 +19,20 @@
 - [documentation generated with compodoc](https://ng2elements.firebaseapp.com/documentation/)
 - [coverage report](https://ng2elements.firebaseapp.com/coverage/)
 
+## Preferred package manager
+
+- [yarn](https://www.npmjs.com/package/yarn)
+
+#### Committing changes to repo
+
+Using commitizen cli is mandatory, [reference](https://github.com/commitizen/cz-cli)
+
+Provided all dependencies were installed, and this requirements are fulfilled [cz-cli#conventional-commit-messages-as-a-global-utility](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) this command must be used.
+
+```bash
+git cz
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
 ## Development server

@@ -8,6 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { timer } from 'rxjs';
+
 import { IBalance, IUser } from '../../../interfaces/index';
 import { BalanceService } from '../../../services/balance/balance.service';
 import { UserService } from '../../../services/user/user.service';

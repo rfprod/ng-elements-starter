@@ -1,4 +1,6 @@
-import { TestBed, async } from '@angular/core/testing';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { async, TestBed } from '@angular/core/testing';
+
 import { LocalStorageMock } from '../../mocks/utils/local-storage.mock';
 import { UserService } from './user.service';
 
@@ -14,7 +16,7 @@ describe('UserService', () => {
     localStorage = window.localStorage;
     spyOn(localStorage, 'setItem').and.callThrough();
 
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [],
       imports: [],
       providers: [UserService],
@@ -41,23 +43,6 @@ describe('UserService', () => {
     localStorage.removeItem('test');
     expect(localStorage.getItem('test')).toBeUndefined();
     expect(localStorage['test']).toBeUndefined();
-  });
-
-  it('should have variables and methods defined', () => {
-    /*
-    expect(service.model).toEqual(jasmine.objectContaining({
-      name: '',
-      email: '',
-      organization: '',
-      token: ''
-    }));
-    expect(service.modelKeys).toEqual(jasmine.any(Object));
-    expect(service.initializeModel).toEqual(jasmine.any(Function));
-    */
-    expect(service.getUser).toEqual(jasmine.any(Function));
-    expect(service.SaveUser).toEqual(jasmine.any(Function));
-    expect(service.RestoreUser).toEqual(jasmine.any(Function));
-    expect(service.ResetUser).toEqual(jasmine.any(Function));
   });
 
   it('getUser method should return a private model', () => {

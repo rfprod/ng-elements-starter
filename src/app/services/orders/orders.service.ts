@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WINDOW } from 'src/app/utils';
+
 import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 
 /**
@@ -13,7 +15,7 @@ export class OrdersService {
   /**
    * Endpoints object for making requests to the API.
    */
-  private readonly endpoints: any = {
+  private readonly endpoints = {
     orders: {
       mock: `${this.window.location.origin}/orders`,
       real: `${this.handlers.apiBaseUrl()}/orders`,

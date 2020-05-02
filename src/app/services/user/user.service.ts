@@ -1,4 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
+
 import { IUser } from '../../interfaces/index';
 
 /**
@@ -17,7 +22,7 @@ export class UserService {
   constructor() {
     this.initializeModel();
     if (
-      !localStorage.getItem('userService') &&
+      !Boolean(localStorage.getItem('userService')) &&
       typeof localStorage.getItem('userService') === 'undefined'
     ) {
       localStorage.setItem('userService', JSON.stringify(this.model));

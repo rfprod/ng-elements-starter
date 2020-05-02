@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AppIndexComponent } from './components/app-index/app-index.component';
 
 /**
  * Application routes.
  */
-const routes: Routes = [
+export const APP_ROUTES: Routes = [
   { path: '', component: AppIndexComponent },
   { path: '**', redirectTo: '' },
 ];
@@ -14,7 +15,7 @@ const routes: Routes = [
  * Application routing module.
  */
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

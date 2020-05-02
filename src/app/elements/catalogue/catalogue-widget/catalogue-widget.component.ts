@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
 
@@ -46,8 +47,9 @@ export class CatalogueWidgetComponent implements OnInit {
   /**
    * Catalogue data change event handler.
    */
-  public catalogueChangeHandler(event: string[]): void {
-    console.warn('Catalogue widget: catalogueChangeHandler, event', event);
+  public catalogueChangeHandler(event: string[]): string[] {
+    // TODO
+    return event;
   }
 
   public ngOnInit(): void {

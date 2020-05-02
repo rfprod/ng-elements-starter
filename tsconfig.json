@@ -1,33 +1,51 @@
 {
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "enableIvy": true,
-    "enableResourceInlining": true,
     "fullTemplateTypeCheck": true,
-    "skipTemplateCodegen": true,
     "strictInjectionParameters": true,
-    "strictMetadataEmit": true
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
   },
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "lib": ["ES2018", "DOM", "ESNext.AsyncIterable"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noUnusedLocals": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["es2017", "dom"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es5",
+    "target": "ES6",
     "typeRoots": ["node_modules/@types"]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    ".azure",
+    ".devops",
+    ".firebase",
+    ".vscode",
+    "coverage",
+    "dist",
+    "documentation",
+    "functions",
+    "shell"
+  ]
 }

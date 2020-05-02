@@ -7,17 +7,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgElementsStarterState } from 'src/app/state/ng2elements.state';
+
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
-import { BalanceElementModule } from './elements/balance/balance-element.module';
-import { CatalogueElementModule } from './elements/catalogue/catalogue-element.module';
-import { OrdersElementModule } from './elements/orders/orders-element.module';
-import { PassportElementModule } from './elements/passport/passport-element.module';
+import { BalanceModule } from './elements/balance/balance.module';
+import { CatalogueModule } from './elements/catalogue/catalogue.module';
+import { OrdersModule } from './elements/orders/orders.module';
+import { PassportModule } from './elements/passport/passport.module';
 import { CustomMaterialModule } from './modules/material/custom-material.module';
 import { AppIconsService } from './services/icons/icons.service';
 import {
@@ -45,11 +47,12 @@ import { getWindow } from './utils/providers';
     ReactiveFormsModule,
     FlexLayoutModule,
     CustomMaterialModule.forRoot(),
-    BalanceElementModule,
-    CatalogueElementModule,
-    OrdersElementModule,
-    PassportElementModule,
+    BalanceModule,
+    CatalogueModule,
+    OrdersModule,
+    PassportModule,
     NgxsModule.forRoot([NgElementsStarterState]),
+    NgxsFormPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,

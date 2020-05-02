@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-declare let marked;
+import marked from 'marked';
 
 /**
  * Markdown service.

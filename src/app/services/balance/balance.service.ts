@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WINDOW } from 'src/app/utils';
+
 import { CustomHttpHandlersService } from '../http-handlers/custom-http-handlers.service';
 
 /**
@@ -13,7 +15,7 @@ export class BalanceService {
   /**
    * Endpoints object for making requests to the API.
    */
-  private readonly endpoints: any = {
+  private readonly endpoints = {
     balance: {
       mock: `${this.window.location.origin}/balance`,
       real: `${this.handlers.apiBaseUrl()}/balance`,

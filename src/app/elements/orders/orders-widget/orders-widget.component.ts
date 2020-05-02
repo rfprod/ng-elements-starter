@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+
 import { IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
 
@@ -52,8 +53,9 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
   /**
    * Orders data change event handler.
    */
-  public ordersChangeHandler(event: string[]): void {
-    console.warn('Orders widget: ordersChangeHandler, event', event);
+  public ordersChangeHandler(event: string[]): string[] {
+    // TODO
+    return event;
   }
 
   /**

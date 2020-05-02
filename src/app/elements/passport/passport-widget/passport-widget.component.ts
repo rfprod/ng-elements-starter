@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+
 import { IServerChangeEvent } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';

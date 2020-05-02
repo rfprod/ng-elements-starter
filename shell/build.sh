@@ -7,7 +7,7 @@
 ##
 
 ##
-# Colors definitions.
+# Colors.
 ##
 source shell/colors.sh
 
@@ -15,7 +15,10 @@ source shell/colors.sh
 # Builds all dists.
 ##
 build() {
-  printf "\n ${LIGHT_BLUE}<< BUILDING ALL APPLICATIONS DEFINED IN angular.json >>${DEFAULT}\n\n"
+  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json >>"
+  printf "
+    ${LIGHT_BLUE}%s
+    ${DEFAULT}\n\n" "$TITLE"
   npx npm-run-all -s build-app-prod build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
 }
 
@@ -23,7 +26,10 @@ build() {
 # Builds all dists for firebase setup.
 ##
 buildFirebase() {
-  printf "\n ${LIGHT_BLUE}<< BUILDING ALL APPLICATIONS DEFINED IN angular.json FOR FIREBASE SETUP >>${DEFAULT}\n\n"
+  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json FOR FIREBASE SETUP >>"
+  printf "
+    ${LIGHT_BLUE}%s
+    ${DEFAULT}\n\n" "$TITLE"
   npx npm-run-all -s build-app-prod-firebase build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
 }
 

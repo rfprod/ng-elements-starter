@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+
 import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
 
 /**
