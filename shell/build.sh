@@ -9,7 +9,34 @@
 ##
 # Colors.
 ##
-source shell/colors.sh
+source shell/colors.sh ''
+
+##
+# Exits with error.
+##
+exitWithError() {
+  exit 1
+}
+
+##
+# Reports usage error and exits.
+##
+reportUsage() {
+  local TITLE="<< USAGE >>"
+  printf "
+    ${LIGHT_BLUE}%s\n
+    ${DEFAULT} - ${YELLOW} bash shell/build.sh ?${DEFAULT} (print install.sh usage)
+    ${DEFAULT} - ${YELLOW} bash shell/build.sh express${DEFAULT} (build all apps for arbitrary nodejs + express production)
+    ${DEFAULT} - ${YELLOW} bash shell/build.sh firebase${DEFAULT} (build all apps for firebase production)
+    ${DEFAULT}\n\n" "$TITLE"
+}
+
+##
+# Generates client documentation with compodoc.
+##
+generateClientDocumentation() {
+  npm run compodoc:generate:report-to-dist
+}
 
 ##
 # Builds all dists.
@@ -19,7 +46,9 @@ build() {
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
-  npx npm-run-all -s build-app-prod build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
+  npx npm-run-all -s build:app:prod build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
+
+  generateClientDocumentation
 }
 
 ##
@@ -30,27 +59,27 @@ buildFirebase() {
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
-  npx npm-run-all -s build-app-prod-firebase build-passport-prod build-balance-prod build-catalogue-prod build-orders-prod
-}
+  npx npm-run-all -s build:app:prod:firebase build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
 
-##
-# Generates client documentation with compodoc.
-##
-generateClientDocumentation() {
-  npm run compodoc-generate-and-report-to-dist
+  generateClientDocumentation
 }
 
 ##
 # Builds applications defined in angular.json using Angular CLI.
 ##
 
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 ] || [ "$1" = "?" ]; then
+  reportUsage
+elif [ "$1" = "express" ]; then
   build
-elif [ $1 = 'firebase' ]; then
+elif [ "$1" = "firebase" ]; then
   buildFirebase
 else
-  build
+  TITLE="<< ERROR >>"
+  printf "
+    ${RED}%s
+    ${LIGHT_RED}- wrong argument: ${1}
+    ${DEFAULT}\n\n" "$TITLE"
+  reportUsage
+  exitWithError
 fi
-
-# generate documentation
-generateClientDocumentation
