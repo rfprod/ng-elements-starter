@@ -42,7 +42,7 @@ generateClientDocumentation() {
 # Builds all dists.
 ##
 build() {
-  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json >>"
+  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json [EXPRESS SETUP] >>"
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
@@ -55,7 +55,7 @@ build() {
 # Builds all dists for firebase setup.
 ##
 buildFirebase() {
-  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json FOR FIREBASE SETUP >>"
+  local TITLE="<< BUILDING ALL APPLICATIONS DEFINED IN angular.json [FIREBASE SETUP] >>"
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
