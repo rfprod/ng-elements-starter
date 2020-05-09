@@ -1,19 +1,25 @@
 <mat-toolbar>
   <span fxFlex="1 1 auto"></span>
+
   <button
     mat-raised-button
     color="primary"
-    (click)="toggleMaterialTheme()"
-    matTooltip="Toggle material theme"
+    (click)="toggleMaterialTheme($event)"
+    [matTooltip]="
+      (darkTheme$ | async)
+        ? 'Toggle material theme. Current theme: Dark'
+        : 'Toggle material theme. Current theme: Light'
+    "
   >
     <mat-icon
       class="material-icons-fas"
       fontSet="fas"
       [fontIcon]="darkTheme ? 'fa-moon' : 'fa-sun'"
     ></mat-icon>
-    <span *ngIf="darkTheme">Dark theme</span>
-    <span *ngIf="!darkTheme">Light theme</span>
+
+    <span>{{ darkTheme ? 'Dark theme' : 'Light theme' }}</span>
   </button>
+
   <span fxFlex="1 1 auto"></span>
 </mat-toolbar>
 

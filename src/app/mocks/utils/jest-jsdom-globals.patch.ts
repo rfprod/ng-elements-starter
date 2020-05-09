@@ -1,5 +1,5 @@
 /* eslint-disable compat/compat */
-import { setUpLocalStorageMock } from './local-storage.mock';
+import { setupLocalStorageMock } from './local-storage.mock';
 
 /**
  * Sets up Jest global mocks
@@ -11,7 +11,7 @@ export const setupJestJsdomGlobalMocks: () => void = () => {
   /**
    * Sets up local storage mock.
    */
-  setUpLocalStorageMock();
+  setupLocalStorageMock();
 
   window.matchMedia = jest.fn().mockImplementation(query => {
     return {
@@ -62,6 +62,21 @@ export const setupJestJsdomGlobalMocks: () => void = () => {
   Object.defineProperty(global, 'URL', {
     value: window.URL,
     writable: true,
+  });
+
+  Object.defineProperty(window, 'CSS', { value: null });
+
+  Object.defineProperty(document, 'doctype', {
+    value: '<!DOCTYPE html>',
+  });
+
+  Object.defineProperty(document.body.style, 'transform', {
+    value: () => {
+      return {
+        enumerable: true,
+        configurable: true,
+      };
+    },
   });
 
   function mutationObserver(..._args: any[]) {
