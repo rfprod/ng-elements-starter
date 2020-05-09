@@ -13,6 +13,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CustomMaterialModule } from 'src/app/modules';
 import {
@@ -25,7 +26,7 @@ import {
   UserService,
 } from 'src/app/services';
 import { AppIconsService } from 'src/app/services/icons/icons.service';
-import { NgElementsStarterState } from 'src/app/state/ng2elements.state';
+import { UiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { DummyComponent } from '../components/dummy.component';
@@ -116,8 +117,10 @@ export const mocksCoreModuleProviders: Provider[] = [
     ReactiveFormsModule,
     FlexLayoutModule,
     CustomMaterialModule.forRoot(),
-    NgxsModule.forRoot([NgElementsStarterState]),
+    NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
+    UiStoreModule.forRoot(),
   ],
   declarations: [DummyComponent],
   exports: [

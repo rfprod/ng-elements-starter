@@ -9,8 +9,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { NgElementsStarterState } from 'src/app/state/ng2elements.state';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +31,7 @@ import {
   OrdersService,
   UserService,
 } from './services/index';
+import { UiStoreModule } from './state/theme/ui.module';
 import { WINDOW } from './utils';
 import { getWindow } from './utils/providers';
 
@@ -51,10 +52,12 @@ import { getWindow } from './utils/providers';
     CatalogueModule,
     OrdersModule,
     PassportModule,
-    NgxsModule.forRoot([NgElementsStarterState]),
+    NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
+    UiStoreModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],

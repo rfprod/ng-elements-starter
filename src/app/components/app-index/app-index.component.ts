@@ -1,5 +1,8 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { tap } from 'rxjs/operators';
+import { UiService } from 'src/app/state/theme/ui.service';
+import { UiState } from 'src/app/state/theme/ui.store';
 
 /**
  * Application index component
@@ -23,21 +26,24 @@ export class AppIndexComponent {
    * Defines if UI should use alternative dark material theme.
    */
   @HostBinding('class.unicorn-dark-theme') public darkTheme = false;
+
   /**
-   * Constructor.
-   * @param overlayContainer Overlay container
+   * Asyncronous material theme state.
    */
-  constructor(public overlayContainer: OverlayContainer) {}
+  public readonly darkTheme$ = this.store.select(UiState.getDarkThemeEnabled).pipe(
+    tap(darkThemeEnabled => {
+      this.darkTheme = darkThemeEnabled;
+    }),
+  );
+
+  constructor(public readonly store: Store, private readonly uiService: UiService) {}
 
   /**
    * Toggles application material theme.
    */
-  public toggleMaterialTheme(): void {
-    if (this.darkTheme) {
-      this.overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
-    } else {
-      this.overlayContainer.getContainerElement().classList.remove('unicorn-dark-theme');
+  public toggleMaterialTheme(event?: Event): void {
+    if (event) {
+      void this.uiService.toggleMaterialTheme().subscribe();
     }
-    this.darkTheme = !this.darkTheme;
   }
 }
