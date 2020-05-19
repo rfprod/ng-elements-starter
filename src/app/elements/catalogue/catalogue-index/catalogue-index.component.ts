@@ -18,18 +18,7 @@ import { UserService } from '../../../services/user/user.service';
  */
 @Component({
   selector: 'app-catalogue-index',
-  template: `
-    <div fxLayout="row wrap">
-      <span fxFlex="100" *ngIf="!isLoggedIn()">
-        user is not logged in
-      </span>
-      <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1" *ngIf="isLoggedIn()">
-        <mat-grid-tile *ngFor="let item of catalogue()">
-          {{ item }}
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-  `,
+  templateUrl: './catalogue-index.component.html',
   host: {
     class: 'mat-body-1',
   },
@@ -82,9 +71,9 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
   /**
    * Gets user catalogue.
    */
-  public getCatalogue(): void {
+  public getCatalogue() {
     const serviceModel: IUser = this.userService.getUser();
-    this.catalogueService
+    void this.catalogueService
       .catalogue(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
       .subscribe(
         (data: TCatalogue) => {
@@ -102,9 +91,6 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
     this.catalogueChange.emit(this.data);
   }
 
-  /**
-   * Lifecycle hook called on component initialization.
-   */
   public ngOnInit(): void {
     this.getCatalogue();
   }

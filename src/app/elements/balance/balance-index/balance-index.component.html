@@ -1,0 +1,12 @@
+<div fxLayout="row wrap">
+  <span fxFlex="100" *ngIf="!isLoggedIn()">
+    user is not logged in
+  </span>
+  <span fxFlex="100" *ngIf="isLoggedIn()">
+    <p>organization: {{ balance().organization }}</p>
+    <p>sum1: {{ balance().sum1 }}</p>
+    <p>sum2: {{ balance().sum2 }}</p>
+    <p>sum3: {{ balance().sum3 }}</p>
+    <p>sum4: {{ balance().sum4 }}</p>
+  </span>
+</div>

@@ -1,0 +1,24 @@
+<div fxLayout="row wrap">
+  <span fxFlex="100" *ngIf="!isLoggedIn()">
+    user is not logged in
+  </span>
+  <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
+    <mat-expansion-panel *ngFor="let order of orders()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ order.id }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <span fxFlex>{{ order.status }}</span>
+          <span fxFlex>{{ order.date }}</span>
+          <span fxFlex>{{ order.goods.length }}</span>
+          <span fxFlex>{{ order.sum }}</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <span>
+        <p *ngFor="let item of order.goods">{{ item }}</p>
+      </span>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

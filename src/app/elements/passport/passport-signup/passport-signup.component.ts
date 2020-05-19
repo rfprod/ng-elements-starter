@@ -11,99 +11,7 @@ import { fadeIn, fadeInOut } from '../animations';
  */
 @Component({
   selector: 'app-passport-signup',
-  template: `
-    <div fxLayout="row wrap">
-      <span fxFlex="100">
-        {{ title }}
-      </span>
-      <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-        <button mat-button (click)="modeChange('index')">Index</button>
-        <button mat-button (click)="modeChange('login')" *ngIf="restrictMode !== 'login'">
-          Login
-        </button>
-      </span>
-
-      <form
-        fxFlex="100"
-        fxLayout="row wrap"
-        fxLayoutAlign="start start"
-        [formGroup]="signupForm"
-        (ngSubmit)="submitForm()"
-        novalidate
-        class="mat-body-2"
-      >
-        <mat-form-field fxFlex="100">
-          <input
-            matInput
-            type="text"
-            name="name"
-            [formControl]="signupForm.controls.name"
-            placeholder="username"
-            required
-          />
-          <mat-icon matSuffix class="material-icons">user</mat-icon>
-          <mat-error *ngIf="signupForm.controls.name.invalid" class="mat-body-1">
-            1+ characters
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="100">
-          <input
-            matInput
-            type="email"
-            name="email"
-            [formControl]="signupForm.controls.email"
-            placeholder="email"
-            required
-          />
-          <mat-icon matSuffix class="material-icons">mail</mat-icon>
-          <mat-error *ngIf="signupForm.controls.email.invalid" class="mat-body-1">
-            invalid email
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="100">
-          <input
-            matInput
-            type="text"
-            name="organization"
-            [formControl]="signupForm.controls.organization"
-            placeholder="organization"
-            required
-          />
-          <mat-icon matSuffix class="material-icons">business</mat-icon>
-          <mat-error *ngIf="signupForm.controls.organization.invalid" class="mat-body-1">
-            1+ characters
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="100">
-          <input
-            matInput
-            type="{{ showPassword ? 'text' : 'password' }}"
-            name="password"
-            [formControl]="signupForm.controls.password"
-            placeholder="password"
-            required
-          />
-          <mat-icon matSuffix class="material-icons" (click)="togglePasswordVisibility()"
-            >lock</mat-icon
-          >
-          <mat-error *ngIf="signupForm.controls.password.invalid" class="mat-body-1">
-            1+ characters
-          </mat-error>
-        </mat-form-field>
-
-        <mat-toolbar [color]="theme">
-          <button
-            mat-button
-            type="submit"
-            [disabled]="signupForm.pristine || signupForm.invalid"
-            aria-label="submit"
-          >
-            Signup
-          </button>
-        </mat-toolbar>
-      </form>
-    </div>
-  `,
+  templateUrl: './passport-signup.component.html',
   animations: [fadeIn, fadeInOut],
   host: {
     class: 'mat-body-1',
@@ -193,7 +101,7 @@ export class PassportSignupComponent implements OnInit {
   /**
    * Sends signup request with provided credentials.
    */
-  public submitForm(): void {
+  public submitForm() {
     const formData: {
       name: string;
       email: string;
@@ -201,22 +109,19 @@ export class PassportSignupComponent implements OnInit {
       password: string;
     } = this.signupForm.value;
     if (this.signupForm.valid) {
-      this.authService
+      void this.authService
         .signup(this.mock, formData.email, formData.password, formData.organization, formData.name)
         .subscribe(
           (data: IUserDto) => {
             this.userService.saveUser(data);
             this.modeChange('index');
+            this.resetForm();
           },
           _ => null,
         );
-      this.resetForm();
     }
   }
 
-  /**
-   * Lifecysle hook called on component initialization.
-   */
   public ngOnInit(): void {
     if (Boolean(this.userService.getUser().token)) {
       this.modeChange('index');

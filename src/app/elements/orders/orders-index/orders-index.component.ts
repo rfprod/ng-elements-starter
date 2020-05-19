@@ -17,32 +17,7 @@ import { UserService } from '../../../services/user/user.service';
  */
 @Component({
   selector: 'app-orders-index',
-  template: `
-    <div fxLayout="row wrap">
-      <span fxFlex="100" *ngIf="!isLoggedIn()">
-        user is not logged in
-      </span>
-      <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
-        <mat-expansion-panel *ngFor="let order of orders()">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ order.id }}
-            </mat-panel-title>
-            <mat-panel-description>
-              <span fxFlex>{{ order.status }}</span>
-              <span fxFlex>{{ order.date }}</span>
-              <span fxFlex>{{ order.goods.length }}</span>
-              <span fxFlex>{{ order.sum }}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <span>
-            <p *ngFor="let item of order.goods">{{ item }}</p>
-          </span>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  `,
+  templateUrl: './orders-index.component.html',
   host: {
     class: 'mat-body-1',
   },
@@ -95,9 +70,9 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   /**
    * Gets user orders.
    */
-  public getOrders(): void {
+  public getOrders() {
     const serviceModel: IUser = this.userService.getUser();
-    this.ordersService
+    void this.ordersService
       .orders(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
       .subscribe(
         (data: IOrder[]) => {
@@ -115,9 +90,6 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
     this.ordersChange.emit(this.data);
   }
 
-  /**
-   * Lifecycle hook called on component initialization.
-   */
   public ngOnInit(): void {
     this.getOrders();
   }
