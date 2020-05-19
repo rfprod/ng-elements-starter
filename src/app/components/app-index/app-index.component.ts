@@ -41,7 +41,7 @@ export class AppIndexComponent {
   /**
    * Toggles application material theme.
    */
-  public toggleMaterialTheme(event?: Event): void {
+  public toggleMaterialTheme(event?: Event) {
     if (event) {
       void this.uiService.toggleMaterialTheme().subscribe();
     }

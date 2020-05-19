@@ -17,20 +17,7 @@ import { UserService } from '../../../services/user/user.service';
  */
 @Component({
   selector: 'app-balance-index',
-  template: `
-    <div fxLayout="row wrap">
-      <span fxFlex="100" *ngIf="!isLoggedIn()">
-        user is not logged in
-      </span>
-      <span fxFlex="100" *ngIf="isLoggedIn()">
-        <p>organization: {{ balance().organization }}</p>
-        <p>sum1: {{ balance().sum1 }}</p>
-        <p>sum2: {{ balance().sum2 }}</p>
-        <p>sum3: {{ balance().sum3 }}</p>
-        <p>sum4: {{ balance().sum4 }}</p>
-      </span>
-    </div>
-  `,
+  templateUrl: './balance-index.component.html',
   host: {
     class: 'mat-body-1',
   },
@@ -83,9 +70,9 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   /**
    * Gets user balance.
    */
-  public getBalance(): void {
+  public getBalance() {
     const serviceModel: IUser = this.userService.getUser();
-    this.balanceService
+    void this.balanceService
       .balance(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
       .subscribe(
         (data: IBalance) => {
@@ -103,9 +90,6 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
     this.balanceChange.emit(this.data);
   }
 
-  /**
-   * Lifecycle hook called on component initialization.
-   */
   public ngOnInit(): void {
     this.getBalance();
   }

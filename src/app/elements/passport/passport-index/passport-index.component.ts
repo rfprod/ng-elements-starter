@@ -9,38 +9,7 @@ import { fadeIn, fadeInOut } from '../animations';
  */
 @Component({
   selector: 'app-passport-index',
-  template: `
-    <div fxLayout="row wrap">
-      <span fxFlex="100">
-        {{ title }}
-      </span>
-      <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-        <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
-        <button
-          mat-button
-          *ngIf="!isLoggedIn() && restrictMode !== 'login'"
-          (click)="modeChange('login')"
-        >
-          Login
-        </button>
-        <button
-          mat-button
-          *ngIf="!isLoggedIn() && restrictMode !== 'signup'"
-          (click)="modeChange('signup')"
-        >
-          Signup
-        </button>
-      </span>
-      <span fxFlex="100" *ngIf="!isLoggedIn()">
-        instructions?
-      </span>
-      <span fxFlex="100" *ngIf="isLoggedIn()">
-        <p>username: {{ user().name }}</p>
-        <p>email: {{ user().email }}</p>
-        <p>organization: {{ user().organization }}</p>
-      </span>
-    </div>
-  `,
+  templateUrl: './passport-index.component.html',
   animations: [fadeIn, fadeInOut],
   host: {
     class: 'mat-body-1',

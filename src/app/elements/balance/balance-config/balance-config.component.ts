@@ -9,44 +9,7 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
  */
 @Component({
   selector: 'app-balance-config',
-  template: `
-    <mat-toolbar [color]="theme">
-      <mat-toolbar-row>
-        <span fxFlex="0 1 auto">
-          {{ title }}
-        </span>
-        <span fxFlex="1 1 auto"></span>
-        <span fxFlex="0 1 auto">
-          <mat-button-toggle-group
-            #group="matButtonToggleGroup"
-            [value]="theme"
-            (change)="matButtonToggleChange($event)"
-            [name]="title"
-            [attr.aria-label]="title"
-          >
-            <mat-button-toggle
-              *ngFor="let item of themes"
-              value="{{ item }}"
-              [matTooltip]="item"
-              matTooltipPosition="below"
-            >
-              <mat-icon class="material-icons" [color]="item">brush</mat-icon>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
-        </span>
-      </mat-toolbar-row>
-      <mat-toolbar-row>
-        <span fxFlex="1 1 auto"></span>
-        <span fxFlex="0 1 auto">
-          <mat-slide-toggle [color]="theme" [checked]="mock" (change)="serverChangeEvent($event)">
-            Server:
-            <span *ngIf="mock">mock</span>
-            <span *ngIf="!mock">real</span>
-          </mat-slide-toggle>
-        </span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  `,
+  templateUrl: './balance-config.component.html',
   host: {
     class: 'mat-body-1',
   },

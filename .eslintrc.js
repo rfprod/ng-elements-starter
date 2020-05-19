@@ -226,18 +226,18 @@ module.exports = {
     radix: 'error',
     'require-atomic-updates': 'error',
     'require-await': 'off', // handled by typescript-eslint rule
-    'rxjs/ban-observables': 'off', // TODO: turn on
-    'rxjs/ban-operators': 'off', // TODO: turn on
-    'rxjs/no-async-subscribe': 'off', // TODO: turn on
-    'rxjs/no-ignored-error': 'off', // TODO: turn on
-    'rxjs/no-ignored-observable': 'off', // TODO: turn on
-    'rxjs/no-ignored-subscribe': 'off', // keep off
-    'rxjs/no-ignored-subscription': 'off', // TODO: turn on
+    'rxjs/ban-observables': 'off', // keep off
+    'rxjs/ban-operators': 'off', // keep off
+    'rxjs/no-async-subscribe': 'error',
+    'rxjs/no-ignored-error': 'error',
+    'rxjs/no-ignored-observable': 'error',
+    'rxjs/no-ignored-subscribe': 'off',
+    'rxjs/no-ignored-subscription': 'error',
     'rxjs/no-internal': 'off', // TODO: turn on
-    'rxjs/no-nested-subscribe': 'off', // TODO: turn on
-    'rxjs/no-subclass': 'error', // TODO: turn on
+    'rxjs/no-nested-subscribe': 'error',
+    'rxjs/no-subclass': 'error',
     'rxjs/no-tap': 'off', // keep off
-    'rxjs/no-exposed-subjects': 'off', // TODO: turn on
+    'rxjs/no-exposed-subjects': 'error',
     yoda: 'error',
   },
 
