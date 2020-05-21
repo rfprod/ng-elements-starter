@@ -35,7 +35,7 @@
         ]
       },
       {
-        "source": "/ng-elements-(app|chat|passport|balance|catalogue|orders)",
+        "source": "/ng-elements-(app|passport|balance|catalogue|orders)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -69,7 +69,7 @@
         ]
       },
       {
-        "source": "/(login|signup|balance|catalogue|orders)",
+        "source": "/(login|signup|passport|balance|catalogue|orders)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -116,16 +116,32 @@
         "destination": "/ng-elements-passport/index.html"
       },
       {
+        "source": "/ng-elements-passport/widget-usage-example",
+        "destination": "/ng-elements-passport/usage-example/index.html"
+      },
+      {
         "source": "/ng-elements-balance",
         "destination": "/ng-elements-balance/index.html"
+      },
+      {
+        "source": "/ng-elements-balance/widget-usage-example",
+        "destination": "/ng-elements-balance/usage-example/index.html"
       },
       {
         "source": "/ng-elements-catalogue",
         "destination": "/ng-elements-catalogue/index.html"
       },
       {
+        "source": "/ng-elements-catalogue/widget-usage-example",
+        "destination": "/ng-elements-catalogue/usage-example/index.html"
+      },
+      {
         "source": "/ng-elements-orders",
         "destination": "/ng-elements-orders/index.html"
+      },
+      {
+        "source": "/ng-elements-orders/widget-usage-example",
+        "destination": "/ng-elements-orders/usage-example/index.html"
       },
       {
         "source": "/coverage",
