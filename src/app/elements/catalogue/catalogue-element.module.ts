@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { NgElementsStarterState } from 'src/app/state/ng2elements.state';
+import { UiStoreModule } from 'src/app/state/theme/ui.module';
 
 import { CatalogueWidgetComponent } from './';
 import { CatalogueModule } from './catalogue.module';
@@ -16,8 +16,9 @@ import { CatalogueModule } from './catalogue.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([NgElementsStarterState]),
+    NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
+    UiStoreModule.forRoot(),
     CatalogueModule,
   ],
   exports: [CatalogueModule],

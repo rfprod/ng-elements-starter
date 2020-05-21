@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
+import { UiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
@@ -30,6 +31,7 @@ import {
     HttpClientModule,
     NgxsModule,
     NgxsFormPluginModule,
+    UiStoreModule,
   ],
   declarations: [
     PassportWidgetComponent,

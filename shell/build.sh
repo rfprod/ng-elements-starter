@@ -39,6 +39,13 @@ generateClientDocumentation() {
 }
 
 ##
+# Generates widget usage examples.
+##
+generateWidgetUsageExamples() {
+  npx npm-run-all -s generate:widget-example:balance generate:widget-example:catalogue generate:widget-example:orders generate:widget-example:passport
+}
+
+##
 # Builds all dists.
 ##
 build() {
@@ -47,6 +54,8 @@ build() {
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
   npx npm-run-all -s build:app:prod build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
+
+  generateWidgetUsageExamples
 
   generateClientDocumentation
 }
@@ -60,6 +69,8 @@ buildFirebase() {
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
   npx npm-run-all -s build:app:prod:firebase build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
+
+  generateWidgetUsageExamples
 
   generateClientDocumentation
 }
