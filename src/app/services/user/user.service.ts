@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IUser, IUserDto } from '../../interfaces/index';
 
@@ -8,30 +10,17 @@ import { IUser, IUserDto } from '../../interfaces/index';
  */
 @Injectable()
 export class UserService {
-  /**
-   * User service model.
-   */
-  private model: IUser = new IUser();
-  /**
-   * Constructor.
-   */
+  private readonly user = new BehaviorSubject<IUser>(new IUser());
+
+  public readonly user$ = this.user.asObservable();
+
+  public readonly userToken$ = this.user$.pipe(map(user => user.token));
+
+  public readonly isLoggedIn$ = this.user$.pipe(map(user => Boolean(user.token)));
+
   constructor() {
     this.initializeModel();
-    if (
-      !Boolean(localStorage.getItem('userService')) &&
-      typeof localStorage.getItem('userService') === 'undefined'
-    ) {
-      localStorage.setItem('userService', JSON.stringify(this.model));
-    } else {
-      this.restoreUser();
-    }
-  }
-
-  /**
-   * Retrieves user service model.
-   */
-  public getUser(): IUser {
-    return this.model;
+    this.checkLocalStorageAndRestoreUser();
   }
 
   /**
@@ -39,19 +28,21 @@ export class UserService {
    * @param newValues new values object
    */
   public saveUser(newValues: IUserDto): void {
+    const user = { ...this.user.value };
     if (newValues.hasOwnProperty('name')) {
-      this.model.name = newValues.name;
+      user.name = newValues.name;
     }
     if (newValues.hasOwnProperty('email')) {
-      this.model.email = newValues.email;
+      user.email = newValues.email;
     }
     if (newValues.hasOwnProperty('organization')) {
-      this.model.organization = newValues.organization;
+      user.organization = newValues.organization;
     }
     if (newValues.hasOwnProperty('token')) {
-      this.model.token = newValues.token;
+      user.token = newValues.token;
     }
-    localStorage.setItem('userService', JSON.stringify(this.model));
+    localStorage.setItem('userService', JSON.stringify(user));
+    this.user.next(user);
   }
 
   /**
@@ -62,7 +53,8 @@ export class UserService {
       Boolean(localStorage.getItem('userService')) &&
       typeof localStorage.getItem('userService') !== 'undefined'
     ) {
-      this.model = JSON.parse(localStorage.getItem('userService'));
+      const user = JSON.parse(localStorage.getItem('userService'));
+      this.user.next(user);
     }
   }
 
@@ -70,21 +62,30 @@ export class UserService {
    * Resets/initializes user service model.
    */
   public resetUser(): void {
-    this.model = new IUser();
-    localStorage.setItem('userService', JSON.stringify(this.model));
+    const user = new IUser();
+    localStorage.setItem('userService', JSON.stringify(user));
+    this.user.next(user);
   }
 
   /**
    * Initializes model.
    */
   private initializeModel(): void {
-    this.model = new IUser();
+    const user = new IUser();
+    this.user.next(user);
   }
 
   /**
-   * Indicats if user is logged in.
+   * Check if local storage contains user data, and restore if it exists.
    */
-  public isLoggedIn(): boolean {
-    return Boolean(this.getUser().token);
+  private checkLocalStorageAndRestoreUser() {
+    if (
+      !Boolean(localStorage.getItem('userService')) &&
+      typeof localStorage.getItem('userService') === 'undefined'
+    ) {
+      localStorage.setItem('userService', JSON.stringify(this.user.value));
+    } else {
+      this.restoreUser();
+    }
   }
 }

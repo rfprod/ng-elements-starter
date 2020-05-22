@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IUser } from 'src/app/interfaces';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { UserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
@@ -44,10 +45,25 @@ export class PassportIndexComponent {
    * Switches mode.
    */
   @Output() public switchMode: EventEmitter<string> = new EventEmitter();
+
   /**
-   * Constructor.
-   * @param userService User service
+   * Returns current user object without token.
    */
+  public readonly user$: Observable<{
+    name: string;
+    email: string;
+    organization: string;
+  }> = this.userService.user$.pipe(
+    map(user => {
+      const name: string = user.name;
+      const email: string = user.email;
+      const organization: string = user.organization;
+      return { name, email, organization };
+    }),
+  );
+
+  public readonly isLoggedIn$ = this.userService.isLoggedIn$;
+
   constructor(private readonly userService: UserService) {}
 
   /**
@@ -56,24 +72,6 @@ export class PassportIndexComponent {
    */
   public modeChange(mode: 'login' | 'signup'): void {
     this.switchMode.emit(mode);
-  }
-
-  /**
-   * Indicates if user is logged in.
-   */
-  public isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
-
-  /**
-   * Returns current user object without token.
-   */
-  public user(): { name: string; email: string; organization: string } {
-    const serviceModel: IUser = this.userService.getUser();
-    const name: string = serviceModel.name;
-    const email: string = serviceModel.email;
-    const organization: string = serviceModel.organization;
-    return { name, email, organization };
   }
 
   /**

@@ -1,8 +1,8 @@
 <div fxLayout="row wrap">
-  <span fxFlex="100" *ngIf="!isLoggedIn()">
+  <span fxFlex="100" *ngIf="!(isLoggedIn$ | async)">
     user is not logged in
   </span>
-  <mat-accordion fxFlex="100" *ngIf="isLoggedIn()">
+  <mat-accordion fxFlex="100" *ngIf="isLoggedIn$ | async">
     <mat-expansion-panel *ngFor="let order of orders()">
       <mat-expansion-panel-header>
         <mat-panel-title>

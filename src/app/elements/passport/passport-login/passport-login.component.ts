@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { first, tap } from 'rxjs/operators';
 
 import { ILoginForm } from '../../../interfaces/index';
 import { IUser } from '../../../interfaces/user.interface';
@@ -118,8 +119,15 @@ export class PassportLoginComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (Boolean(this.userService.getUser().token)) {
-      this.modeChange('index');
-    }
+    void this.userService.isLoggedIn$
+      .pipe(
+        first(),
+        tap(result => {
+          if (result) {
+            this.modeChange('index');
+          }
+        }),
+      )
+      .subscribe();
   }
 }

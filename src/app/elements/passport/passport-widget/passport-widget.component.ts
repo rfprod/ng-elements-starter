@@ -1,4 +1,15 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { first, map, tap } from 'rxjs/operators';
 
 import { IServerChangeEvent } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
@@ -47,6 +58,11 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
+   * User token change output.
+   */
+  @Output() public readonly serverChange = new EventEmitter<{ mock: boolean }>();
+
+  /**
    * UI mode state.
    */
   private readonly mode: {
@@ -60,17 +76,28 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
   };
 
   /**
+   * Returns component start mode key.
+   */
+  private readonly getStartModeKey$: Observable<
+    'index' | 'login' | 'signup'
+  > = this.userService.isLoggedIn$.pipe(
+    first(),
+    map(result => {
+      let key: 'index' | 'login' | 'signup' = 'index';
+      if (this.isRestricted('signup')) {
+        key = result ? 'index' : 'login';
+      } else if (this.isRestricted('login')) {
+        key = 'signup';
+      }
+      return key;
+    }),
+  );
+
+  /**
    * Constructor.
    * @param userService Users service
    */
   constructor(private readonly userService: UserService) {}
-
-  /**
-   * Indicates if user is anonymous, i.e. token is not present in UserService.
-   */
-  public anonUser(): boolean {
-    return Boolean(this.userService.getUser().token);
-  }
 
   /**
    * Resolves if mode is restricted or not.
@@ -94,16 +121,23 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * @param modeKey mode key that should be activated
    */
   public activateMode(modeKey: 'index' | 'login' | 'signup'): void {
-    let key = modeKey;
-    if (Boolean(this.userService.getUser().token)) {
-      // Override modeKey, load index view for authenticated users
-      key = 'index';
-    }
-    if (!this.isRestricted(key)) {
-      this.mode[this.activatedMode] = !this.mode[this.activatedMode];
-      this.mode[key] = !this.mode[key];
-      this.activatedMode = key;
-    }
+    void this.userService.isLoggedIn$
+      .pipe(
+        first(),
+        tap(result => {
+          let key = modeKey;
+          if (result) {
+            // Override modeKey, load index view for authenticated users
+            key = 'index';
+          }
+          if (!this.isRestricted(key)) {
+            this.mode[this.activatedMode] = !this.mode[this.activatedMode];
+            this.mode[key] = !this.mode[key];
+            this.activatedMode = key;
+          }
+        }),
+      )
+      .subscribe();
   }
 
   /**
@@ -138,7 +172,13 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * Lifecycle hook called on component initialization.
    */
   public ngOnInit(): void {
-    this.activateMode(this.getStartModeKey());
+    void this.getStartModeKey$
+      .pipe(
+        tap(key => {
+          this.activateMode(key);
+        }),
+      )
+      .subscribe();
   }
 
   /**
@@ -149,19 +189,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
     if ('mock' in changes) {
       const mock = changes.mock.currentValue;
       this.selectServer({ mock });
+      this.serverChange.emit({ mock });
     }
-  }
-
-  /**
-   * Returns component start mode key.
-   */
-  private getStartModeKey(): 'index' | 'login' | 'signup' {
-    let key: 'index' | 'login' | 'signup' = 'index';
-    if (this.isRestricted('signup')) {
-      key = Boolean(this.userService.getUser().token) ? 'index' : 'login';
-    } else if (this.isRestricted('login')) {
-      key = 'signup';
-    }
-    return key;
   }
 }

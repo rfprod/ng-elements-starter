@@ -43,39 +43,33 @@ describe('UserService', () => {
     expect(localStorage['test']).toBeUndefined();
   });
 
-  it('getUser method should return a private model', () => {
-    expect(service.getUser()).toEqual(jasmine.any(Object));
-    expect(service.getUser()).toEqual(
-      jasmine.objectContaining({
-        name: '',
-        email: '',
-        organization: '',
-        token: '',
-      }),
-    );
-  });
-
-  it('saveUser should update UserService private model', () => {
-    expect(service.getUser().name).toEqual('');
+  it('saveUser should update UserService private model', async(async () => {
+    let user = await service.user$.toPromise();
+    expect(user.name).toEqual('');
     service.saveUser({ name: 'test' });
-    expect(service.getUser().name).toEqual('test');
+    user = await service.user$.toPromise();
+    expect(user.name).toEqual('test');
 
-    expect(service.getUser().email).toEqual('');
+    expect(user.email).toEqual('');
     service.saveUser({ email: 'test' });
-    expect(service.getUser().email).toEqual('test');
+    user = await service.user$.toPromise();
+    expect(user.email).toEqual('test');
 
-    expect(service.getUser().organization).toEqual('');
+    expect(user.organization).toEqual('');
     service.saveUser({ organization: 'test' });
-    expect(service.getUser().organization).toEqual('test');
+    user = await service.user$.toPromise();
+    expect(user.organization).toEqual('test');
 
-    expect(service.getUser().token).toEqual('');
+    expect(user.token).toEqual('');
     service.saveUser({ token: 'sample' });
-    expect(service.getUser().token).toEqual('sample');
-  });
+    user = await service.user$.toPromise();
+    expect(user.token).toEqual('sample');
+  }));
 
-  it('resetUser should reset private model and local storage', () => {
+  it('resetUser should reset private model and local storage', async(async () => {
     service.resetUser();
-    expect(service.getUser()).toEqual(
+    const user = await service.user$.toPromise();
+    expect(user).toEqual(
       jasmine.objectContaining({
         name: '',
         email: '',
@@ -83,10 +77,11 @@ describe('UserService', () => {
         token: '',
       }),
     );
-  });
+  }));
 
-  it('restoreUser should restore user model from local storage if it exists', () => {
-    expect(service.getUser()).toEqual(
+  it('restoreUser should restore user model from local storage if it exists', async(async () => {
+    let user = await service.user$.toPromise();
+    expect(user).toEqual(
       jasmine.objectContaining({
         name: '',
         email: '',
@@ -104,7 +99,8 @@ describe('UserService', () => {
       }),
     );
     service.restoreUser();
-    expect(service.getUser()).toEqual(
+    user = await service.user$.toPromise();
+    expect(user).toEqual(
       jasmine.objectContaining({
         name: 'name',
         email: 'email',
@@ -112,5 +108,5 @@ describe('UserService', () => {
         token: 'token',
       }),
     );
-  });
+  }));
 });
