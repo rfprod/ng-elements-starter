@@ -58,9 +58,9 @@
     "stylelint": "npx stylelint \"./src/**/*.scss\"",
     "stylelint:fix": "npx stylelint \"./src/**/*.scss\" --fix",
     "test": "ng test",
-    "test:single-run": "ng test ng-elements-app --watch=false",
-    "test:single-run:report": "ng test ng-elements-app --watch=false --code-coverage",
-    "test:single-run:report-to-dist": "ng test ng-elements-app --watch=false --code-coverage && cp -r ./coverage ./dist/coverage"
+    "test:single-run": "ng test ng-elements-app --watch=false --coverage=false",
+    "test:single-run:report": "ng test ng-elements-app --watch=false",
+    "test:single-run:report-to-dist": "ng test ng-elements-app --watch=false && cp -r ./coverage ./dist/coverage"
   },
   "husky": {
     "hooks": {
