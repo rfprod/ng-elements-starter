@@ -7,8 +7,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { concatMap, filter, first } from 'rxjs/operators';
 
-import { IOrder, IUser } from '../../../interfaces/index';
+import { IOrder } from '../../../interfaces/index';
 import { OrdersService } from '../../../services/orders/orders.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -43,22 +44,12 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
    */
   private data: IOrder[] = [];
 
-  /**
-   * Constructor.
-   * @param userService User service
-   * @param ordersService Orders service
-   */
+  public readonly isLoggedIn$ = this.userService.isLoggedIn$;
+
   constructor(
     private readonly userService: UserService,
     private readonly ordersService: OrdersService,
   ) {}
-
-  /**
-   * Indicates if user is logged in.
-   */
-  public isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
 
   /**
    * Returns current orders.
@@ -71,9 +62,12 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
    * Gets user orders.
    */
   public getOrders() {
-    const serviceModel: IUser = this.userService.getUser();
-    void this.ordersService
-      .orders(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+    void this.userService.userToken$
+      .pipe(
+        filter(token => Boolean(token)),
+        first(),
+        concatMap(token => this.ordersService.orders(this.mock, token)),
+      )
       .subscribe(
         (data: IOrder[]) => {
           this.data = data;

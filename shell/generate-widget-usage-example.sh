@@ -88,29 +88,29 @@ generateUsage() {
 
   # widget input, and event listener
   HOST_SCRIPTS="
-    <script>
-      function defineVarsAndAddEventListeners() {
-        /**
-          * Widget element reference.
-          */
-        const widget = document.getElementsByTagName(\"${WIDGET_CUSTOM_EL_NAME}\")[0];
-        /**
-          * User token change handler
-          */
-        function userTokenChangeHandler(event) {
-          console.log(\"userTokenChangeHandler, event\", event);
-          // TODO: implement this method
-        }
-        /**
-          * Widget user token change event listener
-          */
-        widget.addEventListener(\"userTokenChange\", userTokenChangeHandler);
-      }
-      document.addEventListener(\"DOMContentLoaded\", function() {
-        console.log('document ready');
-        defineVarsAndAddEventListeners();
-      });
-    </script>
+        <script>
+          function defineVarsAndAddEventListeners() {
+            /**
+              * Widget element reference.
+              */
+            const widget = document.getElementsByTagName(\"${WIDGET_CUSTOM_EL_NAME}\")[0];
+            /**
+              * Server change handler
+              */
+            function serverChangeHandler(event) {
+              console.log(\"serverChangeHandler, event\", event);
+              // TODO: implement this method
+            }
+            /**
+              * Widget server change event listener
+              */
+            widget.addEventListener(\"serverChange\", serverChangeHandler);
+          }
+          document.addEventListener(\"DOMContentLoaded\", function() {
+            console.log('document ready');
+            defineVarsAndAddEventListeners();
+          });
+        </script>
   "
 
   # widget
@@ -150,31 +150,31 @@ generateUsage() {
   ##
   if [ -z "$SCRIPTS_REF" ]; then
     INDEX_HTML="<html>
+      <head>
+        <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
+        ${HOST_SCRIPTS}
+      </head>
       <body>
-        <head>
-          <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
-          ${HOST_SCRIPTS}
-        </head>
         ${WIDGET}
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
       </body>
     </html>"
   else
     INDEX_HTML="<html>
+      <head>
+        <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
+        ${HOST_SCRIPTS}
+      </head>
       <body>
-        <head>
-          <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
-          ${HOST_SCRIPTS}
-        </head>
         ${WIDGET}
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${SCRIPTS_REF}\"></script>
-        <script type=\"text/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${SCRIPTS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
       </body>
     </html>"
   fi

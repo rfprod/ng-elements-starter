@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { first, tap } from 'rxjs/operators';
 
 import { ISignupForm, IUserDto } from '../../../interfaces/index';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -57,12 +58,6 @@ export class PassportSignupComponent implements OnInit {
    */
   public showPassword = false;
 
-  /**
-   * Constructor.
-   * @param fb Form builder
-   * @param userService User service
-   * @param authService Auth service
-   */
   constructor(
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
@@ -123,8 +118,15 @@ export class PassportSignupComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (Boolean(this.userService.getUser().token)) {
-      this.modeChange('index');
-    }
+    void this.userService.isLoggedIn$
+      .pipe(
+        first(),
+        tap(result => {
+          if (result) {
+            this.modeChange('index');
+          }
+        }),
+      )
+      .subscribe();
   }
 }

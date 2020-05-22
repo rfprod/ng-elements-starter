@@ -7,8 +7,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { concatMap, filter, first } from 'rxjs/operators';
 
-import { IBalance, IUser } from '../../../interfaces/index';
+import { IBalance } from '../../../interfaces/index';
 import { BalanceService } from '../../../services/balance/balance.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -43,22 +44,12 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
    */
   private data: IBalance = new IBalance();
 
-  /**
-   * Constructor.
-   * @param userService User service
-   * @param balanceService Balance service
-   */
+  public readonly isLoggedIn$ = this.userService.isLoggedIn$;
+
   constructor(
     private readonly userService: UserService,
     private readonly balanceService: BalanceService,
   ) {}
-
-  /**
-   * Indicates if user is logged in.
-   */
-  public isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
 
   /**
    * Returns current balance.
@@ -71,9 +62,12 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
    * Gets user balance.
    */
   public getBalance() {
-    const serviceModel: IUser = this.userService.getUser();
-    void this.balanceService
-      .balance(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+    void this.userService.userToken$
+      .pipe(
+        filter(token => Boolean(token)),
+        first(),
+        concatMap(token => this.balanceService.balance(this.mock, token)),
+      )
       .subscribe(
         (data: IBalance) => {
           this.data = data;

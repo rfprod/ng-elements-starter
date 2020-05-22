@@ -7,9 +7,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { concatMap, filter, first } from 'rxjs/operators';
 import { TCatalogue } from 'src/app/interfaces/catalogue.interface';
 
-import { IUser } from '../../../interfaces/index';
 import { CatalogueService } from '../../../services/catalogue/catalogue.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -44,22 +44,12 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
    */
   private data: TCatalogue = [];
 
-  /**
-   * Constructor.
-   * @param userService User service
-   * @param catalogueService Catalogue service
-   */
+  public readonly isLoggedIn$ = this.userService.isLoggedIn$;
+
   constructor(
     private readonly userService: UserService,
     private readonly catalogueService: CatalogueService,
   ) {}
-
-  /**
-   * Indicates if user is logged in.
-   */
-  public isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
 
   /**
    * Returns current catalogue.
@@ -72,9 +62,12 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
    * Gets user catalogue.
    */
   public getCatalogue() {
-    const serviceModel: IUser = this.userService.getUser();
-    void this.catalogueService
-      .catalogue(this.mock, Boolean(serviceModel.token) ? serviceModel.token : '$TOKEN')
+    void this.userService.userToken$
+      .pipe(
+        filter(token => Boolean(token)),
+        first(),
+        concatMap(token => this.catalogueService.catalogue(this.mock, token)),
+      )
       .subscribe(
         (data: TCatalogue) => {
           this.data = data;
