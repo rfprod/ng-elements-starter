@@ -101,7 +101,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': [
       'error',
       {
-        allow: ['constructors', 'methods'],
+        allow: ['constructors'],
       },
     ],
     '@typescript-eslint/no-empty-interface': 'error',

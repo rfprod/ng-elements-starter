@@ -10,9 +10,6 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-balance-widget',
   templateUrl: './balance-widget.component.html',
   styleUrls: ['./balance-widget.component.scss'],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class BalanceWidgetComponent implements OnInit {
   /**

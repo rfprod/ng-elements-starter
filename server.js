@@ -78,7 +78,7 @@ if (!devServer) {
   /**
    * Elements' dists.
    */
-  const elements = ['app', 'passport', 'balance', 'catalogue', 'orders'];
+  const elements = ['app', 'passport', 'balance', 'catalog', 'orders'];
   for (const [index, value] of elements.entries()) {
     const webappPath = value === 'app' ? '/' : `/ng-elements-${value}`;
     const distPath = `/dist/ng-elements-${value}`;
@@ -95,7 +95,7 @@ if (!devServer) {
     filesAndFolders: /(assets|txt|ico|html|css|js)/,
     coverage: /(coverage)/,
     documentation: /(documentation)/,
-    api: /(auth|register|balance|catalogue|graphql)/,
+    api: /(auth|register|balance|catalog|graphql)/,
   };
 
   /**
@@ -104,7 +104,7 @@ if (!devServer) {
   const pathRegX = {
     passport: /ng-elements-passport/,
     balance: /ng-elements-balance/,
-    catalogue: /ng-elements-catalogue/,
+    catalog: /ng-elements-catalog/,
     orders: /ng-elements-orders/,
   };
 
@@ -119,7 +119,7 @@ if (!devServer) {
       regX.documentation.test(req.path),
     passport: req => pathRegX.passport.test(req.path),
     balance: req => pathRegX.balance.test(req.path),
-    catalogue: req => pathRegX.catalogue.test(req.path),
+    catalog: req => pathRegX.catalog.test(req.path),
     orders: req => pathRegX.orders.test(req.path),
   };
 
@@ -133,8 +133,8 @@ if (!devServer) {
       res.sendFile(cwd + '/dist/ng-elements-passport/index.html');
     } else if (serve.balance(req)) {
       res.sendFile(cwd + '/dist/ng-elements-balance/index.html');
-    } else if (serve.catalogue(req)) {
-      res.sendFile(cwd + '/dist/ng-elements-catalogue/index.html');
+    } else if (serve.catalog(req)) {
+      res.sendFile(cwd + '/dist/ng-elements-catalog/index.html');
     } else if (serve.orders(req)) {
       res.sendFile(cwd + '/dist/ng-elements-orders/index.html');
     } else {

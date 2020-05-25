@@ -3,17 +3,17 @@ import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/c
 import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { CatalogueConfigComponent } from '../catalogue-config/catalogue-config.component';
-import { CatalogueIndexComponent } from '../catalogue-index/catalogue-index.component';
-import { CatalogueWidgetComponent } from './catalogue-widget.component';
+import { CatalogConfigComponent } from '../catalog-config/catalog-config.component';
+import { CatalogIndexComponent } from '../catalog-index/catalog-index.component';
+import { CatalogWidgetComponent } from './catalog-widget.component';
 
-describe('CatalogueWidgetComponent', () => {
+describe('CatalogWidgetComponent', () => {
   let httpController: HttpTestingController;
-  let component: CatalogueWidgetComponent;
-  let fixture: ComponentFixture<CatalogueWidgetComponent>;
+  let component: CatalogWidgetComponent;
+  let fixture: ComponentFixture<CatalogWidgetComponent>;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
+    declarations: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
@@ -22,7 +22,7 @@ describe('CatalogueWidgetComponent', () => {
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
-        fixture = TestBed.createComponent(CatalogueWidgetComponent);
+        fixture = TestBed.createComponent(CatalogWidgetComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         flushHttpRequests(httpController);

@@ -1,23 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TCatalogue } from 'src/app/interfaces/catalogue.interface';
+import { TCatalog } from 'src/app/interfaces/catalog.interface';
 import { WINDOW } from 'src/app/utils';
 
 import { HttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
- * Catalogue service
- * @description Polls server for catalogue data over http
+ * Catalog service
+ * @description Polls server for catalog data over http
  */
 @Injectable()
-export class CatalogueService {
+export class CatalogService {
   /**
    * Endpoints object for making requests to the API.
    */
   private readonly endpoints = {
-    catalogue: {
-      mock: `${this.window.location.origin}/catalogue`,
+    catalog: {
+      mock: `${this.window.location.origin}/catalog`,
       real: `${this.handlers.apiBaseUrl()}/catalog`,
     },
   };
@@ -35,13 +35,13 @@ export class CatalogueService {
   ) {}
 
   /**
-   * Returns user catalogue.
+   * Returns user catalog.
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */
-  public catalogue(mock: boolean, token: string): Observable<TCatalogue> {
-    const endpoint: string = mock ? this.endpoints.catalogue.mock : this.endpoints.catalogue.real;
-    const observable = this.http.get<TCatalogue>(`${endpoint}?token=${token}`);
-    return this.handlers.pipeHttpRequest<TCatalogue>(observable);
+  public catalog(mock: boolean, token: string): Observable<TCatalog> {
+    const endpoint: string = mock ? this.endpoints.catalog.mock : this.endpoints.catalog.real;
+    const observable = this.http.get<TCatalog>(`${endpoint}?token=${token}`);
+    return this.handlers.pipeHttpRequest<TCatalog>(observable);
   }
 }

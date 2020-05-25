@@ -12,9 +12,6 @@ import { UiState } from 'src/app/state/theme/ui.store';
   selector: 'app-index',
   templateUrl: './app-index.component.html',
   styleUrls: ['./app-index.component.scss'],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class AppIndexComponent {
   /**

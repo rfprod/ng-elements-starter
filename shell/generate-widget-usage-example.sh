@@ -24,7 +24,8 @@ reportUsageErrorAndExit() {
   local TITLE="<< USAGE >>"
   printf "
     ${RED}%s\n
-    ${DEFAULT} - ${YELLOW} bash tools/shell/generate-widget-usage-example.sh MODULE_ALIAS" "$TITLE"
+    ${DEFAULT} - ${YELLOW} bash tools/shell/generate-widget-usage-example.sh MODULE_ALIAS local ${DEFAULT} - generates widget usage example for local express setup
+    ${DEFAULT} - ${YELLOW} bash tools/shell/generate-widget-usage-example.sh MODULE_ALIAS ${DEFAULT} - generates widget usage example for firebase setup" "$TITLE"
 
   reportSupportedModuleAliasesWidgetApps
 
@@ -54,9 +55,14 @@ generateUsage() {
   local TITLE="<< GENERATING WIDGET USAGE EXAMPLE >>"
   printf "
     ${LIGHT_BLUE}%s
-    ${DEFAULT} - module alias: ${YELLOW}${1}" "$TITLE"
+    ${DEFAULT} - module alias: ${YELLOW}${1}
+    ${DEFAULT} - setup: ${YELLOW}${2}" "$TITLE"
 
-  local APP_NAME="ng2elements"
+  local APP_DOMAIN="https://ng2elements.firebaseapp.com"
+
+  if [ "${2}" = "local" ]; then
+    APP_DOMAIN="http://localhost:8080"
+  fi
 
   local MODULE_ALIAS=$1
 
@@ -91,19 +97,19 @@ generateUsage() {
         <script>
           function defineVarsAndAddEventListeners() {
             /**
-              * Widget element reference.
-              */
+             * Widget element reference.
+             */
             const widget = document.getElementsByTagName(\"${WIDGET_CUSTOM_EL_NAME}\")[0];
             /**
-              * Server change handler
-              */
+             * Server change handler
+             */
             function serverChangeHandler(event) {
               console.log(\"serverChangeHandler, event\", event);
               // TODO: implement this method
             }
             /**
-              * Widget server change event listener
-              */
+             * Widget server change event listener
+             */
             widget.addEventListener(\"serverChange\", serverChangeHandler);
           }
           document.addEventListener(\"DOMContentLoaded\", function() {
@@ -151,30 +157,30 @@ generateUsage() {
   if [ -z "$SCRIPTS_REF" ]; then
     INDEX_HTML="<html>
       <head>
-        <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
+        <link rel=\"stylesheet\" href=\"${APP_DOMAIN}/${MODULE_NAME}/${STYLES_REF}\">
         ${HOST_SCRIPTS}
       </head>
       <body>
         ${WIDGET}
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${VENDOR_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${RUNTIME_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${MAIN_REF}\"></script>
       </body>
     </html>"
   else
     INDEX_HTML="<html>
       <head>
-        <link rel=\"stylesheet\" href=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${STYLES_REF}\">
+        <link rel=\"stylesheet\" href=\"${APP_DOMAIN}/${MODULE_NAME}/${STYLES_REF}\">
         ${HOST_SCRIPTS}
       </head>
       <body>
         ${WIDGET}
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${VENDOR_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${RUNTIME_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${SCRIPTS_REF}\"></script>
-        <script type=\"application/javascript\" src=\"https://${APP_NAME}.firebaseapp.com/${MODULE_NAME}/${MAIN_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${VENDOR_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${RUNTIME_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${POLYFILLS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${SCRIPTS_REF}\"></script>
+        <script type=\"application/javascript\" src=\"${APP_DOMAIN}/${MODULE_NAME}/${MAIN_REF}\"></script>
       </body>
     </html>"
   fi
@@ -219,5 +225,5 @@ checkModuleAliasAndProceed() {
 if [ $# -lt 1 ]; then
   reportUsageErrorAndExit
 else
-  checkModuleAliasAndProceed "$1"
+  checkModuleAliasAndProceed "$1" "$2"
 fi

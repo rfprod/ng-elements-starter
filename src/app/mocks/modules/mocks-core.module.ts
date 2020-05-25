@@ -19,7 +19,7 @@ import { CustomMaterialModule } from 'src/app/modules';
 import {
   AuthService,
   BalanceService,
-  CatalogueService,
+  CatalogService,
   HttpHandlersService,
   MarkdownService,
   OrdersService,
@@ -74,9 +74,9 @@ export const mocksCoreModuleProviders: Provider[] = [
     deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {
-    provide: CatalogueService,
+    provide: CatalogService,
     useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
-      new CatalogueService(http, handlers, win),
+      new CatalogService(http, handlers, win),
     deps: [HttpClient, HttpHandlersService, WINDOW],
   },
   {

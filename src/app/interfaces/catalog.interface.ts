@@ -1,0 +1,1 @@
+export type TCatalog = string[];
