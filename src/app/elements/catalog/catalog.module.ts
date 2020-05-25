@@ -10,11 +10,7 @@ import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
 import { CatalogService, HttpHandlersService, UserService } from '../../services/index';
-import {
-  CatalogConfigComponent,
-  CatalogIndexComponent,
-  CatalogWidgetComponent,
-} from './index';
+import { CatalogConfigComponent, CatalogIndexComponent, CatalogWidgetComponent } from './index';
 
 /**
  * Catalog module

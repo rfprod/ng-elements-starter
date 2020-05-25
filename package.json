@@ -47,7 +47,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "ngcc": "ngcc",
-    "precommit:lint": "ng lint; yarn prettier:html; yarn stylelint",
+    "precommit:lint": "ng lint & yarn prettier:html & yarn stylelint",
     "prettier:html": "npx prettier -c src/**/*.html",
     "prettier:html:fix": "npx prettier -c --write src/**/*.html",
     "serve:app": "npm run start:server & ng serve --project ng-elements-app",
