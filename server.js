@@ -106,6 +106,7 @@ if (!devServer) {
     balance: /ng-elements-balance/,
     catalog: /ng-elements-catalog/,
     orders: /ng-elements-orders/,
+    usageExample: /usage-example/,
   };
 
   /**
@@ -121,24 +122,26 @@ if (!devServer) {
     balance: req => pathRegX.balance.test(req.path),
     catalog: req => pathRegX.catalog.test(req.path),
     orders: req => pathRegX.orders.test(req.path),
+    usageExample: req => pathRegX.usageExample.test(req.path),
   };
 
   /**
    * Serve app index file for paths excluding provided in regX object (see above).
    */
   app.use((req, res, next) => {
+    const indexPath = serve.usageExample(req) ? 'index.html' : 'usage-example/index.html';
     if (serve.next(req)) {
       return next();
     } else if (serve.passport(req)) {
-      res.sendFile(cwd + '/dist/ng-elements-passport/index.html');
+      res.sendFile(`${cwd}/dist/ng-elements-passport/${indexPath}`);
     } else if (serve.balance(req)) {
-      res.sendFile(cwd + '/dist/ng-elements-balance/index.html');
+      res.sendFile(`${cwd}/dist/ng-elements-balance/${indexPath}`);
     } else if (serve.catalog(req)) {
-      res.sendFile(cwd + '/dist/ng-elements-catalog/index.html');
+      res.sendFile(`${cwd}/dist/ng-elements-catalog/${indexPath}`);
     } else if (serve.orders(req)) {
-      res.sendFile(cwd + '/dist/ng-elements-orders/index.html');
+      res.sendFile(`${cwd}/dist/ng-elements-orders/${indexPath}`);
     } else {
-      res.sendFile(cwd + '/dist/ng-elements-app/index.html');
+      res.sendFile(`${cwd}/dist/ng-elements-app/index.html`);
     }
   });
 } else {

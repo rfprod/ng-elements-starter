@@ -29,7 +29,7 @@ module.exports = {
 
   rules: {
     '@typescript-eslint/await-thenable': 'error',
-    '@typescript-eslint/ban-ts-ignore': 'warn',
+    '@typescript-eslint/ban-ts-ignore': 'error',
     '@typescript-eslint/ban-types': [
       'error',
       {
@@ -158,7 +158,7 @@ module.exports = {
       { ignoreStatic: true },
     ],
     'arrow-parens': ['error', 'as-needed'],
-    'compat/compat': 'warn',
+    'compat/compat': 'error',
     'constructor-super': 'error',
     complexity: ['error', 10],
     'deprecation/deprecation': 'off', // TODO: revise and turn on
@@ -233,7 +233,7 @@ module.exports = {
     'rxjs/no-ignored-observable': 'error',
     'rxjs/no-ignored-subscribe': 'off',
     'rxjs/no-ignored-subscription': 'error',
-    'rxjs/no-internal': 'off', // TODO: turn on
+    'rxjs/no-internal': 'error',
     'rxjs/no-nested-subscribe': 'error',
     'rxjs/no-subclass': 'error',
     'rxjs/no-tap': 'off', // keep off
@@ -249,9 +249,22 @@ module.exports = {
       },
     },
     {
+      files: '**/*.patch.ts',
+      rules: {
+        'compat/compat': 'off',
+      },
+    },
+    {
+      files: '**/*.mock.ts',
+      rules: {
+        'compat/compat': 'off',
+      },
+    },
+    {
       files: '**/*.spec.ts',
       rules: {
         'max-lines-per-function': 'off',
+        'compat/compat': 'off',
       },
     },
   ],

@@ -1,4 +1,3 @@
-/* eslint-disable compat/compat */
 import { setupLocalStorageMock } from './local-storage.mock';
 
 /**

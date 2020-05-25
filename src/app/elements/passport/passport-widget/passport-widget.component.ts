@@ -138,7 +138,9 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
    * @param event server change event
    */
   public selectServer(event: IServerChangeEvent): void {
-    this.mock = event.mock;
+    const mock = event.mock;
+    this.mock = mock;
+    this.serverChange.emit({ mock });
   }
 
   /**
