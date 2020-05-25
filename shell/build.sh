@@ -42,14 +42,14 @@ generateClientDocumentation() {
 # Generates widget usage examples.
 ##
 generateWidgetUsageExamplesFirebase() {
-  npx run generate:widget-example:all
+  npm run generate:widget-example:all
 }
 
 ##
 # Generates widget usage examples.
 ##
 generateWidgetUsageExamplesLocal() {
-  npx run generate:widget-example:all:local
+  npm run generate:widget-example:all:local
 }
 
 ##
@@ -60,7 +60,7 @@ build() {
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
-  npx npm-run-all -s build:app:prod build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
+  npx npm-run-all -s build:app:prod build:passport:prod build:balance:prod build:catalog:prod build:orders:prod
 
   generateWidgetUsageExamplesLocal
 
@@ -75,7 +75,7 @@ buildFirebase() {
   printf "
     ${LIGHT_BLUE}%s
     ${DEFAULT}\n\n" "$TITLE"
-  npx npm-run-all -s build:app:prod:firebase build:passport:prod build:balance:prod build:catalogue:prod build:orders:prod
+  npx npm-run-all -s build:app:prod:firebase build:passport:prod build:balance:prod build:catalog:prod build:orders:prod
 
   generateWidgetUsageExamplesFirebase
 

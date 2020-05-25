@@ -351,7 +351,7 @@
         }
       }
     },
-    "ng-elements-catalogue": {
+    "ng-elements-catalog": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -365,12 +365,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/ng-elements-catalogue/",
-            "outputPath": "dist/ng-elements-catalogue",
-            "index": "src/app/elements/catalogue/index.html",
-            "main": "src/app/elements/catalogue/main.ts",
+            "baseHref": "/ng-elements-catalog/",
+            "outputPath": "dist/ng-elements-catalog",
+            "index": "src/app/elements/catalog/index.html",
+            "main": "src/app/elements/catalog/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.catalogue.json",
+            "tsConfig": "src/tsconfig.catalog.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
@@ -428,18 +428,18 @@
           "options": {
             "baseHref": "/",
             "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-catalogue:build"
+            "browserTarget": "ng-elements-catalog:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-elements-catalogue:build:production"
+              "browserTarget": "ng-elements-catalog:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-elements-catalogue:build"
+            "browserTarget": "ng-elements-catalog:build"
           }
         }
       }

@@ -120,7 +120,7 @@ generateUsage() {
   "
 
   # widget
-  WIDGET="<${WIDGET_CUSTOM_EL_NAME}></${WIDGET_CUSTOM_EL_NAME}>"
+  WIDGET="<${WIDGET_CUSTOM_EL_NAME} class=\"mat-typography\"></${WIDGET_CUSTOM_EL_NAME}>"
 
   # runtime bundle
   RUNTIME_REF=$(find "$MODULE_DIST_PATH"/index.html -print0 | xargs -0 grep 'runtime-es2015.[^"]*.js' -o)
@@ -209,7 +209,7 @@ checkModuleAliasAndProceed() {
   moduleAliasExists "$1" && ALIAS_EXISTS=1 || ALIAS_EXISTS=0
 
   if [ "$ALIAS_EXISTS" = 1 ]; then
-    generateUsage "$1"
+    generateUsage "$1" "$2"
   else
     local TITLE="<< MODULE ALIAS DOES NOT EXIST >>"
     printf "
