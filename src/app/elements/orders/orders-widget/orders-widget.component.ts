@@ -10,9 +10,6 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-orders-widget',
   templateUrl: './orders-widget.component.html',
   styleUrls: ['./orders-widget.component.scss'],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class OrdersWidgetComponent implements OnInit, OnChanges {
   /**

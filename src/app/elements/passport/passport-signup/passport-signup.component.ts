@@ -13,10 +13,8 @@ import { fadeIn, fadeInOut } from '../animations';
 @Component({
   selector: 'app-passport-signup',
   templateUrl: './passport-signup.component.html',
+  styleUrls: ['./passport-signup.component.scss'],
   animations: [fadeIn, fadeInOut],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class PassportSignupComponent implements OnInit {
   /**

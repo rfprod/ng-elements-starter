@@ -2,14 +2,14 @@ import { EventEmitter } from '@angular/core';
 import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { CatalogueConfigComponent } from './catalogue-config.component';
+import { CatalogConfigComponent } from './catalog-config.component';
 
-describe('CatalogueConfigComponent', () => {
-  let component: CatalogueConfigComponent;
-  let fixture: ComponentFixture<CatalogueConfigComponent>;
+describe('CatalogConfigComponent', () => {
+  let component: CatalogConfigComponent;
+  let fixture: ComponentFixture<CatalogConfigComponent>;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [CatalogueConfigComponent],
+    declarations: [CatalogConfigComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
@@ -17,7 +17,7 @@ describe('CatalogueConfigComponent', () => {
     void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
       .then(_ => {
-        fixture = TestBed.createComponent(CatalogueConfigComponent);
+        fixture = TestBed.createComponent(CatalogConfigComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
       });

@@ -10,9 +10,7 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
 @Component({
   selector: 'app-balance-config',
   templateUrl: './balance-config.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  styleUrls: ['./balance-config.component.scss'],
 })
 export class BalanceConfigComponent {
   /**

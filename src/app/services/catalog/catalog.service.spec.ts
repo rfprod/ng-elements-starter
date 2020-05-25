@@ -3,10 +3,10 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { CatalogueService } from './catalogue.service';
+import { CatalogService } from './catalog.service';
 
-describe('CatalogueService', () => {
-  let service: CatalogueService;
+describe('CatalogService', () => {
+  let service: CatalogService;
   let httpController: HttpTestingController;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({});
@@ -17,7 +17,7 @@ describe('CatalogueService', () => {
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
-        service = TestBed.inject(CatalogueService);
+        service = TestBed.inject(CatalogService);
       });
   }));
 

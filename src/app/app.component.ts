@@ -9,9 +9,6 @@ import { AppIconsService } from './services/icons/icons.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class AppComponent implements OnInit {
   /**
@@ -23,10 +20,7 @@ export class AppComponent implements OnInit {
    * Component theme color.
    */
   public theme: 'primary' | 'accent' | 'warn' = 'primary';
-  /**
-   * Constructor.
-   * @param appIconsService Application icons service
-   */
+
   constructor(private readonly appIconsService: AppIconsService) {}
 
   /**

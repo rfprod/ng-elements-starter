@@ -9,15 +9,11 @@ import { UiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { CatalogueService, HttpHandlersService, UserService } from '../../services/index';
-import {
-  CatalogueConfigComponent,
-  CatalogueIndexComponent,
-  CatalogueWidgetComponent,
-} from './index';
+import { CatalogService, HttpHandlersService, UserService } from '../../services/index';
+import { CatalogConfigComponent, CatalogIndexComponent, CatalogWidgetComponent } from './index';
 
 /**
- * Catalogue module
+ * Catalog module
  */
 @NgModule({
   imports: [
@@ -31,15 +27,15 @@ import {
     NgxsFormPluginModule,
     UiStoreModule,
   ],
-  declarations: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
+  declarations: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
   providers: [
     { provide: WINDOW, useFactory: getWindow },
     HttpHandlersService,
     UserService,
-    CatalogueService,
+    CatalogService,
   ],
-  exports: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
-  entryComponents: [CatalogueWidgetComponent, CatalogueConfigComponent, CatalogueIndexComponent],
+  exports: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
+  entryComponents: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CatalogueModule {}
+export class CatalogModule {}

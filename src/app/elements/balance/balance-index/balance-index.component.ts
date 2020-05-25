@@ -19,9 +19,7 @@ import { UserService } from '../../../services/user/user.service';
 @Component({
   selector: 'app-balance-index',
   templateUrl: './balance-index.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  styleUrls: ['./balance-index.component.scss'],
 })
 export class BalanceIndexComponent implements OnInit, OnChanges {
   /**

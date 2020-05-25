@@ -4,17 +4,14 @@ import { IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
 
 /**
- * Catalogue widget component
+ * Catalog widget component
  */
 @Component({
-  selector: 'app-catalogue-widget',
-  templateUrl: './catalogue-widget.component.html',
-  styleUrls: ['./catalogue-widget.component.scss'],
-  host: {
-    class: 'mat-body-1',
-  },
+  selector: 'app-catalog-widget',
+  templateUrl: './catalog-widget.component.html',
+  styleUrls: ['./catalog-widget.component.scss'],
 })
-export class CatalogueWidgetComponent implements OnInit {
+export class CatalogWidgetComponent implements OnInit {
   /**
    * Component theme.
    */
@@ -45,9 +42,9 @@ export class CatalogueWidgetComponent implements OnInit {
   }
 
   /**
-   * Catalogue data change event handler.
+   * Catalog data change event handler.
    */
-  public catalogueChangeHandler(event: string[]): string[] {
+  public catalogChangeHandler(event: string[]): string[] {
     // TODO
     return event;
   }

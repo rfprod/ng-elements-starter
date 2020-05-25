@@ -99,15 +99,15 @@ module.exports = {
   },
 
   /**
-   * Handles items catalogue.
+   * Handles items catalog.
    */
-  catalogue: (req, res) => {
+  catalog: (req, res) => {
     const token = req.query.token || '';
     if (token) {
-      const catalogue = Array.apply(null, Array(5))
-        .map(String.prototype.valueOf, 'catalogue item ')
+      const catalog = Array.apply(null, Array(5))
+        .map(String.prototype.valueOf, 'catalog item ')
         .map((item, index) => item + index);
-      res.status(200).json(catalogue);
+      res.status(200).json(catalog);
     } else {
       res.status(400).json({ error: 'Missing mandatory request parameters: token' });
     }

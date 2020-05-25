@@ -5,7 +5,7 @@ import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
 import { BalanceModule } from './elements/balance/balance.module';
-import { CatalogueModule } from './elements/catalogue/catalogue.module';
+import { CatalogModule } from './elements/catalog/catalog.module';
 import { OrdersModule } from './elements/orders/orders.module';
 import { PassportModule } from './elements/passport/passport.module';
 import { getTestBedConfig, newTestBedMetadata } from './mocks/utils/test-bed-config.mock';
@@ -14,7 +14,7 @@ describe('AppComponent', () => {
   let httpController: HttpTestingController;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [PassportModule, BalanceModule, CatalogueModule, OrdersModule],
+    imports: [PassportModule, BalanceModule, CatalogModule, OrdersModule],
     declarations: [AppComponent, AppIndexComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);

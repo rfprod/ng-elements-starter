@@ -3,7 +3,7 @@
     user is not logged in
   </span>
   <mat-grid-list fxFlex="100" cols="2" rowHeight="2:1" *ngIf="isLoggedIn$ | async">
-    <mat-grid-tile *ngFor="let item of catalogue()">
+    <mat-grid-tile *ngFor="let item of catalog()">
       {{ item }}
     </mat-grid-tile>
   </mat-grid-list>

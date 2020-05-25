@@ -19,9 +19,7 @@ import { UserService } from '../../../services/user/user.service';
 @Component({
   selector: 'app-orders-index',
   templateUrl: './orders-index.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  styleUrls: ['./orders-index.component.scss'],
 })
 export class OrdersIndexComponent implements OnInit, OnChanges {
   /**

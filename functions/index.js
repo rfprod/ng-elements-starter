@@ -52,7 +52,7 @@ exports.balance = functions.https.onRequest((req, res) => {
 /**
  * Catalogue endpoint mock.
  */
-exports.catalogue = functions.https.onRequest((req, res) => {
+exports.catalog = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
     res.status(403).json({ error: 'Forbidden method' });
   }

@@ -10,9 +10,7 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
 @Component({
   selector: 'app-passport-config',
   templateUrl: './passport-config.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  styleUrls: ['./passport-config.component.scss'],
 })
 export class PassportConfigComponent {
   /**

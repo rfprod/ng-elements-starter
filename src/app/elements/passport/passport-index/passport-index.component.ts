@@ -11,10 +11,8 @@ import { fadeIn, fadeInOut } from '../animations';
 @Component({
   selector: 'app-passport-index',
   templateUrl: './passport-index.component.html',
+  styleUrls: ['./passport-index.component.scss'],
   animations: [fadeIn, fadeInOut],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class PassportIndexComponent {
   /**

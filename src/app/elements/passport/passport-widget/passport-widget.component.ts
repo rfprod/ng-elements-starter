@@ -23,9 +23,6 @@ import { fadeIn, fadeInOut } from '../animations';
   templateUrl: './passport-widget.component.html',
   styleUrls: ['./passport-widget.component.scss'],
   animations: [fadeInOut, fadeIn],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class PassportWidgetComponent implements OnInit, OnChanges {
   /**
@@ -58,7 +55,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
-   * User token change output.
+   * Server change output.
    */
   @Output() public readonly serverChange = new EventEmitter<{ mock: boolean }>();
 
@@ -93,10 +90,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
     }),
   );
 
-  /**
-   * Constructor.
-   * @param userService Users service
-   */
   constructor(private readonly userService: UserService) {}
 
   /**

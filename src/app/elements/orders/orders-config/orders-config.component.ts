@@ -10,9 +10,7 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
 @Component({
   selector: 'app-orders-config',
   templateUrl: './orders-config.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  styleUrls: ['./orders-config.component.scss'],
 })
 export class OrdersConfigComponent {
   /**

@@ -8,22 +8,20 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { concatMap, filter, first } from 'rxjs/operators';
-import { TCatalogue } from 'src/app/interfaces/catalogue.interface';
+import { TCatalog } from 'src/app/interfaces/catalog.interface';
 
-import { CatalogueService } from '../../../services/catalogue/catalogue.service';
+import { CatalogService } from '../../../services/catalog/catalog.service';
 import { UserService } from '../../../services/user/user.service';
 
 /**
- * Catalogue index
+ * Catalog index
  */
 @Component({
-  selector: 'app-catalogue-index',
-  templateUrl: './catalogue-index.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  selector: 'app-catalog-index',
+  templateUrl: './catalog-index.component.html',
+  styleUrls: ['./catalog-index.component.scss'],
 })
-export class CatalogueIndexComponent implements OnInit, OnChanges {
+export class CatalogIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -35,62 +33,62 @@ export class CatalogueIndexComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
-   * Catalogue change event emitter.
+   * Catalog change event emitter.
    */
-  @Output() public catalogueChange: EventEmitter<string[]> = new EventEmitter();
+  @Output() public catalogChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
-   * Catalogue data.
+   * Catalog data.
    */
-  private data: TCatalogue = [];
+  private data: TCatalog = [];
 
   public readonly isLoggedIn$ = this.userService.isLoggedIn$;
 
   constructor(
     private readonly userService: UserService,
-    private readonly catalogueService: CatalogueService,
+    private readonly catalogService: CatalogService,
   ) {}
 
   /**
-   * Returns current catalogue.
+   * Returns current catalog.
    */
-  public catalogue(): TCatalogue {
+  public catalog(): TCatalog {
     return this.data;
   }
 
   /**
-   * Gets user catalogue.
+   * Gets user catalog.
    */
-  public getCatalogue() {
+  public getCatalog() {
     void this.userService.userToken$
       .pipe(
         filter(token => Boolean(token)),
         first(),
-        concatMap(token => this.catalogueService.catalogue(this.mock, token)),
+        concatMap(token => this.catalogService.catalog(this.mock, token)),
       )
       .subscribe(
-        (data: TCatalogue) => {
+        (data: TCatalog) => {
           this.data = data;
-          this.changeCatalogue();
+          this.changeCatalog();
         },
         _ => null,
       );
   }
 
   /**
-   * Emits catalogue data change event.
+   * Emits catalog data change event.
    */
-  public changeCatalogue(): void {
-    this.catalogueChange.emit(this.data);
+  public changeCatalog(): void {
+    this.catalogChange.emit(this.data);
   }
 
   public ngOnInit(): void {
-    this.getCatalogue();
+    this.getCatalog();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.mock) {
-      this.getCatalogue();
+      this.getCatalog();
     }
   }
 }

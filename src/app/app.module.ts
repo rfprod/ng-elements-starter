@@ -17,7 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
 import { BalanceModule } from './elements/balance/balance.module';
-import { CatalogueModule } from './elements/catalogue/catalogue.module';
+import { CatalogModule } from './elements/catalog/catalog.module';
 import { OrdersModule } from './elements/orders/orders.module';
 import { PassportModule } from './elements/passport/passport.module';
 import { CustomMaterialModule } from './modules/material/custom-material.module';
@@ -25,7 +25,7 @@ import { AppIconsService } from './services/icons/icons.service';
 import {
   AuthService,
   BalanceService,
-  CatalogueService,
+  CatalogService,
   HttpHandlersService,
   MarkdownService,
   OrdersService,
@@ -49,7 +49,7 @@ import { getWindow } from './utils/providers';
     FlexLayoutModule,
     CustomMaterialModule.forRoot(),
     BalanceModule,
-    CatalogueModule,
+    CatalogModule,
     OrdersModule,
     PassportModule,
     NgxsModule.forRoot(),
@@ -70,7 +70,7 @@ import { getWindow } from './utils/providers';
     UserService,
     AuthService,
     BalanceService,
-    CatalogueService,
+    CatalogService,
     OrdersService,
     AppIconsService,
   ],

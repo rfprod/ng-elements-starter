@@ -26,7 +26,7 @@ module.exports = app => {
   /**
    * Catalogue endpoint mock.
    */
-  app.get('/catalogue', handlers.catalogue);
+  app.get('/catalog', handlers.catalog);
 
   /**
    * Orders endpoint mock.

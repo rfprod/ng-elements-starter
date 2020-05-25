@@ -26,8 +26,8 @@ This widgets can be consumed by an arbitrary website, and can be interacted with
 | NgElementsStarter                        | [🔗#1](https://ng2elements.firebaseapp.com/) [🔗#2](https://ng2elements.firebaseapp.com/ng-elements-app/) |
 | Balance element                          | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-balance/)                                          |
 | Balance element (widget usage example)   | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-balance/widget-usage-example)                      |
-| Catalogue element                        | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalogue/)                                        |
-| Catalogue element (widget usage example) | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalogue/widget-usage-example)                    |
+| Catalogue element                        | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalog/)                                          |
+| Catalogue element (widget usage example) | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalog/widget-usage-example)                      |
 | Orders element                           | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-orders/)                                           |
 | Orders element (widget usage example)    | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-orders/widget-usage-example)                       |
 | Passport element                         | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-passport/)                                         |
@@ -106,7 +106,7 @@ npm run start:server
 
 npm run serve:app
 npm run serve:balance
-npm run serve:catalogue
+npm run serve:catalog
 npm run serve:orders
 npm run serve:passport
 ```
@@ -133,8 +133,8 @@ npm run build:app:prod:firebase
 npm run build:app:stats
 npm run build:balance:prod
 npm run build:balance:stats
-npm run build:catalogue:prod
-npm run build:catalogue:stats
+npm run build:catalog:prod
+npm run build:catalog:stats
 npm run build:orders:prod
 npm run build:orders:stats
 npm run build:passport:prod
@@ -148,7 +148,7 @@ To analyze a specific bundle check `package.json` commands that are prefixed wit
 ```bash
 npm run analyze:app
 npm run analyze:balance
-npm run analyze:catalogue
+npm run analyze:catalog
 npm run analyze:orders
 npm run analyze:passport
 ```

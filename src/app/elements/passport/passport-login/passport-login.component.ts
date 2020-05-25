@@ -14,10 +14,8 @@ import { fadeIn, fadeInOut } from '../animations';
 @Component({
   selector: 'app-passport-login',
   templateUrl: './passport-login.component.html',
+  styleUrls: ['./passport-login.component.scss'],
   animations: [fadeIn, fadeInOut],
-  host: {
-    class: 'mat-body-1',
-  },
 })
 export class PassportLoginComponent implements OnInit {
   /**

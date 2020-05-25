@@ -5,16 +5,14 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
 
 /**
- * Catalogue config
+ * Catalog config
  */
 @Component({
-  selector: 'app-catalogue-config',
-  templateUrl: './catalogue-config.component.html',
-  host: {
-    class: 'mat-body-1',
-  },
+  selector: 'app-catalog-config',
+  templateUrl: './catalog-config.component.html',
+  styleUrls: ['./catalog-config.component.scss'],
 })
-export class CatalogueConfigComponent {
+export class CatalogConfigComponent {
   /**
    * Component theme.
    */
@@ -23,7 +21,7 @@ export class CatalogueConfigComponent {
   /**
    * Component title.
    */
-  @Input() public title = 'Catalogue';
+  @Input() public title = 'Catalog';
 
   /**
    * Theme change event emitter.
