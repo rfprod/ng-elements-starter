@@ -5,13 +5,14 @@ This folder contains utility shell scripts.
 - `build.sh` - application building script
 - `colors.sh` - color definitions for usage with `printf` command for comprehensiveness
 - `install.sh` - dependencies installation script
+- `precommit.sh` - precommit tasks that should exit on failure
 
 ## `build.sh`
 
 ### print usage
 
 ```bash
-bash tools/shell/build.sh ?
+bash shell/build.sh ?
 ```
 
 ## `colors.sh`
@@ -19,7 +20,7 @@ bash tools/shell/build.sh ?
 ### print usage
 
 ```bash
-bash tools/shell/colors.sh ?
+bash shell/colors.sh ?
 ```
 
 ## `install.sh`
@@ -27,5 +28,13 @@ bash tools/shell/colors.sh ?
 ### print usage
 
 ```bash
-bash tools/shell/install.sh ?
+bash shell/install.sh ?
+```
+
+## `precommit.sh`
+
+### print usage
+
+```bash
+bash shell/precommit.sh ?
 ```
