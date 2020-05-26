@@ -6,7 +6,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { PassportWidgetComponent } from './';
+import { PassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
 import { PassportModule } from './passport.module';
 
 /**
@@ -22,13 +22,14 @@ import { PassportModule } from './passport.module';
     PassportModule,
   ],
   exports: [PassportModule],
+  declarations: [PassportWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PassportElementModule {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
-    const passportWidget = createCustomElement(PassportWidgetComponent, {
+    const passportWidget = createCustomElement(PassportWidgetElementRootComponent, {
       injector: this.injector,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;

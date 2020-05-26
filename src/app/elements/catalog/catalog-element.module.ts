@@ -6,7 +6,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { CatalogWidgetComponent } from '.';
+import { CatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
 import { CatalogModule } from './catalog.module';
 
 /**
@@ -22,13 +22,14 @@ import { CatalogModule } from './catalog.module';
     CatalogModule,
   ],
   exports: [CatalogModule],
+  declarations: [CatalogWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CatalogElementModule {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
-    const catalogWidget = createCustomElement(CatalogWidgetComponent, {
+    const catalogWidget = createCustomElement(CatalogWidgetElementRootComponent, {
       injector: this.injector,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;
