@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
@@ -33,6 +41,11 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
   @Input() public mock = true;
 
   /**
+   * Server change output.
+   */
+  @Output() public readonly serverChange = new EventEmitter<{ mock: boolean }>();
+
+  /**
    * Constructor.
    * @param el Element reference
    * @param userService Users service
@@ -44,7 +57,9 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
    * @param event server change event
    */
   public selectServer(event: { mock: boolean }): void {
-    this.mock = event.mock;
+    const mock = event.mock;
+    this.mock = mock;
+    this.serverChange.emit({ mock });
   }
 
   /**
@@ -55,20 +70,15 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
     return event;
   }
 
-  /**
-   * Lifecycle hook called on component initialization.
-   */
   public ngOnInit(): void {
     this.userService.saveUser(this.user);
   }
 
-  /**
-   * Lifecycle hook called on component input changes.
-   * @param changes input changes
-   */
   public ngOnChanges(changes: SimpleChanges): void {
     if ('mock' in changes) {
-      this.selectServer({ mock: changes.mock.currentValue });
+      const mock = changes.mock.currentValue;
+      this.selectServer({ mock });
+      this.serverChange.emit({ mock });
     }
   }
 }

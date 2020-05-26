@@ -6,7 +6,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { BalanceWidgetComponent } from './';
+import { BalanceWidgetElementRootComponent } from './balance-widget-element-root/balance-widget-element-root.component';
 import { BalanceModule } from './balance.module';
 
 /**
@@ -22,13 +22,14 @@ import { BalanceModule } from './balance.module';
     BalanceModule,
   ],
   exports: [BalanceModule],
+  declarations: [BalanceWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BalanceElementModule {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
-    const balanceWidget = createCustomElement(BalanceWidgetComponent, {
+    const balanceWidget = createCustomElement(BalanceWidgetElementRootComponent, {
       injector: this.injector,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;

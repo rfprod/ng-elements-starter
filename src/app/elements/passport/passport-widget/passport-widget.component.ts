@@ -163,9 +163,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
     }
   }
 
-  /**
-   * Lifecycle hook called on component initialization.
-   */
   public ngOnInit(): void {
     void this.getStartModeKey$
       .pipe(
@@ -176,10 +173,6 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
       .subscribe();
   }
 
-  /**
-   * Lifecycle hook called on component input changes.
-   * @param changes input changes
-   */
   public ngOnChanges(changes: SimpleChanges): void {
     if ('mock' in changes) {
       const mock = changes.mock.currentValue;

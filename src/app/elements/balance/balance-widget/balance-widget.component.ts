@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { IBalance, IUser } from '../../../interfaces/index';
 import { UserService } from '../../../services/user/user.service';
@@ -11,7 +19,7 @@ import { UserService } from '../../../services/user/user.service';
   templateUrl: './balance-widget.component.html',
   styleUrls: ['./balance-widget.component.scss'],
 })
-export class BalanceWidgetComponent implements OnInit {
+export class BalanceWidgetComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -28,6 +36,11 @@ export class BalanceWidgetComponent implements OnInit {
   public mock = true;
 
   /**
+   * Server change output.
+   */
+  @Output() public readonly serverChange = new EventEmitter<{ mock: boolean }>();
+
+  /**
    * Constructor.
    * @param userService Users service
    */
@@ -38,7 +51,9 @@ export class BalanceWidgetComponent implements OnInit {
    * @param event server change event
    */
   public selectServer(event: { mock: boolean }): void {
-    this.mock = event.mock;
+    const mock = event.mock;
+    this.mock = mock;
+    this.serverChange.emit({ mock });
   }
 
   /**
@@ -51,5 +66,13 @@ export class BalanceWidgetComponent implements OnInit {
 
   public ngOnInit(): void {
     this.userService.saveUser(this.user);
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if ('mock' in changes) {
+      const mock = changes.mock.currentValue;
+      this.selectServer({ mock });
+      this.serverChange.emit({ mock });
+    }
   }
 }
