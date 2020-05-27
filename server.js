@@ -70,23 +70,6 @@ const devServer = process.argv[2] === 'dev';
 
 if (!devServer) {
   console.log('server started in production mode, without "dev" argument , serving dists');
-  /**
-   * Serve ngd graphs.
-   */
-  app.use('/', express.static(cwd + '/dist'));
-
-  /**
-   * Elements' dists.
-   */
-  const elements = ['app', 'passport', 'balance', 'catalog', 'orders'];
-  for (const [index, value] of elements.entries()) {
-    const webappPath = value === 'app' ? '/' : `/ng-elements-${value}`;
-    const distPath = `/dist/ng-elements-${value}`;
-    console.log(
-      `serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`,
-    );
-    app.use(webappPath, express.static(cwd + distPath));
-  }
 
   /**
    * Paths regex object that should be passed by the server as is, without path substitution.
@@ -95,7 +78,7 @@ if (!devServer) {
     filesAndFolders: /(assets|txt|ico|html|css|js)/,
     coverage: /(coverage)/,
     documentation: /(documentation)/,
-    api: /(auth|register|balance|catalog|graphql)/,
+    api: /(login|signup|balance|catalog|orders|widget)/,
   };
 
   /**
@@ -124,6 +107,19 @@ if (!devServer) {
     orders: req => pathRegX.orders.test(req.path),
     usageExample: req => pathRegX.usageExample.test(req.path),
   };
+
+  /**
+   * Elements' dists.
+   */
+  const elements = ['app', 'passport', 'balance', 'catalog', 'orders'];
+  for (const [index, value] of elements.entries()) {
+    const webappPath = value === 'app' ? '/' : `/ng-elements-${value}`;
+    const distPath = `/dist/ng-elements-${value}`;
+    console.log(
+      `serving dist ${index}. ${value}:\n - webapp path: ${webappPath}\n - dist path: ${distPath}\n`,
+    );
+    app.use(webappPath, express.static(cwd + distPath));
+  }
 
   /**
    * Serve app index file for paths excluding provided in regX object (see above).

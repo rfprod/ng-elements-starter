@@ -9,27 +9,32 @@ const handlers = require('../../functions/handlers/index');
  */
 module.exports = app => {
   /**
-   * Login endpoint mock.
+   * Login endpoint.
    */
   app.post('/login', handlers.login);
 
   /**
-   * Signup endpoint mock.
+   * Signup endpoint.
    */
   app.post('/signup', handlers.signup);
 
   /**
-   * Balance endpoint mock.
+   * Balance endpoint.
    */
   app.get('/balance', handlers.balance);
 
   /**
-   * Catalogue endpoint mock.
+   * Catalogue endpoint.
    */
   app.get('/catalog', handlers.catalog);
 
   /**
-   * Orders endpoint mock.
+   * Orders endpoint.
    */
   app.get('/orders', handlers.orders);
+
+  /**
+   * Widget metadata endopoint.
+   */
+  app.get('/widget', handlers.widget);
 };
