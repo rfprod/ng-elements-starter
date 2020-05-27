@@ -1,6 +1,28 @@
 'use strict';
 
+/**
+ * @name jwt-methods
+ * @constant
+ * @summary JWT methods
+ * @description Methods to work with json web tokens
+ */
 const jwtMethods = require('../helpers/jwt-methods.js');
+
+/**
+ * @name fs
+ * @constant
+ * @summary File system module
+ * @description Provide file system access
+ */
+const fs = require('fs');
+
+/**
+ * @name cwd
+ * @constant
+ * @summary Current directory of the main Server script - server.js
+ * @description Correct root path for all setups, it should be used for all file references for the server and its modules like filePath: cwd + '/actual/file.extension'. Built Electron app contains actual app in resources/app(.asar) subdirectory, so it is essential to prefer __dirname usage over process.cwd() to get the value.
+ */
+const cwd = __dirname;
 
 /**
  * Returns token object with payload
@@ -141,6 +163,61 @@ module.exports = {
       res.status(200).json(orders);
     } else {
       res.status(400).json({ error: 'Missing mandatory request parameters: token' });
+    }
+  },
+
+  widget: (req, res) => {
+    const name = req.query.name || '';
+
+    let metadata = {
+      name,
+      environment: 'express',
+      assets: {
+        element: `<${name} class="mat-typography"></${name}>`,
+        stylesheet: '',
+        runtime: '',
+        polyfills: '',
+        scripts: '',
+        venor: '',
+        main: '',
+      },
+    };
+
+    let widgetDistPath = `${cwd}/../../dist/${name}/`;
+    let widgetDistIndexFilePath = `${cwd}/../../dist/${name}/index.html`;
+
+    /**
+     * Firebase configuration.
+     */
+    const firebaseConfig = process.env.FIREBASE_CONFIG;
+    if (firebaseConfig) {
+      metadata.environment = 'firebase';
+      res
+        .status(501)
+        .json({ error: 'Getting widget metadata is not implemented in firebase yet.', metadata });
+    } else {
+      const distExists = fs.existsSync(widgetDistIndexFilePath);
+
+      if (distExists) {
+        const files = fs.readdirSync(widgetDistPath);
+        const host = `${req.protocol}://${req.headers.host}`;
+        const distServePath = `${host}/${name}`;
+        const stylesheet = files.find(fileName => /styles\.[a-z0-9]+\.css/.test(fileName));
+        metadata.assets.stylesheet = `${distServePath}/${stylesheet}`;
+        const runtime = files.find(fileName => /runtime-es2015\.[a-z0-9]+\.js/.test(fileName));
+        metadata.assets.runtime = `${distServePath}/${runtime}`;
+        const polyfills = files.find(fileName => /polyfills-es2015\.[a-z0-9]+\.js/.test(fileName));
+        metadata.assets.polyfills = `${distServePath}/${polyfills}`;
+        const scripts = files.find(fileName => /scripts-es2015\.[a-z0-9]+\.js/.test(fileName));
+        metadata.assets.scripts = `${distServePath}/${scripts}`;
+        const vendor = files.find(fileName => /vendor-es2015\.[a-z0-9]+\.js/.test(fileName));
+        metadata.assets.vendor = `${distServePath}/${vendor}`;
+        const main = files.find(fileName => /main-es2015\.[a-z0-9]+\.js/.test(fileName));
+        metadata.assets.main = `${distServePath}/${main}`;
+        res.status(200).json(metadata);
+      } else {
+        res.status(404).json({ error: 'Widget dist not found' });
+      }
     }
   },
 };

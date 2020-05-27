@@ -20,7 +20,7 @@ const handlers = require('./handlers/index');
 admin.initializeApp(functions.config().firebase);
 
 /**
- * Login endpoint mock.
+ * Login endpoint.
  */
 exports.login = functions.https.onRequest((req, res) => {
   if (req.method !== 'POST') {
@@ -30,7 +30,7 @@ exports.login = functions.https.onRequest((req, res) => {
 });
 
 /**
- * Signup endpoint mock.
+ * Signup endpoint.
  */
 exports.signup = functions.https.onRequest((req, res) => {
   if (req.method !== 'POST') {
@@ -40,7 +40,7 @@ exports.signup = functions.https.onRequest((req, res) => {
 });
 
 /**
- * Balance endpoint mock.
+ * Balance endpoint.
  */
 exports.balance = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
@@ -50,7 +50,7 @@ exports.balance = functions.https.onRequest((req, res) => {
 });
 
 /**
- * Catalogue endpoint mock.
+ * Catalogue endpoint.
  */
 exports.catalog = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
@@ -60,11 +60,21 @@ exports.catalog = functions.https.onRequest((req, res) => {
 });
 
 /**
- * Orders endpoint mock.
+ * Orders endpoint.
  */
 exports.orders = functions.https.onRequest((req, res) => {
   if (req.method !== 'GET') {
     res.status(403).json({ error: 'Forbidden method' });
   }
   handlers.orders(req, res);
+});
+
+/**
+ * Widget metadata endpoint.
+ */
+exports.widget = functions.https.onRequest((req, res) => {
+  if (req.method !== 'GET') {
+    res.status(403).json({ error: 'Forbidden method' });
+  }
+  handlers.widget(req, res);
 });
