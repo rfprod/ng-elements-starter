@@ -13,7 +13,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
     project: './tsconfig.json',
   },
@@ -167,7 +167,7 @@ module.exports = {
     'guard-for-in': 'error',
     'max-depth': ['error', 5],
     'max-lines': ['error', { max: 1100, skipBlankLines: true }],
-    'max-lines-per-function': ['error', { max: 50, skipBlankLines: true }],
+    'max-lines-per-function': ['error', { max: 45, skipBlankLines: true }],
     'max-nested-callbacks': ['error', 4],
     'max-params': ['error', 12],
     'no-alert': 'error',
@@ -238,7 +238,7 @@ module.exports = {
     'rxjs/no-subclass': 'error',
     'rxjs/no-tap': 'off', // keep off
     'rxjs/no-exposed-subjects': 'error',
-    yoda: 'error',
+    yoda: ['error', 'never'],
   },
 
   overrides: [
@@ -246,6 +246,22 @@ module.exports = {
       files: '**/test-setup.ts',
       rules: {
         'simple-import-sort/sort': 'off',
+      },
+    },
+    {
+      files: '**/polyfills.ts',
+      rules: {
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
+    {
+      files: '**/polyfills/**',
+      rules: {
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        'no-extend-native': 'off',
+        'no-bitwise': 'off',
       },
     },
     {
@@ -258,13 +274,23 @@ module.exports = {
       files: '**/*.mock.ts',
       rules: {
         'compat/compat': 'off',
+        'rxjs/no-exposed-subjects': 'off',
       },
     },
     {
       files: '**/*.spec.ts',
       rules: {
+        'max-depth': ['error', 5],
         'max-lines-per-function': 'off',
         'compat/compat': 'off',
+      },
+    },
+    {
+      files: '**/generated/**',
+      rules: {
+        'max-lines': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
       },
     },
   ],
