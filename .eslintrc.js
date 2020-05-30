@@ -136,7 +136,10 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-arguments': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': ['error', { typesToIgnore: [''] }],
     '@typescript-eslint/no-unsafe-member-access': 'error',
-    '@typescript-eslint/no-unused-vars': 'off', // keep off, handled by TS compiler
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { vars: 'all', args: 'none', ignoreRestSiblings: false },
+    ], // this is handled by TS compiler also
     '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false }],
     '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
     '@typescript-eslint/no-var-requires': 'error',
