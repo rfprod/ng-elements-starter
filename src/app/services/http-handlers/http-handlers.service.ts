@@ -6,14 +6,16 @@ import { catchError, take, timeout } from 'rxjs/operators';
 import { EHTTP_STATUS } from 'src/app/interfaces/http-statuses.interface';
 import { ETIMEOUT, WINDOW } from 'src/app/utils';
 
-import { UserService } from '../user/user.service';
+import { AppUserService } from '../user/user.service';
 
 /**
  * Custom http handers
  * @description Handles http requests.
  */
-@Injectable()
-export class HttpHandlersService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppHttpHandlersService {
   /**
    * Default timeout interval for http-requests.
    */
@@ -26,7 +28,7 @@ export class HttpHandlersService {
    * @param window window reference
    */
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: AppUserService,
     private readonly snackBar: MatSnackBar,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
@@ -35,7 +37,7 @@ export class HttpHandlersService {
    * Resolves if app is running on localhost.
    */
   public isLocalhost(): boolean {
-    return this.window.location.origin.indexOf('localhost') !== -1;
+    return this.window.location.origin.includes('localhost');
   }
 
   /**

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -8,8 +9,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { IUser } from '../../../interfaces/index';
-import { UserService } from '../../../services/user/user.service';
+import { AppUser } from '../../../interfaces/index';
+import { AppUserService } from '../../../services/user/user.service';
 
 /**
  * Orders widget component
@@ -18,8 +19,9 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-orders-widget',
   templateUrl: './orders-widget.component.html',
   styleUrls: ['./orders-widget.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrdersWidgetComponent implements OnInit, OnChanges {
+export class AppOrdersWidgetComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -33,7 +35,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
   /**
    * User object.
    */
-  @Input() public user: IUser = new IUser();
+  @Input() public user = new AppUser();
 
   /**
    * Indicates if mocked server should be used.
@@ -50,7 +52,7 @@ export class OrdersWidgetComponent implements OnInit, OnChanges {
    * @param el Element reference
    * @param userService Users service
    */
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: AppUserService) {}
 
   /**
    * Selects real or mocked server., used in config callback.

@@ -26,13 +26,6 @@ export const setupJestJsdomGlobalMocks: () => void = () => {
     return { width, height };
   });
 
-  Object.defineProperty(window, 'customElements', {
-    value: {
-      define: jest.fn(),
-    },
-    writable: false,
-  });
-
   Object.defineProperty(window, 'getComputedStyle', {
     value: () => {
       return {
@@ -78,7 +71,7 @@ export const setupJestJsdomGlobalMocks: () => void = () => {
     },
   });
 
-  function mutationObserver(..._args: any[]) {
+  function mutationObserver(...args: any[]) {
     return {
       observe: jest.fn(),
       takeRecords: jest.fn(),

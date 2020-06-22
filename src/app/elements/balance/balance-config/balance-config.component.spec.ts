@@ -2,22 +2,22 @@ import { EventEmitter } from '@angular/core';
 import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { BalanceConfigComponent } from './balance-config.component';
+import { AppBalanceConfigComponent } from './balance-config.component';
 
-describe('BalanceConfigComponent', () => {
-  let component: BalanceConfigComponent;
-  let fixture: ComponentFixture<BalanceConfigComponent>;
+describe('AppBalanceConfigComponent', () => {
+  let component: AppBalanceConfigComponent;
+  let fixture: ComponentFixture<AppBalanceConfigComponent>;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [BalanceConfigComponent],
+    declarations: [AppBalanceConfigComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   beforeEach(async(() => {
     void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
-      .then(_ => {
-        fixture = TestBed.createComponent(BalanceConfigComponent);
+      .then(() => {
+        fixture = TestBed.createComponent(AppBalanceConfigComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
       });

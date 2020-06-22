@@ -5,12 +5,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
-import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { BalanceService, HttpHandlersService, UserService } from '../../services/index';
-import { BalanceConfigComponent, BalanceIndexComponent, BalanceWidgetComponent } from './index';
+import { AppMaterialModule } from '../../modules/material/custom-material.module';
+import {
+  AppBalanceConfigComponent,
+  AppBalanceIndexComponent,
+  AppBalanceWidgetComponent,
+} from './index';
 
 /**
  * Balance module
@@ -19,23 +22,18 @@ import { BalanceConfigComponent, BalanceIndexComponent, BalanceWidgetComponent }
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
+    AppMaterialModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxsModule,
     NgxsFormPluginModule,
-    UiStoreModule,
+    AppUiStoreModule,
   ],
-  declarations: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
-  providers: [
-    { provide: WINDOW, useFactory: getWindow },
-    HttpHandlersService,
-    UserService,
-    BalanceService,
-  ],
-  exports: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
-  entryComponents: [BalanceWidgetComponent, BalanceConfigComponent, BalanceIndexComponent],
+  declarations: [AppBalanceWidgetComponent, AppBalanceConfigComponent, AppBalanceIndexComponent],
+  providers: [{ provide: WINDOW, useFactory: getWindow }],
+  exports: [AppBalanceWidgetComponent, AppBalanceConfigComponent, AppBalanceIndexComponent],
+  entryComponents: [AppBalanceWidgetComponent, AppBalanceConfigComponent, AppBalanceIndexComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class BalanceModule {}
+export class AppBalanceModule {}

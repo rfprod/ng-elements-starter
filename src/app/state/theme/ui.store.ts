@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { setUiState } from './ui.actions';
-import { IUiStateModel, UiPayload } from './ui.interface';
+import { IUiStateModel, TUiPayload } from './ui.interface';
 
 const themeUiActions = {
   setUiState,
@@ -14,8 +14,10 @@ const themeUiActions = {
     darkThemeEnabled: false,
   },
 })
-@Injectable()
-class UiState {
+@Injectable({
+  providedIn: 'root',
+})
+class AppUiState {
   @Selector()
   public static getUi(state: IUiStateModel) {
     return state;
@@ -27,9 +29,9 @@ class UiState {
   }
 
   @Action(setUiState)
-  public setUiState(ctx: StateContext<IUiStateModel>, { payload }: UiPayload) {
+  public setUiState(ctx: StateContext<IUiStateModel>, { payload }: TUiPayload) {
     return ctx.patchState(payload);
   }
 }
 
-export { UiState, themeUiActions };
+export { AppUiState, themeUiActions };

@@ -1,6 +1,3 @@
-/**
- * Server change event interface.
- */
-export class IServerChangeEvent {
-  public mock = true;
+export interface IServerChangeEvent {
+  mock: boolean;
 }

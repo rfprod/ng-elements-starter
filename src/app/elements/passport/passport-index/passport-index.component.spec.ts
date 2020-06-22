@@ -3,15 +3,15 @@ import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/c
 import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { PassportIndexComponent } from './passport-index.component';
+import { AppPassportIndexComponent } from './passport-index.component';
 
-describe('PassportIndexComponent', () => {
+describe('AppPassportIndexComponent', () => {
   let httpController: HttpTestingController;
-  let fixture: ComponentFixture<PassportIndexComponent>;
-  let component: PassportIndexComponent;
+  let fixture: ComponentFixture<AppPassportIndexComponent>;
+  let component: AppPassportIndexComponent;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [PassportIndexComponent],
+    declarations: [AppPassportIndexComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
@@ -20,7 +20,7 @@ describe('PassportIndexComponent', () => {
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
-        fixture = TestBed.createComponent(PassportIndexComponent);
+        fixture = TestBed.createComponent(AppPassportIndexComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         flushHttpRequests(httpController);

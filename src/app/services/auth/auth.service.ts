@@ -3,15 +3,17 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WINDOW } from 'src/app/utils';
 
-import { IUser } from '../../interfaces/user.interface';
-import { HttpHandlersService } from '../http-handlers/http-handlers.service';
+import { AppUser } from '../../interfaces/user.interface';
+import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Auth service
  * @description Sends authentication requests with user credentials to server over http
  */
-@Injectable()
-export class AuthService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppAuthService {
   /**
    * Endpoints object for making requests to the API.
    */
@@ -25,6 +27,7 @@ export class AuthService {
       real: `${this.handlers.apiBaseUrl()}/register`,
     },
   };
+
   /**
    * Constructor.
    * @param http Http client
@@ -33,7 +36,7 @@ export class AuthService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: HttpHandlersService,
+    private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -43,14 +46,14 @@ export class AuthService {
    * @param email user email
    * @param pass user password
    */
-  public login(mock: boolean, email: string, password: string): Observable<IUser> {
+  public login(mock: boolean, email: string, password: string): Observable<AppUser> {
     const endpoint: string = mock ? this.endpoints.login.mock : this.endpoints.login.real;
     const formData: { email: string; password: string } = {
       email,
       password,
     };
-    const observable = this.http.post<IUser>(endpoint, formData);
-    return this.handlers.pipeHttpRequest<IUser>(observable);
+    const observable = this.http.post<AppUser>(endpoint, formData);
+    return this.handlers.pipeHttpRequest<AppUser>(observable);
   }
 
   /**
@@ -67,7 +70,7 @@ export class AuthService {
     password: string,
     organization: string,
     name: string,
-  ): Observable<IUser> {
+  ): Observable<AppUser> {
     const endpoint: string = mock ? this.endpoints.signup.mock : this.endpoints.signup.real;
     const formData: { name: string; email: string; password: string; organization: string } = {
       name,
@@ -75,7 +78,7 @@ export class AuthService {
       password,
       organization,
     };
-    const observable = this.http.post<IUser>(endpoint, formData);
-    return this.handlers.pipeHttpRequest<IUser>(observable);
+    const observable = this.http.post<AppUser>(endpoint, formData);
+    return this.handlers.pipeHttpRequest<AppUser>(observable);
   }
 }

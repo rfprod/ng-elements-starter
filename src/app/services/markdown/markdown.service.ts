@@ -5,8 +5,10 @@ import marked from 'marked';
  * Markdown service.
  * @description Processes string in markdown format, outputs html.
  */
-@Injectable()
-export class MarkdownService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppMarkdownService {
   /**
    * Processes markdown input.
    * @param input marked input

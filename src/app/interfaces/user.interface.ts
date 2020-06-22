@@ -1,10 +1,13 @@
 /**
  * User interface.
  */
-export class IUser {
+export class AppUser {
   public name = '';
+
   public email = '';
+
   public organization = '';
+
   public token = '';
 }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
  * Dummy component.
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-dummy-component',
   template: '<span>summy component</span>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DummyComponent {}

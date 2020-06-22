@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { HttpHandlersService } from './http-handlers.service';
+import { AppHttpHandlersService } from './http-handlers.service';
 
-describe('HttpHandlersService', () => {
-  let service: HttpHandlersService;
+describe('AppHttpHandlersService', () => {
+  let service: AppHttpHandlersService;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({});
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
@@ -14,7 +14,7 @@ describe('HttpHandlersService', () => {
     void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
       .then(() => {
-        service = TestBed.inject(HttpHandlersService);
+        service = TestBed.inject(AppHttpHandlersService);
       });
   }));
 

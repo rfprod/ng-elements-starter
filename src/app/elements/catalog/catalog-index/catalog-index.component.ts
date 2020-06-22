@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -10,8 +11,8 @@ import {
 import { concatMap, filter, first } from 'rxjs/operators';
 import { TCatalog } from 'src/app/interfaces/catalog.interface';
 
-import { CatalogService } from '../../../services/catalog/catalog.service';
-import { UserService } from '../../../services/user/user.service';
+import { AppCatalogService } from '../../../services/catalog/catalog.service';
+import { AppUserService } from '../../../services/user/user.service';
 
 /**
  * Catalog index
@@ -20,8 +21,9 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-catalog-index',
   templateUrl: './catalog-index.component.html',
   styleUrls: ['./catalog-index.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogIndexComponent implements OnInit, OnChanges {
+export class AppCatalogIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -35,7 +37,7 @@ export class CatalogIndexComponent implements OnInit, OnChanges {
   /**
    * Catalog change event emitter.
    */
-  @Output() public catalogChange: EventEmitter<string[]> = new EventEmitter();
+  @Output() public readonly catalogChange: EventEmitter<string[]> = new EventEmitter();
 
   /**
    * Catalog data.
@@ -45,8 +47,8 @@ export class CatalogIndexComponent implements OnInit, OnChanges {
   public readonly isLoggedIn$ = this.userService.isLoggedIn$;
 
   constructor(
-    private readonly userService: UserService,
-    private readonly catalogService: CatalogService,
+    private readonly userService: AppUserService,
+    private readonly catalogService: AppCatalogService,
   ) {}
 
   /**
@@ -71,7 +73,7 @@ export class CatalogIndexComponent implements OnInit, OnChanges {
           this.data = data;
           this.changeCatalog();
         },
-        _ => null,
+        () => null,
       );
   }
 
@@ -87,7 +89,7 @@ export class CatalogIndexComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mock) {
+    if (Boolean(changes.mock)) {
       this.getCatalog();
     }
   }

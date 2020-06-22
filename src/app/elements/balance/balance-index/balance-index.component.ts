@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -9,9 +10,9 @@ import {
 } from '@angular/core';
 import { concatMap, filter, first } from 'rxjs/operators';
 
-import { IBalance } from '../../../interfaces/index';
-import { BalanceService } from '../../../services/balance/balance.service';
-import { UserService } from '../../../services/user/user.service';
+import { AppBalance, IThemeColorChange } from '../../../interfaces/index';
+import { AppBalanceService } from '../../../services/balance/balance.service';
+import { AppUserService } from '../../../services/user/user.service';
 
 /**
  * Balance index
@@ -20,17 +21,18 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-balance-index',
   templateUrl: './balance-index.component.html',
   styleUrls: ['./balance-index.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BalanceIndexComponent implements OnInit, OnChanges {
+export class AppBalanceIndexComponent implements OnInit, OnChanges {
   /**
    * Balance change event emitter.
    */
-  @Output() public balanceChange: EventEmitter<IBalance> = new EventEmitter();
+  @Output() public readonly balanceChange: EventEmitter<AppBalance> = new EventEmitter();
 
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'];
 
   /**
    * Indicates if mocked server should be used for http requests.
@@ -40,19 +42,19 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   /**
    * Balance data.
    */
-  private data: IBalance = new IBalance();
+  private data: AppBalance = new AppBalance();
 
   public readonly isLoggedIn$ = this.userService.isLoggedIn$;
 
   constructor(
-    private readonly userService: UserService,
-    private readonly balanceService: BalanceService,
+    private readonly userService: AppUserService,
+    private readonly balanceService: AppBalanceService,
   ) {}
 
   /**
    * Returns current balance.
    */
-  public balance(): IBalance {
+  public balance(): AppBalance {
     return this.data;
   }
 
@@ -67,11 +69,11 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
         concatMap(token => this.balanceService.balance(this.mock, token)),
       )
       .subscribe(
-        (data: IBalance) => {
+        (data: AppBalance) => {
           this.data = data;
           this.changeBalance();
         },
-        _ => null,
+        () => null,
       );
   }
 
@@ -87,7 +89,7 @@ export class BalanceIndexComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mock) {
+    if (Boolean(changes.mock)) {
       this.getBalance();
     }
   }

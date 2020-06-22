@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -9,9 +10,9 @@ import {
 } from '@angular/core';
 import { concatMap, filter, first } from 'rxjs/operators';
 
-import { IOrder } from '../../../interfaces/index';
-import { OrdersService } from '../../../services/orders/orders.service';
-import { UserService } from '../../../services/user/user.service';
+import { AppOrder } from '../../../interfaces/index';
+import { AppOrdersService } from '../../../services/orders/orders.service';
+import { AppUserService } from '../../../services/user/user.service';
 
 /**
  * Orders index
@@ -20,8 +21,9 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-orders-index',
   templateUrl: './orders-index.component.html',
   styleUrls: ['./orders-index.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrdersIndexComponent implements OnInit, OnChanges {
+export class AppOrdersIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -35,24 +37,24 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   /**
    * Orders change event emitter.
    */
-  @Output() public ordersChange: EventEmitter<IOrder[]> = new EventEmitter();
+  @Output() public readonly ordersChange: EventEmitter<AppOrder[]> = new EventEmitter();
 
   /**
    * Orders data.
    */
-  private data: IOrder[] = [];
+  private data: AppOrder[] = [];
 
   public readonly isLoggedIn$ = this.userService.isLoggedIn$;
 
   constructor(
-    private readonly userService: UserService,
-    private readonly ordersService: OrdersService,
+    private readonly userService: AppUserService,
+    private readonly ordersService: AppOrdersService,
   ) {}
 
   /**
    * Returns current orders.
    */
-  public orders(): IOrder[] {
+  public orders(): AppOrder[] {
     return this.data;
   }
 
@@ -67,11 +69,11 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
         concatMap(token => this.ordersService.orders(this.mock, token)),
       )
       .subscribe(
-        (data: IOrder[]) => {
+        (data: AppOrder[]) => {
           this.data = data;
           this.changeOrders();
         },
-        _ => null,
+        () => null,
       );
   }
 
@@ -87,7 +89,7 @@ export class OrdersIndexComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mock) {
+    if (Boolean(changes.mock)) {
       this.getOrders();
     }
   }
