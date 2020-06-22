@@ -5,8 +5,8 @@ export interface IUiStateModel {
   darkThemeEnabled: boolean;
 }
 
-export type UiPayload = IActionPayload<IUiStateModel>;
+export type TUiPayload = IActionPayload<IUiStateModel>;
 
-export interface IUiService {
+export interface IAppUiService {
   darkThemeEnabled$: Observable<boolean>;
 }

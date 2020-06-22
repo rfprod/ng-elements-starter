@@ -15,6 +15,7 @@ export class AppIconsService {
    * Information stored here is used to add SVG icons to material icons registry.
    */
   private readonly model: ISvgIconInterface[] = [];
+
   /**
    * Constructor.
    * @param matIconRegistry Material icon registry - icons registry for registering icons for usage within mat-icon selector

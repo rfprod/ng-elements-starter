@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
-import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
+import { IServerChangeEvent, IThemeColorChange } from '../../../interfaces/index';
 
 /**
  * Catalog config
@@ -11,8 +11,9 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
   selector: 'app-catalog-config',
   templateUrl: './catalog-config.component.html',
   styleUrls: ['./catalog-config.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogConfigComponent {
+export class AppCatalogConfigComponent {
   /**
    * Component theme.
    */
@@ -26,12 +27,12 @@ export class CatalogConfigComponent {
   /**
    * Theme change event emitter.
    */
-  @Output() public themeChange: EventEmitter<IColorThemeChangeEvent> = new EventEmitter();
+  @Output() public readonly themeChange: EventEmitter<IThemeColorChange> = new EventEmitter();
 
   /**
    * Server change event emitter.
    */
-  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
+  @Output() public readonly serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Insicates if mocked server should be used.

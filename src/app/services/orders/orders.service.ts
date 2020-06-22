@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IOrder } from 'src/app/interfaces';
+import { AppOrder } from 'src/app/interfaces';
 import { WINDOW } from 'src/app/utils';
 
-import { HttpHandlersService } from '../http-handlers/http-handlers.service';
+import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Orders service
  * @description Polls server for orders data over http
  */
-@Injectable()
-export class OrdersService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppOrdersService {
   /**
    * Endpoints object for making requests to the API.
    */
@@ -30,7 +32,7 @@ export class OrdersService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: HttpHandlersService,
+    private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -39,9 +41,9 @@ export class OrdersService {
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */
-  public orders(mock: boolean, token: string): Observable<IOrder[]> {
+  public orders(mock: boolean, token: string): Observable<AppOrder[]> {
     const endpoint: string = mock ? this.endpoints.orders.mock : this.endpoints.orders.real;
-    const observable = this.http.get<IOrder[]>(`${endpoint}?token=${token}`);
-    return this.handlers.pipeHttpRequest<IOrder[]>(observable);
+    const observable = this.http.get<AppOrder[]>(`${endpoint}?token=${token}`);
+    return this.handlers.pipeHttpRequest<AppOrder[]>(observable);
   }
 }

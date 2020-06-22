@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostListener,
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 import { first, map, tap } from 'rxjs/operators';
 
 import { IServerChangeEvent } from '../../../interfaces/index';
-import { UserService } from '../../../services/user/user.service';
+import { AppUserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
 
 /**
@@ -23,8 +24,9 @@ import { fadeIn, fadeInOut } from '../animations';
   templateUrl: './passport-widget.component.html',
   styleUrls: ['./passport-widget.component.scss'],
   animations: [fadeInOut, fadeIn],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PassportWidgetComponent implements OnInit, OnChanges {
+export class AppPassportWidgetComponent implements OnInit, OnChanges {
   /**
    * Currently activated mode.
    */
@@ -90,7 +92,7 @@ export class PassportWidgetComponent implements OnInit, OnChanges {
     }),
   );
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: AppUserService) {}
 
   /**
    * Resolves if mode is restricted or not.

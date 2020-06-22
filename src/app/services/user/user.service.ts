@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { IUser, IUserDto } from '../../interfaces/index';
+import { AppUser, IUserDto } from '../../interfaces/index';
 
 /**
  * User service
  * @description Is a wrapper around browser local storage
  */
-@Injectable()
-export class UserService {
-  private readonly user = new BehaviorSubject<IUser>(new IUser());
+@Injectable({
+  providedIn: 'root',
+})
+export class AppUserService {
+  private readonly user = new BehaviorSubject<AppUser>(new AppUser());
 
   public readonly user$ = this.user.asObservable();
 
@@ -62,7 +64,7 @@ export class UserService {
    * Resets/initializes user service model.
    */
   public resetUser(): void {
-    const user = new IUser();
+    const user = new AppUser();
     localStorage.setItem('userService', JSON.stringify(user));
     this.user.next(user);
   }
@@ -71,7 +73,7 @@ export class UserService {
    * Initializes model.
    */
   private initializeModel(): void {
-    const user = new IUser();
+    const user = new AppUser();
     this.user.next(user);
   }
 

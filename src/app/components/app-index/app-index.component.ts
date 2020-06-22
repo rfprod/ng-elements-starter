@@ -1,8 +1,8 @@
-import { Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-import { UiService } from 'src/app/state/theme/ui.service';
-import { UiState } from 'src/app/state/theme/ui.store';
+import { AppUiService } from 'src/app/state/theme/ui.service';
+import { AppUiState } from 'src/app/state/theme/ui.store';
 
 /**
  * Application index component
@@ -12,6 +12,7 @@ import { UiState } from 'src/app/state/theme/ui.store';
   selector: 'app-index',
   templateUrl: './app-index.component.html',
   styleUrls: ['./app-index.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppIndexComponent {
   /**
@@ -27,19 +28,19 @@ export class AppIndexComponent {
   /**
    * Asyncronous material theme state.
    */
-  public readonly darkTheme$ = this.store.select(UiState.getDarkThemeEnabled).pipe(
+  public readonly darkTheme$ = this.store.select(AppUiState.getDarkThemeEnabled).pipe(
     tap(darkThemeEnabled => {
       this.darkTheme = darkThemeEnabled;
     }),
   );
 
-  constructor(public readonly store: Store, private readonly uiService: UiService) {}
+  constructor(public readonly store: Store, private readonly uiService: AppUiService) {}
 
   /**
    * Toggles application material theme.
    */
   public toggleMaterialTheme(event?: Event) {
-    if (event) {
+    if (Boolean(event)) {
       void this.uiService.toggleMaterialTheme().subscribe();
     }
   }

@@ -3,24 +3,24 @@ import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/c
 import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { PassportConfigComponent } from '../passport-config/passport-config.component';
-import { PassportIndexComponent } from '../passport-index/passport-index.component';
-import { PassportLoginComponent } from '../passport-login/passport-login.component';
-import { PassportSignupComponent } from '../passport-signup/passport-signup.component';
-import { PassportWidgetComponent } from '../passport-widget/passport-widget.component';
+import { AppPassportConfigComponent } from '../passport-config/passport-config.component';
+import { AppPassportIndexComponent } from '../passport-index/passport-index.component';
+import { AppPassportLoginComponent } from '../passport-login/passport-login.component';
+import { AppPassportSignupComponent } from '../passport-signup/passport-signup.component';
+import { AppPassportWidgetComponent } from '../passport-widget/passport-widget.component';
 
-describe('PassportWidgetComponent', () => {
+describe('AppPassportWidgetComponent', () => {
   let httpController: HttpTestingController;
-  let component: PassportWidgetComponent;
-  let fixture: ComponentFixture<PassportWidgetComponent>;
+  let component: AppPassportWidgetComponent;
+  let fixture: ComponentFixture<AppPassportWidgetComponent>;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
     declarations: [
-      PassportWidgetComponent,
-      PassportConfigComponent,
-      PassportIndexComponent,
-      PassportLoginComponent,
-      PassportSignupComponent,
+      AppPassportWidgetComponent,
+      AppPassportConfigComponent,
+      AppPassportIndexComponent,
+      AppPassportLoginComponent,
+      AppPassportSignupComponent,
     ],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
@@ -30,7 +30,7 @@ describe('PassportWidgetComponent', () => {
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
-        fixture = TestBed.createComponent(PassportWidgetComponent);
+        fixture = TestBed.createComponent(AppPassportWidgetComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         flushHttpRequests(httpController);

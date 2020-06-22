@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
+import { IThemeColorChange } from './interfaces';
 import { AppIconsService } from './services/icons/icons.service';
 
 /**
@@ -9,6 +10,7 @@ import { AppIconsService } from './services/icons/icons.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   /**
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit {
   /**
    * Component theme color.
    */
-  public theme: 'primary' | 'accent' | 'warn' = 'primary';
+  public theme: IThemeColorChange['theme'] = 'primary';
 
   constructor(private readonly appIconsService: AppIconsService) {}
 

@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { CatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
-import { CatalogModule } from './catalog.module';
+import { AppCatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
+import { AppCatalogModule } from './catalog.module';
 
 /**
  * Catalog element module
@@ -18,18 +18,18 @@ import { CatalogModule } from './catalog.module';
     BrowserAnimationsModule,
     NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
-    UiStoreModule.forRoot(),
-    CatalogModule,
+    AppUiStoreModule.forRoot(),
+    AppCatalogModule,
   ],
-  exports: [CatalogModule],
-  declarations: [CatalogWidgetElementRootComponent],
+  exports: [AppCatalogModule],
+  declarations: [AppCatalogWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CatalogElementModule {
+export class AppCatalogElementModule {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
-    const catalogWidget = createCustomElement(CatalogWidgetElementRootComponent, {
+    const catalogWidget = createCustomElement(AppCatalogWidgetElementRootComponent, {
       injector: this.injector,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;

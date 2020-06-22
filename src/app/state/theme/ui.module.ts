@@ -3,20 +3,20 @@ import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxsModule } from '@ngxs/store';
 
-import { UiService } from './ui.service';
-import { UiState } from './ui.store';
+import { AppUiService } from './ui.service';
+import { AppUiState } from './ui.store';
 
-export const uiStoreModuleProviders: Provider[] = [UiService];
+export const uiStoreModuleProviders: Provider[] = [AppUiService];
 
 @NgModule({
-  imports: [MatSidenavModule, OverlayModule, NgxsModule.forFeature([UiState])],
-  providers: [...uiStoreModuleProviders],
+  imports: [MatSidenavModule, OverlayModule, NgxsModule.forFeature([AppUiState])],
+  providers: [],
 })
-export class UiStoreModule {
-  public static forRoot(): ModuleWithProviders<UiStoreModule> {
+export class AppUiStoreModule {
+  public static forRoot(): ModuleWithProviders<AppUiStoreModule> {
     return {
-      ngModule: UiStoreModule,
-      providers: [...uiStoreModuleProviders],
+      ngModule: AppUiStoreModule,
+      providers: [],
     };
   }
 }

@@ -5,12 +5,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
-import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { HttpHandlersService, OrdersService, UserService } from '../../services/index';
-import { OrdersConfigComponent, OrdersIndexComponent, OrdersWidgetComponent } from './index';
+import { AppMaterialModule } from '../../modules/material/custom-material.module';
+import {
+  AppOrdersConfigComponent,
+  AppOrdersIndexComponent,
+  AppOrdersWidgetComponent,
+} from './index';
 
 /**
  * Orders module
@@ -19,23 +22,18 @@ import { OrdersConfigComponent, OrdersIndexComponent, OrdersWidgetComponent } fr
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
+    AppMaterialModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxsModule,
     NgxsFormPluginModule,
-    UiStoreModule,
+    AppUiStoreModule,
   ],
-  declarations: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
-  providers: [
-    { provide: WINDOW, useFactory: getWindow },
-    HttpHandlersService,
-    UserService,
-    OrdersService,
-  ],
-  exports: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
-  entryComponents: [OrdersWidgetComponent, OrdersConfigComponent, OrdersIndexComponent],
+  declarations: [AppOrdersWidgetComponent, AppOrdersConfigComponent, AppOrdersIndexComponent],
+  providers: [{ provide: WINDOW, useFactory: getWindow }],
+  exports: [AppOrdersWidgetComponent, AppOrdersConfigComponent, AppOrdersIndexComponent],
+  entryComponents: [AppOrdersWidgetComponent, AppOrdersConfigComponent, AppOrdersIndexComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class OrdersModule {}
+export class AppOrdersModule {}

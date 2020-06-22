@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { first, tap } from 'rxjs/operators';
 
 import { ISignupForm, IUserDto } from '../../../interfaces/index';
-import { AuthService } from '../../../services/auth/auth.service';
-import { UserService } from '../../../services/user/user.service';
+import { AppAuthService } from '../../../services/auth/auth.service';
+import { AppUserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
 
 /**
@@ -15,8 +22,9 @@ import { fadeIn, fadeInOut } from '../animations';
   templateUrl: './passport-signup.component.html',
   styleUrls: ['./passport-signup.component.scss'],
   animations: [fadeIn, fadeInOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PassportSignupComponent implements OnInit {
+export class AppPassportSignupComponent implements OnInit {
   /**
    * Component theme.
    */
@@ -33,11 +41,6 @@ export class PassportSignupComponent implements OnInit {
   @Input() public mock = true;
 
   /**
-   * Switch mode event emitter.
-   */
-  @Output() public switchMode: EventEmitter<string> = new EventEmitter();
-
-  /**
    * Indicates if a particular passport mode is restricted:
    * - login
    * - signup
@@ -45,6 +48,11 @@ export class PassportSignupComponent implements OnInit {
    * null indicates that there is no mode restriction.
    */
   @Input() public restrictMode: 'login' | 'signup' | null = null;
+
+  /**
+   * Switch mode event emitter.
+   */
+  @Output() public readonly switchMode: EventEmitter<string> = new EventEmitter();
 
   /**
    * Signup form.
@@ -58,8 +66,8 @@ export class PassportSignupComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly userService: UserService,
-    private readonly authService: AuthService,
+    private readonly userService: AppUserService,
+    private readonly authService: AppAuthService,
   ) {
     this.resetForm();
   }
@@ -110,7 +118,7 @@ export class PassportSignupComponent implements OnInit {
             this.modeChange('index');
             this.resetForm();
           },
-          _ => null,
+          () => null,
         );
     }
   }

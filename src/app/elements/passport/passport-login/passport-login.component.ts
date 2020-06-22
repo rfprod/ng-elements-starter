@@ -1,11 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { first, tap } from 'rxjs/operators';
 
 import { ILoginForm } from '../../../interfaces/index';
-import { IUser } from '../../../interfaces/user.interface';
-import { AuthService } from '../../../services/auth/auth.service';
-import { UserService } from '../../../services/user/user.service';
+import { AppUser } from '../../../interfaces/user.interface';
+import { AppAuthService } from '../../../services/auth/auth.service';
+import { AppUserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
 
 /**
@@ -16,8 +23,9 @@ import { fadeIn, fadeInOut } from '../animations';
   templateUrl: './passport-login.component.html',
   styleUrls: ['./passport-login.component.scss'],
   animations: [fadeIn, fadeInOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PassportLoginComponent implements OnInit {
+export class AppPassportLoginComponent implements OnInit {
   /**
    * Component theme.
    */
@@ -36,7 +44,7 @@ export class PassportLoginComponent implements OnInit {
   /**
    * Switch mode event emitter.
    */
-  @Output() public switchMode: EventEmitter<string> = new EventEmitter();
+  @Output() public readonly switchMode: EventEmitter<string> = new EventEmitter();
 
   /**
    * Indicates if a particular passport mode is restricted:
@@ -65,8 +73,8 @@ export class PassportLoginComponent implements OnInit {
    */
   constructor(
     private readonly fb: FormBuilder,
-    private readonly userService: UserService,
-    private readonly authService: AuthService,
+    private readonly userService: AppUserService,
+    private readonly authService: AppAuthService,
   ) {
     this.resetForm();
   }
@@ -106,12 +114,12 @@ export class PassportLoginComponent implements OnInit {
     } = this.loginForm.value;
     if (this.loginForm.valid) {
       void this.authService.login(this.mock, formData.email, formData.password).subscribe(
-        (data: IUser) => {
+        (data: AppUser) => {
           this.userService.saveUser(data);
           this.modeChange('index');
           this.resetForm();
         },
-        _ => null,
+        () => null,
       );
     }
   }
