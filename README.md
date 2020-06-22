@@ -2,10 +2,10 @@
 
 ## Azure DevOps
 
-| Pipeline      | Status                                                                                                                                                                                                                                    |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR validation | [![Azure DevOps PR Validation Status](https://rfprod.visualstudio.com/nx-ng-starter/_apis/build/status/PR%20Validation?branchName=master)](https://rfprod.visualstudio.com/nx-ng-starter/_build/latest?definitionId=13&branchName=master) |
-| PROD          | [![Azure DevOps Prod Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/Prod?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8&branchName=master)    |
+| Pipeline      | Status                                                                                                                                                                                                                                                |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR validation | [![Azure DevOps PR Validation Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/PR%20Validation?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=15&branchName=master) |
+| PROD          | [![Azure DevOps Prod Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/Prod?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8&branchName=master)                |
 
 ## Description
 
