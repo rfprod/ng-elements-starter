@@ -2,22 +2,22 @@ import { EventEmitter } from '@angular/core';
 import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { PassportConfigComponent } from './passport-config.component';
+import { AppPassportConfigComponent } from './passport-config.component';
 
-describe('PassportConfigComponent', () => {
-  let component: PassportConfigComponent;
-  let fixture: ComponentFixture<PassportConfigComponent>;
+describe('AppPassportConfigComponent', () => {
+  let component: AppPassportConfigComponent;
+  let fixture: ComponentFixture<AppPassportConfigComponent>;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    declarations: [PassportConfigComponent],
+    declarations: [AppPassportConfigComponent],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   beforeEach(async(() => {
     void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
-      .then(_ => {
-        fixture = TestBed.createComponent(PassportConfigComponent);
+      .then(() => {
+        fixture = TestBed.createComponent(AppPassportConfigComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
       });

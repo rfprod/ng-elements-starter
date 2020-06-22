@@ -10,5 +10,6 @@ export const getActionCreator = (actionScope: string) => <
 ) =>
   class {
     public static readonly type: string = `[${actionScope}]: ${actionName}`;
+
     constructor(public payload: T['payload']) {}
   };

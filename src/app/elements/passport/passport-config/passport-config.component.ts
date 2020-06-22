@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
-import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/index';
+import { IServerChangeEvent, IThemeColorChange } from '../../../interfaces/index';
 
 /**
  * Passport config
@@ -11,8 +11,9 @@ import { IColorThemeChangeEvent, IServerChangeEvent } from '../../../interfaces/
   selector: 'app-passport-config',
   templateUrl: './passport-config.component.html',
   styleUrls: ['./passport-config.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PassportConfigComponent {
+export class AppPassportConfigComponent {
   /**
    * Component theme.
    */
@@ -31,12 +32,12 @@ export class PassportConfigComponent {
   /**
    * Server change event emitter.
    */
-  @Output() public serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
+  @Output() public readonly serverChange: EventEmitter<IServerChangeEvent> = new EventEmitter();
 
   /**
    * Theme change event emitter.
    */
-  @Output() public themeChange: EventEmitter<IColorThemeChangeEvent> = new EventEmitter();
+  @Output() public readonly themeChange: EventEmitter<IThemeColorChange> = new EventEmitter();
 
   /**
    * Component hotkeys.

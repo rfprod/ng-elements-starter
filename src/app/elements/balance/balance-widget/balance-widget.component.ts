@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -8,8 +9,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { IBalance, IUser } from '../../../interfaces/index';
-import { UserService } from '../../../services/user/user.service';
+import { AppBalance, AppUser } from '../../../interfaces/index';
+import { AppUserService } from '../../../services/user/user.service';
 
 /**
  * Balance widget component
@@ -18,8 +19,9 @@ import { UserService } from '../../../services/user/user.service';
   selector: 'app-balance-widget',
   templateUrl: './balance-widget.component.html',
   styleUrls: ['./balance-widget.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BalanceWidgetComponent implements OnInit, OnChanges {
+export class AppBalanceWidgetComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
@@ -28,7 +30,7 @@ export class BalanceWidgetComponent implements OnInit, OnChanges {
   /**
    * User object.
    */
-  @Input() public user: IUser = new IUser();
+  @Input() public user = new AppUser();
 
   /**
    * Indicates if mocked server should be used.
@@ -44,7 +46,7 @@ export class BalanceWidgetComponent implements OnInit, OnChanges {
    * Constructor.
    * @param userService Users service
    */
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: AppUserService) {}
 
   /**
    * Selects real or mocked server., used in config callback.
@@ -59,7 +61,7 @@ export class BalanceWidgetComponent implements OnInit, OnChanges {
   /**
    * Balance data change event handler.
    */
-  public balanceChangeHandler(event: IBalance): IBalance {
+  public balanceChangeHandler(event: AppBalance): AppBalance {
     // TODO
     return event;
   }

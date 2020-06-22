@@ -2,10 +2,10 @@ import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
 import { LocalStorageMock } from '../../mocks/utils/local-storage.mock';
-import { UserService } from './user.service';
+import { AppUserService } from './user.service';
 
-describe('UserService', () => {
-  let service: UserService;
+describe('AppUserService', () => {
+  let service: AppUserService;
   let localStorage: LocalStorageMock;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({});
@@ -22,7 +22,7 @@ describe('UserService', () => {
     void TestBed.configureTestingModule(testBedConfig)
       .compileComponents()
       .then(() => {
-        service = TestBed.inject(UserService);
+        service = TestBed.inject(AppUserService);
       });
   }));
 
@@ -43,7 +43,7 @@ describe('UserService', () => {
     expect(localStorage['test']).toBeUndefined();
   });
 
-  it('saveUser should update UserService private model', async(async () => {
+  it('saveUser should update AppUserService private model', async(async () => {
     let user = await service.user$.toPromise();
     expect(user.name).toEqual('');
     service.saveUser({ name: 'test' });

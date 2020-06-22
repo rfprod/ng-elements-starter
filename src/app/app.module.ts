@@ -16,22 +16,13 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIndexComponent } from './components/app-index/app-index.component';
-import { BalanceModule } from './elements/balance/balance.module';
-import { CatalogModule } from './elements/catalog/catalog.module';
-import { OrdersModule } from './elements/orders/orders.module';
-import { PassportModule } from './elements/passport/passport.module';
-import { CustomMaterialModule } from './modules/material/custom-material.module';
+import { AppBalanceModule } from './elements/balance/balance.module';
+import { AppCatalogModule } from './elements/catalog/catalog.module';
+import { AppOrdersModule } from './elements/orders/orders.module';
+import { AppPassportModule } from './elements/passport/passport.module';
+import { AppMaterialModule } from './modules/material/custom-material.module';
 import { AppIconsService } from './services/icons/icons.service';
-import {
-  AuthService,
-  BalanceService,
-  CatalogService,
-  HttpHandlersService,
-  MarkdownService,
-  OrdersService,
-  UserService,
-} from './services/index';
-import { UiStoreModule } from './state/theme/ui.module';
+import { AppUiStoreModule } from './state/theme/ui.module';
 import { WINDOW } from './utils';
 import { getWindow } from './utils/providers';
 
@@ -47,17 +38,17 @@ import { getWindow } from './utils/providers';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
-    BalanceModule,
-    CatalogModule,
-    OrdersModule,
-    PassportModule,
+    AppMaterialModule.forRoot(),
+    AppBalanceModule,
+    AppCatalogModule,
+    AppOrdersModule,
+    AppPassportModule,
     NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
-    UiStoreModule.forRoot(),
+    AppUiStoreModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
@@ -65,13 +56,6 @@ import { getWindow } from './utils/providers';
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: WINDOW, useFactory: getWindow },
-    MarkdownService,
-    HttpHandlersService,
-    UserService,
-    AuthService,
-    BalanceService,
-    CatalogService,
-    OrdersService,
     AppIconsService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

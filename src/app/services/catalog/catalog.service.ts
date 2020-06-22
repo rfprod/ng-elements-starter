@@ -4,14 +4,16 @@ import { Observable } from 'rxjs';
 import { TCatalog } from 'src/app/interfaces/catalog.interface';
 import { WINDOW } from 'src/app/utils';
 
-import { HttpHandlersService } from '../http-handlers/http-handlers.service';
+import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Catalog service
  * @description Polls server for catalog data over http
  */
-@Injectable()
-export class CatalogService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppCatalogService {
   /**
    * Endpoints object for making requests to the API.
    */
@@ -30,7 +32,7 @@ export class CatalogService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: HttpHandlersService,
+    private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 

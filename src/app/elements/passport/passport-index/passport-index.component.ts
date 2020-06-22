@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UserService } from '../../../services/user/user.service';
+import { AppUserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
 
 /**
@@ -13,8 +13,9 @@ import { fadeIn, fadeInOut } from '../animations';
   templateUrl: './passport-index.component.html',
   styleUrls: ['./passport-index.component.scss'],
   animations: [fadeIn, fadeInOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PassportIndexComponent {
+export class AppPassportIndexComponent {
   /**
    * Component theme.
    */
@@ -42,7 +43,7 @@ export class PassportIndexComponent {
   /**
    * Switches mode.
    */
-  @Output() public switchMode: EventEmitter<string> = new EventEmitter();
+  @Output() public readonly switchMode: EventEmitter<string> = new EventEmitter();
 
   /**
    * Returns current user object without token.
@@ -62,7 +63,7 @@ export class PassportIndexComponent {
 
   public readonly isLoggedIn$ = this.userService.isLoggedIn$;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: AppUserService) {}
 
   /**
    * Emits mode change event.

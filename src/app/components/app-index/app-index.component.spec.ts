@@ -2,10 +2,10 @@ import { HttpTestingController } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from 'src/app/app-routing.module';
-import { BalanceModule } from 'src/app/elements/balance/balance.module';
-import { CatalogModule } from 'src/app/elements/catalog/catalog.module';
-import { OrdersModule } from 'src/app/elements/orders/orders.module';
-import { PassportModule } from 'src/app/elements/passport/passport.module';
+import { AppBalanceModule } from 'src/app/elements/balance/balance.module';
+import { AppCatalogModule } from 'src/app/elements/catalog/catalog.module';
+import { AppOrdersModule } from 'src/app/elements/orders/orders.module';
+import { AppPassportModule } from 'src/app/elements/passport/passport.module';
 import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
@@ -18,10 +18,10 @@ describe('AppIndexComponent', () => {
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
     imports: [
-      PassportModule,
-      BalanceModule,
-      CatalogModule,
-      OrdersModule,
+      AppPassportModule,
+      AppBalanceModule,
+      AppCatalogModule,
+      AppOrdersModule,
       RouterTestingModule.withRoutes(APP_ROUTES),
     ],
     declarations: [AppIndexComponent],

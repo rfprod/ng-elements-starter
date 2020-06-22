@@ -5,17 +5,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
-import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { AuthService, HttpHandlersService, UserService } from '../../services/index';
+import { AppMaterialModule } from '../../modules/material/custom-material.module';
 import {
-  PassportConfigComponent,
-  PassportIndexComponent,
-  PassportLoginComponent,
-  PassportSignupComponent,
-  PassportWidgetComponent,
+  AppPassportConfigComponent,
+  AppPassportIndexComponent,
+  AppPassportLoginComponent,
+  AppPassportSignupComponent,
+  AppPassportWidgetComponent,
 } from './index';
 
 /**
@@ -25,41 +24,36 @@ import {
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
+    AppMaterialModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxsModule,
     NgxsFormPluginModule,
-    UiStoreModule,
+    AppUiStoreModule,
   ],
   declarations: [
-    PassportWidgetComponent,
-    PassportConfigComponent,
-    PassportIndexComponent,
-    PassportLoginComponent,
-    PassportSignupComponent,
+    AppPassportWidgetComponent,
+    AppPassportConfigComponent,
+    AppPassportIndexComponent,
+    AppPassportLoginComponent,
+    AppPassportSignupComponent,
   ],
-  providers: [
-    { provide: WINDOW, useFactory: getWindow },
-    HttpHandlersService,
-    UserService,
-    AuthService,
-  ],
+  providers: [{ provide: WINDOW, useFactory: getWindow }],
   exports: [
-    PassportWidgetComponent,
-    PassportConfigComponent,
-    PassportIndexComponent,
-    PassportLoginComponent,
-    PassportSignupComponent,
+    AppPassportWidgetComponent,
+    AppPassportConfigComponent,
+    AppPassportIndexComponent,
+    AppPassportLoginComponent,
+    AppPassportSignupComponent,
   ],
   entryComponents: [
-    PassportWidgetComponent,
-    PassportConfigComponent,
-    PassportIndexComponent,
-    PassportLoginComponent,
-    PassportSignupComponent,
+    AppPassportWidgetComponent,
+    AppPassportConfigComponent,
+    AppPassportIndexComponent,
+    AppPassportLoginComponent,
+    AppPassportSignupComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class PassportModule {}
+export class AppPassportModule {}

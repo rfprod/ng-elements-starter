@@ -15,18 +15,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { CustomMaterialModule } from 'src/app/modules';
+import { AppMaterialModule } from 'src/app/modules';
 import {
-  AuthService,
-  BalanceService,
-  CatalogService,
-  HttpHandlersService,
-  MarkdownService,
-  OrdersService,
-  UserService,
+  AppAuthService,
+  AppBalanceService,
+  AppCatalogService,
+  AppHttpHandlersService,
+  AppMarkdownService,
+  AppOrdersService,
+  AppUserService,
 } from 'src/app/services';
 import { AppIconsService } from 'src/app/services/icons/icons.service';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
 import { DummyComponent } from '../components/dummy.component';
@@ -58,42 +58,42 @@ export const mocksCoreModuleProviders: Provider[] = [
     },
   },
   {
-    provide: UserService,
-    useFactory: () => new UserService(),
+    provide: AppUserService,
+    useFactory: () => new AppUserService(),
   },
   {
-    provide: HttpHandlersService,
-    useFactory: (userService: UserService, snackBar: MatSnackBar, win: Window) =>
-      new HttpHandlersService(userService, snackBar, win),
-    deps: [UserService, MatSnackBar, WINDOW],
+    provide: AppHttpHandlersService,
+    useFactory: (userService: AppUserService, snackBar: MatSnackBar, win: Window) =>
+      new AppHttpHandlersService(userService, snackBar, win),
+    deps: [AppUserService, MatSnackBar, WINDOW],
   },
   {
-    provide: BalanceService,
-    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
-      new BalanceService(http, handlers, win),
-    deps: [HttpClient, HttpHandlersService, WINDOW],
+    provide: AppBalanceService,
+    useFactory: (http: HttpClient, handlers: AppHttpHandlersService, win: Window) =>
+      new AppBalanceService(http, handlers, win),
+    deps: [HttpClient, AppHttpHandlersService, WINDOW],
   },
   {
-    provide: CatalogService,
-    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
-      new CatalogService(http, handlers, win),
-    deps: [HttpClient, HttpHandlersService, WINDOW],
+    provide: AppCatalogService,
+    useFactory: (http: HttpClient, handlers: AppHttpHandlersService, win: Window) =>
+      new AppCatalogService(http, handlers, win),
+    deps: [HttpClient, AppHttpHandlersService, WINDOW],
   },
   {
-    provide: OrdersService,
-    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
-      new OrdersService(http, handlers, win),
-    deps: [HttpClient, HttpHandlersService, WINDOW],
+    provide: AppOrdersService,
+    useFactory: (http: HttpClient, handlers: AppHttpHandlersService, win: Window) =>
+      new AppOrdersService(http, handlers, win),
+    deps: [HttpClient, AppHttpHandlersService, WINDOW],
   },
   {
-    provide: AuthService,
-    useFactory: (http: HttpClient, handlers: HttpHandlersService, win: Window) =>
-      new AuthService(http, handlers, win),
-    deps: [HttpClient, HttpHandlersService, WINDOW],
+    provide: AppAuthService,
+    useFactory: (http: HttpClient, handlers: AppHttpHandlersService, win: Window) =>
+      new AppAuthService(http, handlers, win),
+    deps: [HttpClient, AppHttpHandlersService, WINDOW],
   },
   {
-    provide: MarkdownService,
-    useFactory: () => new MarkdownService(),
+    provide: AppMarkdownService,
+    useFactory: () => new AppMarkdownService(),
   },
   {
     provide: AppIconsService,
@@ -116,11 +116,11 @@ export const mocksCoreModuleProviders: Provider[] = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
+    AppMaterialModule.forRoot(),
     NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
-    UiStoreModule.forRoot(),
+    AppUiStoreModule.forRoot(),
   ],
   declarations: [DummyComponent],
   exports: [
@@ -131,7 +131,7 @@ export const mocksCoreModuleProviders: Provider[] = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CustomMaterialModule,
+    AppMaterialModule,
     NgxsModule,
     NgxsFormPluginModule,
     DummyComponent,

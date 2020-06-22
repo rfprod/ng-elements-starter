@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBalance } from 'src/app/interfaces';
+import { AppBalance } from 'src/app/interfaces';
 import { WINDOW } from 'src/app/utils';
 
-import { HttpHandlersService } from '../http-handlers/http-handlers.service';
+import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Balance service
  * @description Polls server for balance data over http
  */
-@Injectable()
-export class BalanceService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppBalanceService {
   /**
    * Endpoints object for making requests to the API.
    */
@@ -30,7 +32,7 @@ export class BalanceService {
    */
   constructor(
     private readonly http: HttpClient,
-    private readonly handlers: HttpHandlersService,
+    private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly window: Window,
   ) {}
 
@@ -39,9 +41,9 @@ export class BalanceService {
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */
-  public balance(mock: boolean, token: string): Observable<IBalance> {
+  public balance(mock: boolean, token: string): Observable<AppBalance> {
     const endpoint: string = mock ? this.endpoints.balance.mock : this.endpoints.balance.real;
-    const observable = this.http.get<IBalance>(`${endpoint}?token=${token}`);
-    return this.handlers.pipeHttpRequest<IBalance>(observable);
+    const observable = this.http.get<AppBalance>(`${endpoint}?token=${token}`);
+    return this.handlers.pipeHttpRequest<AppBalance>(observable);
   }
 }

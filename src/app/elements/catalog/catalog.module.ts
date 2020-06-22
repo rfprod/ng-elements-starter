@@ -5,12 +5,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 import { getWindow, WINDOW } from 'src/app/utils';
 
-import { CustomMaterialModule } from '../../modules/material/custom-material.module';
-import { CatalogService, HttpHandlersService, UserService } from '../../services/index';
-import { CatalogConfigComponent, CatalogIndexComponent, CatalogWidgetComponent } from './index';
+import { AppMaterialModule } from '../../modules/material/custom-material.module';
+import {
+  AppCatalogConfigComponent,
+  AppCatalogIndexComponent,
+  AppCatalogWidgetComponent,
+} from './index';
 
 /**
  * Catalog module
@@ -19,23 +22,18 @@ import { CatalogConfigComponent, CatalogIndexComponent, CatalogWidgetComponent }
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CustomMaterialModule.forRoot(),
+    AppMaterialModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxsModule,
     NgxsFormPluginModule,
-    UiStoreModule,
+    AppUiStoreModule,
   ],
-  declarations: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
-  providers: [
-    { provide: WINDOW, useFactory: getWindow },
-    HttpHandlersService,
-    UserService,
-    CatalogService,
-  ],
-  exports: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
-  entryComponents: [CatalogWidgetComponent, CatalogConfigComponent, CatalogIndexComponent],
+  declarations: [AppCatalogWidgetComponent, AppCatalogConfigComponent, AppCatalogIndexComponent],
+  providers: [{ provide: WINDOW, useFactory: getWindow }],
+  exports: [AppCatalogWidgetComponent, AppCatalogConfigComponent, AppCatalogIndexComponent],
+  entryComponents: [AppCatalogWidgetComponent, AppCatalogConfigComponent, AppCatalogIndexComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CatalogModule {}
+export class AppCatalogModule {}

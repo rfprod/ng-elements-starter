@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { UiStoreModule } from 'src/app/state/theme/ui.module';
+import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { PassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
-import { PassportModule } from './passport.module';
+import { AppPassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
+import { AppPassportModule } from './passport.module';
 
 /**
  * Passport element module
@@ -18,18 +18,18 @@ import { PassportModule } from './passport.module';
     BrowserAnimationsModule,
     NgxsModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
-    UiStoreModule.forRoot(),
-    PassportModule,
+    AppUiStoreModule.forRoot(),
+    AppPassportModule,
   ],
-  exports: [PassportModule],
-  declarations: [PassportWidgetElementRootComponent],
+  exports: [AppPassportModule],
+  declarations: [AppPassportWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class PassportElementModule {
+export class AppPassportElementModule {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
-    const passportWidget = createCustomElement(PassportWidgetElementRootComponent, {
+    const passportWidget = createCustomElement(AppPassportWidgetElementRootComponent, {
       injector: this.injector,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as any;

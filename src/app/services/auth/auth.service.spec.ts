@@ -3,10 +3,10 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { async, TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
-import { AuthService } from './auth.service';
+import { AppAuthService } from './auth.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('AppAuthService', () => {
+  let service: AppAuthService;
   let httpController: HttpTestingController;
 
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({});
@@ -17,7 +17,7 @@ describe('AuthService', () => {
       .compileComponents()
       .then(() => {
         httpController = TestBed.inject(HttpTestingController);
-        service = TestBed.inject(AuthService);
+        service = TestBed.inject(AppAuthService);
       });
   }));
 

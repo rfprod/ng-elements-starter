@@ -210,10 +210,10 @@ export const customMaterialModuleProviders: Provider[] = [
     OverlayModule,
   ],
 })
-export class CustomMaterialModule {
-  public static forRoot(): ModuleWithProviders<CustomMaterialModule> {
+export class AppMaterialModule {
+  public static forRoot(): ModuleWithProviders<AppMaterialModule> {
     return {
-      ngModule: CustomMaterialModule,
+      ngModule: AppMaterialModule,
       providers: customMaterialModuleProviders,
     };
   }
