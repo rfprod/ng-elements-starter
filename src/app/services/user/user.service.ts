@@ -31,16 +31,16 @@ export class AppUserService {
    */
   public saveUser(newValues: IUserDto): void {
     const user = { ...this.user.value };
-    if (newValues.hasOwnProperty('name')) {
+    if (newValues['name']) {
       user.name = newValues.name;
     }
-    if (newValues.hasOwnProperty('email')) {
+    if (newValues['email']) {
       user.email = newValues.email;
     }
-    if (newValues.hasOwnProperty('organization')) {
+    if (newValues['organization']) {
       user.organization = newValues.organization;
     }
-    if (newValues.hasOwnProperty('token')) {
+    if (newValues['token']) {
       user.token = newValues.token;
     }
     localStorage.setItem('userService', JSON.stringify(user));

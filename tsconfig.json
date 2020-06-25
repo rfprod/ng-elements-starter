@@ -1,53 +1,32 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "angularCompilerOptions": {
-    "enableIvy": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "enableResourceInlining": true
-  },
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "baseUrl": ".",
-    "rootDir": ".",
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": false,
-    "lib": ["ES2018", "DOM", "ESNext.AsyncIterable"],
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "noUnusedLocals": true,
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
-    "importHelpers": true,
-    "noImplicitAny": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "ES6",
-    "typeRoots": ["node_modules/@types"],
-    "removeComments": true
-  },
-  "exclude": [
-    "node_modules",
-    "tmp",
-    ".azure",
-    ".devops",
-    ".firebase",
-    ".vscode",
-    "coverage",
-    "cypress",
-    "dist",
-    "documentation",
-    "functions",
-    "shell"
+  "files": [],
+  "references": [
+    {
+      "path": "./src/tsconfig.app.json"
+    },
+    {
+      "path": "./src/tsconfig.spec.json"
+    },
+    {
+      "path": "./cypress/tsconfig.e2e.json"
+    },
+    {
+      "path": "./src/tsconfig.passport.json"
+    },
+    {
+      "path": "./src/tsconfig.balance.json"
+    },
+    {
+      "path": "./src/tsconfig.catalog.json"
+    },
+    {
+      "path": "./src/tsconfig.orders.json"
+    }
   ]
 }
