@@ -42,7 +42,7 @@ reportSupportedModuleAliasesWidgetApps() {
   for MODULE_ALIAS_NAME in "${MODULE_ALIAS_NAMES_WIDGET[@]}"; do printf "
       ${DEFAULT} - ${YELLOW}%s${DEFAULT} = ${LIGHT_GREEN}${!MODULE_ALIAS_NAME}${DEFAULT}" "$MODULE_ALIAS_NAME"; done
 
-  local INFO="Use this aliases in other module related scripts like tools/shell/lint.sh, tools/shell/test.sh etc."
+  local INFO="Use this aliases in other module related scripts like shell/lint.sh, shell/test.sh etc."
   printf "\n\n${LIGHT_BLUE} %s${DEFAULT}\n\n" "$INFO"
 }
 

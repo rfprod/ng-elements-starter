@@ -207,6 +207,8 @@
               "buildOptimizer": true
             },
             "production": {
+              "deployUrl": "https://ng2elements.web.app/ng-elements-passport/",
+              "baseHref": "https://ng2elements.web.app/ng-elements-passport/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -300,6 +302,8 @@
               "buildOptimizer": true
             },
             "production": {
+              "deployUrl": "https://ng2elements.web.app/ng-elements-balance/",
+              "baseHref": "https://ng2elements.web.app/ng-elements-balance/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -393,6 +397,8 @@
               "buildOptimizer": true
             },
             "production": {
+              "deployUrl": "https://ng2elements.web.app/ng-elements-catalog/",
+              "baseHref": "https://ng2elements.web.app/ng-elements-catalog/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -486,6 +492,8 @@
               "buildOptimizer": true
             },
             "production": {
+              "deployUrl": "https://ng2elements.web.app/ng-elements-orders/",
+              "baseHref": "https://ng2elements.web.app/ng-elements-orders/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

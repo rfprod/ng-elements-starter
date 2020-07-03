@@ -24,8 +24,8 @@ reportUsageErrorAndExit() {
   local TITLE="<< USAGE >>"
   printf "
     ${RED}%s\n
-    ${DEFAULT} - ${YELLOW} bash tools/shell/generate-widget-usage-example.sh MODULE_ALIAS local ${DEFAULT} - generates widget usage example for local express setup
-    ${DEFAULT} - ${YELLOW} bash tools/shell/generate-widget-usage-example.sh MODULE_ALIAS ${DEFAULT} - generates widget usage example for firebase setup" "$TITLE"
+    ${DEFAULT} - ${YELLOW} bash shell/generate-widget-usage-example.sh MODULE_ALIAS local ${DEFAULT} - generates widget usage example for local express setup
+    ${DEFAULT} - ${YELLOW} bash shell/generate-widget-usage-example.sh MODULE_ALIAS ${DEFAULT} - generates widget usage example for firebase setup" "$TITLE"
 
   reportSupportedModuleAliasesWidgetApps
 
