@@ -21,19 +21,23 @@ This widgets can be consumed by an arbitrary website, and can be interacted with
 
 ## Deployment urls
 
-| Name                                     | Url                                                                                                       |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| NgElementsStarter                        | [🔗#1](https://ng2elements.firebaseapp.com/) [🔗#2](https://ng2elements.firebaseapp.com/ng-elements-app/) |
-| Balance element                          | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-balance/)                                          |
-| Balance element (widget usage example)   | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-balance/widget-usage-example)                      |
-| Catalogue element                        | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalog/)                                          |
-| Catalogue element (widget usage example) | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-catalog/widget-usage-example)                      |
-| Orders element                           | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-orders/)                                           |
-| Orders element (widget usage example)    | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-orders/widget-usage-example)                       |
-| Passport element                         | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-passport/)                                         |
-| Passport element (widget usage example)  | [🔗#1](https://ng2elements.firebaseapp.com/ng-elements-passport/widget-usage-example)                     |
-| Compodoc documentation                   | [🔗#1](https://ng2elements.firebaseapp.com/documentation/)                                                |
-| Coverage report                          | [🔗#1](https://ng2elements.firebaseapp.com/coverage/)                                                     |
+| Name                                        | Url                                                                                       |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| NgElementsStarter                           | [🔗#1](https://ng2elements.web.app/) [🔗#2](https://ng2elements.web.app/ng-elements-app/) |
+| Balance element                             | [🔗#1](https://ng2elements.web.app/ng-elements-balance/)                                  |
+| Balance element (widget usage example)      | [🔗#1](https://ng2elements.web.app/ng-elements-balance/usage-example/index.html)          |
+| Balance element (widget bootstrap script)   | [🔗#1](https://ng2elements.web.app/ng-elements-balance/bootstrap.js)                      |
+| Catalogue element                           | [🔗#1](https://ng2elements.web.app/ng-elements-catalog/)                                  |
+| Catalogue element (widget usage example)    | [🔗#1](https://ng2elements.web.app/ng-elements-catalog/usage-example/index.html)          |
+| Catalogue element (widget bootstrap script) | [🔗#1](https://ng2elements.web.app/ng-elements-catalog/bootstrap.js)                      |
+| Orders element                              | [🔗#1](https://ng2elements.web.app/ng-elements-orders/)                                   |
+| Orders element (widget usage example)       | [🔗#1](https://ng2elements.web.app/ng-elements-orders/usage-example/index.html)           |
+| Orders element (widget bootstrap script)    | [🔗#1](https://ng2elements.web.app/ng-elements-orders/bootstrap.js)                       |
+| Passport element                            | [🔗#1](https://ng2elements.web.app/ng-elements-passport/)                                 |
+| Passport element (widget usage example)     | [🔗#1](https://ng2elements.web.app/ng-elements-passport/usage-example/index.html)         |
+| Passport element (widget bootstrap script)  | [🔗#1](https://ng2elements.web.app/ng-elements-passport/bootstrap.js)                     |
+| Compodoc documentation                      | [🔗#1](https://ng2elements.web.app/documentation/)                                        |
+| Coverage report                             | [🔗#1](https://ng2elements.web.app/coverage/)                                             |
 
 ## Preferred package manager
 
