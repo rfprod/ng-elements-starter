@@ -1,6 +1,80 @@
 {
   "hosting": {
-    "public": "dist",
+    "headers": [
+      {
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://ng2elements.firebaseapp.com https://ng2elements.web.app"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,PUT,POST,DELETE,OPTIONS,HEAD"
+          }
+        ],
+        "source": "**"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          }
+        ],
+        "source": "**/*.@(jpg|jpeg|gif|png|svg)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ],
+        "source": "/ng-elements-(app|passport|balance|catalog|orders)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ],
+        "source": "/(coverage|documentation)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragma",
+            "value": "no-cache"
+          }
+        ],
+        "source": "/(login|signup|passport|balance|catalog|orders)"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -11,149 +85,75 @@
       ".vscode/**",
       ".azure/**"
     ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "https://ng2elements.firebaseapp.com https://ng2elements.web.app"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET,PUT,POST,DELETE,OPTIONS,HEAD"
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=7200"
-          }
-        ]
-      },
-      {
-        "source": "/ng-elements-(app|passport|balance|catalog|orders)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
-          },
-          {
-            "key": "Expires",
-            "value": "-1"
-          },
-          {
-            "key": "Pragma",
-            "value": "no-cache"
-          }
-        ]
-      },
-      {
-        "source": "/(coverage|documentation)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
-          },
-          {
-            "key": "Expires",
-            "value": "-1"
-          },
-          {
-            "key": "Pragma",
-            "value": "no-cache"
-          }
-        ]
-      },
-      {
-        "source": "/(login|signup|passport|balance|catalog|orders)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
-          },
-          {
-            "key": "Expires",
-            "value": "-1"
-          },
-          {
-            "key": "Pragma",
-            "value": "no-cache"
-          }
-        ]
-      }
-    ],
+    "public": "dist",
     "rewrites": [
       {
-        "source": "/login",
-        "function": "login"
+        "function": "login",
+        "source": "/login"
       },
       {
-        "source": "/signup",
-        "function": "signup"
+        "function": "signup",
+        "source": "/signup"
       },
       {
-        "source": "/balance",
-        "function": "balance"
+        "function": "balance",
+        "source": "/balance"
       },
       {
-        "source": "/catalog",
-        "function": "catalog"
+        "function": "catalog",
+        "source": "/catalog"
       },
       {
-        "source": "/orders",
-        "function": "orders"
+        "function": "orders",
+        "source": "/orders"
       },
       {
-        "source": "/ng-elements-app",
-        "destination": "/ng-elements-app/index.html"
+        "destination": "/ng-elements-app/index.html",
+        "source": "/ng-elements-app"
       },
       {
-        "source": "/ng-elements-passport",
-        "destination": "/ng-elements-passport/index.html"
+        "destination": "/ng-elements-passport/index.html",
+        "source": "/ng-elements-passport"
       },
       {
-        "source": "/ng-elements-passport/widget-usage-example",
-        "destination": "/ng-elements-passport/usage-example/index.html"
+        "destination": "/ng-elements-passport/usage-example/index.html",
+        "source": "/ng-elements-passport/widget-usage-example"
       },
       {
-        "source": "/ng-elements-balance",
-        "destination": "/ng-elements-balance/index.html"
+        "destination": "/ng-elements-balance/index.html",
+        "source": "/ng-elements-balance"
       },
       {
-        "source": "/ng-elements-balance/widget-usage-example",
-        "destination": "/ng-elements-balance/usage-example/index.html"
+        "destination": "/ng-elements-balance/usage-example/index.html",
+        "source": "/ng-elements-balance/widget-usage-example"
       },
       {
-        "source": "/ng-elements-catalog",
-        "destination": "/ng-elements-catalog/index.html"
+        "destination": "/ng-elements-catalog/index.html",
+        "source": "/ng-elements-catalog"
       },
       {
-        "source": "/ng-elements-catalog/widget-usage-example",
-        "destination": "/ng-elements-catalog/usage-example/index.html"
+        "destination": "/ng-elements-catalog/usage-example/index.html",
+        "source": "/ng-elements-catalog/widget-usage-example"
       },
       {
-        "source": "/ng-elements-orders",
-        "destination": "/ng-elements-orders/index.html"
+        "destination": "/ng-elements-orders/index.html",
+        "source": "/ng-elements-orders"
       },
       {
-        "source": "/ng-elements-orders/widget-usage-example",
-        "destination": "/ng-elements-orders/usage-example/index.html"
+        "destination": "/ng-elements-orders/usage-example/index.html",
+        "source": "/ng-elements-orders/widget-usage-example"
       },
       {
-        "source": "/coverage",
-        "destination": "/coverage/index.html"
+        "destination": "/coverage/index.html",
+        "source": "/coverage"
       },
       {
-        "source": "/documentation",
-        "destination": "/documentation/index.html"
+        "destination": "/documentation/index.html",
+        "source": "/documentation"
       },
       {
-        "source": "**/!(*.*|login|signup|balance|catalog|orders|coverage|documentation|ng-elements-passport|ng-elements-balance|ng-elements-catalog|ng-elements-orders)",
-        "destination": "/ng-elements-app/index.html"
+        "destination": "/ng-elements-app/index.html",
+        "source": "**/!(*.*|login|signup|balance|catalog|orders|coverage|documentation|ng-elements-passport|ng-elements-balance|ng-elements-catalog|ng-elements-orders)"
       }
     ]
   }

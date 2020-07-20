@@ -1,72 +1,31 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
+  "defaultProject": "ng-elements-app",
   "newProjectRoot": "projects",
   "projects": {
     "ng-elements-app": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "aot": true,
-            "baseHref": "/",
-            "outputPath": "dist/ng-elements-app",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/components-font-awesome/css/all.css",
-              "src/styles.scss"
-            ],
-            "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js"],
-            "allowedCommonJsDependencies": ["node_modules/hammerjs/hammer.js"]
-          },
           "configurations": {
             "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true
+              "vendorChunk": true
             },
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
               "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "7mb",
                   "maximumWarning": "5mb",
-                  "maximumError": "7mb"
+                  "type": "initial"
                 },
                 {
                   "maximumError": "10kb",
@@ -74,45 +33,87 @@
                   "type": "anyComponentStyle"
                 }
               ],
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "optimization": true,
+              "outputHashing": "all",
               "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "sourceMap": false,
+              "vendorChunk": true
             }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "baseHref": "/",
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-app:build"
           },
-          "configurations": {
-            "production": {
-              "browserTarget": "ng-elements-app:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-elements-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "jestConfig": "src/jest.config.js",
-            "passWithNoTests": true,
-            "setupFile": "src/test-setup.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "collectCoverage": true,
+            "allowedCommonJsDependencies": ["node_modules/hammerjs/hammer.js"],
+            "aot": true,
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
+            "baseHref": "/",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "outputPath": "dist/ng-elements-app",
+            "polyfills": "src/polyfills.ts",
             "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js"],
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
               "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
-            ]
+            ],
+            "tsConfig": "src/tsconfig.app.json"
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-elements-app:serve:production"
+            }
+          },
+          "options": {
+            "devServerTarget": "ng-elements-app:serve",
+            "headless": false,
+            "tsConfig": "cypress/tsconfig.e2e.json",
+            "watch": true
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-elements-app:serve:production"
+            }
+          },
+          "options": {
+            "devServerTarget": "ng-elements-app:serve",
+            "tsConfig": "cypress/tsconfig.e2e.json"
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-elements-app:serve:production"
+            }
+          },
+          "options": {
+            "devServerTarget": "ng-elements-app:serve",
+            "headless": false,
+            "tsConfig": "cypress/tsconfig.e2e.json",
+            "watch": true
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-elements-app:build"
           }
         },
         "lint": {
@@ -123,418 +124,300 @@
             "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"]
           }
         },
-        "cypress-run": {
-          "builder": "@briebug/cypress-schematic:cypress",
-          "options": {
-            "devServerTarget": "ng-elements-app:serve",
-            "tsConfig": "cypress/tsconfig.e2e.json"
-          },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "devServerTarget": "ng-elements-app:serve:production"
+              "browserTarget": "ng-elements-app:build:production"
             }
+          },
+          "options": {
+            "baseHref": "/",
+            "browserTarget": "ng-elements-app:build",
+            "proxyConfig": "proxy.conf.json"
           }
         },
-        "cypress-open": {
-          "builder": "@briebug/cypress-schematic:cypress",
+        "test": {
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "devServerTarget": "ng-elements-app:serve",
-            "tsConfig": "cypress/tsconfig.e2e.json",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-elements-app:serve:production"
-            }
-          }
-        },
-        "e2e": {
-          "builder": "@briebug/cypress-schematic:cypress",
-          "options": {
-            "devServerTarget": "ng-elements-app:serve",
-            "tsConfig": "cypress/tsconfig.e2e.json",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-elements-app:serve:production"
-            }
-          }
-        }
-      }
-    },
-    "ng-elements-passport": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "baseHref": "/ng-elements-passport/",
-            "outputPath": "dist/ng-elements-passport",
-            "index": "src/app/elements/passport/index.html",
-            "main": "src/app/elements/passport/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.passport.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "collectCoverage": true,
+            "jestConfig": "src/jest.config.js",
+            "passWithNoTests": true,
+            "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js"],
+            "setupFile": "src/test-setup.ts",
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
               "node_modules/components-font-awesome/css/all.css",
               "src/styles.scss"
             ],
-            "scripts": []
-          },
+            "tsConfig": "src/tsconfig.spec.json"
+          }
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "src"
+    },
+    "ng-elements-balance": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true
+              "vendorChunk": true
             },
             "production": {
-              "deployUrl": "https://ng2elements.web.app/ng-elements-passport/",
-              "baseHref": "https://ng2elements.web.app/ng-elements-passport/",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
               "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
+              "baseHref": "https://ng2elements.web.app/ng-elements-balance/",
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "7mb",
                   "maximumWarning": "5mb",
-                  "maximumError": "7mb"
+                  "type": "initial"
                 },
                 {
                   "maximumError": "250kb",
                   "maximumWarning": "150kb",
                   "type": "anyComponentStyle"
                 }
-              ]
+              ],
+              "buildOptimizer": true,
+              "deployUrl": "https://ng2elements.web.app/ng-elements-balance/",
+              "extractCss": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "vendorChunk": true
             }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "baseHref": "/",
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-passport:build"
           },
-          "configurations": {
-            "production": {
-              "browserTarget": "ng-elements-passport:build:production"
-            }
+          "options": {
+            "assets": ["src/favicon.ico", "src/assets"],
+            "baseHref": "/ng-elements-balance/",
+            "index": "src/app/elements/balance/index.html",
+            "main": "src/app/elements/balance/main.ts",
+            "outputPath": "dist/ng-elements-balance",
+            "polyfills": "src/polyfills.ts",
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "node_modules/components-font-awesome/css/all.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "src/tsconfig.balance.json"
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-elements-passport:build"
-          }
-        }
-      }
-    },
-    "ng-elements-balance": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "baseHref": "/ng-elements-balance/",
-            "outputPath": "dist/ng-elements-balance",
-            "index": "src/app/elements/balance/index.html",
-            "main": "src/app/elements/balance/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.balance.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/components-font-awesome/css/all.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "analyze-bundle": {
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true
-            },
-            "production": {
-              "deployUrl": "https://ng2elements.web.app/ng-elements-balance/",
-              "baseHref": "https://ng2elements.web.app/ng-elements-balance/",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "5mb",
-                  "maximumError": "7mb"
-                },
-                {
-                  "maximumError": "250kb",
-                  "maximumWarning": "150kb",
-                  "type": "anyComponentStyle"
-                }
-              ]
-            }
+            "browserTarget": "ng-elements-balance:build"
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "baseHref": "/",
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-balance:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "ng-elements-balance:build:production"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          },
           "options": {
-            "browserTarget": "ng-elements-balance:build"
+            "baseHref": "/",
+            "browserTarget": "ng-elements-balance:build",
+            "proxyConfig": "proxy.conf.json"
           }
         }
-      }
-    },
-    "ng-elements-catalog": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
+      },
       "prefix": "app",
+      "projectType": "application",
+      "root": "",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
+      "sourceRoot": "src"
+    },
+    "ng-elements-catalog": {
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "baseHref": "/ng-elements-catalog/",
-            "outputPath": "dist/ng-elements-catalog",
-            "index": "src/app/elements/catalog/index.html",
-            "main": "src/app/elements/catalog/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.catalog.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/components-font-awesome/css/all.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
-          },
           "configurations": {
             "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true
+              "vendorChunk": true
             },
             "production": {
-              "deployUrl": "https://ng2elements.web.app/ng-elements-catalog/",
-              "baseHref": "https://ng2elements.web.app/ng-elements-catalog/",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
               "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
+              "baseHref": "https://ng2elements.web.app/ng-elements-catalog/",
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "7mb",
                   "maximumWarning": "5mb",
-                  "maximumError": "7mb"
+                  "type": "initial"
                 },
                 {
                   "maximumError": "250kb",
                   "maximumWarning": "150kb",
                   "type": "anyComponentStyle"
                 }
-              ]
+              ],
+              "buildOptimizer": true,
+              "deployUrl": "https://ng2elements.web.app/ng-elements-catalog/",
+              "extractCss": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "vendorChunk": true
             }
+          },
+          "options": {
+            "assets": ["src/favicon.ico", "src/assets"],
+            "baseHref": "/ng-elements-catalog/",
+            "index": "src/app/elements/catalog/index.html",
+            "main": "src/app/elements/catalog/main.ts",
+            "outputPath": "dist/ng-elements-catalog",
+            "polyfills": "src/polyfills.ts",
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "node_modules/components-font-awesome/css/all.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "src/tsconfig.catalog.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-elements-catalog:build"
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "baseHref": "/",
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-catalog:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "ng-elements-catalog:build:production"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          },
           "options": {
-            "browserTarget": "ng-elements-catalog:build"
+            "baseHref": "/",
+            "browserTarget": "ng-elements-catalog:build",
+            "proxyConfig": "proxy.conf.json"
           }
         }
-      }
-    },
-    "ng-elements-orders": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
+      },
       "prefix": "app",
+      "projectType": "application",
+      "root": "",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
+      "sourceRoot": "src"
+    },
+    "ng-elements-orders": {
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "baseHref": "/ng-elements-orders/",
-            "outputPath": "dist/ng-elements-orders",
-            "index": "src/app/elements/orders/index.html",
-            "main": "src/app/elements/orders/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.orders.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
-              "node_modules/components-font-awesome/css/all.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
-          },
           "configurations": {
             "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true
+              "vendorChunk": true
             },
             "production": {
-              "deployUrl": "https://ng2elements.web.app/ng-elements-orders/",
-              "baseHref": "https://ng2elements.web.app/ng-elements-orders/",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": true,
               "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
+              "baseHref": "https://ng2elements.web.app/ng-elements-orders/",
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "7mb",
                   "maximumWarning": "5mb",
-                  "maximumError": "7mb"
+                  "type": "initial"
                 },
                 {
                   "maximumError": "250kb",
                   "maximumWarning": "150kb",
                   "type": "anyComponentStyle"
                 }
-              ]
+              ],
+              "buildOptimizer": true,
+              "deployUrl": "https://ng2elements.web.app/ng-elements-orders/",
+              "extractCss": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "vendorChunk": true
             }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "baseHref": "/",
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "ng-elements-orders:build"
           },
-          "configurations": {
-            "production": {
-              "browserTarget": "ng-elements-orders:build:production"
-            }
+          "options": {
+            "assets": ["src/favicon.ico", "src/assets"],
+            "baseHref": "/ng-elements-orders/",
+            "index": "src/app/elements/orders/index.html",
+            "main": "src/app/elements/orders/main.ts",
+            "outputPath": "dist/ng-elements-orders",
+            "polyfills": "src/polyfills.ts",
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "node_modules/components-font-awesome/css/all.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "src/tsconfig.orders.json"
           }
         },
         "extract-i18n": {
@@ -542,9 +425,126 @@
           "options": {
             "browserTarget": "ng-elements-orders:build"
           }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-elements-orders:build:production"
+            }
+          },
+          "options": {
+            "baseHref": "/",
+            "browserTarget": "ng-elements-orders:build",
+            "proxyConfig": "proxy.conf.json"
+          }
         }
-      }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "src"
+    },
+    "ng-elements-passport": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "configurations": {
+            "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractCss": true,
+              "extractLicenses": true,
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "vendorChunk": true
+            },
+            "production": {
+              "aot": true,
+              "baseHref": "https://ng2elements.web.app/ng-elements-passport/",
+              "budgets": [
+                {
+                  "maximumError": "7mb",
+                  "maximumWarning": "5mb",
+                  "type": "initial"
+                },
+                {
+                  "maximumError": "250kb",
+                  "maximumWarning": "150kb",
+                  "type": "anyComponentStyle"
+                }
+              ],
+              "buildOptimizer": true,
+              "deployUrl": "https://ng2elements.web.app/ng-elements-passport/",
+              "extractCss": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "vendorChunk": true
+            }
+          },
+          "options": {
+            "assets": ["src/favicon.ico", "src/assets"],
+            "baseHref": "/ng-elements-passport/",
+            "index": "src/app/elements/passport/index.html",
+            "main": "src/app/elements/passport/main.ts",
+            "outputPath": "dist/ng-elements-passport",
+            "polyfills": "src/polyfills.ts",
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "node_modules/components-font-awesome/css/all.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "src/tsconfig.passport.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-elements-passport:build"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-elements-passport:build:production"
+            }
+          },
+          "options": {
+            "baseHref": "/",
+            "browserTarget": "ng-elements-passport:build",
+            "proxyConfig": "proxy.conf.json"
+          }
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "src"
     }
   },
-  "defaultProject": "ng-elements-app"
+  "version": 1
 }
