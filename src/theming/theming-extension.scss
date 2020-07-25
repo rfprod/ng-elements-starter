@@ -28,6 +28,7 @@ $darkgrey: mat-color($mat-grey, 900);
 $grey: mat-color($mat-grey, 400);
 $lightgrey: mat-color($mat-grey, 200);
 $extralightgrey: mat-color($mat-grey, 100);
+$transparent: transparent;
 
 /* Extended palette variables */
 
@@ -78,6 +79,14 @@ $extended-text-palette: (
     'form.legend': $lightgrey,
   ),
 );
+$extended-scrollbar-palette: (
+  light: (
+    '*': $transparent $primary,
+  ),
+  dark: (
+    '*': $transparent $dark-primary,
+  ),
+);
 $extended-box-shadow-palette: (
   light: (
     '::webkit-scrollbar-track': $primary,
@@ -116,6 +125,13 @@ $extended-box-shadow-palette: (
 
   .unicorn-dark-theme & {
     background-color: map-get(map-get($extended-bg-palette, dark), $selector);
+  }
+}
+@mixin extended-scrollbar-color($selector) {
+  scrollbar-color: map-get(map-get($extended-scrollbar-palette, light), $selector);
+
+  .unicorn-dark-theme & {
+    scrollbar-color: map-get(map-get($extended-scrollbar-palette, dark), $selector);
   }
 }
 @mixin extended-box-shadow-color(
@@ -169,7 +185,14 @@ $extended-box-shadow-palette: (
 
   ::-webkit-scrollbar {
     @include extended-background-color('::webkit-scrollbar');
-    width: 8px;
+
+    &:horizontal {
+      height: 8px;
+    }
+
+    &:vertical {
+      width: 8px;
+    }
   }
 
   ::-webkit-scrollbar-track {
@@ -178,6 +201,19 @@ $extended-box-shadow-palette: (
 
   ::-webkit-scrollbar-thumb {
     @include extended-box-shadow-color(inset, 0, 0, 48px, 0, '::webkit-scrollbar-thumb');
+
+    &:horizontal {
+      border-radius: 8px;
+    }
+
+    &:vertical {
+      border-radius: 4px;
+    }
+  }
+
+  * {
+    @include extended-scrollbar-color('*');
+    scrollbar-width: auto;
   }
 }
 @include custom-selectors-coloring();
