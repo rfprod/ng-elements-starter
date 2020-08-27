@@ -1,11 +1,7 @@
 # Angular Elements NodeJS Widget Server Starter
 
-## Azure DevOps
-
-| Pipeline      | Status                                                                                                                                                                                                                                                |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR validation | [![Azure DevOps PR Validation Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/PR%20Validation?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=15&branchName=master) |
-| PROD          | [![Azure DevOps Prod Build Status](https://rfprod.visualstudio.com/ng-elements-starter/_apis/build/status/Prod?branchName=master)](https://rfprod.visualstudio.com/ng-elements-starter/_build/latest?definitionId=8&branchName=master)                |
+![PR validation](https://github.com/rfprod/ng-elements-starter/workflows/PR%20validation/badge.svg)
+![Master](https://github.com/rfprod/ng-elements-starter/workflows/Master/badge.svg)
 
 ## Description
 

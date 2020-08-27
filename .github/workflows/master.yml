@@ -48,8 +48,23 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i -g typescript @angular/cli
-      - run: yarn install --frozen-lockfile
-      - run: ng lint
-      - run: ng test --passWithNoTests --coverage=false --watch=false --maxWorkers=2 --ci --updateSnapshot
-      - run: ng build
+
+       - name: Install global dependencies
+        run: npm i -g typescript @angular/cli firebase-tools @compodoc/ngd-cli
+
+      - name: Install project dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: ng lint
+
+      - name: Buld
+        run: npm run build:all:firebase
+
+      - name: Unit test
+        run: npm run test:single-run:report-to-dist
+
+      - name: Deploy
+        run: firebase deploy --only hosting --token "$FIREBASE_DEPLOY_TOKEN" || exit 1
+        env:
+          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
