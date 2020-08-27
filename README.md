@@ -181,6 +181,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### [Angular Material](https://material.angular.io/)
 
-### [Azure DevOps YAML Schema](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=vsts&tabs=example#trigger)
-
 ### [Firebase JS Reference](https://firebase.google.com/docs/reference/js/)
