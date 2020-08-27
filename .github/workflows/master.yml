@@ -62,7 +62,7 @@ jobs:
       - name: Lint
         run: ng lint
 
-      - name: Buld
+      - name: Build
         run: npm run build:all:firebase
 
       - name: Unit test
