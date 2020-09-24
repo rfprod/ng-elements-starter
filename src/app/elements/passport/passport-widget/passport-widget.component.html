@@ -15,7 +15,7 @@
       [restrictMode]="restrictMode"
       [theme]="theme"
       [mock]="mock"
-      (switchMode)="activateMode($event)"
+      (switchMode)="activateMode($any($event))"
     ></app-passport-index>
 
     <app-passport-login
@@ -25,7 +25,7 @@
       [restrictMode]="restrictMode"
       [theme]="theme"
       [mock]="mock"
-      (switchMode)="activateMode($event)"
+      (switchMode)="activateMode($any($event))"
     ></app-passport-login>
 
     <app-passport-signup
@@ -35,7 +35,7 @@
       [restrictMode]="restrictMode"
       [theme]="theme"
       [mock]="mock"
-      (switchMode)="activateMode($event)"
+      (switchMode)="activateMode($any($event))"
     ></app-passport-signup>
   </div>
 </div>

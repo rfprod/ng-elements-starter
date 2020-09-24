@@ -28,16 +28,16 @@ describe('AppPassportConfigComponent', () => {
   });
 
   it('should have variables and methods defined', () => {
-    expect(component.theme).toBeUndefined();
-    expect(component.title).toEqual(jasmine.any(String));
-    expect(component.hotkeys).toEqual(jasmine.any(String));
-    expect(component.themeChange).toEqual(jasmine.any(EventEmitter));
-    expect(component.themes).toEqual(jasmine.any(Array));
-    expect(component.setTheme).toEqual(jasmine.any(Function));
-    expect(component.matButtonToggleChange).toEqual(jasmine.any(Function));
-    expect(component.mock).toEqual(jasmine.any(Boolean));
-    expect(component.serverChange).toEqual(jasmine.any(EventEmitter));
-    expect(component.selectServer).toEqual(jasmine.any(Function));
-    expect(component.serverChangeEvent).toEqual(jasmine.any(Function));
+    expect(component.theme).toEqual(expect.any(String));
+    expect(component.title).toEqual(expect.any(String));
+    expect(component.hotkeys).toEqual(expect.any(String));
+    expect(component.themeChange).toEqual(expect.any(EventEmitter));
+    expect(component.themes).toEqual(expect.any(Array));
+    expect(component.setTheme).toEqual(expect.any(Function));
+    expect(component.matButtonToggleChange).toEqual(expect.any(Function));
+    expect(component.mock).toEqual(expect.any(Boolean));
+    expect(component.serverChange).toEqual(expect.any(EventEmitter));
+    expect(component.selectServer).toEqual(expect.any(Function));
+    expect(component.serverChangeEvent).toEqual(expect.any(Function));
   });
 });

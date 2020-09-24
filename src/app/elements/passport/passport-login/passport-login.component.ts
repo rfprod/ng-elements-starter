@@ -9,7 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { first, tap } from 'rxjs/operators';
 
-import { ILoginForm } from '../../../interfaces/index';
+import { ILoginForm, IThemeColorChange } from '../../../interfaces/index';
 import { AppUser } from '../../../interfaces/user.interface';
 import { AppAuthService } from '../../../services/auth/auth.service';
 import { AppUserService } from '../../../services/user/user.service';
@@ -29,7 +29,7 @@ export class AppPassportLoginComponent implements OnInit {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Component title.
@@ -58,26 +58,21 @@ export class AppPassportLoginComponent implements OnInit {
   /**
    * Signup form.
    */
-  public loginForm: ILoginForm;
+  public loginForm: ILoginForm = this.fb.group({
+    email: ['', Validators.compose([Validators.required, Validators.email])],
+    password: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+  }) as ILoginForm;
 
   /**
    * Indicates if password should be showm.
    */
   public showPassword = false;
 
-  /**
-   * Constructor.
-   * @param fb Form builder
-   * @param userService User service
-   * @param authService Auth service
-   */
   constructor(
     private readonly fb: FormBuilder,
     private readonly userService: AppUserService,
     private readonly authService: AppAuthService,
-  ) {
-    this.resetForm();
-  }
+  ) {}
 
   /**
    * Emits mode change event.
@@ -113,14 +108,13 @@ export class AppPassportLoginComponent implements OnInit {
       password: string;
     } = this.loginForm.value;
     if (this.loginForm.valid) {
-      void this.authService.login(this.mock, formData.email, formData.password).subscribe(
-        (data: AppUser) => {
+      void this.authService
+        .login(this.mock, formData.email, formData.password)
+        .subscribe((data: AppUser) => {
           this.userService.saveUser(data);
           this.modeChange('index');
           this.resetForm();
-        },
-        () => null,
-      );
+        });
     }
   }
 

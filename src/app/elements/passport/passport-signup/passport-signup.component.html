@@ -4,9 +4,7 @@
   </span>
   <span fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
     <button mat-button (click)="modeChange('index')">Index</button>
-    <button mat-button (click)="modeChange('login')" *ngIf="restrictMode !== 'login'">
-      Login
-    </button>
+    <button mat-button (click)="modeChange('login')" *ngIf="restrictMode !== 'login'">Login</button>
   </span>
 
   <form
@@ -23,7 +21,7 @@
         matInput
         type="text"
         name="name"
-        [formControl]="signupForm.controls.name"
+        formControlName="name"
         placeholder="username"
         required
       />
@@ -37,7 +35,7 @@
         matInput
         type="email"
         name="email"
-        [formControl]="signupForm.controls.email"
+        formControlName="email"
         placeholder="email"
         required
       />
@@ -51,7 +49,7 @@
         matInput
         type="text"
         name="organization"
-        [formControl]="signupForm.controls.organization"
+        formControlName="organization"
         placeholder="organization"
         required
       />
@@ -65,7 +63,7 @@
         matInput
         type="{{ showPassword ? 'text' : 'password' }}"
         name="password"
-        [formControl]="signupForm.controls.password"
+        formControlName="password"
         placeholder="password"
         required
       />

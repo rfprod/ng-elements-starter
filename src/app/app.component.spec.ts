@@ -52,6 +52,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ng-elements-starter!');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome to ng-elements-starter!');
   });
 });

@@ -32,7 +32,7 @@ export class AppBalanceIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
-  @Input() public theme: IThemeColorChange['theme'];
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Indicates if mocked server should be used for http requests.

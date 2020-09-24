@@ -19,12 +19,12 @@
       Signup
     </button>
   </span>
-  <span fxFlex="100" *ngIf="!(isLoggedIn$ | async)">
-    instructions?
-  </span>
-  <span fxFlex="100" *ngIf="(isLoggedIn$ | async) && user$ | async as user">
-    <p>username: {{ user.name }}</p>
-    <p>email: {{ user.email }}</p>
-    <p>organization: {{ user.organization }}</p>
+  <span fxFlex="100" *ngIf="!(isLoggedIn$ | async)"> instructions? </span>
+  <span fxFlex="100" *ngIf="isLoggedIn$ | async">
+    <ng-container *ngIf="user$ | async as user">
+      <p>username: {{ user.name }}</p>
+      <p>email: {{ user.email }}</p>
+      <p>organization: {{ user.organization }}</p>
+    </ng-container>
   </span>
 </div>

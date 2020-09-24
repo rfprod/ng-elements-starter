@@ -31,16 +31,16 @@ export class AppUserService {
    */
   public saveUser(newValues: IUserDto): void {
     const user = { ...this.user.value };
-    if (newValues['name']) {
+    if (typeof newValues.name !== 'undefined') {
       user.name = newValues.name;
     }
-    if (newValues['email']) {
+    if (typeof newValues.email !== 'undefined') {
       user.email = newValues.email;
     }
-    if (newValues['organization']) {
+    if (typeof newValues.organization !== 'undefined') {
       user.organization = newValues.organization;
     }
-    if (newValues['token']) {
+    if (typeof newValues.token !== 'undefined') {
       user.token = newValues.token;
     }
     localStorage.setItem('userService', JSON.stringify(user));
@@ -51,11 +51,9 @@ export class AppUserService {
    * Restores user service model.
    */
   public restoreUser(): void {
-    if (
-      Boolean(localStorage.getItem('userService')) &&
-      typeof localStorage.getItem('userService') !== 'undefined'
-    ) {
-      const user = JSON.parse(localStorage.getItem('userService'));
+    const userServiceModel = localStorage.getItem('userService');
+    if (userServiceModel !== null) {
+      const user = JSON.parse(userServiceModel);
       this.user.next(user);
     }
   }

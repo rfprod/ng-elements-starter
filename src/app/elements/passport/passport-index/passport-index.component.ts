@@ -19,7 +19,7 @@ export class AppPassportIndexComponent {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: 'primary' | 'accent' | 'warn' = 'primary';
 
   /**
    * UI title.

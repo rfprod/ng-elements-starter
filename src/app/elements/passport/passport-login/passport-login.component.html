@@ -23,7 +23,7 @@
         matInput
         type="email"
         name="email"
-        [formControl]="loginForm.controls.email"
+        formControlName="email"
         placeholder="email"
         required
       />
@@ -37,7 +37,7 @@
         matInput
         type="{{ showPassword ? 'text' : 'password' }}"
         name="password"
-        [formControl]="loginForm.controls.password"
+        formControlName="password"
         placeholder="password"
         required
       />

@@ -11,6 +11,9 @@
       "path": "./src/tsconfig.app.json"
     },
     {
+      "path": "./src/tsconfig.eslint.json"
+    },
+    {
       "path": "./src/tsconfig.spec.json"
     },
     {

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { concatMap, filter, first } from 'rxjs/operators';
 
-import { AppOrder } from '../../../interfaces/index';
+import { AppOrder, IThemeColorChange } from '../../../interfaces/index';
 import { AppOrdersService } from '../../../services/orders/orders.service';
 import { AppUserService } from '../../../services/user/user.service';
 
@@ -27,7 +27,7 @@ export class AppOrdersIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Indicates if mocked server should be used for http requests.
