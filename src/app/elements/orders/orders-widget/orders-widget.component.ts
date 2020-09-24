@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { AppUser } from '../../../interfaces/index';
+import { AppOrder, AppUser } from '../../../interfaces/index';
 import { AppUserService } from '../../../services/user/user.service';
 
 /**
@@ -67,7 +67,7 @@ export class AppOrdersWidgetComponent implements OnInit, OnChanges {
   /**
    * Orders data change event handler.
    */
-  public ordersChangeHandler(event: string[]): string[] {
+  public ordersChangeHandler(event: AppOrder[]) {
     // TODO
     return event;
   }

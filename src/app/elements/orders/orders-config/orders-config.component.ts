@@ -17,7 +17,7 @@ export class AppOrdersConfigComponent {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Component title.

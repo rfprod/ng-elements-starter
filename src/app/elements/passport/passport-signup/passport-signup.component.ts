@@ -9,7 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { first, tap } from 'rxjs/operators';
 
-import { ISignupForm, IUserDto } from '../../../interfaces/index';
+import { ISignupForm, IThemeColorChange, IUserDto } from '../../../interfaces/index';
 import { AppAuthService } from '../../../services/auth/auth.service';
 import { AppUserService } from '../../../services/user/user.service';
 import { fadeIn, fadeInOut } from '../animations';
@@ -28,7 +28,7 @@ export class AppPassportSignupComponent implements OnInit {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Component title.
@@ -57,7 +57,12 @@ export class AppPassportSignupComponent implements OnInit {
   /**
    * Signup form.
    */
-  public signupForm: ISignupForm;
+  public signupForm: ISignupForm = this.fb.group({
+    name: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+    email: ['', Validators.compose([Validators.required, Validators.email])],
+    organization: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+    password: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+  }) as ISignupForm;
 
   /**
    * Indicates if password should be showm.
@@ -68,9 +73,7 @@ export class AppPassportSignupComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly userService: AppUserService,
     private readonly authService: AppAuthService,
-  ) {
-    this.resetForm();
-  }
+  ) {}
 
   /**
    * Emits mode change event.
@@ -112,14 +115,11 @@ export class AppPassportSignupComponent implements OnInit {
     if (this.signupForm.valid) {
       void this.authService
         .signup(this.mock, formData.email, formData.password, formData.organization, formData.name)
-        .subscribe(
-          (data: IUserDto) => {
-            this.userService.saveUser(data);
-            this.modeChange('index');
-            this.resetForm();
-          },
-          () => null,
-        );
+        .subscribe((data: IUserDto) => {
+          this.userService.saveUser(data);
+          this.modeChange('index');
+          this.resetForm();
+        });
     }
   }
 

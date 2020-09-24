@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { concatMap, filter, first } from 'rxjs/operators';
+import { IThemeColorChange } from 'src/app/interfaces';
 import { TCatalog } from 'src/app/interfaces/catalog.interface';
 
 import { AppCatalogService } from '../../../services/catalog/catalog.service';
@@ -27,7 +28,7 @@ export class AppCatalogIndexComponent implements OnInit, OnChanges {
   /**
    * Component theme.
    */
-  @Input() public theme: 'primary' | 'accent' | 'warn';
+  @Input() public theme: IThemeColorChange['theme'] = 'primary';
 
   /**
    * Indicates if mocked server should be used for http requests.

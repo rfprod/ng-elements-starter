@@ -63,7 +63,7 @@ export class AppHttpHandlersService {
   }
 
   private displayErrorToast(error: string): void {
-    this.snackBar.open(error, null, {
+    this.snackBar.open(error, void 0, {
       duration: ETIMEOUT.MEDUIM,
     });
   }
