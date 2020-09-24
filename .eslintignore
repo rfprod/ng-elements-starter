@@ -7,7 +7,6 @@ node_modules/*
 .github/
 .firebase/
 .devops/
-.azure/
 documentation/
 dist/
 coverage/
