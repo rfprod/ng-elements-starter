@@ -1,5 +1,5 @@
 import { HttpTestingController } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from 'src/app/app-routing.module';
 import { AppBalanceModule } from 'src/app/elements/balance/balance.module';
@@ -28,17 +28,19 @@ describe('AppIndexComponent', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  beforeEach(async(() => {
-    void TestBed.configureTestingModule(testBedConfig)
-      .compileComponents()
-      .then(() => {
-        httpController = TestBed.inject(HttpTestingController);
-        fixture = TestBed.createComponent(AppIndexComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-        flushHttpRequests(httpController);
-      });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      void TestBed.configureTestingModule(testBedConfig)
+        .compileComponents()
+        .then(() => {
+          httpController = TestBed.inject(HttpTestingController);
+          fixture = TestBed.createComponent(AppIndexComponent);
+          component = fixture.componentInstance;
+          fixture.detectChanges();
+          flushHttpRequests(httpController);
+        });
+    }),
+  );
 
   afterEach(() => {
     flushHttpRequests(httpController, true);

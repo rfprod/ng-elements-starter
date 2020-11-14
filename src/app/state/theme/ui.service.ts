@@ -32,7 +32,8 @@ export class AppUiService {
   public toggleMaterialTheme() {
     return this.store.selectOnce(AppUiState.getDarkThemeEnabled).pipe(
       concatMap(darkThemeEnabled => {
-        return darkThemeEnabled ? this.disableDarkTheme() : this.enableDarkTheme();
+        const result = darkThemeEnabled ? this.disableDarkTheme() : this.enableDarkTheme();
+        return result;
       }),
     );
   }

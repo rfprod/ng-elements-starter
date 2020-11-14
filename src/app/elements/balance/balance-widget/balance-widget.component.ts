@@ -44,12 +44,14 @@ export class AppBalanceWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Constructor.
+   *
    * @param userService Users service
    */
   constructor(private readonly userService: AppUserService) {}
 
   /**
    * Selects real or mocked server., used in config callback.
+   *
    * @param event server change event
    */
   public selectServer(event: { mock: boolean }): void {

@@ -41,14 +41,12 @@ export const mocksCoreModuleProviders: Provider[] = [
   {
     provide: OverlayContainer,
     useValue: {
-      getContainerElement: () => {
-        return {
-          classList: {
-            add: (): null => null,
-            remove: (): null => null,
-          },
-        };
-      },
+      getContainerElement: () => ({
+        classList: {
+          add: (): null => null,
+          remove: (): null => null,
+        },
+      }),
     },
   },
   {

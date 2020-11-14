@@ -7,17 +7,18 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser', // https://github.com/typescript-eslint/typescript-eslint
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'plugin:@angular-eslint/recommended',
-  ],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: './tsconfig.base.json',
+    project: './tsconfig.json',
   },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+    'plugin:@angular-eslint/recommended',
+  ],
   plugins: [
     'prettier',
     '@typescript-eslint', // https://github.com/typescript-eslint/typescript-eslint
@@ -63,6 +64,7 @@ module.exports = {
       'error',
       { default: ['static-field', 'instance-field', 'static-method', 'instance-method'] },
     ],
+    '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/naming-convention': [
       'error', // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
       {
@@ -179,7 +181,6 @@ module.exports = {
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-this-alias': 'error',
     '@typescript-eslint/no-throw-literal': 'error',
-    '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-unnecessary-type-arguments': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': ['error', { typesToIgnore: [''] }],
     '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',

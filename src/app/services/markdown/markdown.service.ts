@@ -3,6 +3,7 @@ import marked from 'marked';
 
 /**
  * Markdown service.
+ *
  * @description Processes string in markdown format, outputs html.
  */
 @Injectable({
@@ -11,6 +12,7 @@ import marked from 'marked';
 export class AppMarkdownService {
   /**
    * Processes markdown input.
+   *
    * @param input marked input
    */
   public process(input: string): string {

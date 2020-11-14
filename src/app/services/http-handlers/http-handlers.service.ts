@@ -10,6 +10,7 @@ import { AppUserService } from '../user/user.service';
 
 /**
  * Custom http handers
+ *
  * @description Handles http requests.
  */
 @Injectable({
@@ -23,6 +24,7 @@ export class AppHttpHandlersService {
 
   /**
    * Constructor.
+   *
    * @param userService User service - browser local storage wrapper which stores user creadentials
    * @param snackBar Error toaster
    * @param window window reference
@@ -80,6 +82,7 @@ export class AppHttpHandlersService {
 
   /**
    * Handles error.
+   *
    * @param error error object
    */
   public handleError(error: HttpErrorResponse): Observable<never> {
@@ -90,6 +93,7 @@ export class AppHttpHandlersService {
 
   /**
    * Pipes request with object response.
+   *
    * @param observable request observable
    */
   public pipeHttpRequest<T>(observable: Observable<T>): Observable<T> {

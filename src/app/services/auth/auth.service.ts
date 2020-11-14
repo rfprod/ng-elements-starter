@@ -8,6 +8,7 @@ import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Auth service
+ *
  * @description Sends authentication requests with user credentials to server over http
  */
 @Injectable({
@@ -30,6 +31,7 @@ export class AppAuthService {
 
   /**
    * Constructor.
+   *
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference
@@ -42,6 +44,7 @@ export class AppAuthService {
 
   /**
    * Loggs user in using email + password.
+   *
    * @param mock indicates that mocked backend should be used
    * @param email user email
    * @param pass user password
@@ -58,6 +61,7 @@ export class AppAuthService {
 
   /**
    * Signs user up.
+   *
    * @param mock indicates that mocked backend should be used
    * @param name user name
    * @param email user email
