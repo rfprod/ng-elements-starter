@@ -1,3 +1,1 @@
-export function getWindow() {
-  return window;
-}
+export const getWindow = () => window;

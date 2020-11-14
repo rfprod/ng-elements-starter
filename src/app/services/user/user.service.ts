@@ -6,6 +6,7 @@ import { AppUser, IUserDto } from '../../interfaces/index';
 
 /**
  * User service
+ *
  * @description Is a wrapper around browser local storage
  */
 @Injectable({
@@ -27,6 +28,7 @@ export class AppUserService {
 
   /**
    * Updates user service model with new values.
+   *
    * @param newValues new values object
    */
   public saveUser(newValues: IUserDto): void {

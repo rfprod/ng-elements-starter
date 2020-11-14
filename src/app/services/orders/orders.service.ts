@@ -8,6 +8,7 @@ import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Orders service
+ *
  * @description Polls server for orders data over http
  */
 @Injectable({
@@ -26,6 +27,7 @@ export class AppOrdersService {
 
   /**
    * Constructor.
+   *
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference
@@ -38,6 +40,7 @@ export class AppOrdersService {
 
   /**
    * Returns user balance.
+   *
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */

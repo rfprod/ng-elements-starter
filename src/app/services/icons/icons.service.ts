@@ -18,6 +18,7 @@ export class AppIconsService {
 
   /**
    * Constructor.
+   *
    * @param matIconRegistry Material icon registry - icons registry for registering icons for usage within mat-icon selector
    * @param domSanitizer DOM sanitizer
    */

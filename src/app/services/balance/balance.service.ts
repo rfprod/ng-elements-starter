@@ -8,6 +8,7 @@ import { AppHttpHandlersService } from '../http-handlers/http-handlers.service';
 
 /**
  * Balance service
+ *
  * @description Polls server for balance data over http
  */
 @Injectable({
@@ -26,6 +27,7 @@ export class AppBalanceService {
 
   /**
    * Constructor.
+   *
    * @param http Http client
    * @param handlers Custom http handlers service
    * @param window Window - window reference
@@ -38,6 +40,7 @@ export class AppBalanceService {
 
   /**
    * Returns user balance.
+   *
    * @param mock indicates that mocked backend should be used
    * @param token user token
    */

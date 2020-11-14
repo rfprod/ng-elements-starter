@@ -96,6 +96,7 @@ export class AppPassportWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Resolves if mode is restricted or not.
+   *
    * @param modeKey mode key that should be chedked for restriction
    */
   public isRestricted(modeKey: 'index' | 'login' | 'signup'): boolean {
@@ -104,6 +105,7 @@ export class AppPassportWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Resolves if mode is current.
+   *
    * @param modeKey mode that should be checked for activateion state
    */
   public isCurrentMode(modeKey: 'index' | 'login' | 'signup'): boolean {
@@ -113,6 +115,7 @@ export class AppPassportWidgetComponent implements OnInit, OnChanges {
   /**
    * Activates a particular UI mode.
    * Deactivates current UI mode first.
+   *
    * @param modeKey mode key that should be activated
    */
   public activateMode(modeKey: 'index' | 'login' | 'signup'): void {
@@ -137,6 +140,7 @@ export class AppPassportWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Selects real or mocked server., used in config callback.
+   *
    * @param event server change event
    */
   public selectServer(event: IServerChangeEvent): void {
@@ -147,6 +151,7 @@ export class AppPassportWidgetComponent implements OnInit, OnChanges {
 
   /**
    * Document keypress host listener.
+   *
    * @param event keyboard event
    */
   @HostListener('document:keypress', ['$event'])

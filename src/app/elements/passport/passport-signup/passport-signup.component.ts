@@ -77,6 +77,7 @@ export class AppPassportSignupComponent implements OnInit {
 
   /**
    * Emits mode change event.
+   *
    * @param mode mode that should be activated by widget component.
    */
   public modeChange(mode: 'index' | 'login'): void {

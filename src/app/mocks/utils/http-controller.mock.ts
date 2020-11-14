@@ -3,7 +3,7 @@ import { HttpTestingController, RequestMatch, TestRequest } from '@angular/commo
 
 export type THttpRequestMatcher<T> = string | RequestMatch | ((req: HttpRequest<T>) => boolean);
 
-export function flushHttpRequests<T>(
+export const flushHttpRequests = <T>(
   httpController: HttpTestingController,
   verify = false,
   matcher: THttpRequestMatcher<T> = (req: HttpRequest<T>): boolean => true,
@@ -15,11 +15,11 @@ export function flushHttpRequests<T>(
     | Blob
     | (string | number | Record<string, unknown> | null)[]
     | null = {},
-): void {
+): void => {
   httpController.match(matcher).forEach((req: TestRequest) => {
     req.flush(responseData);
   });
   if (verify) {
     httpController.verify();
   }
-}
+};

@@ -6,6 +6,7 @@ import { AppUiState } from 'src/app/state/theme/ui.store';
 
 /**
  * Application index component
+ *
  * @description Includes element modules
  */
 @Component({

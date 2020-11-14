@@ -1,5 +1,5 @@
 import { HttpTestingController } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { flushHttpRequests } from 'src/app/mocks/utils/http-controller.mock';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
@@ -25,17 +25,19 @@ describe('AppPassportWidgetComponent', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  beforeEach(async(() => {
-    void TestBed.configureTestingModule(testBedConfig)
-      .compileComponents()
-      .then(() => {
-        httpController = TestBed.inject(HttpTestingController);
-        fixture = TestBed.createComponent(AppPassportWidgetComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-        flushHttpRequests(httpController);
-      });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      void TestBed.configureTestingModule(testBedConfig)
+        .compileComponents()
+        .then(() => {
+          httpController = TestBed.inject(HttpTestingController);
+          fixture = TestBed.createComponent(AppPassportWidgetComponent);
+          component = fixture.componentInstance;
+          fixture.detectChanges();
+          flushHttpRequests(httpController);
+        });
+    }),
+  );
 
   afterEach(() => {
     flushHttpRequests(httpController, true);

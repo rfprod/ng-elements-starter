@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { async, ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
+import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { getTestBedConfig, newTestBedMetadata } from 'src/app/mocks/utils/test-bed-config.mock';
 
 import { AppBalanceConfigComponent } from './balance-config.component';
@@ -13,15 +13,17 @@ describe('AppBalanceConfigComponent', () => {
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
-  beforeEach(async(() => {
-    void TestBed.configureTestingModule(testBedConfig)
-      .compileComponents()
-      .then(() => {
-        fixture = TestBed.createComponent(AppBalanceConfigComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      void TestBed.configureTestingModule(testBedConfig)
+        .compileComponents()
+        .then(() => {
+          fixture = TestBed.createComponent(AppBalanceConfigComponent);
+          component = fixture.componentInstance;
+          fixture.detectChanges();
+        });
+    }),
+  );
 
   it('should be defined', () => {
     expect(component).toBeTruthy();
