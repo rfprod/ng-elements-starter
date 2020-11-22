@@ -6,8 +6,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { AppOrdersWidgetElementRootComponent } from './orders-widget-element-root/orders-widget-element-root.component';
 import { AppOrdersModule } from './orders.module';
+import { AppOrdersWidgetElementRootComponent } from './orders-widget-element-root/orders-widget-element-root.component';
 
 /**
  * Orders element module

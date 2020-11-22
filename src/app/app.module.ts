@@ -13,8 +13,8 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppIndexComponent } from './components/app-index/app-index.component';
 import { AppBalanceModule } from './elements/balance/balance.module';
 import { AppCatalogModule } from './elements/catalog/catalog.module';

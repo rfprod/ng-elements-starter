@@ -6,8 +6,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { AppPassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
 import { AppPassportModule } from './passport.module';
+import { AppPassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
 
 /**
  * Passport element module
