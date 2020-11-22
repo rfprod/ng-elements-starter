@@ -6,8 +6,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { AppCatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
 import { AppCatalogModule } from './catalog.module';
+import { AppCatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
 
 /**
  * Catalog element module

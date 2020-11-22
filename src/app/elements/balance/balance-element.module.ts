@@ -6,8 +6,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
-import { AppBalanceWidgetElementRootComponent } from './balance-widget-element-root/balance-widget-element-root.component';
 import { AppBalanceModule } from './balance.module';
+import { AppBalanceWidgetElementRootComponent } from './balance-widget-element-root/balance-widget-element-root.component';
 
 /**
  * Balance element module
