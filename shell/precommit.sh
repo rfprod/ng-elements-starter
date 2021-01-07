@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-# Color definitions.
+# Colors.
 ##
 source shell/colors.sh ''
 
