@@ -52,7 +52,7 @@
             }
           },
           "options": {
-            "allowedCommonJsDependencies": ["hammerjs"],
+            "allowedCommonJsDependencies": [],
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "baseHref": "/",
@@ -131,7 +131,6 @@
             }
           },
           "options": {
-            "baseHref": "/",
             "browserTarget": "ng-elements-app:build",
             "proxyConfig": "proxy.conf.json"
           }
@@ -243,7 +242,6 @@
             }
           },
           "options": {
-            "baseHref": "/",
             "browserTarget": "ng-elements-balance:build",
             "proxyConfig": "proxy.conf.json"
           }
@@ -338,7 +336,6 @@
             }
           },
           "options": {
-            "baseHref": "/",
             "browserTarget": "ng-elements-catalog:build",
             "proxyConfig": "proxy.conf.json"
           }
@@ -433,7 +430,6 @@
             }
           },
           "options": {
-            "baseHref": "/",
             "browserTarget": "ng-elements-orders:build",
             "proxyConfig": "proxy.conf.json"
           }
@@ -528,7 +524,6 @@
             }
           },
           "options": {
-            "baseHref": "/",
             "browserTarget": "ng-elements-passport:build",
             "proxyConfig": "proxy.conf.json"
           }
