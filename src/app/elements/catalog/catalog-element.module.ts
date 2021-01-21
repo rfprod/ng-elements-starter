@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
 import { AppCatalogModule } from './catalog.module';
-import { AppCatalogWidgetElementRootComponent } from './catalog-widget-element-root/catalog-widget-element-root.component';
+import { AppCatalogWidgetElementRootComponent } from './catalog-widget/catalog-widget-element.component';
 
 /**
  * Catalog element module
@@ -25,14 +25,13 @@ import { AppCatalogWidgetElementRootComponent } from './catalog-widget-element-r
   declarations: [AppCatalogWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppCatalogElementModule {
+export class AppCatalogElementModule implements DoBootstrap {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
     const catalogWidget = createCustomElement(AppCatalogWidgetElementRootComponent, {
       injector: this.injector,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
-    customElements.define('app-catalog-widget', catalogWidget);
+    });
+    customElements.define('app-catalog-widget-element', catalogWidget);
   }
 }

@@ -18,19 +18,30 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:@angular-eslint/recommended',
+    'plugin:eslint-comments/recommended',
   ],
   plugins: [
     'prettier',
     '@typescript-eslint', // https://github.com/typescript-eslint/typescript-eslint
     '@angular-eslint', // https://github.com/angular-eslint/angular-eslint
-    'deprecation', // https://github.com/gund/eslint-plugin-deprecation
     'simple-import-sort', // https://github.com/lydell/eslint-plugin-simple-import-sort
     'rxjs', // https://github.com/cartant/eslint-plugin-rxjs
     'compat', // https://github.com/amilajack/eslint-plugin-compat
+    'eslint-comments', // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/
   ],
   ignorePatterns: ['*.min.js', 'node_modules/'],
 
   rules: {
+    'eslint-comments/no-unused-disable': 'error',
+    'eslint-comments/no-use': [
+      'error',
+      {
+        allow: [],
+      },
+    ],
+    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: false }],
+    'eslint-comments/require-description': ['error', { ignore: [] }],
+    'eslint-comments/no-restricted-disable': ['error', '*'],
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/ban-types': [
@@ -229,7 +240,6 @@ module.exports = {
     'constructor-super': 'error',
     complexity: ['error', 10],
     'default-param-last': 'off', // handled by @typescript-eslint rule
-    'deprecation/deprecation': 'off', // TODO: turn on, and switch to error
     eqeqeq: 'error',
     'func-name-matching': ['error', 'always'],
     'guard-for-in': 'error',

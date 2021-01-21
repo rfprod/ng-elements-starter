@@ -51,7 +51,6 @@ export class AppPassportConfigComponent {
 
   /**
    * Sets a theme as a current.
-   *
    * @param theme theme name
    */
   public setTheme(theme: 'primary' | 'accent' | 'warn'): void {
@@ -61,26 +60,22 @@ export class AppPassportConfigComponent {
 
   /**
    * Theme button group toggle change event.
-   *
-   * @param event button group toggle change event
    */
   public matButtonToggleChange(event: MatButtonToggleChange): void {
     this.setTheme(event.value);
   }
 
   /**
-   * Selects mocked/real server
-   *
+   * Selects mocked/real server.
    * @param mock indicates if mocked server should be used
    */
   public selectServer(mock: boolean): void {
-    this.serverChange.emit({ mock });
+    const event: IServerChangeEvent = { mock };
+    this.serverChange.emit(event);
   }
 
   /**
-   * Server change event
-   *
-   * @param event change event
+   * Server change event.
    */
   public serverChangeEvent(event: MatSlideToggleChange): void {
     this.mock = event.checked;

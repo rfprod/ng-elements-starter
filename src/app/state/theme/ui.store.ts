@@ -14,9 +14,7 @@ const themeUiActions = {
     darkThemeEnabled: false,
   },
 })
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 class AppUiState {
   @Selector()
   public static getUi(state: IUiStateModel) {
