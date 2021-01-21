@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
 import { AppOrdersModule } from './orders.module';
-import { AppOrdersWidgetElementRootComponent } from './orders-widget-element-root/orders-widget-element-root.component';
+import { AppOrdersWidgetElementRootComponent } from './orders-widget/orders-widget-element.component';
 
 /**
  * Orders element module
@@ -25,14 +25,13 @@ import { AppOrdersWidgetElementRootComponent } from './orders-widget-element-roo
   declarations: [AppOrdersWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppOrdersElementModule {
+export class AppOrdersElementModule implements DoBootstrap {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
     const ordersWidget = createCustomElement(AppOrdersWidgetElementRootComponent, {
       injector: this.injector,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
-    customElements.define('app-orders-widget', ordersWidget);
+    });
+    customElements.define('app-orders-widget-element', ordersWidget);
   }
 }

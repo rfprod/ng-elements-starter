@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { AppUiStoreModule } from 'src/app/state/theme/ui.module';
 
 import { AppPassportModule } from './passport.module';
-import { AppPassportWidgetElementRootComponent } from './passport-widget-element-root/passport-widget-element-root.component';
+import { AppPassportWidgetElementRootComponent } from './passport-widget/passport-widget-element.component';
 
 /**
  * Passport element module
@@ -25,14 +25,13 @@ import { AppPassportWidgetElementRootComponent } from './passport-widget-element
   declarations: [AppPassportWidgetElementRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppPassportElementModule {
+export class AppPassportElementModule implements DoBootstrap {
   constructor(private readonly injector: Injector) {}
 
   public ngDoBootstrap() {
     const passportWidget = createCustomElement(AppPassportWidgetElementRootComponent, {
       injector: this.injector,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
-    customElements.define('app-passport-widget', passportWidget);
+    });
+    customElements.define('app-passport-widget-element', passportWidget);
   }
 }
