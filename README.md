@@ -1,3 +1,5 @@
+`ARCHIVE NOTE` elements development is continued in https://github.com/rfprod/nx-ng-starter
+
 # Angular Elements NodeJS Widget Server Starter
 
 ![PR validation](https://github.com/rfprod/ng-elements-starter/workflows/PR%20validation/badge.svg)
